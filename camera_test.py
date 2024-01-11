@@ -22,7 +22,8 @@ cap.set(cv.CAP_PROP_FRAME_COUNT, 260)
 print(cap.get(cv.CAP_PROP_FPS))
 print(cap.get(cv.CAP_PROP_FRAME_COUNT))
 
-while cap.isOpened():
+# while cap.isOpened():
+while True:
     # Capture frame-by-frame
     ret, frame = cap.read()
 
