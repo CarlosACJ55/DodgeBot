@@ -9,12 +9,13 @@ def change_res(width, height):
     cap.set(3, width)
     cap.set(4, height)
 
-# Define the RGB color to track (for example, red)
-target_color = (0, 0, 255)
+# Define the BGR color to track (for example, red)
+target_color = (255, 0, 0)
 
 st = time.time()
 
 cap = cv.VideoCapture(1,cv.CAP_DSHOW)
+
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
@@ -36,8 +37,11 @@ while cap.isOpened():
     hsv_frame = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
 
     # Define a range of colors similar to the target color in HSV
-    lower_bound = np.array([target_color[0] - 10, 100, 100])
-    upper_bound = np.array([target_color[0] + 10, 255,255])
+    #define the color
+    # print(target_color[2] - 10)
+
+    lower_bound = np.array([15, 100, 100])
+    upper_bound = np.array([30, 255,255])
 
     # Create a binary mask for the specified color
     color_mask = cv.inRange(hsv_frame, lower_bound, upper_bound)
