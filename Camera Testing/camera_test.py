@@ -5,7 +5,7 @@ from sklearn.cluster import KMeans
 
 #TODO FIX FRAMERATE CALCULATIONS
 # ALSO FIX COLOR TRACKING SO THAT IT TRACKS BASED OFF MAGNITUDE AND NOT LIMITS ON RBG (SEE YUSUF FOR MORE DETAILS)
-def Enviorment_Tracking(video_steam_mem_location):
+# def Enviorment_Tracking(video_steam_mem_location):
     
 def change_res(width, height):
     cap.set(3, width)
@@ -42,8 +42,8 @@ while cap.isOpened():
     #define the color
     # print(target_color[2] - 10)
 
-    lower_bound_gloves = np.array([0, 100, 100])
-    upper_bound_gloves = np.array([15, 255,255])
+    lower_bound_gloves = np.array([0, 100, 100]) #Pure Red
+    upper_bound_gloves = np.array([15, 255,255]) 
     lower_bound_bot = np.array([130, 100, 100])
     upper_bound_bot = np.array([160, 255,255])
 
@@ -52,7 +52,7 @@ while cap.isOpened():
     color_mask_bot = cv.inRange(hsv_frame, lower_bound_bot, upper_bound_bot)
     # color_mask = color_mask / 255
     result = cv.bitwise_and(frame, frame, mask=color_mask_gloves)
-    results = cv.bitwise_and(frame)
+    # results = cv.bitwise_and(frame)
 
 
     # color_mask_3d = np.stack((color_mask,) * 3, axis=-1)
