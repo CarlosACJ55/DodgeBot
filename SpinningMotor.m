@@ -4,8 +4,8 @@ clc
 syms theta(t) phi(t)
 
 gravity = 9.80665;    % m/s^2
-disk_mass = 23;       % kg
-disk_radius = 0.102 / 2 * sqrt(2);   % Meters
+disk_mass = 12;       % kg
+disk_radius = 0.114 / 2 * sqrt(2);   % Meters
 T_e = 60;             % Motor Torque Nm
 J_motors = 1/2 * disk_mass * disk_radius ^ 2;
 
