@@ -54,6 +54,8 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+uint8_t tx_buff[]={0,1,2,3,4,5,6,7,8,9};
+
 
 /* USER CODE END 0 */
 
@@ -64,6 +66,7 @@ static void MX_GPIO_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+
 
   /* USER CODE END 1 */
 
@@ -94,7 +97,9 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  	  	  	  	  	  	  	  	  	  	  	  // INSERT UART COMMANDS HERE
+	  HAL_UART_Transmit(&huart1, tx_buff, 10, 1000);
+	  HAL_Delay(10000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

@@ -24,11 +24,21 @@ x = linspace(0, 0.1, 1000);
 sol = ode45(M, tspan, y0);
 figure
 plot(sol.x, sol.y(1,:))
+xlabel("Time (s)")
+ylabel("Position (rad)")
+title("Position of Stick Relative to Ground as a Function of Time")
 
 figure
 [~,dy] = gradient(sol.y);
 plot(sol.x, dy)
+xlabel("Time (s)")
+ylabel("Angular Velocity (rad/s)")
+title("Angular Velocity of Stick as a Function of Time")
+
 
 figure
 [~,ddy] = gradient(gradient(sol.y));
 plot(sol.x, ddy)
+xlabel("Time (s)")
+ylabel("Angular Acceleration (rad/s)")
+title("Angular Acceleration of Stick as a Function of Time")
