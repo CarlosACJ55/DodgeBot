@@ -6,14 +6,10 @@ syms theta(t) phi(t)
 gravity = 9.80665;    % m/s^2
 disk_mass = 12;       % kg
 disk_radius = 0.114 / 2 * sqrt(2);   % Meters
-<<<<<<< HEAD
-T_e = 40;             % Motor Torque Nm
-=======
-stick_mass = 0.6;
+stick_mass = 0.5;
 stick_radius = 0.375;
 T_e = 40;             % Motor Torque Nm
 J_stick = 1/3 * stick_mass * stick_radius ^ 2;
->>>>>>> 1b27b74978d8763b0c8d4540b8dca0e64e37cd91
 J_motors = 1/2 * disk_mass * disk_radius ^ 2;
 
 %For starting parameters:
