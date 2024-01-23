@@ -28,6 +28,11 @@ time.sleep(1)
 i = 0
 change_res(640, 360)
 
+def camera_calibration(frame, pixel_center, real_center_dist, user_height, camera_height):
+    real_dist_ratio = user_height/camera_height
+    real_dist = real_center_dist * real_dist_ratio
+    
+
 while cap.isOpened():
     ret, frame = cap.read()
     
