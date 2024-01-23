@@ -17,7 +17,7 @@ print(vertical_fov)
 print(diagonal_fov)
 # def pixel_2_cords(row, col):
 
-def pixel_2_cords(pixel_center_location, pixel_location, center_dist, camera_height, user_height, camera_orentation):
+def pixel_2_cords(pixel_location, pixel_center_location, center_dist, camera_height, user_height, camera_orentation):
     real_ratio = user_height/camera_height
     real_center_dist = real_ratio*center_dist
 
@@ -26,10 +26,25 @@ def pixel_2_cords(pixel_center_location, pixel_location, center_dist, camera_hei
     real_dist_cords = pixel_xy_ratio*real_center_dist
     return camera_orentation*real_dist_cords
 
+def cords_2_pixel(real_dist_cords, pixel_center_location, center_dist, camera_height, user_height, inv_camera_orientation):
+    real_ratio = user_height / camera_height
+    real_center_dist = real_ratio * center_dist
+
+    orientated_cords = real_dist_cords * inv_camera_orientation
+    pixel_xy_ratio = orientated_cords / real_center_dist
+    pixel_xy = pixel_xy_ratio * pixel_center_location
+    pixel_location = pixel_center_location - pixel_xy 
+
+    return int(pixel_location)
+
 center = np.array([360/2, 360/2])
-pixel_loc = np.array([0, 0])
+pixel_loc = np.array([25, 25])
 real_center_dist = 1.06
 cam_height = 2
 user_height = 1.01
-camera_orentation = np.array([-1,1])
-# pixel_2_cords(center, pixel_loc, real_center_dist, cam_height, user_height, camera_orentation)
+camera_orientation = np.array([-1,1])
+
+xy = pixel_2_cords(pixel_loc, center, real_center_dist, cam_height, user_height,  camera_orientation)
+xy_pix =cords_2_pixel(xy, center, real_center_dist, cam_height, user_height, camera_orientation)
+print(xy)
+print(xy_pix)

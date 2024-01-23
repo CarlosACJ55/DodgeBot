@@ -3,27 +3,9 @@ import cv2 as cv
 import time
 from sklearn.cluster import KMeans
 
-#TODO FIX FRAMERATE CALCULATIONS
-# ALSO FIX COLOR TRACKING SO THAT IT TRACKS BASED OFF MAGNITUDE AND NOT LIMITS ON RBG (SEE YUSUF FOR MORE DETAILS)
-# def Enviorment_Tracking(video_steam_mem_location):
-    
 def change_res(width, height):
     cap.set(3, width)
     cap.set(4, height)
-
-# Define the BGR color to track (for example, red)
-target_color = (255, 0, 0)
-
-st = time.time()
-
-cap = cv.VideoCapture(1,cv.CAP_DSHOW)
-
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-
-# Add a delay before starting the loop
-time.sleep(1)
 
 def img_2_vector(img, color='color'):
     img_shape = img.shape
@@ -63,6 +45,17 @@ def pixel_2_cords(pixel_center_location, pixel_location, center_dist, camera_hei
     real_dist_cords = pixel_xy_ratio*real_center_dist
     return camera_orentation*real_dist_cords
 
+def cords_2_pixel(real_dist_cords, pixel_center_location, center_dist, camera_height, user_height, inv_camera_orientation):
+    real_ratio = user_height / camera_height
+    real_center_dist = real_ratio * center_dist
+
+    orientated_cords = real_dist_cords * inv_camera_orientation
+    pixel_xy_ratio = orientated_cords / real_center_dist
+    pixel_xy = pixel_xy_ratio * pixel_center_location
+    pixel_location = pixel_center_location - pixel_xy 
+
+    return pixel_location.astype('uint16')
+
 def kmeans(identified_punch_cords, num_gloves=2):
     if identified_punch_cords.size > 0:
         try:
@@ -74,34 +67,37 @@ def kmeans(identified_punch_cords, num_gloves=2):
 
             punch1_pixel = identified_punch_cords[cluster_labels == 0]
             punch2_pixel = identified_punch_cords[cluster_labels == 1]
-            # print("*",punch1_pixel.shape)
-            # print("**",punch2_pixel.shape)
-            # print("*")
             punch_pixels = [punch1_pixel, punch2_pixel]
-            # print("***", punch_pixels.shape)
             return punch_pixels
         except ValueError as e:
-            # print("**")
             return [identified_punch_cords]
     else:
         return []
-        
 
+st = time.time()
 
+cap = cv.VideoCapture(1,cv.CAP_DSHOW)
 
-        
-        # print("Cluster Labels:", cluster_labels)
-        # print("Cluster Centers:", cluster_centers)
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
 
-
-i = 0
 change_res(640, 360)
-    
 pixel_center = np.array([360/2, 360/2])
 real_center_dist = 1.06
 cam_height = 2
 user_height = 1.35
 camera_orentation = np.array([-1,1])
+
+buffer_size = 10
+centroid_buffer1 = np.zeros((buffer_size, 2), dtype=int)
+centroid_buffer2 = np.zeros((buffer_size, 2), dtype=int)
+buffer_index = 0
+
+def update_buffer(new_centroid, buffer_index):
+    centroid_buffer[buffer_index] = new_centroid
+    buffer_index = (buffer_index + 1) % buffer_size
+    return centroid_buffer, buffer_index
 
 while cap.isOpened():
     ret, frame = cap.read()
@@ -159,12 +155,23 @@ while cap.isOpened():
     cord_list = kmeans(marked_pixel_coords, 2)
     
     if len(cord_list) == 2:
+        
         centroid1 = np.mean(cord_list[0], axis=0, dtype=int)
         centroid2 = np.mean(cord_list[1], axis=0, dtype=int)
+        centroid_buffer1, buffer_index = update_buffer(centroid_buffer1, buffer_index)
+        centroid_buffer2, buffer_index = update_buffer(centroid_buffer2, buffer_index)
+
+        vector1 = np.diff(centroid_buffer1, axis=0)
+        vector2 = np.diff(centroid_buffer2, axis=0)
+        print(vector1.shape)
+        print(vector1)
+
 
         cv.circle(frame, tuple(centroid1[::-1]), 5, (0, 255, 0), -1)
         cv.circle(frame, tuple(centroid2[::-1]), 5, (0, 255, 0), -1)
+
     elif len(cord_list) == 1:
+
         centroid1 = np.mean(cord_list[0], axis=0, dtype=int)
         cv.circle(frame, tuple(centroid1[::-1]), 5, (0, 255, 0), -1)
 
@@ -201,7 +208,7 @@ while cap.isOpened():
     if cv.waitKey(1) == ord('q'):
         break
 
-    i += 1
+    # i += 1
 
 # Release the capture and close OpenCV windows
 cap.release()
