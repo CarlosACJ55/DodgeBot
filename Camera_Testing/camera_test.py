@@ -36,7 +36,7 @@ def calibration_circle(frame):
     cv.circle(frame, (int(350), int(5)),1, (0, 255, 255), cv.FILLED)
     return frame
 
-def pixel_2_cords(pixel_center_location, pixel_location, center_dist, camera_height, user_height, camera_orentation):
+def pixel_2_cords(pixel_location,pixel_center_location, center_dist, camera_height, user_height, camera_orentation):
     real_ratio = user_height/camera_height
     real_center_dist = real_ratio*center_dist
 
@@ -74,8 +74,23 @@ def kmeans(identified_punch_cords, num_gloves=2):
     else:
         return []
 
-st = time.time()
+def update_buffer(centroid_buffer, new_centriod, buffer_index):
+    centroid_buffer[buffer_index] = new_centriod
+    buffer_index = (buffer_index + 1) % buffer_size
+    
+    return centroid_buffer, buffer_index
 
+def perpendicular_vector(vector_buffer):
+    avrg_vector = np.mean(vector_buffer, axis=0)
+
+    # print(avrg_vector)
+
+    a = -1*avrg_vector[0]
+    b = -1*(avrg_vector[0] * a) / avrg_vector[1]
+
+    return np.array([a,b])
+
+st = time.time()
 cap = cv.VideoCapture(1,cv.CAP_DSHOW)
 
 if not cap.isOpened():
@@ -83,21 +98,19 @@ if not cap.isOpened():
     exit()
 
 change_res(640, 360)
-pixel_center = np.array([360/2, 360/2])
+pixel_center = np.array([360/2, 360/2], dtype=int)
 real_center_dist = 1.06
 cam_height = 2
-user_height = 1.35
+user_height = 1.524
 camera_orentation = np.array([-1,1])
 
 buffer_size = 10
-centroid_buffer1 = np.zeros((buffer_size, 2), dtype=int)
-centroid_buffer2 = np.zeros((buffer_size, 2), dtype=int)
-buffer_index = 0
+centroid_buffer1 = np.zeros((buffer_size, 2), dtype=float)
+centroid_buffer2 = np.zeros((buffer_size, 2), dtype=float)
+buffer_index1 = 0
+buffer_index2 = 0
 
-def update_buffer(new_centroid, buffer_index):
-    centroid_buffer[buffer_index] = new_centroid
-    buffer_index = (buffer_index + 1) % buffer_size
-    return centroid_buffer, buffer_index
+
 
 while cap.isOpened():
     ret, frame = cap.read()
@@ -158,22 +171,44 @@ while cap.isOpened():
         
         centroid1 = np.mean(cord_list[0], axis=0, dtype=int)
         centroid2 = np.mean(cord_list[1], axis=0, dtype=int)
-        centroid_buffer1, buffer_index = update_buffer(centroid_buffer1, buffer_index)
-        centroid_buffer2, buffer_index = update_buffer(centroid_buffer2, buffer_index)
-
+        real_centroid1 = pixel_2_cords(centroid1, pixel_center, real_center_dist, cam_height, user_height, camera_orentation)
+        real_centroid2 = pixel_2_cords(centroid2, pixel_center, real_center_dist, cam_height, user_height, camera_orentation)
+        
+        centroid_buffer1, buffer_index1 = update_buffer(centroid_buffer1, real_centroid1, buffer_index1)
+        centroid_buffer2, buffer_index2 = update_buffer(centroid_buffer2, real_centroid2, buffer_index2)
         vector1 = np.diff(centroid_buffer1, axis=0)
         vector2 = np.diff(centroid_buffer2, axis=0)
-        print(vector1.shape)
-        print(vector1)
+        perpendicular_v = perpendicular_vector(vector1)
+        perpendicular_hat = perpendicular_v / np.linalg.norm(perpendicular_v)
+        
+        perpendicular_v_25cm = perpendicular_hat*.25
+        print(perpendicular_v_25cm)
+        perpendicular_v_25cm_pixel = cords_2_pixel(perpendicular_v_25cm, pixel_center, real_center_dist, cam_height, user_height, camera_orentation)
+        
+        # print(vector1)
 
-
-        cv.circle(frame, tuple(centroid1[::-1]), 5, (0, 255, 0), -1)
+        cv.circle(frame, tuple(centroid1[::-1]), 5, (0, 0, 255), -1)
         cv.circle(frame, tuple(centroid2[::-1]), 5, (0, 255, 0), -1)
+        cv.circle(frame, tuple(perpendicular_v_25cm_pixel[::-1]), 15, (255, 255, 255), -1)
 
     elif len(cord_list) == 1:
 
         centroid1 = np.mean(cord_list[0], axis=0, dtype=int)
-        cv.circle(frame, tuple(centroid1[::-1]), 5, (0, 255, 0), -1)
+        real_centroid1 = pixel_2_cords(centroid1, pixel_center, real_center_dist, cam_height, user_height, camera_orentation)
+        centroid_buffer1, buffer_index1 = update_buffer(centroid_buffer1, real_centroid1, buffer_index1)
+        vector1 = np.diff(centroid_buffer1, axis=0)
+        perpendicular_v = perpendicular_vector(vector1)
+        perpendicular_hat = perpendicular_v / np.linalg.norm(perpendicular_v)
+        perpendicular_v_25cm = perpendicular_hat*.25
+        print(perpendicular_v_25cm)
+        perpendicular_v_25cm_pixel = cords_2_pixel(perpendicular_v_25cm, pixel_center, real_center_dist, cam_height, user_height, camera_orentation)
+        # print(vector1)
+        cv.circle(frame, tuple(centroid1[::-1]), 5, (0, 0, 255), -1)
+        cv.circle(frame, tuple(perpendicular_v_25cm_pixel[::-1]), 15, (0, 255, 255), -1)
+
+    
+    else:
+        cv.circle(frame, tuple(pixel_center[::-1]), 15, (255, 255, 0), -1)
 
 
 
