@@ -63,12 +63,39 @@ def pixel_2_cords(pixel_center_location, pixel_location, center_dist, camera_hei
     real_dist_cords = pixel_xy_ratio*real_center_dist
     return camera_orentation*real_dist_cords
 
+def kmeans(identified_punch_cords, num_gloves=2):
+    if identified_punch_cords.size > 0:
+        try:
+            kmeans = KMeans(n_clusters=num_gloves)
+            kmeans.fit(identified_punch_cords)
+
+            cluster_labels = kmeans.labels_
+            cluster_centers = kmeans.cluster_centers_
+
+            punch1_pixel = identified_punch_cords[cluster_labels == 0]
+            punch2_pixel = identified_punch_cords[cluster_labels == 1]
+            # print("*",punch1_pixel.shape)
+            # print("**",punch2_pixel.shape)
+            # print("*")
+            punch_pixels = [punch1_pixel, punch2_pixel]
+            # print("***", punch_pixels.shape)
+            return punch_pixels
+        except ValueError as e:
+            # print("**")
+            return [identified_punch_cords]
+    else:
+        return []
+        
+
+
+
+        
+        # print("Cluster Labels:", cluster_labels)
+        # print("Cluster Centers:", cluster_centers)
+
+
 i = 0
 change_res(640, 360)
-
-def camera_calibration(frame, pixel_center, real_center_dist, user_height, camera_height):
-    real_dist_ratio = user_height/camera_height
-    real_dist = real_center_dist * real_dist_ratio
     
 pixel_center = np.array([360/2, 360/2])
 real_center_dist = 1.06
@@ -108,7 +135,7 @@ while cap.isOpened():
     # color_mask_bot = cv.inRange(hsv_frame, lower_bound_bot, upper_bound_bot)
     # color_mask = color_mask / 255
     result = cv.bitwise_and(frame, frame, mask=color_mask_gloves)
-    results = cv.bitwise_and(frame)
+    # results = cv.bitwise_and(frame)
 
     # rgb_frame = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
 
@@ -129,14 +156,30 @@ while cap.isOpened():
     # binary_frame = np.logical_and(hsv_frame, color_mask_3d)
     # print(binary_frame.shape)
 
+    cord_list = kmeans(marked_pixel_coords, 2)
+    
+    if len(cord_list) == 2:
+        centroid1 = np.mean(cord_list[0], axis=0, dtype=int)
+        centroid2 = np.mean(cord_list[1], axis=0, dtype=int)
+
+        cv.circle(frame, tuple(centroid1[::-1]), 5, (0, 255, 0), -1)
+        cv.circle(frame, tuple(centroid2[::-1]), 5, (0, 255, 0), -1)
+    elif len(cord_list) == 1:
+        centroid1 = np.mean(cord_list[0], axis=0, dtype=int)
+        cv.circle(frame, tuple(centroid1[::-1]), 5, (0, 255, 0), -1)
+
+
+
+
+
     # Calculate the centroid (average position) of red pixels
-    if marked_pixel_coords.size > 0:
-        centroid = np.mean(marked_pixel_coords, axis=0, dtype=int)
-        print(pixel_2_cords(pixel_center, centroid, real_center_dist, cam_height, user_height, camera_orentation))
+    # if marked_pixel_coords.size > 0:
+        # centroid = np.mean(marked_pixel_coords, axis=0, dtype=int)
+        # print(pixel_2_cords(pixel_center, centroid, real_center_dist, cam_height, user_height, camera_orentation))
 
     #     # Draw a circle at the centroid
     #     cv.circle(frame, tuple(centroid[::-1]), 5, (0, 255, 0), -1)
-        cv.circle(frame, tuple(centroid[::-1]), 5, (0, 255, 0), -1)
+        # cv.circle(frame, tuple(centroid[::-1]), 5, (0, 255, 0), -1)
 
     # Calculate the frame rate TODO FIX THIS
     # et = time.time() - st
