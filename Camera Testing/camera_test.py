@@ -79,7 +79,7 @@ camera_orentation = np.array([-1,1])
 while cap.isOpened():
     ret, frame = cap.read()
     frame = frame_resize(frame)
-    
+
     if not ret:
         print("Can't receive frame (stream end?). Exiting ...")
         break
@@ -122,7 +122,7 @@ while cap.isOpened():
     # Find the coordinates of all marked color pixels in the mask
     #finds all the pixels where the condition is true
     #the returns a list of cordinates where its true
-    marked_pixel_coords = np.column_stack(np.where(color_mask > 0))
+    marked_pixel_coords = np.column_stack(np.where(color_mask_gloves > 0))
     
     # cv.imshow('frame', marked_pixel_coords)
     # binary_frame = color_mask_3d * frame
