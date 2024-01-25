@@ -9,80 +9,165 @@ License: Released for free under a Creative Commons Attribution 2.5 License
 This website was based upon a number of source materials, which are elaborated upon in credits.txt
 
 -->
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 
-<!--Reconfigurable base tag; used to modify the site root location for root-relative links-->
-<!-- Python SimpleHTTPServer Testing -->
-<!--<base href="/http://localhost:8000/" />-->
-<!-- ECE477 preview URL -->
-<!--<base href="/https://engineering.purdue.edu/ece477/preview/" />-->
-<!-- ECE477 final URL -->
-<!--<base href="/https://engineering.purdue.edu/ece477/" />-->
-<!--<base href="https://engineering.purdue.edu/ece477/StudentWebTemplate/" />-->
-    <base href="https://engineering.purdue.edu/477grp5/" /> <!-- Replace the 25 with your team number-->
-	
-<!--Content-->
-<title>ECE477 Homepage</title>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<meta name="author" content="Phil Walter">
-<meta name = "format-detection" content = "telephone=no" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--Reconfigurable base tag; used to modify the site root location for root-relative links-->
+    <!-- Python SimpleHTTPServer Testing -->
+    <!--<base href="/http://localhost:8000/" />-->
+    <!-- ECE477 preview URL -->
+    <!--<base href="/https://engineering.purdue.edu/ece477/preview/" />-->
+    <!-- ECE477 final URL -->
+    <!--<base href="/https://engineering.purdue.edu/ece477/" />-->
+    <!--<base href="https://engineering.purdue.edu/ece477/StudentWebTemplate/" />-->
+    <base href="https://engineering.purdue.edu/477grp5/"/> <!-- Replace the 25 with your team number-->
 
-<!--CSS-->
-<link rel="stylesheet" href="css/default.css" type="text/css" media="all" />
-<link rel="stylesheet" href="css/responsive.css">
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/content.css">
-<!--[if IE 6]>
-<link href="/default_ie6.css" rel="stylesheet" type="text/css" />
-<![endif]-->
+    <!--Content-->
+    <title>ECE477 Homepage</title>
+    <meta content="" name="keywords"/>
+    <meta content="" name="description"/>
+    <meta content="Phil Walter" name="author">
+    <meta content="telephone=no" name="format-detection"/>
+    <meta content="width=device-width,initial-scale=1.0" name="viewport">
+
+    <!--CSS-->
+    <link href="css/default.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="css/responsive.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/content.css" rel="stylesheet">
+    <!--[if IE 6]>
+    <link href="/default_ie6.css" rel="stylesheet" type="text/css"/>
+    <![endif]-->
 
 </head>
 <body>
 <div id="wrapper_site">
     <div id="wrapper_page">
-		<!-- Instantiate global site header.-->
-		<div id="header"></div>
-		<!-- Instantiate site global navigation bar.-->
-		<div id="menu"></div>
-		<!-- Instantiate slideshow module. All slideshow images should be 1100px x 500px and stored in ./img/slideshow-->
-		<div id="slideshow"></div>
-		<!-- Instantiate main page content. All page content should be added to about.html -->
-		<div id="content">
-            <h2>Project Name:</h2>
-			
-            <h2>Project Description:</h2> Replace all this text with your project description:  This is the place to talk about your project. What problem does it address? How does it work? This description should describe all project functionality and at the end of the semester your completed project will be graded on how well you have fulfilled this described functionality.  This is also where you will state any stretch goals that you wish to use for a design bonus.  First Draft is from your Final Project Proposal and you may change this project description at will over the first 5 weeks of the course. 
-            
-            <h2>Project Specific Design Requirements (PSDRs):</h2> These are the 5 Design Requirements where we capture your team engineering design effort (the rest of your project may consist of off-the-shelf hardware and software) and these 5 PSDRs are worth 8% of your teams final grade.  First Draft is from your Final Project Proposal and you may change your PSDRs at will over the first 5 weeks of the course.  At least 3 must be hardware PSDRs (indicate).  Delete this text and only list your 5 PSDRs.  
-                <ol>
-                    <li>PSDR #1 (Hardware): An ability to....</li>
-                    <li>PSDR #2 (Hardware): An ability to....</li>
-                    <li>PSDR #3 (Hardware): An ability to....</li>
-                    <li>PSDR #4 (Hardware): An ability to....</li>
-                    <li>PSDR #5 (Software): An ability to....</li>
-                </ol>
+        <div id="header"></div>
+        <div id="menu"></div>
+        <div id="slideshow"></div>
+        <div id="content">
+            <h2>Project Name: PunchBot</h2>
+            <h2>Project Description:</h2>
+            <p>PunchBot has a simple goal: dodging your punches. The main goal is to build a single unit target
+                attached to an axle that will allow it to pivot with 2 degrees of freedom. Combined with a cameras to
+                see and predict the gloves' motions, this robot is supposed to predict and dodge all incoming
+                punches to serve mainly as an entertaining game for kids.</p>
+            <h3>Hardware Components:</h3>
+            <p>Robot Body:
+            <ul>
+                <li>Design a simple and compact robot body that can move on an axle.</li>
+                <li>Ensure that the design allows for easy bunching and dodging movements.</li>
+            </ul>
+            <p>Axle and Motor System:
+            <ul>
+                <li>Choose motors that can control the movement of the robot along the axle.</li>
+                <li>Integrate an axle system that allows the robot to rotate and dodge punches.</li>
+            </ul>
+            <p>Camera System:
+            <ul>
+                <li>Select a camera with sufficient resolution and frame rate for real-time detection.</li>
+                <li>Mount the camera in a way that provides a good field of view for detecting punches.</li>
+            </ul>
+            <p>Color Detection System:
+            <ul>
+                <li>Use sensors or image processing techniques to identify brightly colored gloves.</li>
+                <li>Implement a system that can accurately distinguish the gloves from the background.</li>
+            </ul>
+            <p>Microcontroller or Single-Board Computer:
+            <ul>
+                <li>Choose a microcontroller or single-board computer (like Raspberry Pi or Arduino) to process
+                    camera input and control motors.
+                </li>
+                <li>Ensure it has the necessary processing power and interfaces for camera and motor control.</li>
+            </ul>
+            <h3>Software Components:</h3>
+            Image Processing Algorithm:
+            <ul>
+                <li>Develop an image processing algorithm to analyze the camera feed.</li>
+                <li>Identify and track the position of the brightly-colored gloves in real-time.</li>
+            </ul>
+            Control Algorithm:
+            <ul>
+                <li>Create a control algorithm that takes input from the image processing module.</li>
+                <li>Implement a dodging strategy based on the detected glove positions.</li>
+            </ul>
+            Motor Control:
+            <ul>
+                <li>Write code to control the motors based on the output from the control algorithm.</li>
+                <li>Ensure the robot can move quickly and accurately to dodge punches.</li>
+            </ul>
+            Integration and Testing:
+            <ul>
+                <li>Integrate the hardware and software components.</li>
+                <li>Test the prototype in controlled environments to ensure accurate glove detection and effective
+                    dodging.
+                </li>
+            </ul>
+            Refinement:
+            <ul>
+                <li>Refine the algorithms and adjust parameters based on testing results.</li>
+                <li>Fine-tune the robot's movements for better-dodging performance.</li>
+            </ul>
+            Safety Measures:
+            <ul>
+                <li>Implement safety features, such as emergency stop mechanisms, to ensure the safety of
+                    users and the robot itself.
+                </li>
+            </ul>
+            Documentation:
+            <ul>
+                <li>Document the design, code, and testing procedures for future reference or improvement.
+                </li>
+            </ul>
+            <h2>Project Specific Design Requirements (PSDRs):</h2>
+            These are the five Design Requirements where we
+            capture your team engineering design effort (the rest of your project may consist of off-the-shelf
+            hardware and software), and these 5 PSDRs are worth 8% of your teams final grade. The First Draft is from
+            your Final Project Proposal, and you may change your PSDRs at will over the first 5 weeks of the course.
+            At least three must be hardware PSDRs (indicate). Delete this text and only list your 5 PSDRs.
+            <ol>
+                <li>PSDR #1 (Software): An ability to track a punch and robot in the environment space.</li>
+                <li>PSDR #2 (Software): An ability to create a set of coordinates that place the robots outside a punch
+                    trajectory path
+                </li>
+                <li>PSDR #3 (Hardware): An ability to translate a set of coordinates into motor-specific torque values
+                    to control the proper robot path.
+                </li>
+                <li>PSDR #4 (Hardware): An ability to supply a constant 5V and 3.3V to the microcontrollers and
+                    peripherals of the logic system at varying current demands.
+                </li>
+                <li>PSDR #5 (Hardware): An ability to communicate motor command data between both microcontrollers.
+                </li>
+            </ol>
+            Definitions:
+            <ol>
+                <li>Punch – Strong enough force applied by a bare hand to create mild contusion on an average
+                    21-year-old healthy male.
+                </li>
+                <li>Environment (Area) – The effective area in space, which the dodging system was designed to monitor.
+                    System – The electrical makeup of the robot which involves the specified components.
+                </li>
+            </ol>
         </div>
-		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
-		<div id="footer"></div>
-	</div>
+        <div id="footer"></div>
+    </div>
 </div>
 
 <!--JS-->
-<script src="js/jquery.js"></script>
-<script src="js/jquery-migrate-1.1.1.js"></script>
+<script src="js/jquery.js" type=""></script>
+<script src="js/jquery-migrate-1.1.1.js" type=""></script>
 
 
 <script type="text/javascript">
-$(document).ready(function() {
-    $("#header").load("header.html");
-	$("#menu").load("navbar.html");
-	$("#slideshow").load("slideshow.html");
-	//$("#content").load("about.html");
-	$("#footer").load("footer.html");
-});
+    $(document).ready(function () {
+        $("#header").load("header.html");
+        $("#menu").load("navbar.html");
+        $("#slideshow").load("slideshow.html");
+//$("#content").load("about.html");
+        $("#footer").load("footer.html");
+    });
 </script>
 
 </body>
