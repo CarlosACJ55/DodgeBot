@@ -1,7 +1,12 @@
 import numpy as np
 import cv2 as cv
 import time
-from sklearn.cluster import KMeans
+# from sklearn.cluster import KMeans
+
+# print(cv.cuda.getDevice())
+centroid_buffer1 = [np.zeros(2, dtype=float)]
+print(centroid_buffer1)
+print("\n")
 
 image_sensor_width = 5.44 #mm (horizonal)
 image_sensor_height = 3.072 #mm (vertical)
@@ -35,9 +40,9 @@ def cords_2_pixel(real_dist_cords, pixel_center_location, center_dist, camera_he
     pixel_xy = pixel_xy_ratio * pixel_center_location
     pixel_location = pixel_center_location - pixel_xy 
 
-    return int(pixel_location)
+    return pixel_location.astype('uint16')
 
-center = np.array([360/2, 360/2])
+center = np.array([360/2, 360/2], dtype=int)
 pixel_loc = np.array([25, 25])
 real_center_dist = 1.06
 cam_height = 2
@@ -48,3 +53,5 @@ xy = pixel_2_cords(pixel_loc, center, real_center_dist, cam_height, user_height,
 xy_pix =cords_2_pixel(xy, center, real_center_dist, cam_height, user_height, camera_orientation)
 print(xy)
 print(xy_pix)
+
+print(np.random.choice([-1,0,1]))
