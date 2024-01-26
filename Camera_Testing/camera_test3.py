@@ -5,7 +5,6 @@ import time
 import torch
 from kmeans_pytorch import kmeans, kmeans_predict
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-# device = torch.device('gpu')
 np.random.seed(42)
 torch.manual_seed(42)
 torch.cuda.manual_seed(42)
@@ -82,7 +81,7 @@ def kmeans_gpu(identified_punch_cords, num_gloves, prev_cluster_centers, num_pun
 
             return punch_pixels, punch_centers
         except ValueError as e:
-            
+            print("*")
             return [identified_punch_cords], torch.stack([pixel_center-(pixel_center//2), pixel_center+(pixel_center//2)]).to(device)
     else:
 
@@ -150,13 +149,12 @@ while cap.isOpened():
     #the returns a list of cordinates where its true
     marked_pixel_coords = np.column_stack(np.where(color_mask_gloves > 0))
     marked_pixel_coords = torch.tensor(marked_pixel_coords, dtype=torch.float16, device=device)
-    marked_coords = pixel_2_cords(marked_pixel_coords, pixel_center, real_center_dist, cam_height, user_height, camera_orentation)
+    # marked_coords = pixel_2_cords(marked_pixel_coords, pixel_center, real_center_dist, cam_height, user_height, camera_orentation)
     
     print("color process:", time.time()-st)
     # cord_centers = [np.array(1,1), np.arr]
     # kmeans_gpu(marked_pixel_coords, 2)
     cord_list, punch_pixel_cord_centers = kmeans_gpu(marked_pixel_coords, 2, punch_pixel_cord_centers, num_punches)
-    cord_list, punch_pixel_cord_centers = kmeans_gpu(marked_coords, 2, punch_pixel_cord_centers, num_punches)
     print("cord centers", punch_pixel_cord_centers)
     print("kmeans:", time.time()-st)
     
@@ -254,15 +252,14 @@ while cap.isOpened():
                     vy = torch.abs(hat_vector_2frames[1])
                     
                 hat_avoidance_vector = torch.tensor([vx, vy], dtype=torch.float16).to(device)
-        
+                
                 
                 if norm_vector_2frames > .05 and main_punch_dist < .75:
                     print("its coming")
                     previous_robot_loc = previous_robot_loc + (avoidance_dist - dist_from_punch_traj)*hat_avoidance_vector + (avoidance_dist/2)*hat_avoidance_vector
         
         previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height, user_height, camera_orentation)
-        print("processing done", time.time()-st)
-        centroid = centroid.cpu().to(torch.int16).numpy()
+        centroid = centroid_.cpu().to(torch.int16).numpy()
         centroid_= centroid_.cpu().to(torch.int16).numpy()
         previous_robot_loc_pixel = previous_robot_loc_pixel.cpu().to(torch.int16).numpy()
 
