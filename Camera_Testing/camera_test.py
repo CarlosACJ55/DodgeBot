@@ -127,8 +127,12 @@ centroid_buffer2 = [torch.zeros(2, dtype=torch.float16, device=device)] * buffer
 
 # previous_robot_loc = np.array([0,0])
 previous_robot_loc = torch.zeros(2, dtype=torch.float16, device=device)
+<<<<<<< Updated upstream
 previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height, user_height,
                                          camera_orentation)  # .dtype(int)
+=======
+previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height, user_height, camera_orentation)#.dtype(int)
+>>>>>>> Stashed changes
 max_dodge_dist = .1
 avoidance_dist = .15
 
@@ -161,11 +165,19 @@ while cap.isOpened():
     # finds all the pixels where the condition is true
     # the returns a list of cordinates where its true
     marked_pixel_coords = np.column_stack(np.where(color_mask_gloves > 0))
+<<<<<<< Updated upstream
     marked_pixel_coords = torch.tensor(marked_pixel_coords, dtype=torch.float16, device=device)
     marked_coords = pixel_2_cords(marked_pixel_coords, pixel_center, real_center_dist, cam_height, user_height,
                                   camera_orentation)
 
     print("color process:", time.time() - st)
+=======
+    print(marked_pixel_coords)
+    marked_pixel_coords = torch.tensor(marked_pixel_coords, dtype=torch.int16, device=device)
+    marked_coords = pixel_2_cords(marked_pixel_coords, pixel_center, real_center_dist, cam_height, user_height, camera_orentation)
+    
+    print("color process:", time.time()-st)
+>>>>>>> Stashed changes
     # cord_centers = [np.array(1,1), np.arr]
     # kmeans_gpu(marked_pixel_coords, 2)
     cord_list, punch_pixel_cord_centers = kmeans_gpu(marked_pixel_coords, 2, punch_pixel_cord_centers, num_punches)
@@ -316,6 +328,7 @@ while cap.isOpened():
     # bgr_binary_frame = cv.cvtColor(binary_frame, cv.COLOR_HSV2BGR)
     print("end:", time.time() - st)
     cv.imshow('Original Frame', frame)
+
 
     if cv.waitKey(1) == ord('q'):
         break

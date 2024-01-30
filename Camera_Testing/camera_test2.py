@@ -76,6 +76,7 @@ def kmeans_gpu(identified_punch_cords, num_gloves, prev_cluster_centers):
     if identified_punch_cords.size > 0:
         identified_punch_cords_torch = torch.from_numpy(identified_punch_cords)
         try:
+<<<<<<< Updated upstream
             if prev_cluster_centers[0, 0] == -10:
 
                 # st = time.time()
@@ -85,6 +86,16 @@ def kmeans_gpu(identified_punch_cords, num_gloves, prev_cluster_centers):
             else:
                 cluster_labels = kmeans_predict(identified_punch_cords_torch, prev_cluster_centers, device='cuda:0')
 
+=======
+            # if prev_cluster_centers[0,0] == -10:
+
+            # st = time.time()
+            # if prev_cluster_centers[0][0] == -10:
+            cluster_labels, punch_centers = kmeans(X=identified_punch_cords_torch, num_clusters=num_gloves, device='cuda:0')
+            # else:
+                # cluster_labels = kmeans_predict(identified_punch_cords_torch, prev_cluster_centers, device='cuda:0')
+                
+>>>>>>> Stashed changes
             # KMeans(n_clusters=num_gloves, n_init=10, algorithm="lloyd")
 
             # kmeans.fit(identified_punch_cords)
@@ -102,9 +113,15 @@ def kmeans_gpu(identified_punch_cords, num_gloves, prev_cluster_centers):
 
             return punch_pixels, punch_centers
         except ValueError as e:
+<<<<<<< Updated upstream
             return [identified_punch_cords], torch.tensor([[-10, -10], [-10, -10]])
     else:
         return [], torch.tensor([[-10, -10], [-10, -10]])
+=======
+            return [identified_punch_cords],torch.tensor([[0, 0],[0,0]])
+    else:
+        return [], torch.tensor([[0, 0],[0,0]])
+>>>>>>> Stashed changes
 
 
 st = time.time()
@@ -281,13 +298,19 @@ while cap.isOpened():
                     vx = -1 * np.abs(hat_vector_2frames[0])
                 else:
                     vx = np.abs(hat_vector_2frames[0])
+<<<<<<< Updated upstream
 
                 if previous_robot_loc[0] >= 0:
+=======
+                
+                if previous_robot_loc[1] >= 0:
+>>>>>>> Stashed changes
                     vy = -1 * np.abs(hat_vector_2frames[1])
                 else:
                     vy = np.abs(hat_vector_2frames[1])
 
                 hat_avoidance_vector = np.array([vx, vy])
+<<<<<<< Updated upstream
 
                 if norm_vector_2frames > .05 and main_punch_dist < .75:
                     print("its coming")
@@ -298,6 +321,17 @@ while cap.isOpened():
         previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height,
                                                  user_height, camera_orentation)
 
+=======
+                
+                
+                # if norm_vector_2frames > .05 and main_punch_dist < .75:
+                print("its coming")
+                previous_robot_loc = previous_robot_loc + (avoidance_dist - dist_from_punch_traj)*hat_avoidance_vector + (avoidance_dist/2)*hat_avoidance_vector
+        
+        previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height, user_height, camera_orentation)
+        
+            
+>>>>>>> Stashed changes
         cv.circle(frame, tuple(centroid[::-1]), 5, (0, 0, 255), -1)
         cv.circle(frame, tuple(centroid_[::-1]), 5, (0, 255, 0), -1)
         cv.circle(frame, tuple(previous_robot_loc_pixel[::-1]), 15, (255, 255, 255), -1)
@@ -306,12 +340,19 @@ while cap.isOpened():
     else:
         print("away")
         # print(previous_robot_loc)
+<<<<<<< Updated upstream
         cord_centers = torch.tensor([[-10, -10], [-10, -10]])
         if (abs(previous_robot_loc[0]) >= .5) or (abs(previous_robot_loc[1]) >= .5) or np.isnan(
                 previous_robot_loc).any():
             previous_robot_loc = np.array([0, 0])
             previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height,
                                                      user_height, camera_orentation)
+=======
+        cord_centers = torch.tensor([[0, 0],[0,0]])
+        if (abs(previous_robot_loc[0]) >= .5) or (abs(previous_robot_loc[1]) >= .5) or np.isnan(previous_robot_loc).any():
+            previous_robot_loc = np.array([0,0])
+            previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc,pixel_center, real_center_dist, cam_height, user_height, camera_orentation)
+>>>>>>> Stashed changes
         cv.circle(frame, tuple(previous_robot_loc_pixel[::-1]), 15, (0, 0, 0), -1)
 
     # Calculate the centroid (average position) of red pixels

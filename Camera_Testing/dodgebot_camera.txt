@@ -116,7 +116,7 @@ centroid_buffer2 = [torch.zeros(2, dtype=torch.float16, device=device)] * buffer
 
 # previous_robot_loc = np.array([0,0])
 previous_robot_loc = torch.zeros(2, dtype=torch.float16, device=device)
-previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc,pixel_center, real_center_dist, cam_height, user_height, camera_orentation)#.dtype(int)
+previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height, user_height, camera_orentation)#.dtype(int)
 max_dodge_dist = .1
 avoidance_dist = .15
 
@@ -149,7 +149,8 @@ while cap.isOpened():
     #finds all the pixels where the condition is true
     #the returns a list of cordinates where its true
     marked_pixel_coords = np.column_stack(np.where(color_mask_gloves > 0))
-    marked_pixel_coords = torch.tensor(marked_pixel_coords, dtype=torch.float16, device=device)
+    print(marked_pixel_coords)
+    marked_pixel_coords = torch.tensor(marked_pixel_coords, dtype=torch.int16, device=device)
     marked_coords = pixel_2_cords(marked_pixel_coords, pixel_center, real_center_dist, cam_height, user_height, camera_orentation)
     
     print("color process:", time.time()-st)
@@ -304,6 +305,7 @@ while cap.isOpened():
     # bgr_binary_frame = cv.cvtColor(binary_frame, cv.COLOR_HSV2BGR)
     print("end:",time.time()-st)
     cv.imshow('Original Frame', frame)
+
 
     if cv.waitKey(1) == ord('q'):
         break
