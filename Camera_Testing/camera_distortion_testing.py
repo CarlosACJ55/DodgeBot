@@ -81,7 +81,8 @@ while cap.isOpened():
     ret, frame = cap.read()
     
     st = time.time()
-    # frame = cv.undistort(frame, camera_matrix, distortion_coeff, None, new_camera_matrix)
+    frame = cv.undistort(frame, camera_matrix, distortion_coeff, None, new_camera_matrix)
+    
     frame = frame_resize(frame)
     print(time.time()-st)
 

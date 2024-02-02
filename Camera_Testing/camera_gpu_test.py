@@ -240,8 +240,7 @@ while cap.isOpened():
                             avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + (
                                                  avoidance_dist / 2) * hat_avoidance_vector
 
-        previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height,
-                                                 user_height, camera_orentation)
+        previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height,user_height, camera_orentation)
         print("processing done", time.time() - st)
         centroid = centroid.cpu().to(torch.int16).numpy()
         centroid_ = centroid_.cpu().to(torch.int16).numpy()

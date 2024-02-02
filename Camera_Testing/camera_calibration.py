@@ -112,11 +112,15 @@ max_dodge_dist = .1
 avoidance_dist = .2
 cord_centers = torch.tensor([[-.5, -.5], [.5, .5]])
 np.random.seed(42)
-
+camera_matrix = np.array([[354.71698103,0.0,325.02163159],[0.0,355.44339145,161.51298043],[0.0,0.0,1.0]])
+distortion_coeff = np.array([[-3.52228685e-01, 1.55541160e-01,4.99708023e-05,-4.91499027e-05,-3.67726346e-02]])
 while cap.isOpened():
     ret, frame = cap.read()
-    frame = frame_resize(frame)
     st = time.time()
+    frame = cv.undistort(frame, camera_matrix, distortion_coeff, None, camera_matrix)
+    print(time.time()-st)
+    frame = frame_resize(frame)
+    
     if not ret:
         print("Can't receive frame (stream end?). Exiting ...")
         break
