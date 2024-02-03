@@ -28,18 +28,18 @@ figure
 plot(sol.x, sol.y(1,:))
 xlabel("Time (s)")
 ylabel("Position (rad)")
-title("Position of Stick Relative to Ground as a Function of Time")
+title("Position of Motor Assembly Relative to Ground as a Function of Time")
 
 figure
 [~,dy] = gradient(sol.y);
 plot(sol.x, dy)
 xlabel("Time (s)")
 ylabel("Angular Velocity (rad/s)")
-title("Angular Velocity of Stick as a Function of Time")
+title("Angular Velocity of Motor Assembly as a Function of Time")
 
 figure
 [~,ddy] = gradient(gradient(sol.y));
 plot(sol.x, ddy)
 xlabel("Time (s)")
 ylabel("Angular Acceleration (rad/s)")
-title("Angular Acceleration of Stick as a Function of Time")
+title("Angular Acceleration of Motor Assembly as a Function of Time")
