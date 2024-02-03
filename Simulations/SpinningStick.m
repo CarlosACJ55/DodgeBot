@@ -6,7 +6,7 @@ syms theta(t) phi(t)
 gravity = 9.80665;    % m/s^2
 rod_mass = 1/2;       % kg
 rod_radius = 0.375;   % Meters
-T_e = 30;             % Motor Torque Nm
+T_e = 28.7;             % Motor Torque Nm
 J_rod = 1/3 * rod_mass * rod_radius ^ 2;
 T_L = rod_mass * gravity * rod_radius * cos(phi);
 
