@@ -18,35 +18,56 @@ print(vertical_fov)
 print(diagonal_fov)
 
 
-# def pixel_2_cords(row, col):
+
+# def pixel_2_cords(pixel_location, pixel_center_location, center_dist, camera_height, height, orientation):
+#     real_ratio = height / camera_height
+#     dist = real_ratio * center_dist
+#     pixel_xy = pixel_center_location - pixel_location
+#     pixel_xy_ratio = pixel_xy / pixel_center_location
+#     real_dist_cords = pixel_xy_ratio * dist
+#     return orientation * real_dist_cords
+
+
+# def cords_2_pixel(real_dist_cords, pixel_center_location, center_dist, camera_height, height, inv_camera_orientation):
+#     real_ratio = height / camera_height
+#     dist = real_ratio * center_dist
+#     orientated_cords = real_dist_cords * inv_camera_orientation
+#     pixel_xy_ratio = orientated_cords / dist
+#     pixel_xy = pixel_xy_ratio * pixel_center_location
+#     pixel_location = pixel_center_location - pixel_xy
+#     return pixel_location.astype('uint16')
+
 
 def pixel_2_cords(pixel_location, pixel_center_location, center_dist, camera_height, height, orientation):
-    real_ratio = height / camera_height
+    real_ratio = (camera_height - height) / camera_height
     dist = real_ratio * center_dist
-    pixel_xy = pixel_center_location - pixel_location
+    pixel_xy = pixel_location - pixel_center_location
+
     pixel_xy_ratio = pixel_xy / pixel_center_location
     real_dist_cords = pixel_xy_ratio * dist
-    return orientation * real_dist_cords
+    return real_dist_cords * orientation
 
 
 def cords_2_pixel(real_dist_cords, pixel_center_location, center_dist, camera_height, height, inv_camera_orientation):
-    real_ratio = height / camera_height
+    real_ratio = (camera_height - height) / camera_height
     dist = real_ratio * center_dist
     orientated_cords = real_dist_cords * inv_camera_orientation
     pixel_xy_ratio = orientated_cords / dist
+
     pixel_xy = pixel_xy_ratio * pixel_center_location
     pixel_location = pixel_center_location - pixel_xy
     return pixel_location.astype('uint16')
 
 
 center = np.array([360 / 2, 360 / 2], dtype=int)
-pixel_loc = np.array([25, 25])
-real_center_dist = 1.06
+pixel_loc = np.array([270, 90])
+real_center_dist = 1.00
 cam_height = 2
-user_height = 1.01
-camera_orientation = np.array([-1, 1])
+user_height = 1.00
+camera_orientation = np.array([1, -1])
+inv_camera_orientation = -1 * camera_orientation
 xy = pixel_2_cords(pixel_loc, center, real_center_dist, cam_height, user_height, camera_orientation)
-xy_pix = cords_2_pixel(xy, center, real_center_dist, cam_height, user_height, camera_orientation)
+xy_pix = cords_2_pixel(xy, center, real_center_dist, cam_height, user_height, -1*camera_orientation)
 print(xy)
 print(xy_pix)
-print(np.random.choice([-1, 0, 1]))
+# print(np.random.choice([-1, 0, 1]))

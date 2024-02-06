@@ -46,24 +46,26 @@ def calibration_circle(frame):
     cv.circle(frame, (int(350), int(5)), 1, (0, 255, 255), cv.FILLED)
     return frame
 
-
 def pixel_2_cords(pixel_location, pixel_center_location, center_dist, camera_height, height, orientation):
-    real_ratio = height / camera_height
+    real_ratio = (camera_height - height) / camera_height
     dist = real_ratio * center_dist
-    pixel_xy = pixel_center_location - pixel_location
+    pixel_xy = pixel_location - pixel_center_location
+
     pixel_xy_ratio = pixel_xy / pixel_center_location
     real_dist_cords = pixel_xy_ratio * dist
-    return orientation * real_dist_cords
+    return real_dist_cords * orientation
 
 
 def cords_2_pixel(real_dist_cords, pixel_center_location, center_dist, camera_height, height, inv_camera_orientation):
-    real_ratio = height / camera_height
+    real_ratio = (camera_height - height) / camera_height
     dist = real_ratio * center_dist
     orientated_cords = real_dist_cords * inv_camera_orientation
     pixel_xy_ratio = orientated_cords / dist
+
     pixel_xy = pixel_xy_ratio * pixel_center_location
     pixel_location = pixel_center_location - pixel_xy
     return pixel_location.astype('uint16')
+
 
 
 def kmeans_gpu(identified_punch_cords, num_gloves, prev_cluster_centers, center_dist_threshold=-1):
@@ -106,26 +108,24 @@ cam_height = 2.36855
 # Max - 1.35
 # Ayman - 1.524
 user_height = 1.35
-camera_orientation = np.array([-1, 1])
+camera_orientation = np.array([1, -1])
+inv_camera_orientation = -1 * camera_orientation
 buffer_size = 3
 centroid_buffer1 = [np.zeros(2, dtype=float)] * buffer_size
 centroid_buffer2 = [np.zeros(2, dtype=float)] * buffer_size
 previous_robot_loc = np.array([0, 0])
-previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height, user_height,
-                                         camera_orientation)
+previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height, user_height, inv_camera_orientation)
 max_dodge_dist = .1
-avoidance_dist = .2
+avoidance_dist = .1
 cord_centers = torch.tensor([[-.5, -.5], [.5, .5]])
 camera_matrix = np.array([[354.71698103,0.0,325.02163159],[0.0,355.44339145,161.51298043],[0.0,0.0,1.0]])
 distortion_coeff = np.array([[-3.52228685e-01, 1.55541160e-01,4.99708023e-05,-4.91499027e-05,-3.67726346e-02]])
 np.random.seed(42)
-end = 0.0
-end2 = 0.0
+
 i = 0
-i2 = 0
 dodge_time = 0
 run_time_dict = {"Un-Distortion":[], "resize":[], "Range":[],"Marking Pixels":[], "Converting Cords":[],"Kmeans":[],"Buffer":[],"Main Punch":[],"Slope":[], "Punch Vector Calc":[], "Avoidance":[], "Total End":[], "Output End":[]}
-
+save = False
 while cap.isOpened():
     ret, frame = cap.read()
     st = time.time()
@@ -181,14 +181,14 @@ while cap.isOpened():
             main_punch = centroid_buffer1
             main_punch_dist = punch1_dist
             prev_punch_dist = np.linalg.norm(centroid_buffer1[1] - previous_robot_loc)
-            main_centroid = cords_2_pixel(centroid1, pixel_center, real_center_dist, cam_height, user_height, camera_orientation)
-            minor_centroid = cords_2_pixel(centroid2, pixel_center, real_center_dist, cam_height, user_height, camera_orientation)
+            main_centroid = cords_2_pixel(centroid1, pixel_center, real_center_dist, cam_height, user_height, inv_camera_orientation)
+            minor_centroid = cords_2_pixel(centroid2, pixel_center, real_center_dist, cam_height, user_height, inv_camera_orientation)
         else:
             main_punch = centroid_buffer2
             main_punch_dist = punch2_dist
             prev_punch_dist = np.linalg.norm(centroid_buffer2[1] - previous_robot_loc)
-            main_centroid = cords_2_pixel(centroid2, pixel_center, real_center_dist, cam_height, user_height, camera_orientation)
-            minor_centroid = cords_2_pixel(centroid1, pixel_center, real_center_dist, cam_height, user_height, camera_orientation)
+            main_centroid = cords_2_pixel(centroid2, pixel_center, real_center_dist, cam_height, user_height, inv_camera_orientation)
+            minor_centroid = cords_2_pixel(centroid1, pixel_center, real_center_dist, cam_height, user_height, inv_camera_orientation)
         run_time_dict["Main Punch"].append(time.time() - st)
         
          
@@ -206,35 +206,55 @@ while cap.isOpened():
             dodge_time = time.time()
             if dist_from_punch_traj <= avoidance_dist:
                 if previous_robot_loc[0] >= 0:
-                    vx = -1 * np.abs(hat_vector_2frames[0])
+                    vx = -1 * np.abs(hat_vector_2frames[1])
                 else:
-                    vx = np.abs(hat_vector_2frames[0])
+                    vx = np.abs(hat_vector_2frames[1])
                 if previous_robot_loc[1] >= 0:
-                    vy = -1 * np.abs(hat_vector_2frames[1])
+                    vy = -1 * np.abs(hat_vector_2frames[0])
                 else:
-                    vy = np.abs(hat_vector_2frames[1])
+                    vy = np.abs(hat_vector_2frames[0])
                 hat_avoidance_vector = np.array([vx, vy])
-                # if norm_vector_2frames > .05 and main_punch_dist < .75:
+                
                 print("its coming")
                 if main_punch_dist - prev_punch_dist < .05:
-                    previous_robot_loc = previous_robot_loc + (avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + (avoidance_dist / 2) * hat_avoidance_vector
+                    temp = previous_robot_loc
+                    previous_robot_loc = previous_robot_loc + 2*(avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + (avoidance_dist) * hat_avoidance_vector
                     run_time_dict["Avoidance"].append(time.time() - st)
+                    save = True
+                    print("\n\n")
+                    print(f"Dodge {temp} --> {previous_robot_loc}")
+                    print("\n\n")
+                    
         elif time.time() - dodge_time >= np.random.uniform(1.5,3.0):
-            previous_robot_loc = np.array([0, 0])
+            previous_robot_loc = np.array([0, 0]) + .01*(main_punch[0] / np.abs(main_punch[0]))
         
         run_time_dict["Total End"].append(time.time() - st)
-        previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height, user_height, camera_orientation)
+        previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height, user_height, inv_camera_orientation)
         
         cv.circle(frame, tuple(main_centroid[::-1]), 15, (0, 0, 255), -1)
         cv.circle(frame, tuple(minor_centroid[::-1]), 5, (0, 255, 0), -1)
         cv.circle(frame, tuple(previous_robot_loc_pixel[::-1]), 20, (255, 255, 255), -1)
+        if save == True:
+            temp_pixel = cords_2_pixel(temp, pixel_center, real_center_dist, cam_height, user_height, inv_camera_orientation)
+            cv.circle(frame, tuple(temp_pixel[::-1]), 20, (0, 0, 0), -1)
+            cv.imwrite(f"./saved_frames/frames/punch_frame{i}.jpg", frame)
+            f = open("./saved_frames/punch_data.txt", "a")
+            f.write(f"Punch Frame Case #{i}\n")
+            f.write(f"main buffer: {main_punch}\n")
+            f.write(f"hat avoidance vector: {hat_avoidance_vector}\n")
+            f.write(f"previous robot loc, new robot loc: {temp} , {previous_robot_loc}\n")
+            f.write("\n")
+            f.close()
+            i += 1
+            save = False
+
     else:
         print("away")
         # print(previous_robot_loc)
         cord_centers = torch.tensor([[float('nan'), -.5], [.5, .5]])
         # if (abs(previous_robot_loc[0]) >= .5) or (abs(previous_robot_loc[1]) >= .5) or np.isnan(previous_robot_loc).any():
         previous_robot_loc = np.array([0, 0])
-        previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height, user_height, camera_orientation)
+        previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height, user_height, inv_camera_orientation)
         cv.circle(frame, tuple(previous_robot_loc_pixel[::-1]), 15, (0, 0, 0), -1)
     # Calculate the centroid (average position) of red pixels
     # if marked_pixel_coords.size > 0:
