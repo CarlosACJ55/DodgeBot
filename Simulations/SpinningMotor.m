@@ -4,13 +4,13 @@ clc
 syms theta(t) phi(t)
 
 gravity = 9.80665;    % m/s^2
-disk_mass = 12;       % kg
-disk_radius = 0.114 / 2 * sqrt(2);   % Meters
+motor_mass = 12;       % kg
+motor_radius = 0.130;   % Meters
 stick_mass = 0.5;
 stick_radius = 0.375;
-T_e = 40;             % Motor Torque Nm
+T_e = 54;             % Motor Torque Nm
 J_stick = 1/3 * stick_mass * stick_radius ^ 2;
-J_motors = 1/2 * disk_mass * disk_radius ^ 2;
+J_motors = 1/6 * motor_mass * motor_radius ^ 2;
 
 %For starting parameters:
 cond1 = pi / 4; %Initial Rotor position
@@ -28,18 +28,18 @@ figure
 plot(sol.x, sol.y(1,:))
 xlabel("Time (s)")
 ylabel("Position (rad)")
-title("Position of Stick Relative to Ground as a Function of Time")
+title("Position of Motor Assembly Relative to Ground as a Function of Time")
 
 figure
 [~,dy] = gradient(sol.y);
 plot(sol.x, dy)
 xlabel("Time (s)")
 ylabel("Angular Velocity (rad/s)")
-title("Angular Velocity of Stick as a Function of Time")
+title("Angular Velocity of Motor Assembly as a Function of Time")
 
 figure
 [~,ddy] = gradient(gradient(sol.y));
 plot(sol.x, ddy)
 xlabel("Time (s)")
 ylabel("Angular Acceleration (rad/s)")
-title("Angular Acceleration of Stick as a Function of Time")
+title("Angular Acceleration of Motor Assembly as a Function of Time")

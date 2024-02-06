@@ -52,15 +52,150 @@ contact course staff.
 			and include things such as a file lister (for listing out homework assignments or tutorials)
 		-->
 		<div id="content">
-            <h2>Progress Report/Engineering Project Journal for -insert student name here-</h2>
-            
-            <b>Date Reported:</b> -Enter the date for this journal entry mm/dd/yyyy (the date the project meeting or work was performed)-<br>
-            <b>Start Time:</b> -Enter the time you began the meeting/work for this entry e.g., 2:37pm-<br>
-            <b>Work Time:</b> -Enter how long the meeting or work lasted for this entry (round to nearest quarter hour) e.g., 1.25 hours-<br>
-            -Discuss your project meeting/work for this entry here. Make sure that this is from your individual perspective and include images, video, and other graphics.  Follow the guidelines presented in the Progress Report Policy that is posted on Brightspace.  This is a template entry; simply copy/paste this entry and overwrite for each journal entry.-  </br>
-                     
+            <h2>Progress Report/Engineering Project Journal for Maximilian Drach</h2>
+
+			<b>Date Reported:</b> 01/25/2024<br>
+			<b>Start Time:</b> 10:00am<br>
+			<b>Work Time:</b> 9 hours<br>
+            Bug Fixes & New Dodging Algorithm:
+            <ul>
+                <li>Implemented new changes to the computer vision tracking algorithm.</li>
+                <li>First, I fixed bugs in the punch location stream buffer. After realizing that we only had around 5 frames per punch to detect and move, I changed the buffer size to 3 frames.</li>
+                <li>Next, I analyzed the runtime of my code and realized that the k-means algorithm was running too slow on the CPU, so I rewrote the code to run on the GPU. This improvement reduced my runtime from 45ms to under 15ms per frame. This enhancement allows us to run the camera at 60 fps with theoretically no latency.</li>
+                <li>The significant improvement this week was our new dodging algorithm. It is designed around the robot dodging the punch into space and moving in the inverse-opposite proportional direction. (Picture Below)</li>
+                <img src="Team\progress\img - member3\Dodge_0126_Algorithm.png" width="75%"></img>
+                <li>Finally, I changed all my code to use PyTorch instead of NumPy to allow for further GPU utilization. However, this ended up slowing down the code because arithmetic operations are slower in PyTorch than in NumPy.</li>
+            </ul>
+
+			<b>Date Reported:</b> 01/23/2024<br>
+			<b>Start Time:</b> 9:30am<br>
+			<b>Work Time:</b> 7 hours<br>
+            Computer Vision Tracking:
+            <ul>
+                <li>After applying the color mask filter, I am left with the pixel values that detected by the computer to match the color gloves. I then convert these pixels into their coordinate values in the xy-real-coordinate-space. I then pass the collection of these points into a simple kmeans algorithm which segment these points into two cluster of points.</li>
+            </ul>
+            Robot Dodging Algorithm Design & Testing:
+            <ul>
+                <li>I then started to log the center of these clusters from the past 10 frames (i.e., 10 past center points).</li>
+                <li>Utilizing this buffer, I find the cluster which has the most change in the distance over the past 10 frames. This cluster is then used as the main punch to track and react too.</li>
+                <li>I first then approximate the linear trajectory of punch, and test to see robot location is within (.15m or specified distance) of the punch trajectory line. If the robot is within the punch trajectory, then dodging algorithm is engaged.</li>
+                <li>The dodging algorithm checks to see if the punch is mainly coming from the x or y direction. It then places a greater avoidance distance emphasis on the direction that punch is not mainly coming from. So if you are proportionally travelling in the x direction towards the robot, then robot will main move in the y-direction to avoid the punch. If you are coming from an angle where the x and y direction is about equal, then it will mostly travel perpendicular to the incoming punch. In the non-significant direction, it will randomly choose to stay on the same axis (0), move back (-1), more forward (1) equally. This adds more stochasticity to the dodge, without affecting the effectiveness of the dodge.</li>
+                <li>Finally, I noticed that the robot would sometime get confused when the punch was pulled back after punching and it would unintentionally move the robot, so I added an extract check to make sure the vector of the punch was moving towards the punch.</li>
+            </ul>
+
+
+			<b>Date Reported:</b> 01/16/2024<br>
+			<b>Start Time:</b> 9:30am<br>
+			<b>Work Time:</b>7 hours<br>
+            Camera Calibration Research:
+			<ul>
+				<li>Assuming for a non-distortion lens, I derived a formula for mapping a pixel location to its xy-coordinate in the real world. (Formula Below)</li>
+                <img src="Team\progress\img - member3\NonDistortion_PixelMap_Formula.png" width="50%"></img>
+				<li>Set up a top-down test camera that was 2m above ground.</li>
+				<li>Using the environment tracking research from last week, I created a 1x1m box with painters’ tape to test the accuracy of the coordinate mapping. (Picture Below)</li>
+                <img src="Team\progress\img - member3\Dodgebot_Topdown_Camera_Setup.jpg" width="25%"></img>
+				<li>Putting together the color tracking algorithm and camera calibration mapping formula, I created a rough Environment Punch Tracker Algorithm that can accurately track a punch in space. Given the inputted camera observation height, real-world distance from the center pixel to the edge, and user punch height (i.e. the height of a user's hands when in a punching stance), and tracking color HSV values. (Video Below)</li>
+				<video width="40%" controls>
+                    <source src="Team\progress\img - member3\Punch_Tracking_0116.mp4" type="video/mp4">
+                </video> 
+                <li>Finally, I started researching more advanced camera calibration methods and other M12 lens optics to increase the accuracy of the Camera Calibration Mapping.</li>
+				<li>Useful Links:
+					<ul>
+					  <li><a href="https://www.mathworks.com/help/vision/ug/camera-calibration.html" target="_blank">Camera Calibration - MathWorks</a></li>
+					  <li><a href="https://ieeexplore.ieee.org/document/888718" target="_blank">IEEE Explore - Camera Calibration</a></li>
+					  <li><a href="https://www.image-engineering.de/library/image-quality/factors/1062-distortion#:~:text=The%20bending%20of%20a%20straight,percentage%20of%20picture%20height%20distortion." target="_blank">Image Engineering - Distortion</a></li>
+					  <li><a href="https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html" target="_blank">OpenCV - Camera Calibration Tutorial</a></li>
+					  <li><a href="https://docs.opencv.org/3.4/d4/d94/tutorial_camera_calibration.html" target="_blank">OpenCV - Camera Calibration</a></li>
+					  <li><a href="https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html" target="_blank">OpenCV - Camera Calibration (Calib3d Module)</a></li>
+					  <li><a href="https://learnopencv.com/camera-calibration-using-opencv/" target="_blank">Learn OpenCV - Camera Calibration</a></li>
+					  <li><a href="https://www.geeksforgeeks.org/camera-calibration-with-python-opencv/" target="_blank">GeeksforGeeks - Camera Calibration with Python OpenCV</a></li>
+					  <li><a href="https://commonlands.com/products/stereographic-m12-fisheye-cil207?" target="_blank">Stereographic M12 Fisheye Lens</a></li>
+					</ul>
+				  </li>
+			  </ul>
+            <b>Date Reported:</b> 01/11/2024<br>
+			<b>Start Time:</b> 9:30am<br>
+			<b>Work Time:</b>6 hours<br>
+			<ul>
+				<li>Utilizing the OpenCV Library in Python, I was able to stream the camera frames to a Dell XPS9710 over a USB2 cable.</li>
+				<li>Implemented a Color Mask on the video stream utilizing the OpenCV Library in Python.</li>
+				<li>I converted the BGR image to HSV color space. The HSV color space allows determination of saturation (Saturation) and brightness (Value), crucial for image sensor calibration. The Hue value controls the color to look for in the image.</li>
+				  
+				<ul>
+					<li><a href="https://en.wikipedia.org/wiki/HSL_and_HSV" target="_blank">HSL and HSV on Wikipedia</a></li>
+					<li><a href="https://realpython.com/python-opencv-color-spaces/" target="_blank">OpenCV Color Spaces</a></li>
+					<li><a href="https://docs.opencv.org/3.4/d0/d86/tutorial_py_image_arithmetics.html" target="_blank">OpenCV Image Arithmetics</a></li>
+				</ul>
+				  
+				<li>Utilizing the Color Mask, I can find which pixel values meet the color criteria, allowing us to track a specific color throughout the image. In the video, we use a "Bitwise-And" Mask to show only pixels meeting HSV criteria, making the rest black. (Video Below)</li>
+                <video width="50%" controls>
+                    <source src="Team\progress\img - member3\HSV_Color_Filter.mp4" type="video/mp4">
+                </video> 
+				<li>Researched the Lucas-Kanade Optical Flow method as an alternative gloves tracking algorithm.</li>
+				<ul>
+					<li><a href="https://www.cs.cmu.edu/~16385/s15/lectures/Lecture21.pdf" target="_blank">Lucas-Kanade Optical Flow</a></li>
+					<li><a href="https://docs.opencv.org/3.4/db/d7f/tutorial_js_lucas_kanade.html" target="_blank">OpenCV Lucas-Kanade Tutorial</a></li>
+				
+				</ul>
+				<li>Started researching k-means image segmentation for real-time tracking of two gloves, even if they are the same color.</li>
+				<ul>
+					<li><a href="https://www.kdnuggets.com/2019/08/introduction-image-segmentation-k-means-clustering.html" target="_blank">Introduction to Image Segmentation with K-means Clustering</a></li>
+					<li><a href="https://medium.com/mlearning-ai/k-means-clustering-71a875dbce3c" target="_blank">K-means Clustering Article</a></li>
+					<li><a href="https://cierra-andaur.medium.com/using-k-means-clustering-for-image-segmentation-fe86c3b39bf4" target="_blank">Using K-means Clustering for Image Segmentation</a></li>
+					<li><a href="https://www.geeksforgeeks.org/image-segmentation-using-k-means-clustering/" target="_blank">Image Segmentation using K-means Clustering (GeeksforGeeks)</a></li>
+					<li><a href="https://towardsdatascience.com/image-color-segmentation-by-k-means-clustering-algorithm-5792e563f26e" target="_blank">Image Color Segmentation by K-means Clustering</a></li>
+				</ul>
+			  </ul>
+            <b>Date Reported:</b> 01/09/2024<br>
+            <b>Start Time:</b> 9:30am<br>
+            <b>Work Time:</b>6.5 hours<br>
+            <ul>
+				<li>I spent this week working on the design specifications of the project in order to find the hardware necessary to complete the project.</li>
+			</ul>
+			Kinematics & Punch Research:
+			<ul>
+				<li>I research time duration and kinematics behind a human punch. I used both online resources and slo-mo camera testing to confirm the theoretical time frame values from the online resources.</li>
+				<ol>
+					<li><a href="https://boxingscience.co.uk/science-behind-punch/" target="_blank">science-behind-punch</a></li>
+					<li><a href="https://chesterrep.openrepository.com/bitstream/handle/10034/623170/FINAL%20THESIS%20FOR%20CHESTERREP.pdf?sequence=1&isAllowed=y" target="_blank">Punch Kinematic Doctoral Thesis</a></li>
+				</ol>
+				<li>From the research we found the average punch time duration was around 100~200ms.</li>
+				<ol>
+					<li>The video below was filmed using a iPhone 14 Pro using the slow-mo camera feature and it confirms the theorical calculations.</li>
+					<!-- <video width="960" height="540" controls> -->
+                    <video width="75%" controls>
+						<source src="Team\progress\img - member3\Slowmo_punch.mp4" type="video/mp4">
+						
+					</video> 
+				</ol>
+			</ul>
+			Camera Specification Research:
+			<ul>
+				<li>With the knowledge of the time requirements, we set out to figure out the minimum frame rate and resolution of the camera.</li>
+				<ul>
+				  <li>We wanted a minimum resolution of 1 (pixel / cm<sup>2</sup>), to approximately allow our camera system to have around 1 cm<sup>2</sup> accuracy while tracking real-world targets. (Formula Below)</li>
+                  <img src="Team\progress\img - member3\CameraRes_Formula.png" width="75%"></img>
+				  <li>Since punches have a time frame of 100~200ms, we wanted a camera that would give us around 20 frames to track a punch before impact.</li>
+				</ul>
+				<li>After calculating our minimum parameters, we asked Joe if he had any cameras that met our specifications. He lent us a <a href="https://www.webcamerausb.com/elp-wide-angle-260fps-usb-webcam-2megapixels-cmos-ov4689-sensor-mini-1080p-60fps-camera-board-module-with-29mm-lens-p-269.html" target="_blank">ELP-USBFHD08S-L29</a> camera.</li>
+			  </ul>
+            Environment Sensor Placement Structure:
+            <ul>
+                <li>For our project, we found that a top-down camera view would enable us to accurately track objects in the xy-plane.</li>
+        
+                <li><strong>Key Advantages</strong></li>
+                <ul>
+                <li>Utilizes only 1 camera for tracking and means less equipment.</li>
+                <li>Simplifies the image processing and lowers computational complexity.</li>
+                <li>Allows us to easily map images to real-world coordinate locations.</li>
+                </ul>
+                <li>We decided on a Tepee Structure to hold the camera and processing unit above the robot environment area. (Diagram Below)</li>
+                
+            </ul>
+            <img src="Team\progress\img - member3\Dodgebot_Structure.jpg" width="75%"></img>
         </div>
-	
+		
+		
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
 		<div id="footer"></div>
     </div>

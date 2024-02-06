@@ -11,148 +11,195 @@ This website was based upon a number of source materials, which are elaborated u
 -->
 <html lang="" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+	<base href="https://engineering.purdue.edu/477grp5/"/>
 
-    <!--Reconfigurable base tag; used to modify the site root location for root-relative links-->
-    <!-- Python SimpleHTTPServer Testing -->
-    <!--<base href="/http://localhost:8000/" />-->
-    <!-- ECE477 preview URL -->
-    <!--<base href="/https://engineering.purdue.edu/ece477/preview/" />-->
-    <!-- ECE477 final URL -->
-    <!--<base href="/https://engineering.purdue.edu/ece477/" />-->
-    <!--<base href="https://engineering.purdue.edu/ece477/StudentWebTemplate/" />-->
-    <base href="https://engineering.purdue.edu/477grp5/"/> <!-- Replace the 25 with your team number-->
+	<!--Content-->
+	<title>ECE477 Homepage</title>
+	<meta content="" name="keywords"/>
+	<meta content="" name="description"/>
+	<meta content="Phil Walter" name="author">
+	<meta content="telephone=no" name="format-detection"/>
+	<meta content="width=device-width,initial-scale=1.0" name="viewport">
 
-    <!--Content-->
-    <title>ECE477 Homepage</title>
-    <meta content="" name="keywords"/>
-    <meta content="" name="description"/>
-    <meta content="Phil Walter" name="author">
-    <meta content="telephone=no" name="format-detection"/>
-    <meta content="width=device-width,initial-scale=1.0" name="viewport">
-
-    <!--CSS-->
-    <link href="css/default.css" media="all" rel="stylesheet" type="text/css"/>
-    <link href="css/responsive.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-    <link href="css/content.css" rel="stylesheet">
-    <!--[if IE 6]>
-    <link href="/default_ie6.css" rel="stylesheet" type="text/css"/>
-    <![endif]-->
+	<!--CSS-->
+	<link href="css/default.css" media="all" rel="stylesheet" type="text/css"/>
+	<link href="css/responsive.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet">
+	<link href="css/content.css" rel="stylesheet">
+	<!--[if IE 6]>
+	<link rel="stylesheet" type="text/css"/>
+	<![endif]-->
 
 </head>
 <body>
 <div id="wrapper_site">
-    <div id="wrapper_page">
-        <div id="header"></div>
-        <div id="menu"></div>
-        <div id="slideshow"></div>
-        <div id="content">
-            <h2>Project Name: PunchBot</h2>
-            <h2>Project Description:</h2>
-            <p>PunchBot has a simple goal: dodging your punches. The main goal is to build a single unit target
-                attached to an axle that will allow it to pivot with 2 degrees of freedom. Combined with a cameras to
-                see and predict the gloves' motions, this robot is supposed to predict and dodge all incoming
-                punches to serve mainly as an entertaining game for kids.</p>
-            <h3>Hardware Components:</h3>
-            <p>Robot Body:
-            <ul>
-                <li>Design a simple and compact robot body that can move on an axle.</li>
-                <li>Ensure that the design allows for easy bunching and dodging movements.</li>
-            </ul>
-            <p>Axle and Motor System:
-            <ul>
-                <li>Choose motors that can control the movement of the robot along the axle.</li>
-                <li>Integrate an axle system that allows the robot to rotate and dodge punches.</li>
-            </ul>
-            <p>Camera System:
-            <ul>
-                <li>Select a camera with sufficient resolution and frame rate for real-time detection.</li>
-                <li>Mount the camera in a way that provides a good field of view for detecting punches.</li>
-            </ul>
-            <p>Color Detection System:
-            <ul>
-                <li>Use sensors or image processing techniques to identify brightly colored gloves.</li>
-                <li>Implement a system that can accurately distinguish the gloves from the background.</li>
-            </ul>
-            <p>Microcontroller or Single-Board Computer:
-            <ul>
-                <li>Choose a microcontroller or single-board computer (like Raspberry Pi or Arduino) to process
-                    camera input and control motors.
-                </li>
-                <li>Ensure it has the necessary processing power and interfaces for camera and motor control.</li>
-            </ul>
-            <h3>Software Components:</h3>
-            Image Processing Algorithm:
-            <ul>
-                <li>Develop an image processing algorithm to analyze the camera feed.</li>
-                <li>Identify and track the position of the brightly-colored gloves in real-time.</li>
-            </ul>
-            Control Algorithm:
-            <ul>
-                <li>Create a control algorithm that takes input from the image processing module.</li>
-                <li>Implement a dodging strategy based on the detected glove positions.</li>
-            </ul>
-            Motor Control:
-            <ul>
-                <li>Write code to control the motors based on the output from the control algorithm.</li>
-                <li>Ensure the robot can move quickly and accurately to dodge punches.</li>
-            </ul>
-            Integration and Testing:
-            <ul>
-                <li>Integrate the hardware and software components.</li>
-                <li>Test the prototype in controlled environments to ensure accurate glove detection and effective
-                    dodging.
-                </li>
-            </ul>
-            Refinement:
-            <ul>
-                <li>Refine the algorithms and adjust parameters based on testing results.</li>
-                <li>Fine-tune the robot's movements for better-dodging performance.</li>
-            </ul>
-            Safety Measures:
-            <ul>
-                <li>Implement safety features, such as emergency stop mechanisms, to ensure the safety of
-                    users and the robot itself.
-                </li>
-            </ul>
-            Documentation:
-            <ul>
-                <li>Document the design, code, and testing procedures for future reference or improvement.
-                </li>
-            </ul>
-            <h2>Project Specific Design Requirements (PSDRs):</h2>
-            These are the five Design Requirements where we
-            capture your team engineering design effort (the rest of your project may consist of off-the-shelf
-            hardware and software), and these 5 PSDRs are worth 8% of your teams final grade. The First Draft is from
-            your Final Project Proposal, and you may change your PSDRs at will over the first 5 weeks of the course.
-            At least three must be hardware PSDRs (indicate). Delete this text and only list your 5 PSDRs.
-            <ol>
-                <li>PSDR #1 (Software): An ability to track a punch and robot in the environment space.</li>
-                <li>PSDR #2 (Software): An ability to create a set of coordinates that place the robots outside a punch
-                    trajectory path
-                </li>
-                <li>PSDR #3 (Hardware): An ability to translate a set of coordinates into motor-specific torque values
-                    to control the proper robot path.
-                </li>
-                <li>PSDR #4 (Hardware): An ability to supply a constant 5V and 3.3V to the microcontrollers and
-                    peripherals of the logic system at varying current demands.
-                </li>
-                <li>PSDR #5 (Hardware): An ability to communicate motor command data between both microcontrollers.
-                </li>
-            </ol>
-            Definitions:
-            <ol>
-                <li>Punch – Strong enough force applied by a bare hand to create mild contusion on an average
-                    21-year-old healthy male.
-                </li>
-                <li>Environment (Area) – The effective area in space, which the dodging system was designed to monitor.
-                    System – The electrical makeup of the robot which involves the specified components.
-                </li>
-            </ol>
-        </div>
-        <div id="footer"></div>
-    </div>
+	<div id="wrapper_page">
+		<div id="header"></div>
+		<div id="menu"></div>
+		<div id="slideshow"></div>
+		<div id="content">
+			<!--			<sup id="fn1">-->
+			<!--				1. [Text of footnote 1]<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup>-->
+			<h2>Project Name: PunchBot 2.0</h2>
+			<h2>Project Description:</h2>
+			<p>
+				PunchBot 2.0 introduces an immersive user interface to the exciting world of dodging punches. Our
+				primary objective is to create a dynamic single-unit target attached to an axle, offering 2 degrees
+				of freedom for seamless dodging maneuvers. Equipped with advanced cameras to track glove motions in
+				real-time, it is designed to predict and skillfully evade incoming punches, delivering an engaging
+				and entertaining experience for kids.
+			<h3>Hardware Components:</h3>
+			<p>Interactive Robot Body:
+			<ul>
+				<li>
+					Craft a sleek and user-friendly robot body capable of fluid movements on the axle, ensuring an
+					interactive and enjoyable dodging experience.
+				</li>
+				<li>Incorporate design elements that facilitate seamless dodging and bunching motions for enhanced user
+					engagement.
+				</li>
+			</ul>
+			<p>Axle and Motor System:
+			<ul>
+				<li>
+					Select motors with precision control capabilities to orchestrate the robot's movement along the
+					axle.
+				</li>
+				<li>
+					Integrate an agile axle system enabling dynamic rotations and swift dodges in response to incoming
+					punches. The two motors will provide
+				</li>
+			</ul>
+			<p>Camera System with User Focus:
+			<ul>
+				<li>
+					Opt for a high-resolution camera with an optimal frame rate for immersive real-time punch
+					detection.
+				</li>
+				<li>
+					Strategically mount the camera to provide an extensive field of view, enhancing the user's visual
+					experience
+					during gameplay.
+				</li>
+			</ul>
+			<p>Color Detection System:
+			<ul>
+				<li>
+					Implement cutting-edge sensors and image processing techniques to identify brightly colored gloves
+					with upmost accuracy.
+				</li>
+				<li>
+					Craft a system that not only distinguishes gloves from the background but also enhances the visual
+					appeal of the game.
+				</li>
+			</ul>
+			<p>User-Centric Microcontroller or Single-Board Computer:
+			<ul>
+				<li>
+					Choose a microcontroller or single-board computer, such as Raspberry Pi or Arduino, with ample
+					processing power and interfaces for seamless integration of camera input and motor control.
+				</li>
+				<li>Prioritize user-centric interfaces to enhance overall engagement and enjoyment.</li>
+			</ul>
+			<h3>Software Components:</h3>
+			<p>Enhanced Image Processing Algorithm:
+			<ul>
+				<li>Develop a sophisticated image processing algorithm for precise analysis of the camera feed.</li>
+				<li>
+					Efficiently identify and track the position of the brightly colored gloves in real-time,
+					contributing to a more immersive user experience.
+				</li>
+			</ul>
+			<p>User-Interactive Control Algorithm:
+			<ul>
+				<li>
+					Create an intelligent control algorithm that not only responds to glove positions but also factors
+					in user engagement.
+				</li>
+				<li>
+					Implement a dodging strategy that aligns with the user's movements, making the interaction more
+					intuitive and enjoyable.
+				</li>
+			</ul>
+			<p>Motor Control for Dynamic Movements:
+			<ul>
+				<li>Craft code that dynamically controls the motors based on the output from the control algorithm.</li>
+				<li>
+					Ensure the robot exhibits swift, accurate, and user-friendly dodging movements, elevating the
+					overall gaming experience.
+				</li>
+			</ul>
+			<p>Integration and User-Focused Testing:
+			<ul>
+				<li>Harmonize hardware and software components to create a seamless user interface.</li>
+				<li>Conduct user-focused testing in controlled environments to validate accurate glove detection and
+					optimize
+					dodging effectiveness.
+				</li>
+			</ul>
+			<p>Refinement for Enhanced User Enjoyment:
+			<ul>
+				<li>Refine algorithms and adjust parameters based on user feedback and testing results.</li>
+				<li>
+					Fine-tune the robot's movements to maximize user enjoyment, creating a captivating and memorable
+					experience.
+				</li>
+			</ul>
+			<p>Safety Measures and User Empowerment:
+			<ul>
+				<li>
+					Implement safety features, including an emergency off button, to ensure the well-being of users and
+					the robot.
+				</li>
+				<li>Empower users with control over their interactive experience, prioritizing a secure and enjoyable
+					environment.
+				</li>
+			</ul>
+			<p>Comprehensive Documentation for Future Iterations:
+			<ul>
+				<li>
+					Document the design, code, and testing procedures, focusing on user-centric aspects for future
+					enhancements or improvements.
+				</li>
+			</ul>
+			<h2>Project Specific Design Requirements (PSDRs):</h2>
+			<ol>
+				<li>[Software]: An ability to track a punch and robot in the environment space by implementing
+					computer vision on two cameras connected to a jetson nano. The connection and refresh rate of the
+					script should be continually fast enough to record and process 0.5s of footage at a time with a
+					50ms delay.
+				</li>
+				<li>
+					[Software]: An ability to generate the best possible dodge solution from a given punch. To
+					accomplish this, we must generate a predicted trajectory and then generate instructions for the
+					motors to dodge in the opposite direction. This must be within 5% of the fastest as possible given
+					the circumstance, then return to the center when we detect the punch has been retracted.
+				</li>
+				<li>
+					[Hardware]: An ability to translate a set of coordinates into motor-specific torque values to
+					control the proper robot path. Using EtherCAD, we must be able to convert our directions into
+					hardware-specific serial commands that will accurately guide PunchBot as it actuates in the real
+					world.
+				</li>
+				<li>
+					[Hardware]: An ability to supply a constant 5V and 3.3V to the microcontrollers and peripherals
+					of the logic system at varying current demands.
+				</li>
+				<li>[Hardware]: An ability to communicate motor command data between both microcontrollers.</li>
+			</ol>
+		</div>
+		<b>Definitions:</b><br>
+		<hr>
+		Punch – Strong enough force applied by a bare hand to create mild contusion on an average
+		21-year-old healthy male.
+		<sup><a href="#fn1" id="ref1">1</a></sup><br>
+		<hr>
+		Environment (Area) – The effective area in space, which the dodging system was designed to monitor.
+		System – The electrical makeup of the robot which involves the specified components.
+		<sup><a href="#fn2" id="ref2">2</a></sup>
+		<div id="footer"></div>
+	</div>
 </div>
 
 <!--JS-->
@@ -161,13 +208,12 @@ This website was based upon a number of source materials, which are elaborated u
 
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#header").load("header.html");
-        $("#menu").load("navbar.html");
-        $("#slideshow").load("slideshow.html");
-//$("#content").load("about.html");
-        $("#footer").load("footer.html");
-    });
+	$(document).ready(function () {
+		$("#header").load("header.html");
+		$("#menu").load("navbar.html");
+		$("#slideshow").load("slideshow.html");
+		$("#footer").load("footer.html");
+	});
 </script>
 
 </body>

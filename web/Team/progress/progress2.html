@@ -10,60 +10,226 @@ contact course staff.
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<!--Reconfigurable base tag; used to modify the site root location for root-relative links-->
-<!--<base href="https://engineering.purdue.edu/ece477/StudentWebTemplate/" />-->
-    <base href="https://engineering.purdue.edu/477grp5/" /> <!-- Replace the N with your team number-->
+	<!--Reconfigurable base tag; used to modify the site root location for root-relative links-->
+	<!--<base href="https://engineering.purdue.edu/ece477/StudentWebTemplate/" />-->
+	<base href="https://engineering.purdue.edu/477grp5/"/> <!-- Replace the N with your team number-->
 
-<!--Content-->
-<title>ECE477 Course Documents</title>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<meta name="author" content="George Hadley">
-<meta name = "format-detection" content = "telephone=no" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<!--Content-->
+	<title>ECE477 Course Documents</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta name="author" content="George Hadley">
+	<meta name="format-detection" content="telephone=no"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<!--CSS-->
-<link rel="stylesheet" href="css/default.css" type="text/css" media="all" />
-<link rel="stylesheet" href="css/responsive.css">
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/content.css">
-<!--[if IE 6]>
-<link href="default_ie6.css" rel="stylesheet" type="text/css" />
-<![endif]-->
+	<!--CSS-->
+	<link rel="stylesheet" href="css/default.css" type="text/css" media="all"/>
+	<link rel="stylesheet" href="css/responsive.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/content.css">
+	<!--[if IE 6]>
+	<link href="default_ie6.css" rel="stylesheet" type="text/css"/>
+	<![endif]-->
 
 </head>
 <body>
 <div id="wrapper_site">
-    <div id="wrapper_page">
-	<!-- Instantiate global site header.-->
-	<div id="header"></div>
+	<div id="wrapper_page">
+		<!-- Instantiate global site header.-->
+		<div id="header"></div>
 		<!-- Instantiate site global navigation bar.-->
 		<div id="menu"></div>
-	
+
 		<!-- Instantiate a page banner image. Page banner images should be 1100x350px and should be located within the local
 			img folder located at this directory level. -->
 		<div id="banner">
 			<img src="Files/img/BannerImgExample.jpg"></img>
 		</div>
-	
+
 		<!-- Instantiate "tools" needed for a page. Tools are premade functional blocks that can be used to build a page,
 			and include things such as a file lister (for listing out homework assignments or tutorials)
 		-->
 		<div id="content">
-            <h2>Progress Report/Engineering Project Journal for -insert student name here-</h2>
-            
-            <b>Date Reported:</b> -Enter the date for this journal entry mm/dd/yyyy (the date the project meeting or work was performed)-<br>
-            <b>Start Time:</b> -Enter the time you began the meeting/work for this entry e.g., 2:37pm-<br>
-            <b>Work Time:</b> -Enter how long the meeting or work lasted for this entry (round to nearest quarter hour) e.g., 1.25 hours-<br>
-            -Discuss your project meeting/work for this entry here. Make sure that this is from your individual perspective and include images, video, and other graphics.  Follow the guidelines presented in the Progress Report Policy that is posted on Brightspace.  This is a template entry; simply copy/paste this entry and overwrite for each journal entry.-  </br>
+			<h2>Progress Report/Engineering Project Journal for Ayman Motoda</h2>
 
-        </div>
-	
+			<br><br><b>Date Reported:</b> 01/25/2024:<br>
+			<b>Start Time:</b> 10:30am <br>
+			<b>Work Time:</b> 5 hours<br><br>
+			
+			The main focus for today was to figure out what chip we need to use to communicate with the motor controllers. 
+			Because we are using interfaces that are not natively supported by the microcontrollers of both the Jetson or 
+			the STM32 chip, we need to be able to configure the STM32 to use a different interface. We looked researched 
+			a lot of different solutions that include EtherCAT, Ethernet, and CANOpen. Currently, I found a SPI <-> Ethernet chip 
+			that can help this (<a
+				href="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/DataSheets/00002417A.pdf">LAN9220</a>), 
+			but since the SPI interface is much slower than the Ethernet interface, it would be better
+			to natively support it. We are using the Nucleo test board that has Ethernet on it to figure out how to 
+			configure it instead of trying to adapt it. We know it is at least possible, so we need to figure out how to support
+			it. 
+
+
+			<br><br><b>Date Reported:</b> 01/23/2024:<br>
+			<b>Start Time:</b> 10:00am <br>
+			<b>Work Time:</b> 6 hours<br><br>
+			
+			We started working on the PCB to first lay out the power delivery system for all the logic components. We selected
+			buck controllers that fit the voltage and power specifications that we needed. After that, we started selecting the 
+			supplemental components that are needed to make the circuit work. The capacitors on the input and output side we
+			selected to be electrolytic since we have consistent polar direction on the input and output side. They also have
+			low ESR which allows noise to filter really well through them on the input and output side at higher frequencies.
+			The one ceramic capacitor we are using on this circuit is going to be the bootstrap capacitor since the polarity
+			could change at any instance in time. For the diode, we used the one that was listed for simplicity. The inductor
+			that we selected was a toroidal design. While they are larger in footprint, our size constraints are not a large 
+			issue in this application, and we would like to reduce the amount of inductive noise that most inductors have for 
+			not having a permiable core. This will reduce the chance of noise being induced into signal traces that might pass
+			around the inductor. With all these components, we also started generating the BOM with these components in them, 
+			and will continue to add components as we expand the schematic.
+
+			<br><img src="Team/progress/img - member2/image12.png" style="width:763px;height:565px;"></img><br>
+			Image 12: Schematic of 5V and 3.3V Supply Circuits
+
+			<br><br><br><br><b>Date Reported:</b> 01/18/2024:<br>
+			<b>Start Time:</b> 11:30am <br>
+			<b>Work Time:</b> 4 hours<br><br>
+
+			We mostly focused on finalizing the specifications of the motors that we need. We did the simulation for the
+			2nd axis motor configuration, and we got the results shown below using the same motor torque.
+			We are still modeling the motors with a constant Torque since our speed range for most of the motors in this
+			class stay constant for our angular speed range.
+			<br><img src="Team\progress\img - member2\image9.jpg"></img><br>
+			<br><img src="Team\progress\img - member2\image10.jpg"></img><br>
+			<br><img src="Team\progress\img - member2\image11.jpg"></img><br>
+			Images 9, 10, 11: MatLab Model Graphs of the Position, Angular Velocity, and Angular Acceleration
+			Respectively versus Time of the 2nd Axis Motor<br><br>
+			Because of the higher inertia, the position doesn't change as much as the first axis in the same amount of
+			time. This is not a huge issues since the robot realistically should not be dodging by moving
+			itself forward since it would cause issues with the robot accidentally hitting the user if the user steps
+			forward also. The convenient part is that since the motor requires the same amount of torque
+			as the other axis, the power situation is much less of an issue since any more torque above this would
+			require a higher heavier motor where the return would diminish further. Because of this, the motor
+			that would be ideal is the <a
+				href="https://www.kollmorgen.com/sites/default/files/AMC-KM_CA_000246_RevG_EN-mobile.pdf">AKM2G-53L</a>
+			<br><img src="Team\progress\img - member2\image2.jpg" style="width:803px;height:150px;"></img>
+			<img src="Team\progress\img - member2\image4.jpg" style="width:803px;height:19px;"></img><br>
+
+			<br><br><br><br><b>Date Reported:</b> 01/16/2024:<br>
+			<b>Start Time:</b> 9:30am <br>
+			<b>Work Time:</b> 4 hours<br><br>
+
+
+			We contacted the companies, and getting 2 of these motors and the drivers will cost $8k-$9k. If we are able
+			to get funding from the department in order to get these motors, we will pursue them as planned. If we
+			cannot, we will have to get something cheaper or get funding for cheaper motors that can perform somewhat
+			close to what we need. This will make the outlook for the rest of the project more difficult to create. One
+			thing to note is that the communication protocols that are used by the controllers are limited to a few
+			options of EtherCAT, Ethernet, and CANopen, so we might need to decide how we are going to interface with
+			these protocols since most of them are industry based.
+			<br><br>
+			We started the programming of the STM32 (for now) microcontroller that will be used to communicate with the
+			Jetson. Because of the short distance from the boards and for simplicity of the control signals, we are
+			going to be using UART. We have the setup for the pins, and now we need to set up the Jetson to be on the
+			other end of the communication line.
+			<br><br>
+			The final motor configuration has been decided where we are going to have a main motor that is going to do
+			the back and forth movement in the y-direction, and it will also hold the motor that
+			will move the stick in the x-direction back and forth. We will have this motor along the axis of rotation of
+			the first motor to reduce the amount of inertia exhibited onto the main motor. Once
+			we have this, we can put a differential or bevel gear in front of the second motor to have the axis of
+			rotation 90 degrees away from the motor so it will move the bag in the x-direction.
+
+
+			<br><br><br><br><b>Date Reported:</b> 01/11/2024:<br>
+			<b>Start Time:</b> 9:30am <br>
+			<b>Work Time:</b> 5 hours<br><br>
+
+
+			We timed a punch in a video to see how quickly the punch takes from starting to landing. We took this metric
+			and calculated how much torque the robot would need to have the stick move fast enough.
+
+			<video controls height="360" width="640">
+				<source src="Team\progress\img - member2\video1.mp4" type="video/mp4">
+			</video>
+			<br>
+			Video 1: Slow-Mo Video of a Punch<br><br>
+
+			We obtained the torque equation to see how much torque the motor must produce, and we first obtained the
+			differential equation to describe its behavior. Theta represents the motor’s position as a function of time.
+
+			<br><img src="Team\progress\img - member2\image3.jpg"></img><br>
+			Image 3: Differential Equation used to Describe the Dynamics of the Robot as a Function of Time<br><br>
+
+			Since this equation is not solvable using ODE methods, we put this equation into MatLab to solve the
+			equation and plot the position, velocity, and acceleration of the moving bag as a function of time.
+
+			<br><img src="Team\progress\img - member2\image6.jpg"></img><br>
+			<br><img src="Team\progress\img - member2\image7.jpg"></img><br>
+			<br><img src="Team\progress\img - member2\image8.jpg"></img><br>
+			Image 4, 5, 6: MatLab Model Graphs of the Position, Angular Velocity, and Angular Acceleration Respectively
+			versus Time of the 1st Axis Motor<br><br>
+
+			Since we have 100ms to move the robot in the total time, we gave 50ms to computation and therefore the
+			remaining 50ms to move the robot. Our tests showed us that we need at least 40Nm per axis of rotation in
+			order to move the stick in the time restriction we put. This metric might change based on how quickly the
+			computation and signal transmission occurs. <br><br>
+
+			Since our position requirements for precision require relatively high acceleration, torque, and resulting
+			speed, we require a motor that can move faster than a stepper motor. The most powerful stepper motor will
+			not be able to rotate at the speeds that we desire when we look at stepper motors that are in the double
+			digits for rotational speed even though the torque is quite high. Permanent Magnet DC Motors will not
+			produce the torque that we need at the size that we require, (most powerful for the size only produces
+			20Nm).
+			<a href="https://www.electrocraft.com/products/pmdc/DPP720/">ElectroCraft DPP720 DC Motor</a><br><br>
+
+
+			The only option we have is to use a BLDC motor to drive the motors at the speed and torque that we need.
+			This will require a more advanced control scheme on top of a more industrial grade motor.
+			<a href="https://www.kollmorgen.com/en-us/products/motors/servo/servo-motors">Kollmorgen Servo
+				Motors</a><br>
+
+			We found products from this company that are within our specification from their catalog as well as the
+			motor driver that can control the position, velocity, torque, etc. from commands that come from external
+			controllers.
+
+
+			<br><br><br><br><b>Date Reported:</b> 01/09/2024:<br>
+			<b>Start Time:</b> 9:30am <br>
+			<b>Work Time:</b> 8 hours<br><br>
+
+			Brainstorming mechanical ideas for the system, we came up with an original design of having one motor to
+			move the stick that would hold the punching bag on top and would have a freedom of movement of 180 degrees.
+			Then, that motor apparatus would rotate around 360 degrees on a plate to give coordinates that are spherical
+			with a fixed R.
+
+			<br><img src="Team\progress\img - member2\image1.jpg"></img><br>
+			Image 1: Original Expression for Torque Movement and Setup<br><br>
+
+			We also talked about the structure and how the camera would fit along with it, and we came up with a teepee
+			style structure to place the camera symmetrically.
+
+			<br><img src="Team\progress\img - member2\image5.jpg"></img><br>
+			Image 2: Original Structure Setup for Camera in Relation to Moving Bot<br><br>
+
+			We noticed that the stick has to be shorter than what we originally planned for. Originally, the stick was
+			going to be as tall as a person, but we need to cut it in half to reduce the amount of torque required to
+			swing the stick fast. The stick that will rotate around will now be 0.75m in length instead of 1.5m in
+			height. This means that we will place the motor apparatus 0.75m off the ground to give the same height of
+			the robot.
+
+
+
+
+
+
+
+
+
+		</div>
+
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
 		<div id="footer"></div>
-    </div>
+	</div>
 </div>
 
 <!--JS-->
@@ -71,11 +237,11 @@ contact course staff.
 <script src="js/jquery-migrate-1.1.1.js"></script>
 
 <script type="text/javascript">
-$(document).ready(function() {
-    $("#header").load("header.html");
-	$("#menu").load("navbar.html");
-	$("#footer").load("footer.html");
-});
+	$(document).ready(function () {
+		$("#header").load("header.html");
+		$("#menu").load("navbar.html");
+		$("#footer").load("footer.html");
+	});
 </script>
 </body>
 </html>
