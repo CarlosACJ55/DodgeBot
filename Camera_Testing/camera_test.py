@@ -120,19 +120,26 @@ camera_matrix = np.array([[354.71698103,0.0,325.02163159],[0.0,355.44339145,161.
 distortion_coeff = np.array([[-3.52228685e-01, 1.55541160e-01,4.99708023e-05,-4.91499027e-05,-3.67726346e-02]])
 np.random.seed(42)
 end = 0.0
+end2 = 0.0
 i = 0
+i2 = 0
+dodge_time = 0
+run_time_dict = {"Un-Distortion":[], "resize":[], "Range":[],"Marking Pixels":[], "Converting Cords":[],"Kmeans":[],"Buffer":[],"Main Punch":[],"Slope":[], "Punch Vector Calc":[], "Avoidance":[], "Total End":[], "Output End":[]}
 
 while cap.isOpened():
     ret, frame = cap.read()
-    frame = cv.undistort(frame, camera_matrix, distortion_coeff, None, camera_matrix)
-    frame = frame_resize(frame)
     st = time.time()
+    frame = cv.undistort(frame, camera_matrix, distortion_coeff, None, camera_matrix)
+    run_time_dict["Un-Distortion"].append(time.time() - st)
+    frame = frame_resize(frame)
+    run_time_dict["resize"].append(time.time() - st)
+   
     if not ret:
         print("Can't receive frame (stream end?). Exiting ...")
         break
     # Convert the frame to the HSV color space (better for color tracking)
     hsv_frame = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
-    print("Color Conversion:", time.time() - st)
+    
     lower_bound_gloves = np.array([0, 100, 100])
     upper_bound_gloves = np.array([15, 255, 255])
     lower_bound_bot = np.array([130, 100, 100])
@@ -144,20 +151,20 @@ while cap.isOpened():
     # upper_bound_bot = np.array([160, 255,255])
     # Create a binary mask for the specified color
     color_mask_gloves = cv.inRange(hsv_frame, lower_bound_gloves, upper_bound_gloves)
-    print("Range:", time.time() - st)
+    run_time_dict["Range"].append(time.time() - st)
     
     # all_labels = skimage.feature.blob_doh(color_mask_gloves, min_sigma=10, max_sigma=50)
     # print(all_labels)
  
     
     marked_pixel_coords = np.column_stack(np.where(color_mask_gloves > 0))
-    print("Marking Pixels:", time.time()-st)
+    run_time_dict["Marking Pixels"].append(time.time()-st)
     marked_coords = pixel_2_cords(marked_pixel_coords, pixel_center, real_center_dist, cam_height, user_height, camera_orientation)
-    print("Converting Cords:", time.time()-st)
+    run_time_dict["Converting Cords"].append(time.time()-st)
     cord_list, cord_centers = kmeans_gpu(marked_coords, 2, cord_centers)
     print("cord centers", cord_centers)
     
-    print("kmeans:", time.time() - st)
+    run_time_dict["Kmeans"].append(time.time() - st)
     if len(cord_list) == 2:
         centroid1 = cord_centers[0].numpy()
         centroid2 = cord_centers[1].numpy()
@@ -166,7 +173,7 @@ while cap.isOpened():
             centroid_buffer2.pop()
         centroid_buffer1.insert(0, centroid1)
         centroid_buffer2.insert(0, centroid2)
-        print("buffer:", time.time() - st)
+        run_time_dict["Buffer"].append(time.time() - st)
         punch1_dist = np.linalg.norm(centroid_buffer1[0] - previous_robot_loc)
         punch2_dist = np.linalg.norm(centroid_buffer2[0] - previous_robot_loc)
 
@@ -182,37 +189,40 @@ while cap.isOpened():
             prev_punch_dist = np.linalg.norm(centroid_buffer2[1] - previous_robot_loc)
             main_centroid = cords_2_pixel(centroid2, pixel_center, real_center_dist, cam_height, user_height, camera_orientation)
             minor_centroid = cords_2_pixel(centroid1, pixel_center, real_center_dist, cam_height, user_height, camera_orientation)
-        print("norm:", time.time() - st)
-     
+        run_time_dict["Main Punch"].append(time.time() - st)
+        
+         
         punch_trajectory_line_slope = (main_punch[1][1] - main_punch[0][1]) / (main_punch[1][0] - main_punch[0][0])
         punch_trajectory_line_offset = main_punch[0][1] - punch_trajectory_line_slope * main_punch[0][0]
         punch_y_check = punch_trajectory_line_slope * previous_robot_loc[0] + punch_trajectory_line_offset
         dist_from_punch_traj = np.linalg.norm(np.array([previous_robot_loc[0], punch_y_check]) - previous_robot_loc)
-        print("slope:", time.time() - st)
+        run_time_dict["Slope"].append(time.time() - st)
         
         vector_2frames = main_punch[0] - main_punch[1]
         norm_vector_2frames = np.linalg.norm(vector_2frames)
         hat_vector_2frames = vector_2frames / norm_vector_2frames
-        
+        run_time_dict["Punch Vector Calc"].append(time.time() - st)
         if norm_vector_2frames >= .05:
+            dodge_time = time.time()
             if dist_from_punch_traj <= avoidance_dist:
                 if previous_robot_loc[0] >= 0:
                     vx = -1 * np.abs(hat_vector_2frames[0])
                 else:
                     vx = np.abs(hat_vector_2frames[0])
-                if previous_robot_loc[0] >= 0:
+                if previous_robot_loc[1] >= 0:
                     vy = -1 * np.abs(hat_vector_2frames[1])
                 else:
                     vy = np.abs(hat_vector_2frames[1])
                 hat_avoidance_vector = np.array([vx, vy])
                 # if norm_vector_2frames > .05 and main_punch_dist < .75:
                 print("its coming")
-                if main_punch_dist - prev_punch_dist < .1:
+                if main_punch_dist - prev_punch_dist < .05:
                     previous_robot_loc = previous_robot_loc + (avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + (avoidance_dist / 2) * hat_avoidance_vector
+                    run_time_dict["Avoidance"].append(time.time() - st)
+        elif time.time() - dodge_time >= np.random.uniform(1.5,3.0):
+            previous_robot_loc = np.array([0, 0])
         
-        end += (time.time() - st)
-        i += 1       
-        print("end:", time.time() - st)
+        run_time_dict["Total End"].append(time.time() - st)
         previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height, user_height, camera_orientation)
         
         cv.circle(frame, tuple(main_centroid[::-1]), 15, (0, 0, 255), -1)
@@ -222,9 +232,9 @@ while cap.isOpened():
         print("away")
         # print(previous_robot_loc)
         cord_centers = torch.tensor([[float('nan'), -.5], [.5, .5]])
-        if (abs(previous_robot_loc[0]) >= .5) or (abs(previous_robot_loc[1]) >= .5) or np.isnan(previous_robot_loc).any():
-            previous_robot_loc = np.array([0, 0])
-            previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height, user_height, camera_orientation)
+        # if (abs(previous_robot_loc[0]) >= .5) or (abs(previous_robot_loc[1]) >= .5) or np.isnan(previous_robot_loc).any():
+        previous_robot_loc = np.array([0, 0])
+        previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height, user_height, camera_orientation)
         cv.circle(frame, tuple(previous_robot_loc_pixel[::-1]), 15, (0, 0, 0), -1)
     # Calculate the centroid (average position) of red pixels
     # if marked_pixel_coords.size > 0:
@@ -234,9 +244,16 @@ while cap.isOpened():
     # frame = calibration_circle(frame)
     # bgr_binary_frame = cv.cvtColor(binary_frame, cv.COLOR_HSV2BGR)
     
+    
     cv.imshow('Original Frame', frame)
+    run_time_dict["Output End"].append(time.time() - st)
+                                       
     if cv.waitKey(1) == ord('q'):
-        print("Average Computation Time", end/i)
         break
+
+for key in run_time_dict.keys():
+    runtime_list = run_time_dict[key]
+    print(key, ":", sum(runtime_list)/len(runtime_list))
 cap.release()
 cv.destroyAllWindows()
+

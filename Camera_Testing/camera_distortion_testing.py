@@ -76,18 +76,18 @@ if not cap.isOpened():
     print("Cannot open camera")
     exit()
 
-i = 0
+
+
 while cap.isOpened():
     ret, frame = cap.read()
     
     st = time.time()
     frame = cv.undistort(frame, camera_matrix, distortion_coeff, None, new_camera_matrix)
     
-    frame = frame_resize(frame)
+    # frame = frame_resize(frame)
     print(time.time()-st)
-
     cv.imshow('Original Frame', frame)
-
+    
     if cv.waitKey(1) == ord('q'):
         break
 
