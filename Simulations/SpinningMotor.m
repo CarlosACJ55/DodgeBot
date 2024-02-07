@@ -4,13 +4,15 @@ clc
 syms theta(t) phi(t)
 
 gravity = 9.80665;    % m/s^2
-motor_mass = 12;       % kg
-motor_radius = 0.130;   % Meters
+motor_mass = 9;       % kg
+motor_length = 0.171;  %m
+motor_height = 0.130;  %m
+motor_width  = 0.130;  %m
 stick_mass = 0.5;
 stick_radius = 0.375;
 T_e = 54;             % Motor Torque Nm
 J_stick = 1/3 * stick_mass * stick_radius ^ 2;
-J_motors = 1/6 * motor_mass * motor_radius ^ 2;
+J_motors = 1/12 * motor_mass * motor_width ^ 2 + 7/48 * motor_mass * motor_length ^ 2;
 
 %For starting parameters:
 cond1 = pi / 4; %Initial Rotor position
