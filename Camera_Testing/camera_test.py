@@ -97,6 +97,7 @@ def kmeans_gpu(identified_punch_cords, num_gloves, prev_cluster_centers, center_
 st = time.time()
 cap = cv.VideoCapture(1, cv.CAP_DSHOW)
 
+# cap = cv.VideoCapture(0, cv.CAP_VFW)
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
@@ -205,10 +206,12 @@ while cap.isOpened():
         if norm_vector_2frames >= .05:
             dodge_time = time.time()
             if dist_from_punch_traj <= avoidance_dist:
+                print("*")
                 if previous_robot_loc[0] >= 0:
                     vx = -1 * np.abs(hat_vector_2frames[1])
                 else:
                     vx = np.abs(hat_vector_2frames[1])
+
                 if previous_robot_loc[1] >= 0:
                     vy = -1 * np.abs(hat_vector_2frames[0])
                 else:
@@ -216,16 +219,15 @@ while cap.isOpened():
                 hat_avoidance_vector = np.array([vx, vy])
                 
                 print("its coming")
-                if main_punch_dist - prev_punch_dist < .05:
-                    temp = previous_robot_loc
-                    previous_robot_loc = previous_robot_loc + 2*(avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + (avoidance_dist) * hat_avoidance_vector
-                    run_time_dict["Avoidance"].append(time.time() - st)
-                    save = True
-                    print("\n\n")
-                    print(f"Dodge {temp} --> {previous_robot_loc}")
-                    print("\n\n")
-                    
-        elif time.time() - dodge_time >= np.random.uniform(1.5,3.0):
+                # if main_punch_dist - prev_punch_dist < .05:
+                temp = previous_robot_loc
+                previous_robot_loc = previous_robot_loc + 2*(avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + (avoidance_dist) * hat_avoidance_vector
+                run_time_dict["Avoidance"].append(time.time() - st)
+                save = True
+                    # print("\n\n")
+                    # print(f"Dodge {temp} --> {previous_robot_loc}")
+                    # print("\n\n") 
+        elif time.time() - dodge_time >= np.random.uniform(.5,2.0):
             previous_robot_loc = np.array([0, 0]) + .01*(main_punch[0] / np.abs(main_punch[0]))
         
         run_time_dict["Total End"].append(time.time() - st)
@@ -233,7 +235,7 @@ while cap.isOpened():
         
         cv.circle(frame, tuple(main_centroid[::-1]), 15, (0, 0, 255), -1)
         cv.circle(frame, tuple(minor_centroid[::-1]), 5, (0, 255, 0), -1)
-        cv.circle(frame, tuple(previous_robot_loc_pixel[::-1]), 20, (255, 255, 255), -1)
+        cv.circle(frame, tuple(previous_robot_loc_pixel[::-1]), 25, (255, 255, 255), -1)
         if save == True:
             temp_pixel = cords_2_pixel(temp, pixel_center, real_center_dist, cam_height, user_height, inv_camera_orientation)
             cv.circle(frame, tuple(temp_pixel[::-1]), 20, (0, 0, 0), -1)

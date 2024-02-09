@@ -1,855 +1,595 @@
 Punch Frame Case #0
-main buffer: [array([-0.01825806,  0.14290942], dtype=float32), array([-0.02906889,  0.19423953], dtype=float32), array([-0.03349356,  0.21653596], dtype=float32)]
-hat avoidance vector: [-0.97853249 -0.20609255]
-previous robot loc, new robot loc: [0 0] , [-0.23854694 -0.0502413 ]
+main buffer: [array([ 0.14619817, -0.17144835], dtype=float32), array([ 0.17832635, -0.21283059], dtype=float32), array([ 0.19588171, -0.24130219], dtype=float32)]
+hat avoidance vector: [-0.78988844  0.61325055]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.2048817   0.15682903]
 
 Punch Frame Case #1
-main buffer: [array([-0.23862031, -0.04274769], dtype=float32), array([-0.20765254,  0.0223106 ], dtype=float32), array([-0.19564855,  0.04729816], dtype=float32)]
-hat avoidance vector: [0.9029271  0.42979366]
-previous robot loc, new robot loc: [-0.23854694 -0.0502413 ] , [0.02542583 0.07540983]
+main buffer: [array([ 0.06071416, -0.07187485], dtype=float32), array([ 0.12010324, -0.13896991], dtype=float32), array([ 0.14619817, -0.17144835], dtype=float32)]
+hat avoidance vector: [ 0.74879855 -0.66279769]
+previous robot loc, new robot loc: [-0.2048817   0.15682903] , [-0.08710197  0.05257651]
 
 Punch Frame Case #2
-main buffer: [array([0.21278995, 0.11880926], dtype=float32), array([0.14176416, 0.14432488], dtype=float32), array([0.1062239, 0.1617166], dtype=float32)]
-hat avoidance vector: [-0.33808994 -0.94111377]
-previous robot loc, new robot loc: [0 0] , [-0.03541395 -0.09857896]
+main buffer: [array([ 0.02440335, -0.02865456], dtype=float32), array([ 0.06071416, -0.07187485], dtype=float32), array([ 0.12010324, -0.13896991], dtype=float32)]
+hat avoidance vector: [ 0.76565456 -0.6432519 ]
+previous robot loc, new robot loc: [-0.08710197  0.05257651] , [ 0.06374376 -0.07415401]
 
 Punch Frame Case #3
-main buffer: [array([-0.13615188,  0.14669824], dtype=float32), array([-0.17229402,  0.1893535 ], dtype=float32), array([-0.18685411,  0.20699778], dtype=float32)]
-hat avoidance vector: [0.7629519 0.6464552]
-previous robot loc, new robot loc: [-0.03541395 -0.09857896] , [0.09704561 0.01365508]
+main buffer: [array([ 0.11841176, -0.10278236], dtype=float32), array([ 0.08270518, -0.0603928 ], dtype=float32), array([ 0.05737594, -0.0411693 ], dtype=float32)]
+hat avoidance vector: [-0.76482123  0.64424258]
+previous robot loc, new robot loc: [ 0.06374376 -0.07415401] , [-0.11022017  0.07238346]
 
 Punch Frame Case #4
-main buffer: [array([-0.04081273,  0.05129315], dtype=float32), array([-0.09348909,  0.09822785], dtype=float32), array([-0.12696837,  0.13494101], dtype=float32)]
-hat avoidance vector: [-0.6652444  -0.74662566]
-previous robot loc, new robot loc: [0.09704561 0.01365508] , [-0.04585295 -0.14672467]
+main buffer: [array([0.07294918, 0.00532202], dtype=float32), array([ 0.11764362, -0.03079856], dtype=float32), array([ 0.13668004, -0.05522407], dtype=float32)]
+hat avoidance vector: [ 0.62856054 -0.77776057]
+previous robot loc, new robot loc: [-0.11022017  0.07238346] , [-0.0234411  -0.03499415]
 
 Punch Frame Case #5
-main buffer: [array([-0.06579441, -0.07454007], dtype=float32), array([-0.00756628, -0.06423061], dtype=float32), array([ 0.00847107, -0.05744986], dtype=float32)]
-hat avoidance vector: [0.17434148 0.98468524]
-previous robot loc, new robot loc: [-0.04585295 -0.14672467] , [-0.00675082  0.07412517]
+main buffer: [array([ 0.16041826, -0.1800582 ], dtype=float32), array([ 0.21782103, -0.23576234], dtype=float32), array([ 0.23357448, -0.26816463], dtype=float32)]
+hat avoidance vector: [-0.69640899  0.71764511]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.16536828  0.17071592]
 
 Punch Frame Case #6
-main buffer: [array([-0.03826945,  0.26853725], dtype=float32), array([-0.10103145,  0.28637725], dtype=float32), array([-0.12398732,  0.29166886], dtype=float32)]
-hat avoidance vector: [ 0.27341723 -0.96189553]
-previous robot loc, new robot loc: [-0.00675082  0.07412517] , [ 0.02456831 -0.03605711]
+main buffer: [array([0.03337464, 0.01042983], dtype=float32), array([ 0.07715458, -0.02206664], dtype=float32), array([ 0.1026075, -0.0714042], dtype=float32)]
+hat avoidance vector: [ 0.59601951 -0.80296999]
+previous robot loc, new robot loc: [-0.16536828  0.17071592] , [-0.00177931 -0.04967458]
 
 Punch Frame Case #7
-main buffer: [array([-0.16988018,  0.20245779], dtype=float32), array([-0.26640716,  0.30508783], dtype=float32), array([-0.28619656,  0.32657886], dtype=float32)]
-hat avoidance vector: [-0.72843379  0.68511623]
-previous robot loc, new robot loc: [ 0.02456831 -0.03605711] , [-0.17081796  0.14771018]
+main buffer: [array([ 0.10959296, -0.11733977], dtype=float32), array([ 0.14563552, -0.15758239], dtype=float32), array([ 0.15064341, -0.19625033], dtype=float32)]
+hat avoidance vector: [-0.74491     0.66716492]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.20772409  0.18500057]
 
 Punch Frame Case #8
-main buffer: [array([-0.22261713,  0.26681164], dtype=float32), array([-0.27527744,  0.31892088], dtype=float32), array([-0.23083201,  0.26912585], dtype=float32)]
-hat avoidance vector: [ 0.70337784 -0.71081609]
-previous robot loc, new robot loc: [-0.17081796  0.14771018] , [-0.0075248  -0.01730981]
+main buffer: [array([ 0.02381171, -0.01742218], dtype=float32), array([ 0.08292695, -0.06778356], dtype=float32), array([ 0.10959296, -0.11733977], dtype=float32)]
+hat avoidance vector: [ 0.64849597 -0.76121807]
+previous robot loc, new robot loc: [-0.20772409  0.18500057] , [-0.0198847  -0.03548922]
 
 Punch Frame Case #9
-main buffer: [array([-0.20408528,  0.25798583], dtype=float32), array([-0.27198493,  0.32220462], dtype=float32), array([-0.27708247,  0.32594293], dtype=float32)]
-hat avoidance vector: [0.68713987 0.7265251 ]
-previous robot loc, new robot loc: [-0.0075248  -0.01730981] , [0.13719319 0.13570308]
+main buffer: [array([ 0.04323245, -0.08373182], dtype=float32), array([ 0.11323234, -0.20064656], dtype=float32), array([ 0.12643895, -0.23726422], dtype=float32)]
+hat avoidance vector: [0.85797477 0.5136918 ]
+previous robot loc, new robot loc: [-0.0198847  -0.03548922] , [0.13939576 0.05987613]
 
 Punch Frame Case #10
-main buffer: [array([-0.06464117,  0.14931633], dtype=float32), array([-0.18917428,  0.263446  ], dtype=float32), array([-0.21765396,  0.2867262 ], dtype=float32)]
-hat avoidance vector: [-0.67564201 -0.73722982]
-previous robot loc, new robot loc: [0.13719319 0.13570308] , [0.05027859 0.04086582]
+main buffer: [array([ 0.05787405, -0.05374101], dtype=float32), array([ 0.10512376, -0.10638999], dtype=float32), array([ 0.13078146, -0.13383567], dtype=float32)]
+hat avoidance vector: [-0.7442379   0.66791457]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.19897655  0.17754552]
 
 Punch Frame Case #11
-main buffer: [array([-0.29532504,  0.34842077], dtype=float32), array([-0.34610143,  0.37669972], dtype=float32), array([-0.3195719,  0.3647205], dtype=float32)]
-hat avoidance vector: [-0.48656091 -0.87364668]
-previous robot loc, new robot loc: [0.05027859 0.04086582] , [-0.03969744 -0.12069105]
+main buffer: [array([ 0.09973042, -0.12401193], dtype=float32), array([ 0.14249434, -0.15788445], dtype=float32), array([ 0.14065261, -0.14629509], dtype=float32)]
+hat avoidance vector: [ 0.62090302 -0.78388739]
+previous robot loc, new robot loc: [-0.19897655  0.17754552] , [-0.0933697   0.04421732]
 
 Punch Frame Case #12
-main buffer: [array([ 0.00502842, -0.05931557], dtype=float32), array([ 0.07507078, -0.0683027 ], dtype=float32), array([ 0.10564374, -0.06452644], dtype=float32)]
-hat avoidance vector: [0.12726662 0.99186856]
-previous robot loc, new robot loc: [-0.03969744 -0.12069105] , [-0.01005886  0.11030099]
+main buffer: [array([ 0.10440315, -0.12329939], dtype=float32), array([ 0.15384892, -0.205338  ], dtype=float32), array([ 0.16875188, -0.24467063], dtype=float32)]
+hat avoidance vector: [-0.85646594  0.51620352]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.17271699  0.10012598]
 
 Punch Frame Case #13
-main buffer: [array([-0.08569469,  0.00726275], dtype=float32), array([-0.04553089, -0.02601313], dtype=float32), array([-0.00993989, -0.04968752], dtype=float32)]
-hat avoidance vector: [ 0.6379872  -0.77004695]
-previous robot loc, new robot loc: [-0.01005886  0.11030099] , [0.075621   0.00688588]
+main buffer: [array([ 0.02315319, -0.03986112], dtype=float32), array([ 0.07444488, -0.07763352], dtype=float32), array([ 0.10440315, -0.12329939], dtype=float32)]
+hat avoidance vector: [ 0.5929805  -0.80521673]
+previous robot loc, new robot loc: [-0.17271699  0.10012598] , [ 1.29359329e-04 -1.34584553e-01]
 
 Punch Frame Case #14
-main buffer: [array([0.17669794, 0.01876712], dtype=float32), array([0.12930514, 0.06723715], dtype=float32), array([0.10539617, 0.09957075], dtype=float32)]
-hat avoidance vector: [-0.71500748 -0.69911671]
-previous robot loc, new robot loc: [0.075621   0.00688588] , [-0.05647261 -0.122272  ]
+main buffer: [array([ 0.0799937 , -0.06105599], dtype=float32), array([ 0.11256341, -0.10897651], dtype=float32), array([ 0.13511546, -0.16660501], dtype=float32)]
+hat avoidance vector: [-0.82705683  0.56211829]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.15222347  0.10025697]
 
 Punch Frame Case #15
-main buffer: [array([ 3.8540518e-05, -2.0072329e-01], dtype=float32), array([ 0.05066908, -0.20779498], dtype=float32), array([ 0.07077568, -0.20475695], dtype=float32)]
-hat avoidance vector: [0.13832963 0.99038625]
-previous robot loc, new robot loc: [-0.05647261 -0.122272  ] , [-0.02473402  0.10496395]
+main buffer: [array([ 0.03243382, -0.03410453], dtype=float32), array([ 0.0799937 , -0.06105599], dtype=float32), array([ 0.11256341, -0.10897651], dtype=float32)]
+hat avoidance vector: [ 0.49302453 -0.87001538]
+previous robot loc, new robot loc: [-0.15222347  0.10025697] , [-0.03362052 -0.10903565]
 
 Punch Frame Case #16
-main buffer: [array([0.10294669, 0.01588954], dtype=float32), array([0.0685959 , 0.06723969], dtype=float32), array([0.0592818 , 0.08182719], dtype=float32)]
-hat avoidance vector: [-0.83117253 -0.55601454]
-previous robot loc, new robot loc: [0 0] , [-0.10823361 -0.07240309]
+main buffer: [array([ 0.04997191, -0.06738304], dtype=float32), array([ 0.00607223, -0.04279037], dtype=float32), array([ 0.00736228, -0.03928782], dtype=float32)]
+hat avoidance vector: [0.48873734 0.8724309 ]
+previous robot loc, new robot loc: [-0.03362052 -0.10903565] , [ 0.02651253 -0.00169389]
 
 Punch Frame Case #17
-main buffer: [array([-0.00802158, -0.09884179], dtype=float32), array([-0.03098131, -0.05189579], dtype=float32), array([-0.04867595, -0.02064074], dtype=float32)]
-hat avoidance vector: [0.8983212 0.4393392]
-previous robot loc, new robot loc: [-0.10823361 -0.07240309] , [ 0.0009431  -0.01900837]
+main buffer: [array([ 0.03259582, -0.00261422], dtype=float32), array([ 0.0631251 , -0.07681874], dtype=float32), array([ 0.08054245, -0.0815684 ], dtype=float32)]
+hat avoidance vector: [-0.92479008  0.38047785]
+previous robot loc, new robot loc: [ 0.02651253 -0.00169389] , [-0.2252787   0.10189826]
 
 Punch Frame Case #18
-main buffer: [array([-0.12313498, -0.11271223], dtype=float32), array([-0.05204578, -0.14552435], dtype=float32), array([-0.02871458, -0.13556819], dtype=float32)]
-hat avoidance vector: [-0.41907629  0.90795112]
-previous robot loc, new robot loc: [ 0.0009431  -0.01900837] , [-0.0615103   0.11630025]
+main buffer: [array([ 0.02579957, -0.06268904], dtype=float32), array([ 0.07554695, -0.10031592], dtype=float32), array([ 0.10285701, -0.1243722 ], dtype=float32)]
+hat avoidance vector: [-0.60324091  0.79755896]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.12182154  0.16428435]
 
 Punch Frame Case #19
-main buffer: [array([-0.04117977,  0.26188183], dtype=float32), array([-0.09035831,  0.27922103], dtype=float32), array([-0.102552  ,  0.28934932], dtype=float32)]
-hat avoidance vector: [ 0.33251432 -0.94309819]
-previous robot loc, new robot loc: [-0.0615103   0.11630025] , [-0.01254745 -0.02257129]
+main buffer: [array([-0.0044897 , -0.04688598], dtype=float32), array([ 0.05199219, -0.08913206], dtype=float32), array([ 0.08123707, -0.12597798], dtype=float32)]
+hat avoidance vector: [-0.59895295  0.80078417]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.11251742  0.15380254]
 
 Punch Frame Case #20
-main buffer: [array([-0.03465617,  0.19769523], dtype=float32), array([-0.0732435 ,  0.23343794], dtype=float32), array([-0.08369266,  0.23986931], dtype=float32)]
-hat avoidance vector: [0.6795484 0.7336307]
-previous robot loc, new robot loc: [-0.01254745 -0.02257129] , [0.05555171 0.05094759]
+main buffer: [array([ 0.06691798, -0.07163096], dtype=float32), array([ 0.12329564, -0.11017796], dtype=float32), array([ 0.14197573, -0.14379533], dtype=float32)]
+hat avoidance vector: [-0.56441271  0.8254928 ]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.13368307  0.20014648]
 
 Punch Frame Case #21
-main buffer: [array([0.01736485, 0.14931518], dtype=float32), array([-0.02468939,  0.18417957], dtype=float32), array([-0.03465617,  0.19769523], dtype=float32)]
-hat avoidance vector: [-0.63822901 -0.76984656]
-previous robot loc, new robot loc: [0.05555171 0.05094759] , [-0.09334113 -0.12865038]
+main buffer: [array([ 0.0264654, -0.0299877], dtype=float32), array([ 0.06691798, -0.07163096], dtype=float32), array([ 0.12329564, -0.11017796], dtype=float32)]
+hat avoidance vector: [ 0.71728688 -0.696778  ]
+previous robot loc, new robot loc: [-0.13368307  0.20014648] , [-0.01213439  0.08207315]
 
 Punch Frame Case #22
-main buffer: [array([0.1177877 , 0.09430968], dtype=float32), array([0.1531229 , 0.14297642], dtype=float32), array([0.15880615, 0.16250394], dtype=float32)]
-hat avoidance vector: [0.80920076 0.5875322 ]
-previous robot loc, new robot loc: [-0.09334113 -0.12865038] , [0.09453504 0.00775989]
+main buffer: [array([ 0.10738489, -0.12411515], dtype=float32), array([ 0.14937048, -0.1549386 ], dtype=float32), array([ 0.16668002, -0.17103767], dtype=float32)]
+hat avoidance vector: [-0.59178829  0.80609345]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.11709168  0.16311557]
 
 Punch Frame Case #23
-main buffer: [array([0.04870264, 0.03729014], dtype=float32), array([0.10094416, 0.08246689], dtype=float32), array([0.1177877 , 0.09430968], dtype=float32)]
-hat avoidance vector: [-0.65410954 -0.75639981]
-previous robot loc, new robot loc: [0.09453504 0.00775989] , [-0.0564566  -0.16684397]
+main buffer: [array([0.07075953, 0.01785643], dtype=float32), array([ 0.11478789, -0.02761645], dtype=float32), array([ 0.13273375, -0.05872748], dtype=float32)]
+hat avoidance vector: [-0.71842563  0.69560367]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.07533546  0.07262464]
 
 Punch Frame Case #24
-main buffer: [array([-0.04049932, -0.00749436], dtype=float32), array([0.04870264, 0.03729014], dtype=float32), array([0.10094416, 0.08246689], dtype=float32)]
-hat avoidance vector: [0.44868395 0.8936905 ]
-previous robot loc, new robot loc: [-0.0564566  -0.16684397] , [ 0.01024559 -0.03398627]
+main buffer: [array([ 0.09875264, -0.03339033], dtype=float32), array([ 0.19390143, -0.1179973 ], dtype=float32), array([ 0.2126167 , -0.14789282], dtype=float32)]
+hat avoidance vector: [-0.66449666  0.74729127]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.11555115  0.13119451]
 
 Punch Frame Case #25
-main buffer: [array([-0.09267272, -0.02443907], dtype=float32), array([-0.04049932, -0.00749436], dtype=float32), array([0.04870264, 0.03729014], dtype=float32)]
-hat avoidance vector: [-0.30889401  0.95109648]
-previous robot loc, new robot loc: [ 0.01024559 -0.03398627] , [-0.06914861  0.21047151]
+main buffer: [array([ 0.0722314 , -0.03156536], dtype=float32), array([ 0.12146943, -0.08457009], dtype=float32), array([ 0.1517605, -0.1431763], dtype=float32)]
+hat avoidance vector: [-0.73266017  0.68059474]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.14323332  0.13234402]
 
 Punch Frame Case #26
-main buffer: [array([-0.11510956,  0.2830108 ], dtype=float32), array([-0.16573554,  0.30232847], dtype=float32), array([-0.17985544,  0.3149425 ], dtype=float32)]
-hat avoidance vector: [ 0.35650399 -0.93429375]
-previous robot loc, new robot loc: [-0.06914861  0.21047151] , [ 0.01819426 -0.01842886]
+main buffer: [array([ 0.06035037, -0.04938498], dtype=float32), array([ 0.11091543, -0.09711534], dtype=float32), array([ 0.13954243, -0.17086637], dtype=float32)]
+hat avoidance vector: [-0.68642944  0.72719646]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.18475002  0.19631622]
 
 Punch Frame Case #27
-main buffer: [array([ 0.11603772, -0.06241103], dtype=float32), array([ 0.16960041, -0.04617192], dtype=float32), array([ 0.1893109, -0.0355881], dtype=float32)]
-hat avoidance vector: [-0.2901381   0.95698476]
-previous robot loc, new robot loc: [ 0.01819426 -0.01842886] , [-0.04747957  0.19818818]
+main buffer: [array([ 0.11985065, -0.07230849], dtype=float32), array([ 0.16467883, -0.11720948], dtype=float32), array([ 0.17086296, -0.14010121], dtype=float32)]
+hat avoidance vector: [-0.70768034  0.70653272]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.13476225  0.13452749]
 
 Punch Frame Case #28
-main buffer: [array([-0.14542711,  0.16921103], dtype=float32), array([-0.18937954,  0.24044144], dtype=float32), array([-0.24644963,  0.34625608], dtype=float32)]
-hat avoidance vector: [ 0.85102665 -0.52512252]
-previous robot loc, new robot loc: [-0.04747957  0.19818818] , [0.04807935 0.13922394]
+main buffer: [array([0.03511596, 0.02547818], dtype=float32), array([ 0.08652509, -0.01639108], dtype=float32), array([ 0.11985065, -0.07230849], dtype=float32)]
+hat avoidance vector: [ 0.63149482 -0.77538019]
+previous robot loc, new robot loc: [-0.13476225  0.13452749] , [ 0.01767426 -0.0526415 ]
 
 Punch Frame Case #29
-main buffer: [array([0.0042815 , 0.22719134], dtype=float32), array([-0.03166908,  0.26200035], dtype=float32), array([-0.04287893,  0.27034754], dtype=float32)]
-hat avoidance vector: [-0.6956085 -0.7184211]
-previous robot loc, new robot loc: [0.04807935 0.13922394] , [-0.12891107 -0.04357091]
+main buffer: [array([ 0.08989145, -0.13100378], dtype=float32), array([ 0.15719023, -0.16246983], dtype=float32), array([ 0.17991717, -0.17701812], dtype=float32)]
+hat avoidance vector: [-0.42354801  0.90587366]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.04620488  0.11020956]
 
 Punch Frame Case #30
-main buffer: [array([0.0719152 , 0.03665819], dtype=float32), array([0.12186642, 0.01728749], dtype=float32), array([0.1506112 , 0.00533034], dtype=float32)]
-hat avoidance vector: [0.361558  0.9323497]
-previous robot loc, new robot loc: [-0.12891107 -0.04357091] , [-0.07760887  0.08872209]
+main buffer: [array([ 0.11274355, -0.24217905], dtype=float32), array([ 0.14734107, -0.31600064], dtype=float32), array([ 0.17211697, -0.3455688 ], dtype=float32)]
+hat avoidance vector: [-0.90548885  0.42437005]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.23818977  0.10631762]
 
 Punch Frame Case #31
-main buffer: [array([-0.04117867,  0.13835452], dtype=float32), array([-0.06591585,  0.1824658 ], dtype=float32), array([-0.07698034,  0.2006312 ], dtype=float32)]
-hat avoidance vector: [ 0.87221205 -0.4891279 ]
-previous robot loc, new robot loc: [-0.07760887  0.08872209] , [ 0.08410388 -0.00196482]
+main buffer: [array([0.03533487, 0.00019145], dtype=float32), array([ 0.06924833, -0.04857017], dtype=float32), array([ 0.08871312, -0.11956026], dtype=float32)]
+hat avoidance vector: [-0.82096571  0.57097757]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.15974525  0.10805698]
 
 Punch Frame Case #32
-main buffer: [array([-0.00623669,  0.08152622], dtype=float32), array([-0.0334717 ,  0.12475815], dtype=float32), array([-0.04117867,  0.13835452], dtype=float32)]
-hat avoidance vector: [-0.84610134  0.53302205]
-previous robot loc, new robot loc: [ 0.08410388 -0.00196482] , [-0.11903443  0.12600708]
+main buffer: [array([0.10166324, 0.00192216], dtype=float32), array([0.05804657, 0.02671525], dtype=float32), array([0.02449868, 0.03244012], dtype=float32)]
+hat avoidance vector: [ 0.49417365 -0.86936325]
+previous robot loc, new robot loc: [-0.15974525  0.10805698] , [-0.05345647 -0.07892904]
 
 Punch Frame Case #33
-main buffer: [array([0.20829944, 0.17613104], dtype=float32), array([0.24945633, 0.2061332 ], dtype=float32), array([0.2645364 , 0.22007492], dtype=float32)]
-hat avoidance vector: [-0.58906871 -0.80808294]
-previous robot loc, new robot loc: [0 0] , [-0.16241398 -0.22279908]
+main buffer: [array([ 0.09586825, -0.1904939 ], dtype=float32), array([ 0.12976107, -0.25259227], dtype=float32), array([ 0.13180423, -0.28549415], dtype=float32)]
+hat avoidance vector: [-0.87777084  0.47908065]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.21266201  0.11152723]
 
 Punch Frame Case #34
-main buffer: [array([0.15861614, 0.13403924], dtype=float32), array([0.20025878, 0.16483085], dtype=float32), array([0.20829944, 0.17613104], dtype=float32)]
-hat avoidance vector: [0.5945443 0.8040629]
-previous robot loc, new robot loc: [-0.16241398 -0.22279908] , [-0.0550753  -0.07763402]
+main buffer: [array([ 0.05428988, -0.06437457], dtype=float32), array([ 0.07434032, -0.1167034 ], dtype=float32), array([ 0.08126662, -0.14577034], dtype=float32)]
+hat avoidance vector: [-0.93379939  0.35779691]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.15581335  0.05353346]
 
 Punch Frame Case #35
-main buffer: [array([0.11179084, 0.09165972], dtype=float32), array([0.15861614, 0.13403924], dtype=float32), array([0.20025878, 0.16483085], dtype=float32)]
-hat avoidance vector: [0.67103314 0.74142736]
-previous robot loc, new robot loc: [-0.0550753  -0.07763402] , [0.13397448 0.13124788]
+main buffer: [array([ 0.04471536, -0.09471957], dtype=float32), array([ 0.06614426, -0.15106454], dtype=float32), array([ 0.07318213, -0.20672444], dtype=float32)]
+hat avoidance vector: [-0.93468547  0.35547584]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.25814118  0.09197838]
 
 Punch Frame Case #36
-main buffer: [array([0.13725108, 0.02614218], dtype=float32), array([0.16934264, 0.07035785], dtype=float32), array([0.19278632, 0.10813959], dtype=float32)]
-hat avoidance vector: [-0.80930424 -0.58738977]
-previous robot loc, new robot loc: [0 0] , [-0.11090541 -0.0804947 ]
+main buffer: [array([0.01592129, 0.02166882], dtype=float32), array([ 0.04052344, -0.02381239], dtype=float32), array([ 0.05343227, -0.05802014], dtype=float32)]
+hat avoidance vector: [-0.87956315  0.47578207]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.17890323  0.09218342]
 
 Punch Frame Case #37
-main buffer: [array([0.00213069, 0.00029935], dtype=float32), array([-0.01439396,  0.05164842], dtype=float32), array([-0.01695798,  0.05909259], dtype=float32)]
-hat avoidance vector: [-0.9519226  -0.30633846]
-previous robot loc, new robot loc: [0 0] , [-0.27898918 -0.08978158]
+main buffer: [array([ 0.03719606, -0.19311336], dtype=float32), array([ 0.06607811, -0.23525637], dtype=float32), array([ 0.08042423, -0.2576139 ], dtype=float32)]
+hat avoidance vector: [ 0.82487506 -0.56531507]
+previous robot loc, new robot loc: [-0.17890323  0.09218342] , [ 0.01902912 -0.04346639]
 
 Punch Frame Case #38
-main buffer: [array([-0.21984273,  0.14307511], dtype=float32), array([-0.209872  ,  0.20352778], dtype=float32), array([-0.2041158 ,  0.25274214], dtype=float32)]
-hat avoidance vector: [0.9866697  0.16273578]
-previous robot loc, new robot loc: [-0.27898918 -0.08978158] , [-0.10706121 -0.06142474]
+main buffer: [array([ 0.01882904, -0.10684241], dtype=float32), array([ 0.06703313, -0.2036053 ], dtype=float32), array([ 0.08758102, -0.22714452], dtype=float32)]
+hat avoidance vector: [-0.89508247  0.44590065]
+previous robot loc, new robot loc: [ 0.01902912 -0.04346639] , [-0.13532311  0.03342682]
 
 Punch Frame Case #39
-main buffer: [array([-0.0118166 ,  0.13455117], dtype=float32), array([-0.12384353,  0.26161304], dtype=float32), array([-0.12875487,  0.2822258 ], dtype=float32)]
-hat avoidance vector: [-0.75009114 -0.66133446]
-previous robot loc, new robot loc: [0 0] , [-0.13415479 -0.11828054]
+main buffer: [array([ 0.12550399, -0.16310668], dtype=float32), array([ 0.16360244, -0.20128247], dtype=float32), array([ 0.16552047, -0.22723258], dtype=float32)]
+hat avoidance vector: [ 0.7078234  -0.70638949]
+previous robot loc, new robot loc: [-0.13532311  0.03342682] , [-0.01474265 -0.08690937]
 
 Punch Frame Case #40
-main buffer: [array([-0.46511838,  0.2790105 ], dtype=float32), array([ 0.44776848, -0.44464147], dtype=float32), array([ 0.43590096, -0.43426684], dtype=float32)]
-hat avoidance vector: [-0.62120408 -0.78364885]
-previous robot loc, new robot loc: [0 0] , [-0.13064408 -0.16480748]
+main buffer: [array([ 0.03825321, -0.12182844], dtype=float32), array([ 0.01310699, -0.07529971], dtype=float32), array([-0.00106858, -0.0449691 ], dtype=float32)]
+hat avoidance vector: [0.8797416  0.47545207]
+previous robot loc, new robot loc: [-0.01474265 -0.08690937] , [ 0.13808504 -0.0043144 ]
 
 Punch Frame Case #41
-main buffer: [array([ 0.12618195, -0.04523293], dtype=float32), array([ 0.1577807 , -0.09631727], dtype=float32), array([ 0.16832367, -0.11173608], dtype=float32)]
-hat avoidance vector: [-0.8504504  -0.52605516]
-previous robot loc, new robot loc: [0 0] , [-0.12011768 -0.07430007]
+main buffer: [array([ 0.08986936, -0.10342997], dtype=float32), array([ 0.07338838, -0.15341502], dtype=float32), array([ 0.06071033, -0.18693273], dtype=float32)]
+hat avoidance vector: [-0.94970822  0.31313607]
+previous robot loc, new robot loc: [ 0.13808504 -0.0043144 ] , [-0.05733181  0.06011809]
 
 Punch Frame Case #42
-main buffer: [array([0.03484248, 0.04368473], dtype=float32), array([0.08240013, 0.0208804 ], dtype=float32), array([ 0.11634623, -0.02819573], dtype=float32)]
-hat avoidance vector: [0.43237144 0.9016956 ]
-previous robot loc, new robot loc: [-0.12011768 -0.07430007] , [-0.07354679  0.02282189]
+main buffer: [array([ 0.08269627, -0.12403822], dtype=float32), array([ 0.13288328, -0.18203558], dtype=float32), array([ 0.15177949, -0.22022906], dtype=float32)]
+hat avoidance vector: [ 0.75618815 -0.65435421]
+previous robot loc, new robot loc: [-0.05733181  0.06011809] , [ 0.13574365 -0.10695638]
 
 Punch Frame Case #43
-main buffer: [array([ 0.0652978 , -0.14057964], dtype=float32), array([ 0.10383188, -0.17933618], dtype=float32), array([ 0.11401048, -0.19093701], dtype=float32)]
-hat avoidance vector: [ 0.70913899 -0.70506877]
-previous robot loc, new robot loc: [-0.07354679  0.02282189] , [ 0.12234901 -0.17194954]
+main buffer: [array([ 0.0954821, -0.1522041], dtype=float32), array([ 0.13386859, -0.2016439 ], dtype=float32), array([ 0.13254367, -0.23010346], dtype=float32)]
+hat avoidance vector: [-0.78986824  0.61327654]
+previous robot loc, new robot loc: [ 0.13574365 -0.10695638] , [ 0.05217953 -0.04207478]
 
 Punch Frame Case #44
-main buffer: [array([ 0.12528238, -0.17187212], dtype=float32), array([ 0.16553904, -0.23137112], dtype=float32), array([ 0.18279424, -0.2473192 ], dtype=float32)]
-hat avoidance vector: [-0.82823598  0.56037951]
-previous robot loc, new robot loc: [ 0.12234901 -0.17194954] , [-0.12246686 -0.00630859]
+main buffer: [array([ 0.03271128, -0.01103873], dtype=float32), array([ 0.07267175, -0.11549427], dtype=float32), array([ 0.0954821, -0.1522041], dtype=float32)]
+hat avoidance vector: [-0.93398744  0.35730582]
+previous robot loc, new robot loc: [ 0.05217953 -0.04207478] , [-0.19093103  0.05092949]
 
 Punch Frame Case #45
-main buffer: [array([ 0.07970179, -0.1090611 ], dtype=float32), array([ 0.12450422, -0.15537089], dtype=float32), array([ 0.12528238, -0.17187212], dtype=float32)]
-hat avoidance vector: [0.7187068  0.69531333]
-previous robot loc, new robot loc: [-0.12246686 -0.00630859] , [0.01680557 0.12843062]
+main buffer: [array([ 0.06698411, -0.06486619], dtype=float32), array([ 0.09280644, -0.12069765], dtype=float32), array([ 0.10378417, -0.11366434], dtype=float32)]
+hat avoidance vector: [-0.90762532  0.41978127]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.1382309   0.05855754]
 
 Punch Frame Case #46
-main buffer: [array([ 0.02493111, -0.06606073], dtype=float32), array([ 0.07970179, -0.1090611 ], dtype=float32), array([ 0.12450422, -0.15537089], dtype=float32)]
-hat avoidance vector: [-0.61752194 -0.78655368]
-previous robot loc, new robot loc: [0.01680557 0.12843062] , [-0.05228772  0.04042471]
+main buffer: [array([0.04186817, 0.0405845 ], dtype=float32), array([0.08227217, 0.00771217], dtype=float32), array([ 0.09966022, -0.03856345], dtype=float32)]
+hat avoidance vector: [-0.6311022   0.77569973]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.08275669  0.10400901]
 
 Punch Frame Case #47
-main buffer: [array([ 0.08507379, -0.12551434], dtype=float32), array([ 0.12587973, -0.17784953], dtype=float32), array([ 0.13579011, -0.1866042 ], dtype=float32)]
-hat avoidance vector: [ 0.78861558 -0.61488652]
-previous robot loc, new robot loc: [-0.05228772  0.04042471] , [ 0.17622755 -0.1377495 ]
+main buffer: [array([ 0.05141004, -0.00321085], dtype=float32), array([ 0.08933692, -0.05231875], dtype=float32), array([ 0.09629662, -0.09996676], dtype=float32)]
+hat avoidance vector: [-0.79144198  0.6112442 ]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.13181521  0.09952632]
 
 Punch Frame Case #48
-main buffer: [array([ 0.08196452, -0.11228754], dtype=float32), array([ 0.1064542 , -0.16241835], dtype=float32), array([ 0.10991811, -0.17805816], dtype=float32)]
-hat avoidance vector: [-0.89851671  0.43893936]
-previous robot loc, new robot loc: [ 0.17622755 -0.1377495 ] , [ 0.0571706  -0.07958834]
+main buffer: [array([ 0.0704632 , -0.17904022], dtype=float32), array([ 0.1082846 , -0.23238778], dtype=float32), array([ 0.12764509, -0.28265932], dtype=float32)]
+hat avoidance vector: [ 0.81578249 -0.57835889]
+previous robot loc, new robot loc: [-0.13181521  0.09952632] , [ 0.10190695 -0.06617385]
 
 Punch Frame Case #49
-main buffer: [array([ 0.03131647, -0.03408539], dtype=float32), array([ 0.06339899, -0.07830434], dtype=float32), array([ 0.08196452, -0.11228754], dtype=float32)]
-hat avoidance vector: [-0.80940348  0.58725291]
-previous robot loc, new robot loc: [ 0.0571706  -0.07958834] , [-0.17766284  0.09079223]
+main buffer: [array([ 0.01866843, -0.03709909], dtype=float32), array([0.01432353, 0.01560588], dtype=float32), array([0.00918175, 0.04378481], dtype=float32)]
+hat avoidance vector: [-0.99661922  0.08215936]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.13341013  0.00182245]
 
 Punch Frame Case #50
-main buffer: [array([-0.03218066, -0.01886676], dtype=float32), array([ 0.03379496, -0.0532671 ], dtype=float32), array([ 0.06680872, -0.08292622], dtype=float32)]
-hat avoidance vector: [ 0.46233654 -0.88670456]
-previous robot loc, new robot loc: [-0.17766284  0.09079223] , [-0.0545903  -0.14524575]
+main buffer: [array([-0.01385859, -0.11268013], dtype=float32), array([-0.02216206, -0.17399736], dtype=float32), array([-0.02724503, -0.20600586], dtype=float32)]
+hat avoidance vector: [0.9909552 0.1341933]
+previous robot loc, new robot loc: [-0.01 -0.01] , [0.14025613 0.0103474 ]
 
 Punch Frame Case #51
-main buffer: [array([-0.10397189, -0.22583388], dtype=float32), array([-0.04851238, -0.2400114 ], dtype=float32), array([-0.0191209 , -0.24708761], dtype=float32)]
-hat avoidance vector: [0.24767256 0.96884376]
-previous robot loc, new robot loc: [-0.0545903  -0.14524575] , [-0.00337456  0.0550996 ]
+main buffer: [array([ 0.00051877, -0.10102134], dtype=float32), array([-0.00974186, -0.17471328], dtype=float32), array([-0.00766458, -0.21131168], dtype=float32)]
+hat avoidance vector: [-0.99044532  0.13790634]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.24171771  0.02504835]
 
 Punch Frame Case #52
-main buffer: [array([-0.09296745, -0.0637725 ], dtype=float32), array([-0.02677732, -0.10205942], dtype=float32), array([ 0.00257763, -0.13022147], dtype=float32)]
-hat avoidance vector: [ 0.50070637 -0.86561728]
-previous robot loc, new robot loc: [-0.00337456  0.0550996 ] , [ 0.06136874 -0.05682811]
+main buffer: [array([ 0.05822632, -0.253875  ], dtype=float32), array([ 0.09295242, -0.29240966], dtype=float32), array([ 0.10741348, -0.30962336], dtype=float32)]
+hat avoidance vector: [ 0.74286354 -0.66944283]
+previous robot loc, new robot loc: [-0.24171771  0.02504835] , [-0.09896444 -0.10359595]
 
 Punch Frame Case #53
-main buffer: [array([0.08171976, 0.01471954], dtype=float32), array([ 0.10369377, -0.0697352 ], dtype=float32), array([ 0.11461313, -0.10545974], dtype=float32)]
-hat avoidance vector: [-0.96777844  0.25180322]
-previous robot loc, new robot loc: [ 0.06136874 -0.05682811] , [-0.08402584 -0.01899836]
+main buffer: [array([-0.01834348, -0.15225793], dtype=float32), array([ 0.02337416, -0.22835152], dtype=float32), array([ 0.05822632, -0.253875  ], dtype=float32)]
+hat avoidance vector: [0.87686634 0.48073423]
+previous robot loc, new robot loc: [-0.09896444 -0.10359595] , [-0.00845753 -0.05397634]
 
 Punch Frame Case #54
-main buffer: [array([-0.00936098, -0.11828828], dtype=float32), array([ 0.04678123, -0.17672227], dtype=float32), array([ 0.05824549, -0.18986608], dtype=float32)]
-hat avoidance vector: [0.7211063 0.6928245]
-previous robot loc, new robot loc: [-0.08402584 -0.01899836] , [0.11674662 0.1738998 ]
+main buffer: [array([0.00570115, 0.03056229], dtype=float32), array([ 0.01210597, -0.0223192 ], dtype=float32), array([ 0.01525733, -0.05597926], dtype=float32)]
+hat avoidance vector: [-0.9927451   0.12023769]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.27775957  0.0248524 ]
 
 Punch Frame Case #55
-main buffer: [array([0.11832224, 0.03393133], dtype=float32), array([ 0.12992729, -0.03008008], dtype=float32), array([ 0.13134032, -0.0551833 ], dtype=float32)]
-hat avoidance vector: [-0.98396009 -0.17838867]
-previous robot loc, new robot loc: [0.11674662 0.1738998 ] , [-0.04926942  0.14380165]
+main buffer: [array([-0.00237512, -0.01465862], dtype=float32), array([-0.00754576, -0.06618802], dtype=float32), array([-0.00812647, -0.08931092], dtype=float32)]
+hat avoidance vector: [0.9950033  0.09984203]
+previous robot loc, new robot loc: [-0.01 -0.01] , [0.12801402 0.0038488 ]
 
 Punch Frame Case #56
-main buffer: [array([0.0265292 , 0.03961727], dtype=float32), array([ 0.05752425, -0.0090578 ], dtype=float32), array([ 0.06866739, -0.02549787], dtype=float32)]
-hat avoidance vector: [ 0.84350443 -0.53712225]
-previous robot loc, new robot loc: [-0.04926942  0.14380165] , [ 0.19125515 -0.0093583 ]
+main buffer: [array([ 0.03764928, -0.11110181], dtype=float32), array([ 0.05799961, -0.17275278], dtype=float32), array([ 0.08262354, -0.20310004], dtype=float32)]
+hat avoidance vector: [0.9496034 0.313454 ]
+previous robot loc, new robot loc: [-0.01 -0.01] , [0.19273871 0.0569219 ]
 
 Punch Frame Case #57
-main buffer: [array([ 0.18966928, -0.0235442 ], dtype=float32), array([ 0.18126948, -0.07616157], dtype=float32), array([ 0.1814908 , -0.09344898], dtype=float32)]
-hat avoidance vector: [-0.98749614  0.15764318]
-previous robot loc, new robot loc: [ 0.19125515 -0.0093583 ] , [-0.10079497  0.03726438]
+main buffer: [array([ 0.03737163, -0.1589626 ], dtype=float32), array([ 0.0504936 , -0.21674925], dtype=float32), array([ 0.0659477 , -0.24931201], dtype=float32)]
+hat avoidance vector: [-0.97517425  0.22143884]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.22711717  0.04384366]
+
+Punch Frame Case #58
+main buffer: [array([ 0.02176169, -0.0642976 ], dtype=float32), array([ 0.03569524, -0.01310326], dtype=float32), array([0.04708698, 0.02979295], dtype=float32)]
+hat avoidance vector: [-0.96490026  0.26261649]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.09129104  0.01756834]
 
 Punch Frame Case #0
-main buffer: [array([ 0.10196896, -0.03545715], dtype=float32), array([ 0.13990663, -0.09101298], dtype=float32), array([ 0.14962222, -0.10490474], dtype=float32)]
-hat avoidance vector: [-0.82582104 -0.56393224]
-previous robot loc, new robot loc: [0 0] , [-0.15371342 -0.104967  ]
+main buffer: [array([ 0.0270234 , -0.02800811], dtype=float32), array([ 0.00462271, -0.08045343], dtype=float32), array([-0.00371426, -0.09989434], dtype=float32)]
+hat avoidance vector: [-0.91962612  0.39279491]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.15946146  0.06238115]
 
 Punch Frame Case #1
-main buffer: [array([-0.01123778, -0.19146329], dtype=float32), array([ 0.03584646, -0.21803592], dtype=float32), array([ 0.04309855, -0.22672077], dtype=float32)]
-hat avoidance vector: [0.4914936 0.8708812]
-previous robot loc, new robot loc: [-0.15371342 -0.104967  ] , [-0.00925767  0.15099523]
+main buffer: [array([ 0.113677  , -0.19616206], dtype=float32), array([ 0.13851358, -0.24005248], dtype=float32), array([ 0.14585277, -0.25304472], dtype=float32)]
+hat avoidance vector: [-0.87031674  0.49249238]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.24596468  0.13484457]
 
 Punch Frame Case #2
-main buffer: [array([0.0236885, 0.0997454], dtype=float32), array([0.05179485, 0.0530584 ], dtype=float32), array([0.06144283, 0.03275862], dtype=float32)]
-hat avoidance vector: [ 0.85672975 -0.51576555]
-previous robot loc, new robot loc: [-0.00925767  0.15099523] , [ 0.24478281 -0.00194137]
+main buffer: [array([ 0.09035814, -0.1317015 ], dtype=float32), array([ 0.10837565, -0.17898403], dtype=float32), array([ 0.12301455, -0.20991553], dtype=float32)]
+hat avoidance vector: [-0.93445402  0.35608372]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.10366951  0.03331499]
 
 Punch Frame Case #3
-main buffer: [array([ 0.2693403 , -0.06693553], dtype=float32), array([ 0.28912398, -0.11389416], dtype=float32), array([ 0.2905534 , -0.13216658], dtype=float32)]
-hat avoidance vector: [-0.92155379  0.38825068]
-previous robot loc, new robot loc: [ 0.24478281 -0.00194137] , [-0.02550488  0.11193086]
+main buffer: [array([ 0.00819878, -0.0565654 ], dtype=float32), array([ 0.00353601, -0.11309515], dtype=float32), array([ 0.00208476, -0.13177532], dtype=float32)]
+hat avoidance vector: [-0.99661547  0.08220435]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.23969578  0.01059579]
 
 Punch Frame Case #4
-main buffer: [array([0.2188025 , 0.01096773], dtype=float32), array([ 0.25877425, -0.03233219], dtype=float32), array([ 0.26079524, -0.05445336], dtype=float32)]
-hat avoidance vector: [ 0.73478144 -0.6783039 ]
-previous robot loc, new robot loc: [-0.02550488  0.11193086] , [0.07465613 0.01946853]
+main buffer: [array([ 0.04991573, -0.14710477], dtype=float32), array([ 0.0727577 , -0.20234917], dtype=float32), array([ 0.07963453, -0.22016497], dtype=float32)]
+hat avoidance vector: [-0.92412192  0.38209784]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.19225947  0.07362848]
 
 Punch Frame Case #5
-main buffer: [array([0.07791004, 0.02655204], dtype=float32), array([ 0.10005897, -0.02280737], dtype=float32), array([ 0.10478804, -0.04147728], dtype=float32)]
-hat avoidance vector: [-0.91235536 -0.40939918]
-previous robot loc, new robot loc: [0.07465613 0.01946853] , [-0.18597194 -0.09748252]
+main buffer: [array([ 0.0514271 , -0.18033578], dtype=float32), array([ 0.07199686, -0.2260659 ], dtype=float32), array([ 0.07918862, -0.23919249], dtype=float32)]
+hat avoidance vector: [-0.91198719  0.41021878]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.12089537  0.04887773]
 
 Punch Frame Case #6
-main buffer: [array([-0.2530773 , -0.11870371], dtype=float32), array([-0.19640131, -0.13567479], dtype=float32), array([-0.18198366, -0.14264812], dtype=float32)]
-hat avoidance vector: [0.28685606 0.9579737 ]
-previous robot loc, new robot loc: [-0.18597194 -0.09748252] , [-0.11176665  0.15033069]
+main buffer: [array([ 0.02931541, -0.11439707], dtype=float32), array([ 0.04798004, -0.16086565], dtype=float32), array([ 0.05321943, -0.1749626 ], dtype=float32)]
+hat avoidance vector: [-0.92794412  0.37271935]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.16388134  0.05984143]
 
 Punch Frame Case #7
-main buffer: [array([-0.04705285,  0.11414469], dtype=float32), array([-0.02184994,  0.06942797], dtype=float32), array([-0.01368408,  0.05694502], dtype=float32)]
-hat avoidance vector: [ 0.87116098 -0.49099752]
-previous robot loc, new robot loc: [-0.11176665  0.15033069] , [0.08107912 0.04164034]
+main buffer: [array([ 0.03011281, -0.09072819], dtype=float32), array([ 0.04783353, -0.137618  ], dtype=float32), array([ 0.05569005, -0.1540106 ], dtype=float32)]
+hat avoidance vector: [-0.93542731  0.35351911]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.21916322  0.07660596]
 
 Punch Frame Case #8
-main buffer: [array([0.05787501, 0.17907208], dtype=float32), array([0.10443035, 0.13362318], dtype=float32), array([0.11541788, 0.12136315], dtype=float32)]
-hat avoidance vector: [-0.69855261 -0.71555865]
-previous robot loc, new robot loc: [0.08107912 0.04164034] , [-0.04830741 -0.09089607]
+main buffer: [array([ 0.04166264, -0.08028892], dtype=float32), array([ 0.06934031, -0.13039277], dtype=float32), array([ 0.07566541, -0.14141542], dtype=float32)]
+hat avoidance vector: [-0.87532508  0.48353481]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.22988946  0.12251637]
 
 Punch Frame Case #9
-main buffer: [array([-0.08241124, -0.04679426], dtype=float32), array([-0.04271382, -0.09583498], dtype=float32), array([-0.02715901, -0.11536476], dtype=float32)]
-hat avoidance vector: [0.77726203 0.62917703]
-previous robot loc, new robot loc: [-0.04830741 -0.09089607] , [0.18333906 0.09661679]
+main buffer: [array([ 0.06553771, -0.17135307], dtype=float32), array([ 0.08993936, -0.22386786], dtype=float32), array([ 0.10050013, -0.2438968 ], dtype=float32)]
+hat avoidance vector: [-0.90687841  0.42139244]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.18619335  0.0811637 ]
 
 Punch Frame Case #10
-main buffer: [array([0.18736109, 0.00390767], dtype=float32), array([ 0.03344495, -0.18108205], dtype=float32), array([ 0.03335854, -0.17218344], dtype=float32)]
-hat avoidance vector: [-0.7687155  -0.63959086]
-previous robot loc, new robot loc: [0.18333906 0.09661679] , [ 0.02770734 -0.03287276]
+main buffer: [array([ 0.0202061 , -0.06386922], dtype=float32), array([ 0.04242793, -0.11148731], dtype=float32), array([ 0.0492259 , -0.12880975], dtype=float32)]
+hat avoidance vector: [-0.90618277  0.42288622]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.20386086  0.08980195]
 
 Punch Frame Case #11
-main buffer: [array([ 0.11008309, -0.03652651], dtype=float32), array([ 0.13391328, -0.08456369], dtype=float32), array([ 0.14513019, -0.09804015], dtype=float32)]
-hat avoidance vector: [-0.89582819  0.4444007 ]
-previous robot loc, new robot loc: [ 0.02770734 -0.03287276] , [-0.09555838  0.02827666]
+main buffer: [array([-0.02356409, -0.02007631], dtype=float32), array([-0.03411467, -0.07932894], dtype=float32), array([-0.03887873, -0.0922476 ], dtype=float32)]
+hat avoidance vector: [0.9845144  0.17530349]
+previous robot loc, new robot loc: [-0.01 -0.01] , [0.15520071 0.01941578]
 
 Punch Frame Case #12
-main buffer: [array([-0.11620931,  0.05408382], dtype=float32), array([-0.09782153, -0.00937165], dtype=float32), array([-0.08894537, -0.04283158], dtype=float32)]
-hat avoidance vector: [ 0.96048707 -0.27832478]
-previous robot loc, new robot loc: [-0.09555838  0.02827666] , [ 0.14892561 -0.0425686 ]
+main buffer: [array([-0.01566117, -0.01762408], dtype=float32), array([-0.02847154, -0.07069767], dtype=float32), array([-0.03110095, -0.0866185 ], dtype=float32)]
+hat avoidance vector: [0.97208434 0.23463187]
+previous robot loc, new robot loc: [-0.01 -0.01] , [0.2508486  0.05296099]
 
 Punch Frame Case #13
-main buffer: [array([ 0.184681  , -0.13882747], dtype=float32), array([ 0.1288703 , -0.17381819], dtype=float32), array([ 0.10944928, -0.1912696 ], dtype=float32)]
-hat avoidance vector: [-0.53118855  0.84725362]
-previous robot loc, new robot loc: [ 0.14892561 -0.0425686 ] , [0.05260828 0.11105896]
+main buffer: [array([-0.01434675, -0.08426008], dtype=float32), array([-0.02789479, -0.13441451], dtype=float32), array([-0.03508361, -0.15515274], dtype=float32)]
+hat avoidance vector: [0.9653983  0.26077968]
+previous robot loc, new robot loc: [-0.01 -0.01] , [0.16730784 0.03789555]
 
 Punch Frame Case #14
-main buffer: [array([0.09860731, 0.22835495], dtype=float32), array([0.14049762, 0.19588114], dtype=float32), array([0.14566723, 0.17991948], dtype=float32)]
-hat avoidance vector: [-0.61267549 -0.79033458]
-previous robot loc, new robot loc: [0.05260828 0.11105896] , [-0.03748265 -0.00515587]
+main buffer: [array([-0.01543904, -0.02058681], dtype=float32), array([-0.02413768, -0.08077591], dtype=float32), array([-0.02655442, -0.09805968], dtype=float32)]
+hat avoidance vector: [0.98971754 0.14303583]
+previous robot loc, new robot loc: [-0.01 -0.01] , [0.23337572 0.02517311]
 
 Punch Frame Case #15
-main buffer: [array([ 0.03729698, -0.09466302], dtype=float32), array([ 0.07896173, -0.13348392], dtype=float32), array([ 0.08894271, -0.14465834], dtype=float32)]
-hat avoidance vector: [0.6816966 0.7316349]
-previous robot loc, new robot loc: [-0.03748265 -0.00515587] , [0.15350715 0.19982507]
+main buffer: [array([ 0.02214045, -0.00530757], dtype=float32), array([ 0.01188732, -0.06290112], dtype=float32), array([ 0.00785499, -0.08073182], dtype=float32)]
+hat avoidance vector: [-0.98452038  0.17526993]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.16031712  0.02032082]
 
 Punch Frame Case #16
-main buffer: [array([0.16711989, 0.1202253 ], dtype=float32), array([0.2078451 , 0.06380405], dtype=float32), array([0.2328618, 0.0240209], dtype=float32)]
-hat avoidance vector: [-0.8108393  -0.58526886]
-previous robot loc, new robot loc: [0.15350715 0.19982507] , [-0.04049385  0.05979394]
+main buffer: [array([ 0.07325621, -0.14736505], dtype=float32), array([ 0.09584467, -0.19678645], dtype=float32), array([ 0.10244491, -0.21128936], dtype=float32)]
+hat avoidance vector: [-0.90950352  0.41569614]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.26097112  0.1138496 ]
 
 Punch Frame Case #17
-main buffer: [array([0.13023424, 0.02847327], dtype=float32), array([ 0.16988018, -0.02112738], dtype=float32), array([ 0.1842343 , -0.03873088], dtype=float32)]
-hat avoidance vector: [ 0.78113437 -0.62436295]
-previous robot loc, new robot loc: [-0.04049385  0.05979394] , [ 0.05146474 -0.01370882]
+main buffer: [array([ 0.04435891, -0.13929956], dtype=float32), array([ 0.06806136, -0.19031909], dtype=float32), array([ 0.07879306, -0.204222  ], dtype=float32)]
+hat avoidance vector: [-0.90690839  0.42132786]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.16169229  0.06976412]
 
 Punch Frame Case #18
-main buffer: [array([0.07978065, 0.07496751], dtype=float32), array([0.12199868, 0.04089158], dtype=float32), array([0.13023424, 0.02847327], dtype=float32)]
-hat avoidance vector: [-0.62807769  0.77815068]
-previous robot loc, new robot loc: [ 0.05146474 -0.01370882] , [-0.06690826  0.13294824]
+main buffer: [array([ 0.03326569, -0.13568382], dtype=float32), array([ 0.05631001, -0.18483664], dtype=float32), array([ 0.06499942, -0.20040877], dtype=float32)]
+hat avoidance vector: [-0.90543109  0.42449325]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.1238973   0.05277507]
 
 Punch Frame Case #19
-main buffer: [array([0.03832102, 0.11160314], dtype=float32), array([0.07978065, 0.07496751], dtype=float32), array([0.12199868, 0.04089158], dtype=float32)]
-hat avoidance vector: [ 0.66216624 -0.74935699]
-previous robot loc, new robot loc: [-0.06690826  0.13294824] , [ 0.0843038  -0.03817467]
+main buffer: [array([-0.02848433, -0.11645327], dtype=float32), array([-0.04984726, -0.17263745], dtype=float32), array([-0.0577943 , -0.18761313], dtype=float32)]
+hat avoidance vector: [0.9347121  0.35540587]
+previous robot loc, new robot loc: [-0.01 -0.01] , [0.16228659 0.05550858]
 
 Punch Frame Case #20
-main buffer: [array([-0.012192  ,  0.13600837], dtype=float32), array([0.03832102, 0.11160314], dtype=float32), array([0.07978065, 0.07496751], dtype=float32)]
-hat avoidance vector: [-0.43503281  0.90041465]
-previous robot loc, new robot loc: [ 0.0843038  -0.03817467] , [0.00928733 0.11709161]
-
-Punch Frame Case #0
-main buffer: [array([-0.02396706, -0.15729898], dtype=float32), array([ 0.03685103, -0.14190146], dtype=float32), array([ 0.03776441, -0.1508611 ], dtype=float32)]
-hat avoidance vector: [-0.24542986 -0.96941429]
-previous robot loc, new robot loc: [0 0] , [-0.03651232 -0.14421865]
-
-Punch Frame Case #1
-main buffer: [array([ 0.21550608, -0.28475535], dtype=float32), array([ 0.252722  , -0.32911566], dtype=float32), array([ 0.27931312, -0.32591575], dtype=float32)]
-hat avoidance vector: [0.76610225 0.6427187 ]
-previous robot loc, new robot loc: [-0.03651232 -0.14421865] , [ 0.07084771 -0.05414935]
-
-Punch Frame Case #2
-main buffer: [array([ 0.14920111, -0.22078162], dtype=float32), array([ 0.20479877, -0.26970956], dtype=float32), array([ 0.21550608, -0.28475535], dtype=float32)]
-hat avoidance vector: [-0.66064304  0.75070018]
-previous robot loc, new robot loc: [ 0.07084771 -0.05414935] , [-0.0628146   0.09773345]
-
-Punch Frame Case #3
-main buffer: [array([ 0.10313945, -0.17880291], dtype=float32), array([ 0.14920111, -0.22078162], dtype=float32), array([ 0.20479877, -0.26970956], dtype=float32)]
-hat avoidance vector: [ 0.67359012 -0.73910505]
-previous robot loc, new robot loc: [-0.0628146   0.09773345] , [ 0.05486655 -0.03139364]
-
-Punch Frame Case #4
-main buffer: [array([ 0.03360836, -0.13233632], dtype=float32), array([ 0.10313945, -0.17880291], dtype=float32), array([ 0.14920111, -0.22078162], dtype=float32)]
-hat avoidance vector: [-0.55563146  0.83142871]
-previous robot loc, new robot loc: [ 0.05486655 -0.03139364] , [-0.04784236  0.12229661]
-
-Punch Frame Case #5
-main buffer: [array([0.01497205, 0.12074807], dtype=float32), array([0.07108096, 0.11364403], dtype=float32), array([0.10644757, 0.09084918], dtype=float32)]
-hat avoidance vector: [ 0.1256087  -0.99207985]
-previous robot loc, new robot loc: [-0.04784236  0.12229661] , [-0.01096421 -0.16897359]
-
-Punch Frame Case #6
-main buffer: [array([ 0.08071876, -0.2587294 ], dtype=float32), array([ 0.18096784, -0.28640735], dtype=float32), array([ 0.22470228, -0.29024413], dtype=float32)]
-hat avoidance vector: [0.26613483 0.9639358 ]
-previous robot loc, new robot loc: [-0.01096421 -0.16897359] , [0.05172574 0.05808833]
-
-Punch Frame Case #7
-main buffer: [array([0.10495291, 0.10122333], dtype=float32), array([0.1448763 , 0.04072387], dtype=float32), array([0.1730638 , 0.00844408], dtype=float32)]
-hat avoidance vector: [-0.83464903 -0.55078214]
-previous robot loc, new robot loc: [0.05172574 0.05808833] , [-0.09534373 -0.03896232]
-
-Punch Frame Case #8
-main buffer: [array([ 0.1208532 , -0.25707555], dtype=float32), array([ 0.15739985, -0.2995883 ], dtype=float32), array([ 0.16879243, -0.30905423], dtype=float32)]
-hat avoidance vector: [0.7583114 0.6518925]
-previous robot loc, new robot loc: [-0.09534373 -0.03896232] , [0.10683952 0.13484721]
-
-Punch Frame Case #9
-main buffer: [array([0.17374472, 0.18293472], dtype=float32), array([0.20614685, 0.14103678], dtype=float32), array([0.220442  , 0.12424844], dtype=float32)]
-hat avoidance vector: [-0.79104334 -0.61176014]
-previous robot loc, new robot loc: [0.10683952 0.13484721] , [-0.02399901  0.03366211]
-
-Punch Frame Case #10
-main buffer: [array([ 0.30004358, -0.17875959], dtype=float32), array([ 0.3498809 , -0.23232707], dtype=float32), array([ 0.3563966 , -0.24704686], dtype=float32)]
-hat avoidance vector: [ 0.73213834 -0.68115598]
-previous robot loc, new robot loc: [-0.02399901  0.03366211] , [ 0.09616363 -0.07813302]
-
-Punch Frame Case #11
-main buffer: [array([ 0.17474493, -0.04046271], dtype=float32), array([ 0.24202147, -0.1057303 ], dtype=float32), array([ 0.27080488, -0.1460481 ], dtype=float32)]
-hat avoidance vector: [-0.69630927  0.71774185]
-previous robot loc, new robot loc: [ 0.09616363 -0.07813302] , [-0.03341599  0.05543509]
-
-Punch Frame Case #12
-main buffer: [array([0.09740739, 0.0392828 ], dtype=float32), array([ 0.15310036, -0.01967357], dtype=float32), array([ 0.17474493, -0.04046271], dtype=float32)]
-hat avoidance vector: [ 0.72693962 -0.68670142]
-previous robot loc, new robot loc: [-0.03341599  0.05543509] , [ 0.0957344  -0.06656645]
-
-Punch Frame Case #13
-main buffer: [array([ 0.17359923, -0.09124222], dtype=float32), array([ 0.19606502, -0.1478134 ], dtype=float32), array([ 0.2043726 , -0.19655256], dtype=float32)]
-hat avoidance vector: [-0.92939544  0.36908567]
-previous robot loc, new robot loc: [ 0.0957344  -0.06656645] , [-0.02378971 -0.0191005 ]
-
-Punch Frame Case #14
-main buffer: [array([ 0.15477055, -0.2173929 ], dtype=float32), array([ 0.1824346 , -0.26445475], dtype=float32), array([ 0.1751106 , -0.29048923], dtype=float32)]
-hat avoidance vector: [0.8620894  0.50675625]
-previous robot loc, new robot loc: [-0.02378971 -0.0191005 ] , [0.14391013 0.07947738]
-
-Punch Frame Case #15
-main buffer: [array([0.2245433 , 0.05059441], dtype=float32), array([0.24260528, 0.00124565], dtype=float32), array([ 0.25150037, -0.06598538], dtype=float32)]
-hat avoidance vector: [-0.93907648 -0.34370831]
-previous robot loc, new robot loc: [0.14391013 0.07947738] , [0.04194726 0.04215829]
-
-Punch Frame Case #16
-main buffer: [array([0.08430633, 0.02989215], dtype=float32), array([ 0.1270505 , -0.04543146], dtype=float32), array([ 0.14782672, -0.09055544], dtype=float32)]
-hat avoidance vector: [-0.86972094 -0.49354383]
-previous robot loc, new robot loc: [0.04194726 0.04215829] , [-0.16471683 -0.07511817]
-
-Punch Frame Case #17
-main buffer: [array([ 0.02390132, -0.24494551], dtype=float32), array([ 0.08300753, -0.2976146 ], dtype=float32), array([ 0.10912489, -0.32522622], dtype=float32)]
-hat avoidance vector: [0.66528237 0.74659187]
-previous robot loc, new robot loc: [-0.16471683 -0.07511817] , [0.03370289 0.14755202]
-
-Punch Frame Case #18
-main buffer: [array([ 0.10031801, -0.01490398], dtype=float32), array([ 0.11875033, -0.09303179], dtype=float32), array([ 0.12379984, -0.11370529], dtype=float32)]
-hat avoidance vector: [-0.97328007 -0.22962137]
-previous robot loc, new robot loc: [0.03370289 0.14755202] , [-0.14158404  0.1061974 ]
-
-Punch Frame Case #19
-main buffer: [array([ 0.09971544, -0.15705873], dtype=float32), array([ 0.15785886, -0.22453243], dtype=float32), array([ 0.16378577, -0.24330471], dtype=float32)]
-hat avoidance vector: [ 0.7575407  -0.65278786]
-previous robot loc, new robot loc: [-0.14158404  0.1061974 ] , [ 0.07297825 -0.07869518]
-
-Punch Frame Case #20
-main buffer: [array([ 0.05972204, -0.08490341], dtype=float32), array([ 0.08890844, -0.13711564], dtype=float32), array([ 0.09971544, -0.15705873], dtype=float32)]
-hat avoidance vector: [-0.87287956  0.48793566]
-previous robot loc, new robot loc: [ 0.07297825 -0.07869518] , [-0.16276682  0.05308523]
+main buffer: [array([-0.14205305, -0.13778332], dtype=float32), array([-0.17389901, -0.18537365], dtype=float32), array([-0.17890061, -0.1970272 ], dtype=float32)]
+hat avoidance vector: [0.8310893 0.5561389]
+previous robot loc, new robot loc: [-0.01 -0.01] , [0.12371289 0.07947646]
 
 Punch Frame Case #21
-main buffer: [array([-0.02716867,  0.048174  ], dtype=float32), array([ 0.01625787, -0.01159903], dtype=float32), array([ 0.05972204, -0.08490341], dtype=float32)]
-hat avoidance vector: [ 0.80902416 -0.58777541]
-previous robot loc, new robot loc: [-0.16276682  0.05308523] , [-0.06708222 -0.01643192]
+main buffer: [array([-0.04804794, -0.1499219 ], dtype=float32), array([-0.08283921, -0.18942867], dtype=float32), array([-0.09516334, -0.1989078 ], dtype=float32)]
+hat avoidance vector: [0.75047517 0.6608987 ]
+previous robot loc, new robot loc: [-0.01 -0.01] , [0.06997509 0.06042929]
 
 Punch Frame Case #22
-main buffer: [array([ 0.01975797, -0.03010738], dtype=float32), array([ 0.05306756, -0.08583245], dtype=float32), array([ 0.05950596, -0.1090362 ], dtype=float32)]
-hat avoidance vector: [0.8583442 0.5130742]
-previous robot loc, new robot loc: [-0.06708222 -0.01643192] , [0.07746013 0.0699681 ]
+main buffer: [array([ 0.00853756, -0.08266532], dtype=float32), array([-0.03564225, -0.1379116 ], dtype=float32), array([-0.04804794, -0.1499219 ], dtype=float32)]
+hat avoidance vector: [-0.78098744 -0.62454665]
+previous robot loc, new robot loc: [0.06997509 0.06042929] , [-0.06081253 -0.04416006]
 
 Punch Frame Case #23
-main buffer: [array([0.09047769, 0.10364987], dtype=float32), array([0.10750776, 0.04824232], dtype=float32), array([0.11811084, 0.01259314], dtype=float32)]
-hat avoidance vector: [-0.95586824 -0.2937957 ]
-previous robot loc, new robot loc: [0.07746013 0.0699681 ] , [-0.13662127  0.00416803]
+main buffer: [array([ 0.01086263, -0.04898418], dtype=float32), array([-0.02297456, -0.09773518], dtype=float32), array([-0.05023339, -0.13301352], dtype=float32)]
+hat avoidance vector: [0.8215094  0.57019496]
+previous robot loc, new robot loc: [-0.01 -0.01] , [0.12301543 0.08232362]
 
 Punch Frame Case #24
-main buffer: [array([-0.04893613, -0.11229753], dtype=float32), array([-0.02458561, -0.15641402], dtype=float32), array([-0.00646231, -0.19862346], dtype=float32)]
-hat avoidance vector: [ 0.87549043 -0.48323542]
-previous robot loc, new robot loc: [-0.13662127  0.00416803] , [ 0.08890863 -0.12031539]
+main buffer: [array([-0.02353738, -0.10492007], dtype=float32), array([-0.05953053, -0.14181484], dtype=float32), array([-0.06987464, -0.15306154], dtype=float32)]
+hat avoidance vector: [0.715799   0.69830644]
+previous robot loc, new robot loc: [-0.01 -0.01] , [0.08871787 0.08630544]
 
 Punch Frame Case #25
-main buffer: [array([-0.08471993, -0.06044057], dtype=float32), array([-0.04893613, -0.11229753], dtype=float32), array([-0.02458561, -0.15641402], dtype=float32)]
-hat avoidance vector: [-0.82306165  0.56795216]
-previous robot loc, new robot loc: [ 0.08890863 -0.12031539] , [-0.00019338 -0.05883071]
+main buffer: [array([ 0.08092976, -0.02643094], dtype=float32), array([ 0.01806901, -0.05023009], dtype=float32), array([-0.01783015, -0.06585381], dtype=float32)]
+hat avoidance vector: [0.35407424 0.93521726]
+previous robot loc, new robot loc: [-0.01 -0.01] , [0.06020793 0.17544041]
 
 Punch Frame Case #26
-main buffer: [array([-0.14453453, -0.25597873], dtype=float32), array([-0.18084238, -0.29718012], dtype=float32), array([-0.19298881, -0.30508626], dtype=float32)]
-hat avoidance vector: [-0.750256   -0.66114742]
-previous robot loc, new robot loc: [0 0] , [-0.15608024 -0.13754245]
+main buffer: [array([-0.00497749, -0.08133024], dtype=float32), array([-0.07177398, -0.111045  ], dtype=float32), array([-0.02511892, -0.09619091], dtype=float32)]
+hat avoidance vector: [0.40645167 0.91367227]
+previous robot loc, new robot loc: [-0.01 -0.01] , [0.05213465 0.12967394]
 
 Punch Frame Case #27
-main buffer: [array([-0.09332569, -0.18399057], dtype=float32), array([-0.13256966, -0.23960753], dtype=float32), array([-0.14453453, -0.25597873], dtype=float32)]
-hat avoidance vector: [0.81707215 0.5765355 ]
-previous robot loc, new robot loc: [-0.15608024 -0.13754245] , [-0.02157752 -0.04263578]
+main buffer: [array([ 0.04311701, -0.00936459], dtype=float32), array([0.02653873, 0.04588897], dtype=float32), array([0.02316059, 0.06559403], dtype=float32)]
+hat avoidance vector: [-0.95781565 -0.28738314]
+previous robot loc, new robot loc: [0.01 0.01] , [-0.10300178 -0.02390507]
 
 Punch Frame Case #28
-main buffer: [array([-0.06516544, -0.11319256], dtype=float32), array([-0.09332569, -0.18399057], dtype=float32), array([-0.13256966, -0.23960753], dtype=float32)]
-hat avoidance vector: [0.92919433 0.36959153]
-previous robot loc, new robot loc: [-0.02157752 -0.04263578] , [0.2209161  0.05381723]
+main buffer: [array([0.18981425, 0.09711013], dtype=float32), array([0.22995935, 0.13616158], dtype=float32), array([0.24011539, 0.14788018], dtype=float32)]
+hat avoidance vector: [-0.69727564  0.71680307]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.10462436  0.10783445]
 
 Punch Frame Case #29
-main buffer: [array([-0.20154122, -0.23967063], dtype=float32), array([-0.23517089, -0.28514174], dtype=float32), array([-0.21515886, -0.2717245 ], dtype=float32)]
-hat avoidance vector: [-0.80400205 -0.59462655]
-previous robot loc, new robot loc: [0 0] , [-0.21480058 -0.15886294]
+main buffer: [array([0.20193443, 0.07913137], dtype=float32), array([0.24247642, 0.11279801], dtype=float32), array([0.25502545, 0.12067445], dtype=float32)]
+hat avoidance vector: [-0.63885796 -0.76932478]
+previous robot loc, new robot loc: [0.01 0.01] , [-0.06633888 -0.08192872]
 
 Punch Frame Case #30
-main buffer: [array([-0.20154122, -0.2451177 ], dtype=float32), array([-0.23868026, -0.2946364 ], dtype=float32), array([-0.22332945, -0.28256622], dtype=float32)]
-hat avoidance vector: [0.7999999  0.60000014]
-previous robot loc, new robot loc: [-0.21480058 -0.15886294] , [-0.05794771 -0.04122324]
+main buffer: [array([0.1120115 , 0.08181889], dtype=float32), array([0.15682822, 0.11765956], dtype=float32), array([0.1697138 , 0.12788816], dtype=float32)]
+hat avoidance vector: [-0.62456006 -0.78097683]
+previous robot loc, new robot loc: [0.01 0.01] , [-0.16517486 -0.2090462 ]
 
 Punch Frame Case #31
-main buffer: [array([-0.07430004, -0.13476777], dtype=float32), array([-0.11136023, -0.18843105], dtype=float32), array([-0.11444218, -0.20388722], dtype=float32)]
-hat avoidance vector: [-0.82284701 -0.56826305]
-previous robot loc, new robot loc: [0 0] , [-0.22448827 -0.15503294]
+main buffer: [array([0.12617359, 0.06463645], dtype=float32), array([0.16609192, 0.10883992], dtype=float32), array([0.17673004, 0.12338853], dtype=float32)]
+hat avoidance vector: [-0.74216437 -0.67021799]
+previous robot loc, new robot loc: [0.01 0.01] , [-0.10279696 -0.09186227]
 
 Punch Frame Case #32
-main buffer: [array([-0.2511294 , -0.29915652], dtype=float32), array([-0.09343802, -0.44058332], dtype=float32), array([-0.09552529, -0.4345543 ], dtype=float32)]
-hat avoidance vector: [0.6676715 0.744456 ]
-previous robot loc, new robot loc: [-0.22448827 -0.15503294] , [-0.13636693 -0.05677735]
+main buffer: [array([0.10045464, 0.0837494 ], dtype=float32), array([0.14264844, 0.12459639], dtype=float32), array([0.15591879, 0.13560891], dtype=float32)]
+hat avoidance vector: [-0.69554687 -0.71848065]
+previous robot loc, new robot loc: [0.01 0.01] , [-0.17944201 -0.18568835]
 
 Punch Frame Case #33
-main buffer: [array([-0.22672294, -0.2246985 ], dtype=float32), array([-0.24303721, -0.273223  ], dtype=float32), array([-0.2511294 , -0.29915652], dtype=float32)]
-hat avoidance vector: [0.94786304 0.31867793]
-previous robot loc, new robot loc: [-0.13636693 -0.05677735] , [0.05241876 0.00669367]
+main buffer: [array([0.14124161, 0.05509169], dtype=float32), array([0.18316473, 0.09318753], dtype=float32), array([0.19490686, 0.10434156], dtype=float32)]
+hat avoidance vector: [-0.67251724 -0.74008143]
+previous robot loc, new robot loc: [0.01 0.01] , [-0.09199601 -0.102243  ]
 
 Punch Frame Case #34
-main buffer: [array([ 0.08389578, -0.01272608], dtype=float32), array([-0.05716959, -0.16562006], dtype=float32), array([-0.07659435, -0.18070029], dtype=float32)]
-hat avoidance vector: [-0.73496526 -0.67810482]
-previous robot loc, new robot loc: [0.05241876 0.00669367] , [-0.12872359 -0.16043463]
-
-Punch Frame Case #0
-main buffer: [array([0.03963716, 0.01683795], dtype=float32), array([ 0.08412681, -0.03902068], dtype=float32), array([ 0.09226757, -0.05067726], dtype=float32)]
-hat avoidance vector: [-0.78221446  0.62300926]
-previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.17456455  0.13699987]
-
-Punch Frame Case #1
-main buffer: [array([-0.03425268,  0.09286992], dtype=float32), array([0.01014848, 0.04757936], dtype=float32), array([0.03963716, 0.01683795], dtype=float32)]
-hat avoidance vector: [ 0.71408337 -0.70006061]
-previous robot loc, new robot loc: [-0.17456455  0.13699987] , [-0.03102842 -0.00371758]
-
-Punch Frame Case #2
-main buffer: [array([-0.07402671,  0.12806004], dtype=float32), array([-0.03425268,  0.09286992], dtype=float32), array([0.01014848, 0.04757936], dtype=float32)]
-hat avoidance vector: [0.662631 0.748946]
-previous robot loc, new robot loc: [-0.03102842 -0.00371758] , [0.10564928 0.15076391]
-
-Punch Frame Case #3
-main buffer: [array([0.09835348, 0.18373613], dtype=float32), array([0.14353509, 0.11087529], dtype=float32), array([0.16457902, 0.08202731], dtype=float32)]
-hat avoidance vector: [-0.84986144 -0.52700621]
-previous robot loc, new robot loc: [0.10564928 0.15076391] , [-0.13128628  0.00383818]
-
-Punch Frame Case #4
-main buffer: [array([-0.03830998,  0.04886303], dtype=float32), array([0.01261696, 0.01930714], dtype=float32), array([0.02789512, 0.00882105], dtype=float32)]
-hat avoidance vector: [ 0.5019502 -0.8648966]
-previous robot loc, new robot loc: [-0.13128628  0.00383818] , [-0.03038648 -0.17001949]
-
-Punch Frame Case #5
-main buffer: [array([ 0.00784556, -0.16982274], dtype=float32), array([ 0.06340753, -0.17619695], dtype=float32), array([ 0.0751723 , -0.17771392], dtype=float32)]
-hat avoidance vector: [0.11397497 0.9934836 ]
-previous robot loc, new robot loc: [-0.03038648 -0.17001949] , [0.00328369 0.12347265]
-
-Punch Frame Case #6
-main buffer: [array([0.07451489, 0.18947457], dtype=float32), array([0.11322847, 0.13593541], dtype=float32), array([0.12559237, 0.11771701], dtype=float32)]
-hat avoidance vector: [-0.81034565 -0.58595216]
-previous robot loc, new robot loc: [0.00328369 0.12347265] , [-0.10650882  0.04408287]
-
-Punch Frame Case #7
-main buffer: [array([ 0.03300609, -0.01595411], dtype=float32), array([ 0.08189514, -0.04908114], dtype=float32), array([ 0.10102788, -0.06294282], dtype=float32)]
-hat avoidance vector: [ 0.56094831 -0.82785082]
-previous robot loc, new robot loc: [-0.10650882  0.04408287] , [ 0.04242423 -0.17571339]
-
-Punch Frame Case #8
-main buffer: [array([-0.03225999,  0.01434587], dtype=float32), array([ 0.01743059, -0.00530676], dtype=float32), array([ 0.03300609, -0.01595411], dtype=float32)]
-hat avoidance vector: [-0.36778042  0.92991269]
-previous robot loc, new robot loc: [ 0.04242423 -0.17571339] , [-0.00887317 -0.04601071]
-
-Punch Frame Case #9
-main buffer: [array([-0.10599208,  0.09360139], dtype=float32), array([-0.1537294 ,  0.06505895], dtype=float32), array([-0.17628397,  0.05388013], dtype=float32)]
-hat avoidance vector: [0.51317376 0.8582847 ]
-previous robot loc, new robot loc: [-0.00887317 -0.04601071] , [0.04363472 0.04180891]
-
-Punch Frame Case #10
-main buffer: [array([-0.08144257,  0.00937436], dtype=float32), array([-0.03110876,  0.01000443], dtype=float32), array([ 0.00481804, -0.00018737], dtype=float32)]
-hat avoidance vector: [-0.01251691 -0.99992162]
-previous robot loc, new robot loc: [0.04363472 0.04180891] , [ 0.04026603 -0.22730115]
-
-Punch Frame Case #11
-main buffer: [array([-0.00153799, -0.2211079 ], dtype=float32), array([ 0.05283253, -0.23836806], dtype=float32), array([ 0.06887099, -0.24584682], dtype=float32)]
-hat avoidance vector: [-0.30257401  0.95312583]
-previous robot loc, new robot loc: [ 0.04026603 -0.22730115] , [-0.04836467  0.05189074]
-
-Punch Frame Case #12
-main buffer: [array([0.10582174, 0.08852072], dtype=float32), array([0.14474817, 0.12501714], dtype=float32), array([0.15458217, 0.13635807], dtype=float32)]
-hat avoidance vector: [-0.68396997 -0.72951025]
-previous robot loc, new robot loc: [0.01 0.01] , [-0.18744895 -0.20059555]
-
-Punch Frame Case #13
-main buffer: [array([0.04453555, 0.027223  ], dtype=float32), array([0.09026206, 0.07393925], dtype=float32), array([0.10582174, 0.08852072], dtype=float32)]
-hat avoidance vector: [0.71463645 0.69949603]
-previous robot loc, new robot loc: [-0.18744895 -0.20059555] , [0.02037648 0.00282685]
-
-Punch Frame Case #14
-main buffer: [array([-0.01431799, -0.04293936], dtype=float32), array([0.04453555, 0.027223  ], dtype=float32), array([0.09026206, 0.07393925], dtype=float32)]
-hat avoidance vector: [-0.76615024 -0.64266151]
-previous robot loc, new robot loc: [0.02037648 0.00282685] , [-0.20609359 -0.18714059]
-
-Punch Frame Case #15
-main buffer: [array([-0.05329444, -0.11044949], dtype=float32), array([-0.01431799, -0.04293936], dtype=float32), array([0.04453555, 0.027223  ], dtype=float32)]
-hat avoidance vector: [0.8660284  0.49999484]
-previous robot loc, new robot loc: [-0.20609359 -0.18714059] , [-0.10907109 -0.13112539]
-
-Punch Frame Case #16
-main buffer: [array([-0.00224167, -0.11245664], dtype=float32), array([ 0.02778349, -0.05965227], dtype=float32), array([ 0.0460213 , -0.03165064], dtype=float32)]
-hat avoidance vector: [0.8692962  0.49429154]
-previous robot loc, new robot loc: [-0.10907109 -0.13112539] , [ 0.00462501 -0.06647652]
-
-Punch Frame Case #17
-main buffer: [array([0.09018181, 0.07171555], dtype=float32), array([0.1045062 , 0.12754512], dtype=float32), array([0.11175469, 0.14438798], dtype=float32)]
-hat avoidance vector: [-0.96862584  0.24852374]
-previous robot loc, new robot loc: [ 0.00462501 -0.06647652] , [-0.09682194 -0.04044792]
-
-Punch Frame Case #18
-main buffer: [array([ 0.03350177, -0.06294343], dtype=float32), array([ 0.08623943, -0.11668229], dtype=float32), array([ 0.11695942, -0.13387577], dtype=float32)]
-hat avoidance vector: [0.7137241 0.7004269]
-previous robot loc, new robot loc: [-0.09682194 -0.04044792] , [0.03856987 0.09242144]
-
-Punch Frame Case #19
-main buffer: [array([5.0266492e-05, 2.4859065e-03], dtype=float32), array([ 0.02318159, -0.04592473], dtype=float32), array([ 0.03350177, -0.06294343], dtype=float32)]
-hat avoidance vector: [-0.90229082 -0.43112791]
-previous robot loc, new robot loc: [0.03856987 0.09242144] , [-0.07823014  0.03661267]
-
-Punch Frame Case #20
-main buffer: [array([0.05732172, 0.04065175], dtype=float32), array([0.02288087, 0.08405986], dtype=float32), array([0.00624166, 0.10767443], dtype=float32)]
-hat avoidance vector: [-0.78337705 -0.6215468 ]
-previous robot loc, new robot loc: [0.01 0.01] , [-0.15427849 -0.12034179]
-
-Punch Frame Case #21
-main buffer: [array([ 0.02950123, -0.1473187 ], dtype=float32), array([ 0.07169258, -0.19214213], dtype=float32), array([ 0.09172484, -0.2164261 ], dtype=float32)]
-hat avoidance vector: [-0.72816277  0.6854043 ]
-previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.12354439  0.11570253]
-
-Punch Frame Case #22
-main buffer: [array([-0.0691444 , -0.06769724], dtype=float32), array([-0.00267214, -0.12024128], dtype=float32), array([ 0.02950123, -0.1473187 ], dtype=float32)]
-hat avoidance vector: [ 0.62012357 -0.78450412]
-previous robot loc, new robot loc: [-0.12354439  0.11570253] , [-0.0245717  -0.00950555]
-
-Punch Frame Case #23
-main buffer: [array([-0.01420852, -0.03849871], dtype=float32), array([-0.06116765, -0.06041035], dtype=float32), array([-0.0751979 , -0.07473862], dtype=float32)]
-hat avoidance vector: [0.42284393 0.9062025 ]
-previous robot loc, new robot loc: [-0.01 -0.01] , [0.10563303 0.23781469]
-
-Punch Frame Case #24
-main buffer: [array([0.16158305, 0.20163628], dtype=float32), array([0.30011928, 0.0161185 ], dtype=float32), array([ 0.29854745, -0.03462526], dtype=float32)]
-hat avoidance vector: [-0.80124646 -0.59833437]
-previous robot loc, new robot loc: [0.10563303 0.23781469] , [-0.10369592  0.08149736]
-
-Punch Frame Case #25
-main buffer: [array([-0.10364162,  0.15324526], dtype=float32), array([-0.04689299,  0.11297664], dtype=float32), array([-0.00939911,  0.08024702], dtype=float32)]
-hat avoidance vector: [ 0.57870299 -0.81553841]
-previous robot loc, new robot loc: [-0.10369592  0.08149736] , [ 0.02837196 -0.10461958]
-
-Punch Frame Case #26
-main buffer: [array([-0.06067638, -0.02893257], dtype=float32), array([-0.11808617, -0.00818485], dtype=float32), array([-0.13452478, -0.00687614], dtype=float32)]
-hat avoidance vector: [-0.33988222  0.94046795]
-previous robot loc, new robot loc: [ 0.02837196 -0.10461958] , [-0.05880606  0.13660555]
-
-Punch Frame Case #27
-main buffer: [array([0.08770807, 0.17154768], dtype=float32), array([0.12930247, 0.13668354], dtype=float32), array([0.18149243, 0.05089467], dtype=float32)]
-hat avoidance vector: [ 0.64237982 -0.76638639]
-previous robot loc, new robot loc: [-0.05880606  0.13660555] , [0.03257294 0.02758653]
-
-Punch Frame Case #28
-main buffer: [array([-0.02278905,  0.19736841], dtype=float32), array([0.03571251, 0.19545385], dtype=float32), array([0.07558963, 0.17863244], dtype=float32)]
-hat avoidance vector: [-0.03270915 -0.99946493]
-previous robot loc, new robot loc: [0.03257294 0.02758653] , [ 0.02825435 -0.10437275]
-
-Punch Frame Case #29
-main buffer: [array([ 0.04938019, -0.16803531], dtype=float32), array([ 0.12424527, -0.17326881], dtype=float32), array([ 0.14261061, -0.17984436], dtype=float32)]
-hat avoidance vector: [-0.06973552  0.99756551]
-previous robot loc, new robot loc: [ 0.02825435 -0.10437275] , [0.01167025 0.13286255]
-
-Punch Frame Case #30
-main buffer: [array([0.13817292, 0.08784308], dtype=float32), array([0.17154644, 0.04623533], dtype=float32), array([0.1836029 , 0.03295135], dtype=float32)]
-hat avoidance vector: [-0.78006953 -0.62569273]
-previous robot loc, new robot loc: [0.01167025 0.13286255] , [-0.13444056  0.01566726]
-
-Punch Frame Case #31
-main buffer: [array([-0.04420574,  0.12777977], dtype=float32), array([0.00745728, 0.13071646], dtype=float32), array([0.03960252, 0.12197646], dtype=float32)]
-hat avoidance vector: [ 0.05675158 -0.99838835]
-previous robot loc, new robot loc: [-0.13444056  0.01566726] , [-0.12348655 -0.17703839]
-
-Punch Frame Case #32
-main buffer: [array([-0.00042963, -0.23400876], dtype=float32), array([ 0.06388902, -0.21849003], dtype=float32), array([ 0.09164193, -0.21993849], dtype=float32)]
-hat avoidance vector: [0.23454818 0.9721045 ]
-previous robot loc, new robot loc: [-0.12348655 -0.17703839] , [-0.07344837  0.03034904]
-
-Punch Frame Case #33
-main buffer: [array([0.02496993, 0.09788587], dtype=float32), array([0.10052604, 0.06498676], dtype=float32), array([0.13108115, 0.03660532], dtype=float32)]
-hat avoidance vector: [ 0.39922234 -0.91685414]
-previous robot loc, new robot loc: [-0.07344837  0.03034904] , [ 0.00224788 -0.14349499]
-
-Punch Frame Case #34
-main buffer: [array([ 0.12958223, -0.19203074], dtype=float32), array([ 0.17583947, -0.22084895], dtype=float32), array([ 0.18911219, -0.23277289], dtype=float32)]
-hat avoidance vector: [-0.52877694  0.84876084]
-previous robot loc, new robot loc: [ 0.00224788 -0.14349499] , [-0.14010237  0.08499703]
+main buffer: [array([ 0.07805593, -0.0037708 ], dtype=float32), array([0.126002  , 0.04096735], dtype=float32), array([0.14124161, 0.05509169], dtype=float32)]
+hat avoidance vector: [0.6822244  0.73114276]
+previous robot loc, new robot loc: [-0.09199601 -0.102243  ] , [0.03052857 0.02906711]
 
 Punch Frame Case #35
-main buffer: [array([ 0.06194622, -0.03035327], dtype=float32), array([ 0.10622634, -0.05610124], dtype=float32), array([ 0.11956195, -0.064494  ], dtype=float32)]
-hat avoidance vector: [ 0.50267464 -0.86447561]
-previous robot loc, new robot loc: [-0.14010237  0.08499703] , [ 0.00962593 -0.17249848]
+main buffer: [array([0.17390957, 0.13047537], dtype=float32), array([0.21917674, 0.16549489], dtype=float32), array([0.22771253, 0.17315494], dtype=float32)]
+hat avoidance vector: [-0.61188877 -0.7909438 ]
+previous robot loc, new robot loc: [0.01 0.01] , [-0.16582244 -0.21727279]
 
 Punch Frame Case #36
-main buffer: [array([-0.03734825, -0.0079102 ], dtype=float32), array([ 0.04347343, -0.02240655], dtype=float32), array([ 0.06194622, -0.03035327], dtype=float32)]
-hat avoidance vector: [-0.17654489  0.98429263]
-previous robot loc, new robot loc: [ 0.00962593 -0.17249848] , [-0.01576778 -0.03092066]
+main buffer: [array([0.0788761 , 0.04742343], dtype=float32), array([0.12648492, 0.09633129], dtype=float32), array([0.14165382, 0.11295252], dtype=float32)]
+hat avoidance vector: [-0.71655899 -0.6975264 ]
+previous robot loc, new robot loc: [0.01 0.01] , [-0.15719898 -0.15275799]
 
 Punch Frame Case #37
-main buffer: [array([-0.09587121, -0.02164022], dtype=float32), array([-0.03734825, -0.0079102 ], dtype=float32), array([ 0.04347343, -0.02240655], dtype=float32)]
-hat avoidance vector: [0.22840738 0.97356564]
-previous robot loc, new robot loc: [-0.01576778 -0.03092066] , [0.04634226 0.2338177 ]
+main buffer: [array([0.08782806, 0.159634  ], dtype=float32), array([0.10780881, 0.20765609], dtype=float32), array([0.11378621, 0.21945918], dtype=float32)]
+hat avoidance vector: [-0.92327094 -0.38414931]
+previous robot loc, new robot loc: [0.01 0.01] , [-0.19788503 -0.07649562]
 
 Punch Frame Case #38
-main buffer: [array([-0.02932796, -0.01490248], dtype=float32), array([ 0.03730705, -0.01028398], dtype=float32), array([ 0.07865813, -0.02077232], dtype=float32)]
-hat avoidance vector: [-0.06914453  0.99760669]
-previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.01059286  0.28711058]
+main buffer: [array([0.01710775, 0.13276747], dtype=float32), array([0.02978091, 0.1948259 ], dtype=float32), array([0.03436859, 0.21270572], dtype=float32)]
+hat avoidance vector: [-0.97977871 -0.20008391]
+previous robot loc, new robot loc: [0.01 0.01] , [-0.11156708 -0.01482562]
 
-Punch Frame Case #0
-main buffer: [array([ 0.16713394, -0.06529869], dtype=float32), array([ 0.22926764, -0.09088851], dtype=float32), array([ 0.23889923, -0.09755904], dtype=float32)]
-hat avoidance vector: [-0.38081792  0.92465007]
-previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.04353651  0.11999003]
+Punch Frame Case #39
+main buffer: [array([0.03198672, 0.17489615], dtype=float32), array([0.04149321, 0.22799768], dtype=float32), array([0.04429756, 0.24494717], dtype=float32)]
+hat avoidance vector: [-0.98435026 -0.17622319]
+previous robot loc, new robot loc: [0.01 0.01] , [-0.2024575  -0.02803518]
 
-Punch Frame Case #1
-main buffer: [array([-0.01538116,  0.06565689], dtype=float32), array([-0.06990542,  0.02273924], dtype=float32), array([-0.08705362, -0.00541395], dtype=float32)]
-hat avoidance vector: [ 0.61850882 -0.78577781]
-previous robot loc, new robot loc: [-0.04353651  0.11999003] , [0.00192696 0.06223147]
+Punch Frame Case #40
+main buffer: [array([0.05627409, 0.19803356], dtype=float32), array([0.07681619, 0.26690593], dtype=float32), array([0.08297168, 0.2820833 ], dtype=float32)]
+hat avoidance vector: [-0.95828313 -0.28582063]
+previous robot loc, new robot loc: [0.01 0.01] , [-0.21445204 -0.05694579]
 
-Punch Frame Case #2
-main buffer: [array([ 0.18199253, -0.01293439], dtype=float32), array([ 0.22509925, -0.04217047], dtype=float32), array([ 0.23545164, -0.05384666], dtype=float32)]
-hat avoidance vector: [-0.56130534 -0.82760876]
-previous robot loc, new robot loc: [0.00192696 0.06223147] , [-0.0559104  -0.02304601]
+Punch Frame Case #41
+main buffer: [array([0.056832  , 0.16065054], dtype=float32), array([0.06954433, 0.21342571], dtype=float32), array([0.07247691, 0.22819   ], dtype=float32)]
+hat avoidance vector: [-0.97219342  0.23417918]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.23543563  0.04911984]
 
-Punch Frame Case #3
-main buffer: [array([ 0.10534263, -0.00027345], dtype=float32), array([ 0.18199253, -0.01293439], dtype=float32), array([ 0.22509925, -0.04217047], dtype=float32)]
-hat avoidance vector: [0.16297063 0.9866309 ]
-previous robot loc, new robot loc: [-0.0559104  -0.02304601] , [-0.03951688  0.076201  ]
+Punch Frame Case #42
+main buffer: [array([0.05510207, 0.10157079], dtype=float32), array([0.07581686, 0.18389799], dtype=float32), array([0.08543476, 0.21808955], dtype=float32)]
+hat avoidance vector: [-0.96977276 -0.24400979]
+previous robot loc, new robot loc: [0.01 0.01] , [-0.11087399 -0.02041376]
 
-Punch Frame Case #4
-main buffer: [array([-0.04813669,  0.05823841], dtype=float32), array([0.02620078, 0.03601112], dtype=float32), array([0.06656164, 0.02330052], dtype=float32)]
-hat avoidance vector: [ 0.28647336 -0.95808822]
-previous robot loc, new robot loc: [-0.03951688  0.076201  ] , [-0.00243003 -0.04783314]
+Punch Frame Case #43
+main buffer: [array([0.02433198, 0.13160843], dtype=float32), array([0.0420358 , 0.19003081], dtype=float32), array([0.04756621, 0.20740636], dtype=float32)]
+hat avoidance vector: [-0.9570241 -0.2900084]
+previous robot loc, new robot loc: [0.01 0.01] , [-0.13486841 -0.03389968]
 
-Punch Frame Case #5
-main buffer: [array([ 0.02459857, -0.05379785], dtype=float32), array([ 0.11975384, -0.06619108], dtype=float32), array([ 0.15494874, -0.070958  ], dtype=float32)]
-hat avoidance vector: [0.12915143 0.9916249 ]
-previous robot loc, new robot loc: [-0.00243003 -0.04783314] , [0.01662698 0.09848662]
+Punch Frame Case #44
+main buffer: [array([-0.20778495,  0.10050659], dtype=float32), array([-0.15724593,  0.10154216], dtype=float32), array([-0.1679803,  0.1001421], dtype=float32)]
+hat avoidance vector: [ 0.02048623 -0.99979013]
+previous robot loc, new robot loc: [-0.01  0.01] , [-0.00772846 -0.10085812]
 
-Punch Frame Case #6
-main buffer: [array([-0.05672074,  0.01118922], dtype=float32), array([-0.102852  , -0.02151699], dtype=float32), array([-0.12391625, -0.04126759], dtype=float32)]
-hat avoidance vector: [-0.57836938 -0.81577504]
-previous robot loc, new robot loc: [0.01662698 0.09848662] , [-0.04971475  0.00491333]
+Punch Frame Case #45
+main buffer: [array([ 0.04662314, -0.02589661], dtype=float32), array([ 0.10538877, -0.08194272], dtype=float32), array([ 0.07228249, -0.14592673], dtype=float32)]
+hat avoidance vector: [-0.69016403  0.7236529 ]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.17077922  0.17955118]
 
-Punch Frame Case #7
-main buffer: [array([-0.00661347,  0.08446965], dtype=float32), array([0.06065984, 0.06125623], dtype=float32), array([0.09156363, 0.04489405], dtype=float32)]
-hat avoidance vector: [ 0.32618815 -0.94530481]
-previous robot loc, new robot loc: [-0.04971475  0.00491333] , [-0.03158811 -0.0476183 ]
+Punch Frame Case #46
+main buffer: [array([-0.025117  ,  0.03856442], dtype=float32), array([ 0.02887743, -0.00917189], dtype=float32), array([ 0.04662314, -0.02589661], dtype=float32)]
+hat avoidance vector: [ 0.66235596 -0.7491892 ]
+previous robot loc, new robot loc: [-0.17077922  0.17955118] , [ 0.01175653 -0.02691456]
 
-Punch Frame Case #8
-main buffer: [array([ 0.06700052, -0.06662108], dtype=float32), array([ 0.14069992, -0.08039545], dtype=float32), array([ 0.1750052 , -0.09240863], dtype=float32)]
-hat avoidance vector: [0.18371807 0.982979  ]
-previous robot loc, new robot loc: [-0.03158811 -0.0476183 ] , [-0.00413634  0.09926173]
+Punch Frame Case #47
+main buffer: [array([2.4986513e-02, 2.4986513e-05], dtype=float32), array([-0.025117  ,  0.03856442], dtype=float32), array([ 0.02887743, -0.00917189], dtype=float32)]
+hat avoidance vector: [-0.60969371  0.79263717]
+previous robot loc, new robot loc: [ 0.01175653 -0.02691456] , [-0.12589279  0.15203754]
 
-Punch Frame Case #9
-main buffer: [array([-0.06382824, -0.01229699], dtype=float32), array([-0.10069482, -0.05021716], dtype=float32), array([-0.11923122, -0.07887997], dtype=float32)]
-hat avoidance vector: [ 0.71699721 -0.69707602]
-previous robot loc, new robot loc: [-0.00413634  0.09926173] , [0.06744799 0.02966631]
+Punch Frame Case #48
+main buffer: [array([-0.05173971,  0.0539627 ], dtype=float32), array([-0.00528685,  0.02140957], dtype=float32), array([-0.00546624,  0.01873865], dtype=float32)]
+hat avoidance vector: [ 0.57388973 -0.81893259]
+previous robot loc, new robot loc: [-0.12589279  0.15203754] , [-0.00665    -0.01812025]
 
-Punch Frame Case #10
-main buffer: [array([ 0.10951921, -0.00484945], dtype=float32), array([ 0.16299196, -0.03820477], dtype=float32), array([ 0.19115105, -0.06195494], dtype=float32)]
-hat avoidance vector: [-0.52925551  0.84846252]
-previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.0338071   0.06022823]
+Punch Frame Case #49
+main buffer: [array([-0.12667906,  0.19504663], dtype=float32), array([-0.1936538 ,  0.25616172], dtype=float32), array([-0.20106019,  0.27058473], dtype=float32)]
+hat avoidance vector: [-0.67405415  0.73868185]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.0839285   0.09293428]
 
-Punch Frame Case #11
-main buffer: [array([0.04532441, 0.02556866], dtype=float32), array([0.09551483, 0.00384391], dtype=float32), array([ 0.10951921, -0.00484945], dtype=float32)]
-hat avoidance vector: [ 0.39723134 -0.91771853]
-previous robot loc, new robot loc: [-0.0338071   0.06022823] , [ 0.02561563 -0.07705533]
+Punch Frame Case #50
+main buffer: [array([-0.1182012 ,  0.17962727], dtype=float32), array([-0.15652566,  0.21898845], dtype=float32), array([-0.12667906,  0.19504663], dtype=float32)]
+hat avoidance vector: [ 0.71647936 -0.69760829]
+previous robot loc, new robot loc: [-0.0839285   0.09293428] , [ 0.0572277  -0.04450406]
 
-Punch Frame Case #12
-main buffer: [array([ 0.05094467, -0.0891821 ], dtype=float32), array([ 0.1047321 , -0.09026438], dtype=float32), array([ 0.13474989, -0.09613628], dtype=float32)]
-hat avoidance vector: [-0.02011733  0.99979758]
-previous robot loc, new robot loc: [ 0.02561563 -0.07705533] , [0.02283173 0.06129955]
+Punch Frame Case #51
+main buffer: [array([ 0.05378972, -0.14230444], dtype=float32), array([ 0.14053415, -0.2195165 ], dtype=float32), array([ 0.13738695, -0.22257291], dtype=float32)]
+hat avoidance vector: [-0.66487312  0.74695629]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.06536101  0.07466484]
 
-Punch Frame Case #13
-main buffer: [array([-0.1385952 , -0.13275334], dtype=float32), array([-0.16996945, -0.174561  ], dtype=float32), array([-0.18131284, -0.20413266], dtype=float32)]
-hat avoidance vector: [-0.79982984 -0.60022676]
-previous robot loc, new robot loc: [0.02283173 0.06129955] , [-0.08030156 -0.01609612]
+Punch Frame Case #52
+main buffer: [array([-0.18901297,  0.09913649], dtype=float32), array([ 0.16250394, -0.23603925], dtype=float32), array([ 0.16831414, -0.23967063], dtype=float32)]
+hat avoidance vector: [ 0.69008452 -0.72372884]
+previous robot loc, new robot loc: [-0.06536101  0.07466484] , [ 0.01271232 -0.00721486]
 
-Punch Frame Case #14
-main buffer: [array([ 0.08374447, -0.04212502], dtype=float32), array([ 0.14368133, -0.08718321], dtype=float32), array([ 0.17010339, -0.12236044], dtype=float32)]
-hat avoidance vector: [-0.60090047  0.7993238 ]
-previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.06612616  0.09126377]
+Punch Frame Case #53
+main buffer: [array([-0.12743253,  0.21214864], dtype=float32), array([ 0.11788345, -0.2606418 ], dtype=float32), array([ 0.11599612, -0.26086822], dtype=float32)]
+hat avoidance vector: [-0.8876276   0.46056181]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.18044738  0.0888171 ]
 
-Punch Frame Case #15
-main buffer: [array([-0.02421295,  0.00764125], dtype=float32), array([ 0.05909007, -0.03600777], dtype=float32), array([ 0.08374447, -0.04212502], dtype=float32)]
-hat avoidance vector: [ 0.46412471 -0.88576984]
-previous robot loc, new robot loc: [-0.06612616  0.09126377] , [-0.02512579  0.01301565]
+Punch Frame Case #54
+main buffer: [array([ 0.04602765, -0.14448325], dtype=float32), array([ 0.11438826, -0.25922167], dtype=float32), array([ 0.12145646, -0.26398787], dtype=float32)]
+hat avoidance vector: [-0.8590824   0.51183718]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.12055751  0.06778554]
 
-Punch Frame Case #16
-main buffer: [array([ 0.01204775, -0.02991126], dtype=float32), array([ 0.06011823, -0.05305605], dtype=float32), array([ 0.08566645, -0.07088454], dtype=float32)]
-hat avoidance vector: [ 0.43381184 -0.90100354]
-previous robot loc, new robot loc: [-0.02512579  0.01301565] , [ 0.02908823 -0.09958391]
+Punch Frame Case #55
+main buffer: [array([ 0.06375283, -0.1702484 ], dtype=float32), array([ 0.11308569, -0.25234097], dtype=float32), array([ 0.11105949, -0.24935429], dtype=float32)]
+hat avoidance vector: [ 0.85713655 -0.51508927]
+previous robot loc, new robot loc: [-0.12055751  0.06778554] , [ 0.01886692 -0.01600045]
 
-Punch Frame Case #17
-main buffer: [array([-0.03719696, -0.01198353], dtype=float32), array([ 0.01204775, -0.02991126], dtype=float32), array([ 0.06011823, -0.05305605], dtype=float32)]
-hat avoidance vector: [-0.3420895  0.9396674]
-previous robot loc, new robot loc: [ 0.02908823 -0.09958391] , [-0.00051312 -0.01827355]
+Punch Frame Case #56
+main buffer: [array([-0.03924676, -0.03861826], dtype=float32), array([ 0.11523349, -0.22023027], dtype=float32), array([nan, nan], dtype=float32)]
+hat avoidance vector: [-0.76171154  0.64791632]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.0867155   0.07226677]
+
+Punch Frame Case #57
+main buffer: [array([-0.33499417,  0.32750446], dtype=float32), array([ 0.12364826, -0.21772675], dtype=float32), array([ 0.12475524, -0.2186731 ], dtype=float32)]
+hat avoidance vector: [ 0.76525658 -0.64372534]
+previous robot loc, new robot loc: [-0.0867155   0.07226677] , [ 0.08177195 -0.069463  ]
+
+Punch Frame Case #58
+main buffer: [array([ 0.04687338, -0.10836782], dtype=float32), array([ 0.07175593, -0.15669376], dtype=float32), array([ 0.09138312, -0.19056983], dtype=float32)]
+hat avoidance vector: [-0.88906908 -0.45777294]
+previous robot loc, new robot loc: [0 0] , [-0.2359018  -0.12146352]
+
+Punch Frame Case #59
+main buffer: [array([ 0.01089412, -0.10621767], dtype=float32), array([ 0.04861791, -0.23712094], dtype=float32), array([ 0.05261062, -0.26504594], dtype=float32)]
+hat avoidance vector: [-0.96089548  0.27691147]
+previous robot loc, new robot loc: [ 0.01 -0.01] , [-0.09932102  0.0215042 ]
 
