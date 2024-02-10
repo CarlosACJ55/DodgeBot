@@ -110,10 +110,12 @@ import sys
 #         frame[0] = temp.copy()
 #     # cv2.imshow("Frame", temp)
 #     # frame[0] = temp.copy()
-	
-# cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
-# frame = [np.zeros((360,640,3))]
-# i = 0
+
+
+#gotta thread with in the same class
+cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
+frame = [np.zeros((360,640,3))]
+i = 0
 # frame_capture_thread = threading.Thread(target=read_frame, args=(cap, frame,))
 # frame_capture_thread.start()
 # st = time.time()
@@ -148,6 +150,6 @@ import sys
     
 # print(i)
 # print(i / (time.time()-st))
-cap.release()
-cv2.destroyAllWindows()
+# cap.release()
+# cv2.destroyAllWindows()
 
