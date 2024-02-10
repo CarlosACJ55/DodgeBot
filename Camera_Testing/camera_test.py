@@ -97,6 +97,7 @@ def kmeans_gpu(identified_punch_cords, num_gloves, prev_cluster_centers, center_
 st = time.time()
 cap = cv.VideoCapture(1, cv.CAP_DSHOW)
 
+# cap = cv.VideoCapture(0, cv.CAP_VFW)
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
@@ -116,23 +117,33 @@ centroid_buffer2 = [np.zeros(2, dtype=float)] * buffer_size
 previous_robot_loc = np.array([0, 0])
 previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height, user_height, inv_camera_orientation)
 max_dodge_dist = .1
-avoidance_dist = .1
+avoidance_dist = .15
 cord_centers = torch.tensor([[-.5, -.5], [.5, .5]])
-camera_matrix = np.array([[354.71698103,0.0,325.02163159],[0.0,355.44339145,161.51298043],[0.0,0.0,1.0]])
-distortion_coeff = np.array([[-3.52228685e-01, 1.55541160e-01,4.99708023e-05,-4.91499027e-05,-3.67726346e-02]])
+# camera_matrix_640x360 = np.array([[354.71698103,0.0,325.02163159],[0.0,355.44339145,161.51298043],[0.0,0.0,1.0]])
+# distortion_coeff_640x360 = np.array([[-3.52228685e-01, 1.55541160e-01,4.99708023e-05,-4.91499027e-05,-3.67726346e-02]])
+# camera_matrix =np.array([[354.71698103,0.0,325.02163159],[0.0,355.44339145,161.51298043],[0.0,0.0,1.0]])
+# distortion_coeff =np.array([[-3.52228685e-01, 1.55541160e-01,4.99708023e-05,-4.91499027e-05,-3.67726346e-02]])
+# camera_matrix =  np.array([[363.49819993, 0.0, 183.27924979],[0.0, 363.58850066, 166.87756871],[0.0,0.0,1.0]])
+# distortion_coeff = np.array([[-4.11894961e-01, 3.42717870e-01,-3.75730100e-04,1.67843721e-03, -2.15788453e-01]])
 np.random.seed(42)
+mapx = np.load("mapx.npy")
+mapy = np.load("mapy.npy")
 
 i = 0
 dodge_time = 0
-run_time_dict = {"Un-Distortion":[], "resize":[], "Range":[],"Marking Pixels":[], "Converting Cords":[],"Kmeans":[],"Buffer":[],"Main Punch":[],"Slope":[], "Punch Vector Calc":[], "Avoidance":[], "Total End":[], "Output End":[]}
+run_time_dict = {"Un-Distortion":[], "Resize":[], "Color Detection":[],"Marking Pixels":[], "Converting Cords":[],"Kmeans":[],"Buffer":[],"Main Punch":[],"Slope":[], "Punch Vector Calc":[], "Avoidance":[], "Total End":[], "Output End":[]}
 save = False
+
+result = cv.VideoWriter('Testrun.mp4',  cv.VideoWriter_fourcc('m', 'p', '4', 'v'), 60, (360,360)) 
+st1 = time.time()
 while cap.isOpened():
     ret, frame = cap.read()
     st = time.time()
-    frame = cv.undistort(frame, camera_matrix, distortion_coeff, None, camera_matrix)
+    # frame = cv.undistort(frame, camera_matrix, distortion_coeff, None, camera_matrix)
+    frame = cv.remap(frame, mapx, mapy, cv.INTER_LINEAR)
     run_time_dict["Un-Distortion"].append(time.time() - st)
     frame = frame_resize(frame)
-    run_time_dict["resize"].append(time.time() - st)
+    run_time_dict["Resize"].append(time.time() - st)
    
     if not ret:
         print("Can't receive frame (stream end?). Exiting ...")
@@ -151,21 +162,21 @@ while cap.isOpened():
     # upper_bound_bot = np.array([160, 255,255])
     # Create a binary mask for the specified color
     color_mask_gloves = cv.inRange(hsv_frame, lower_bound_gloves, upper_bound_gloves)
-    run_time_dict["Range"].append(time.time() - st)
+    run_time_dict["Color Detection"].append(time.time() - st)
     
-    # all_labels = skimage.feature.blob_doh(color_mask_gloves, min_sigma=10, max_sigma=50)
-    # print(all_labels)
- 
     
+
     marked_pixel_coords = np.column_stack(np.where(color_mask_gloves > 0))
     run_time_dict["Marking Pixels"].append(time.time()-st)
+
     marked_coords = pixel_2_cords(marked_pixel_coords, pixel_center, real_center_dist, cam_height, user_height, camera_orientation)
     run_time_dict["Converting Cords"].append(time.time()-st)
     cord_list, cord_centers = kmeans_gpu(marked_coords, 2, cord_centers)
-    print("cord centers", cord_centers)
-    
     run_time_dict["Kmeans"].append(time.time() - st)
+    # print("cord centers", cord_centers)
+    
     if len(cord_list) == 2:
+        
         centroid1 = cord_centers[0].numpy()
         centroid2 = cord_centers[1].numpy()
         if len(centroid_buffer1) >= buffer_size and len(centroid_buffer1) >= buffer_size:
@@ -205,10 +216,12 @@ while cap.isOpened():
         if norm_vector_2frames >= .05:
             dodge_time = time.time()
             if dist_from_punch_traj <= avoidance_dist:
+                
                 if previous_robot_loc[0] >= 0:
                     vx = -1 * np.abs(hat_vector_2frames[1])
                 else:
                     vx = np.abs(hat_vector_2frames[1])
+
                 if previous_robot_loc[1] >= 0:
                     vy = -1 * np.abs(hat_vector_2frames[0])
                 else:
@@ -216,16 +229,15 @@ while cap.isOpened():
                 hat_avoidance_vector = np.array([vx, vy])
                 
                 print("its coming")
-                if main_punch_dist - prev_punch_dist < .05:
-                    temp = previous_robot_loc
-                    previous_robot_loc = previous_robot_loc + 2*(avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + (avoidance_dist) * hat_avoidance_vector
-                    run_time_dict["Avoidance"].append(time.time() - st)
-                    save = True
-                    print("\n\n")
-                    print(f"Dodge {temp} --> {previous_robot_loc}")
-                    print("\n\n")
-                    
-        elif time.time() - dodge_time >= np.random.uniform(1.5,3.0):
+                # if main_punch_dist - prev_punch_dist < .05:
+                temp = previous_robot_loc
+                previous_robot_loc = previous_robot_loc + (avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + (avoidance_dist) * hat_avoidance_vector
+                run_time_dict["Avoidance"].append(time.time() - st)
+                save = True
+                    # print("\n\n")
+                    # print(f"Dodge {temp} --> {previous_robot_loc}")
+                    # print("\n\n") 
+        elif time.time() - dodge_time >= 2:
             previous_robot_loc = np.array([0, 0]) + .01*(main_punch[0] / np.abs(main_punch[0]))
         
         run_time_dict["Total End"].append(time.time() - st)
@@ -233,7 +245,7 @@ while cap.isOpened():
         
         cv.circle(frame, tuple(main_centroid[::-1]), 15, (0, 0, 255), -1)
         cv.circle(frame, tuple(minor_centroid[::-1]), 5, (0, 255, 0), -1)
-        cv.circle(frame, tuple(previous_robot_loc_pixel[::-1]), 20, (255, 255, 255), -1)
+        cv.circle(frame, tuple(previous_robot_loc_pixel[::-1]), 25, (255, 255, 255), -1)
         if save == True:
             temp_pixel = cords_2_pixel(temp, pixel_center, real_center_dist, cam_height, user_height, inv_camera_orientation)
             cv.circle(frame, tuple(temp_pixel[::-1]), 20, (0, 0, 0), -1)
@@ -249,7 +261,7 @@ while cap.isOpened():
             save = False
 
     else:
-        print("away")
+        # print("away")
         # print(previous_robot_loc)
         cord_centers = torch.tensor([[float('nan'), -.5], [.5, .5]])
         # if (abs(previous_robot_loc[0]) >= .5) or (abs(previous_robot_loc[1]) >= .5) or np.isnan(previous_robot_loc).any():
@@ -263,17 +275,21 @@ while cap.isOpened():
     # calibration circle
     # frame = calibration_circle(frame)
     # bgr_binary_frame = cv.cvtColor(binary_frame, cv.COLOR_HSV2BGR)
-    
-    
+    i += 1
+    result.write(frame)
     cv.imshow('Original Frame', frame)
     run_time_dict["Output End"].append(time.time() - st)
                                        
     if cv.waitKey(1) == ord('q'):
         break
 
+print("fps:", i / (time.time() - st1))
 for key in run_time_dict.keys():
     runtime_list = run_time_dict[key]
     print(key, ":", sum(runtime_list)/len(runtime_list))
+
+
+result.release() 
 cap.release()
 cv.destroyAllWindows()
 
