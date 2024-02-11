@@ -55,44 +55,70 @@ cv.destroyAllWindows()
 
 
 projection_error, camera_matrix, distortion_coeff, rotation_vector, translation_vector = cv.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
-w = 360
-h = 360
+# w = 360
+# h = 360
 new_camera_matrix, _= cv.getOptimalNewCameraMatrix(camera_matrix,distortion_coeff,(640,360),0,(640,360))
-# test, _ = cv.Rodrigues(rotation_vector[0])
-
-
+# # test, _ = cv.Rodrigues(rotation_vector[0])
 print(projection_error)
 print(camera_matrix)
 print(distortion_coeff)
-print(rotation_vector)
-print(translation_vector)
 
-print(new_camera_matrix)
+mapx, mapy = cv.initUndistortRectifyMap(camera_matrix, distortion_coeff, None, new_camera_matrix, (640,360), 5)
+# print(mapx)
+# print(mapy)
+np.save("mapx.npy", mapx)
+np.save("mapy.npy", mapy)
+
+
+# frame = cv.undistort(frame, camera_matrix, distortion_coeff, None, new_camera_matrix)
+i = 0
+# for fname in images:
+    # print(fname)
+    # img = cv.imread(path+fname)
+
+    # frame = cv.undistort(img, camera_matrix, distortion_coeff, None, camera_matrix)
+    # frame2 = cv.remap(img, mapx, mapy, cv.INTER_LINEAR)
+    # cv.imshow('img', frame)
+    # cv.imwrite(f"chessboard_360x360_0_{i}.jpg", frame)
+    # cv.imwrite(f"chessboard_360x360_1_{i}.jpg", frame2)
+    # i+=1
+    # time.sleep(2)
+
+# print(rotation_vector)
+# print(translation_vector)
+
+# print(new_camera_matrix)
+# camera_matrix = np.array([[354.71698103,0.0,325.02163159],[0.0,355.44339145,161.51298043],[0.0,0.0,1.0]])
+# distortion_coeff = np.array([[-3.52228685e-01, 1.55541160e-01,4.99708023e-05,-4.91499027e-05,-3.67726346e-02]])
+# new_camera_matrix = camera_matrix
 print("*")
+# frame = np.array([[150,145],[230,302]], dtype=float)
+# print(frame)
+# frame = cv.undistortPoints(frame, camera_matrix, distortion_coeff, None, new_camera_matrix)
+# print(frame)
+# cap = cv.VideoCapture(0,cv.CAP_DSHOW)
+# # cap = cv.VideoCapture(0,cv.CAP_V4L2)
+# if not cap.isOpened():
+#     print("Cannot open camera")
+#     exit()
 
-cap = cv.VideoCapture(1,cv.CAP_DSHOW)
-# cap = cv.VideoCapture(0,cv.CAP_V4L2)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
 
 
-
-while cap.isOpened():
-    ret, frame = cap.read()
+# while cap.isOpened():
+#     ret, frame = cap.read()
     
-    st = time.time()
-    frame = cv.undistort(frame, camera_matrix, distortion_coeff, None, new_camera_matrix)
+#     st = time.time()
+#     frame = cv.undistort(frame, camera_matrix, distortion_coeff, None, new_camera_matrix)
     
-    # frame = frame_resize(frame)
-    print(time.time()-st)
-    cv.imshow('Original Frame', frame)
+#     # frame = frame_resize(frame)
+#     print(time.time()-st)
+#     cv.imshow('Original Frame', frame)
     
-    if cv.waitKey(1) == ord('q'):
-        break
+#     if cv.waitKey(1) == ord('q'):
+#         break
 
-cap.release()
-cv.destroyAllWindows()
+# cap.release()
+# cv.destroyAllWindows()
 
 # mean_error = 0
 
@@ -119,7 +145,7 @@ cv.destroyAllWindows()
 # i = 0
 # while cap.isOpened():
 #     ret, frame = cap.read()
-#     # frame = frame_resize(frame)
+#     frame = frame_resize(frame)
 #     gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
 #     frame2 = frame.copy()
 
@@ -128,9 +154,8 @@ cv.destroyAllWindows()
 #     if border_bool == True:
 #         cv.imshow('Original Frame', img)
 #         if cv.waitKey(1) == ord('s'):
-#             cv.imwrite(f"chessboard_640x360_{i}.jpg", frame)
-
-#         i+=1
+#             cv.imwrite(f"chessboard_360x360_{i}.jpg", frame)
+#             i+=1
 #     else:
 #         cv.imshow('Original Frame', frame)
 
@@ -139,3 +164,22 @@ cv.destroyAllWindows()
 
 # cap.release()
 # cv.destroyAllWindows()
+
+###################################################
+#immediate camera distorion
+  # marked_pixel_coords2 = np.squeeze(marked_pixel_coords2, axis=1)
+    # run_time_dict["test"].append(time.time()-st)
+    # marked_pixel_coords2 = marked_pixel_coords2.astype(int)
+    # print(marked_pixel_coords2)
+    # print(marked_pixel_coords2.shape)
+    # print(np.setdiff1d(marked_pixel_coords, marked_pixel_coords2))
+    
+
+    #more efficient cordinate mapping!!
+    # print(marked_pixel_coords.shape)
+    
+    # if len(marked_pixel_coords) != 0:
+    #     marked_pixel_coords = marked_pixel_coords.astype(float)
+    #     marked_pixel_coords = cv.undistortPoints(marked_pixel_coords, camera_matrix, distortion_coeff, None, camera_matrix)
+    #     marked_pixel_coords = np.squeeze(marked_pixel_coords, axis=1)
+    #     run_time_dict["Un-Distortion"].append(time.time() - st)

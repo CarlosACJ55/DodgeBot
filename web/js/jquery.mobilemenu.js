@@ -6,7 +6,7 @@
  * Built on top of the jQuery library
  *   http://jquery.com
  * 
- * Documentation
+ * docs
  *   http://github.com/mambows/mobilemenu
  */
 (function($){
