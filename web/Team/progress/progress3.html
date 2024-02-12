@@ -51,8 +51,212 @@ contact course staff.
 		<!-- Instantiate "tools" needed for a page. Tools are premade functional blocks that can be used to build a page,
 			and include things such as a file lister (for listing out homework assignments or tutorials)
 		-->
+		
 		<div id="content">
             <h2>Progress Report/Engineering Project Journal for Maximilian Drach</h2>
+		
+			<b>Date Reported:</b> 02/08/2024<br>
+			<b>Start Time:</b> 10:30am <br>
+			<b>Work Time:</b> 9 hours<br>
+			Robotics Kinematic Mappings:
+			<ul>
+				<li>Collaborated with Yusuf Jarada to develop mappings from motor angles to the x, y, z Cartesian coordinates of the Dodgebot's punching bag.</li>
+				<br>
+				<label>Robot Angle Kinematics Equations (RAKE)</label>
+				<br>
+				<img src="Team\progress\img - member3\Robot_Angle_Kinematics_Equ.png" width="50%"></img>
+				<br>
+				
+				<li>Derived inverse mappings to track the Dodgebot's punching bag location with x, y, z Cartesian coordinates and derive the motor position angles, essential for precise robot kinematics across 3D space and tracking the robot with a top-down camera.</li>
+				<br>
+				<label>Inverse Derivations</label>
+				<br>
+				<img src="Team\progress\img - member3\Inv_RAKE_derivation.png" width="50%"></img>
+				<br>
+				<li>This development enables accurate positioning of the robot in response to punches, facilitating testing of communication protocols and validating command execution.</li>
+			</ul>
+
+			
+			Camera Dodgebot Position Tracking:
+			<ul>
+				<li>Created an algorithm to track the punching bag utilizing the top-down camera and the assumption of the hemi-spherical nature of the robot’s dodging system. (Video Below & Algorithm Below)</li>
+				<br>
+				<label>Dodgebot Pixel to Cordinate Mapping (DP2C) Algorithm</label>
+				<br>
+				<img src="Team\progress\img - member3\Dodgebot_Robot_Angle_Kinematics_Equ.png" width="60%"></img>
+				<br>
+				<li>The implementation of the new formulas and algorithms allow us to accurately track our robot with a top-down camera down to 1~2 cm accuracy. This is critical if we need an alternative method to track the robot’s position, if we are unable to utilize the motor driver position tracking capabilities.</li>
+				<li>By providing precise tracking capabilities, the project gains flexibility in testing and validating robot movements, contributing to overall project robustness.</li>
+				<li>Next steps involve integrating the robot tracking into the main code, assessing its impact on processing runtime, and potentially optimizing tracking through threading or other improvements.</li>
+				<br>
+				<label>Dodgebot Pixel to Cordinate Mapping (DP2C) Algorithm Explaination Video</label>
+				<br>
+				<video width="99%" controls>
+					<source src="Team\progress\img - member3\DP2C_Algorithm_Explination.mp4#t=6,315" type="video/mp4">
+				</video> 
+				<br>
+			</ul>
+
+
+			<b>Date Reported:</b> 02/06/2024<br>
+			<b>Start Time:</b> 9:30am <br>
+			<b>Work Time:</b> 5 hours<br>
+			
+			Bug Fixes:
+			<ul>
+				<li>Identified and resolved a bug within the Camera Mapping process, updating the formula to account for the similar triangle theory and adjusting for the camera height. (Formula Below)</li>
+				<br>
+				<label>Updated Pixel to Cordinate Mapping (P2C) Algorithm</label>
+				<br>
+				<img src="Team\progress\img - member3\Similar_Tri_Camera_Mapping.png" width="95%"></img>
+				<br>
+				<li>Fixed two additional bugs in the dodging program: addressed a vector value issue in the if statements and implemented inverse proportionality fix to the code.</li>
+				<li>These critical fixes are anticipated to enhance our dodging capabilities significantly.</li>
+				<li>I want to conduct thorough testing and validation of bug fixes and algorithm enhancements to ensure seamless operation.</li>
+				<br>
+				<label>Pixel to Cordinate Mapping (DP2C) Algorithm Explaination Video</label>
+				<br>
+				<video width="99%" controls>
+					<source src="Team\progress\img - member3\P2C_Algorithm_Explination.mp4#t=1,197" type="video/mp4">
+				</video> 
+				<br>
+			</ul>
+			
+			Further Runtime Evaluations:
+			<ul>
+				<li>Implemented a runtime dictionary to track different parts of the code's runtimes, facilitating performance evaluation and identifying potential bottlenecks.</li>
+				<li>Established a dodge review system to record frames associated with dodging, enabling thorough analysis of code behavior and areas for improvement.</li>
+				<li>Recognized the significance of runtime evaluations in identifying optimization opportunities and enhancing code efficiency.</li>
+			</ul>
+			Component Procurement & Selection:
+			<ul>
+				<li>Collaborated with Jessica Davis from Motion USA to finalize component selection and pricing, securing the Yaskawa SGM7G-30A6A61, SGM7G-20A6A61, SGD7S-330A00A, and critical cables at $8,800 with a lead time of 3~5 days.</li>
+				<li>This procurement ensures timely acquisition of essential components, advancing project timelines and readiness.</li>
+				<li>Next steps will be to make sure that our components are ordered next week and contact the department about the status of the ordering process.</li>
+			</ul>
+			
+
+			<b>Date Reported:</b> 02/05/2024<br>
+			<b>Start Time:</b> 8:00pm <br>
+			<b>Work Time:</b> 2 hours<br>
+			<ul>
+				<li>I focused on contacting 10 companies to request quotes for Yaskawa components essential for our project. Through email correspondence, I reached out to Nex Instruments, Motion USA, WI Automation, Viyork Tech, Mitkco, Dreisilker, Dykman, Reading CNC, Int Technics, and Motion Industries. The objective was to gather pricing and availability information from various suppliers to aid in our decision-making process. This initiative aimed to ensure we select the most suitable supplier offering competitive pricing and reliable delivery times. The responses received will play a crucial role in assessing factors like cost, lead time, and customer service, which are vital for making informed procurement decisions.</li>
+			</ul>
+			
+			
+
+			<b>Date Reported:</b> 02/02/2024<br>
+			<b>Start Time:</b> 1:00pm <br>
+			<b>Work Time:</b> 2 hours<br>
+			Ordering Motors from Yaskawa:
+			<ul>
+				<li>After consultation with Dr. Walters, the decision was made to transition our motor selection to Yaskawa motors due to their extensive off-the-shelf component inventory, promising significantly reduced lead times.</li>
+				<li>Collaborated with Bob from Finch Automation to facilitate the motor procurement process. Conducted extensive research on available motors and liaised with Bob to ascertain their availability and suitability for our project requirements.</li>
+				<li>This shift in motor selection strategy is anticipated to streamline our supply chain logistics and expedite the acquisition of essential components, ultimately enhancing project timelines and overall efficiency.</li>
+				<li>I need to finalize the motor selection and proceed with the procurement process through Finch Automation.</li>
+				<li>The decision to pivot our motor selection to Yaskawa, coupled with proactive collaboration with Finch Automation, represents a strategic move aimed at expediting component acquisition and enhancing project readiness and efficiency.</li>
+				
+			</ul>
+			
+
+			<b>Date Reported:</b> 02/01/2024<br>
+			<b>Start Time:</b> 5:30pm <br>
+			<b>Work Time:</b> 4 hours<br>
+			
+			Optimized K-Means Algorithm:
+			<ul>
+				<li>Hypothesized that pre-passing center points into the K-Means Algorithm would improve cluster tracking across frames and expedite convergence.</li>
+				<li>Implemented enhancements, resulting in a significant reduction in processing time from around 8ms to 2ms per frame, while consistently tracking gloves across frames.</li>
+				<br>
+				<label>Optimized Kmeans Example Vlog with Ayman Motoda &#x1F60E;</label>
+				<br>
+				<video width="35%" controls playbackRate="0.25">
+					<source src="Team\progress\img - member3\Optimized_Kmean_Ayman.mp4" type="video/mp4">
+				</video> 
+				<br>
+			</ul>
+			
+
+			Integrated the Camera De-Distortion Algorithm:
+			<ul>
+				<li>Utilized the Intrinsic Camera Matrix and Distortion Coefficients derived from 01/30 research to integrate the de-distortion algorithm into the Punch Tracking Algorithm.</li>
+				<li>Implemented to mitigate lens distortion effects and improve tracking accuracy.</li>
+				<li>Discovered that de-distortion adds approximately 1ms to the Punch Tracking Algorithm's runtime but ensures more accurate tracking without distortion errors.</li>
+				<li>This integration enhances the overall accuracy and reliability of the punch tracking system, contributing to the project's success in real-world applications.</li>
+				<li>In the video below, the red circle represents the main punch that Dodgebot (white/black circle) has to avoid. Please watch the video at .25 speed to really see the algorithm in motion.</li>
+				<br>
+				<label>Dodgebot Dodging Algorithm Example *WATCH at .25 Speed!&#x1F600;</label>
+				<br>
+				<video width="50%" controls playbackRate="0.25">
+					<source src="Team\progress\img - member3\Dodging_Algorithm_Example_020224.mp4" type="video/mp4">
+				</video> 
+				
+			</ul>
+			
+			Insight into Algorithm Efficiency & Operational Effectiveness:
+			<ul>
+				<li>I learned that our Punch Tracking Algorithm takes around 5~6ms to run and our Punch Dodging Algorithm takes around .5~2ms, this means our end decision dodging time is around 6~8ms.</li>
+				<li>This means we process 125 fps ~ 165 fps, giving us around 12~17 frames before a punch is expected to reach a target.</li>
+				<li>This is a huge operational advantage and gives us more headroom for delays in communications.</li>
+				<li>While ideally, we would want our total algorithm runtime to be around 4ms to run at the native frame rate of the camera of 260fps, this is still a significant improvement.</li>
+				<br>
+				<label>Algorithm Run Time (sec)</label>
+				<br>
+				<img src="Team\progress\img - member3\Average_Runtime_020224.png" width="75%"></img>
+				<br>
+			</ul>
+
+
+			<b>Date Reported:</b> 02/01/2024<br>
+			<b>Start Time:</b> 1:00pm <br>
+			<b>Work Time:</b> 3.5 hours<br>
+			Tested Kmeans vs Blob Detection:
+			<ul>
+				<li>Implemented <a href="https://en.wikipedia.org/wiki/Blob_detection" target="_blank"> Determinant of Hessian Blob Detection Algorithm</a> using the SciPy library based on the recommendation of Rohan Sakar.</li>
+				<li>Blob Detection ran faster than the K-Means Algorithm, approximately 5ms, but exhibited significantly lower accuracy in detecting gloves and struggled to consistently track punches across frames.</li>
+				<li>Next steps involve exploring alternative algorithms or refining parameters to improve Blob Detection accuracy or improve the efficiency of the K-Means Algorithm approach.</li>
+			</ul>
+
+
+			<b>Date Reported:</b> 01/31/2024<br>
+			<b>Start Time:</b> 3:00pm <br>
+			<b>Work Time:</b> 1 hours<br>
+			<ul>
+				<li>Collaborated with Ayman Motoda to place an order for motors and motor drivers from Kollmorgen supplier Neff-Automation.</li>
+				<li>Discovered that the lead time for the AKM2G-53L-ACDNLD10 motor was 4 weeks, AKD2G-SPC-6V012S-A1DX-0000-A motor driver was 6 weeks, and H2-21-015-B2-00–001000 cable was 6 weeks.</li>
+				<li>Explored alternative suppliers and companies for motors with similar specifications and quicker delivery times. Initiated contact with Bob from Finch Automation to explore Yaskawa offerings.</li>
+				<li>This proactive approach ensures timely procurement of essential components, contributing to project timeline adherence and overall progress.</li>
+            </ul>
+
+			<b>Date Reported:</b> 01/30/2024<br>
+			<b>Start Time:</b> 10:00am<br>
+			<b>Work Time:</b> 5 hours<br>
+			Camera Distortion Research:
+			<ul>
+                <li>I focused on advancing our project's capabilities through Camera Distortion Research.</li>
+                <li>Explored camera lens distortion mapping and implemented <a href="https://ieeexplore.ieee.org/document/888718" target="_blank">Zhang’s calibration method</a> for reverse mapping of the camera’s lens.</li>
+                <li>Utilized the OpenCV library to identify edges in a chessboard and derive the Intrinsic Camera Matrix and Distortion Coefficients.</li>
+                <li>Achieved undistorted frame algorithm (Picture Below)</li>
+                <!-- <img src="Team\progress\img - member3\chessboard_undistorted.jpg" width="75%"></img> -->
+				<!-- <img src="Team\progress\img - member3\chessboard_distorted.jpg" width="75%"></img> -->
+				<div style="display: flex;">
+					<div style="flex: 50%; padding: 5px;">
+						<img src="Team\progress\img - member3\chessboard_distorted.jpg" width="100%">
+						<p style="text-align: center;">Distorted Image</p>
+					</div>
+					<div style="flex: 50%; padding: 5px;">
+						<img src="Team\progress\img - member3\chessboard_undistorted.jpg" width="100%">
+						<p style="text-align: center;">Undistorted Image</p>
+					</div>
+				</div>
+				
+                <li>Upgrades our robots’ tracking capabilities to precisely track punches closer to the edges of the camera frame where distortion is most prevalent.</li>
+				<li>Acquired valuable insights into camera lens distortion mapping and its implications for accurate punch tracking.</li>
+				<li>Next steps involve integrating the undistortion process into our robot's tracking algorithms and rigorously testing its efficacy across diverse scenarios.</li>
+				<li>My progress in camera distortion research increases the accuracy of the tracking algorithm thus contributing to an improve punch-dodging algorithm.</li>
+				
+            </ul>
+
 
 			<b>Date Reported:</b> 01/25/2024<br>
 			<b>Start Time:</b> 10:00am<br>
@@ -63,6 +267,9 @@ contact course staff.
                 <li>First, I fixed bugs in the punch location stream buffer. After realizing that we only had around 5 frames per punch to detect and move, I changed the buffer size to 3 frames.</li>
                 <li>Next, I analyzed the runtime of my code and realized that the k-means algorithm was running too slow on the CPU, so I rewrote the code to run on the GPU. This improvement reduced my runtime from 45ms to under 15ms per frame. This enhancement allows us to run the camera at 60 fps with theoretically no latency.</li>
                 <li>The significant improvement this week was our new dodging algorithm. It is designed around the robot dodging the punch into space and moving in the inverse-opposite proportional direction. (Picture Below)</li>
+				<br>
+				<label>Punch Dodging Algorithm</label>
+				<br>
                 <img src="Team\progress\img - member3\Dodge_0126_Algorithm.png" width="75%"></img>
                 <li>Finally, I changed all my code to use PyTorch instead of NumPy to allow for further GPU utilization. However, this ended up slowing down the code because arithmetic operations are slower in PyTorch than in NumPy.</li>
             </ul>
@@ -90,14 +297,24 @@ contact course staff.
             Camera Calibration Research:
 			<ul>
 				<li>Assuming for a non-distortion lens, I derived a formula for mapping a pixel location to its xy-coordinate in the real world. (Formula Below)</li>
+				<br>
+				<label>Non-Distorted Pixel Mapping Formula</label>
+				<br>
                 <img src="Team\progress\img - member3\NonDistortion_PixelMap_Formula.png" width="50%"></img>
 				<li>Set up a top-down test camera that was 2m above ground.</li>
 				<li>Using the environment tracking research from last week, I created a 1x1m box with painters’ tape to test the accuracy of the coordinate mapping. (Picture Below)</li>
+				<br>
+				<label>Top-Down Camera Setup</label>
+				<br>
                 <img src="Team\progress\img - member3\Dodgebot_Topdown_Camera_Setup.jpg" width="25%"></img>
-				<li>Putting together the color tracking algorithm and camera calibration mapping formula, I created a rough Environment Punch Tracker Algorithm that can accurately track a punch in space. Given the inputted camera observation height, real-world distance from the center pixel to the edge, and user punch height (i.e. the height of a user's hands when in a punching stance), and tracking color HSV values. (Video Below)</li>
+				<li>Putting together the color tracking algorithm and camera calibration mapping formula, I created a rough Environment Punch Tracker Algorithm that can accurately track a punch in space. Given the inputted camera observation height, real-world distance from the center pixel to the edge, and user punch height (i.e. the height of a user's hands when in a punching stance), and tracking color HSV values.</li>
+				<br>
+				<label>Real-XY-Location Color Tracking Video Example</label>
+				<br>
 				<video width="40%" controls>
                     <source src="Team\progress\img - member3\Punch_Tracking_0116.mp4" type="video/mp4">
                 </video> 
+				<br>
                 <li>Finally, I started researching more advanced camera calibration methods and other M12 lens optics to increase the accuracy of the Camera Calibration Mapping.</li>
 				<li>Useful Links:
 					<ul>
@@ -128,9 +345,13 @@ contact course staff.
 				</ul>
 				  
 				<li>Utilizing the Color Mask, I can find which pixel values meet the color criteria, allowing us to track a specific color throughout the image. In the video, we use a "Bitwise-And" Mask to show only pixels meeting HSV criteria, making the rest black. (Video Below)</li>
-                <video width="50%" controls>
+                <br>
+				<label>Color Tracking Video Example</label>
+				<br>
+				<video width="50%" controls>
                     <source src="Team\progress\img - member3\HSV_Color_Filter.mp4" type="video/mp4">
                 </video> 
+				<br>
 				<li>Researched the Lucas-Kanade Optical Flow method as an alternative gloves tracking algorithm.</li>
 				<ul>
 					<li><a href="https://www.cs.cmu.edu/~16385/s15/lectures/Lecture21.pdf" target="_blank">Lucas-Kanade Optical Flow</a></li>
@@ -163,6 +384,9 @@ contact course staff.
 				<ol>
 					<li>The video below was filmed using a iPhone 14 Pro using the slow-mo camera feature and it confirms the theorical calculations.</li>
 					<!-- <video width="960" height="540" controls> -->
+					<br>
+					<label>Punch Timeline Test *WATCH at .25 Speed</label>
+					<br>
                     <video width="75%" controls>
 						<source src="Team\progress\img - member3\Slowmo_punch.mp4" type="video/mp4">
 						
