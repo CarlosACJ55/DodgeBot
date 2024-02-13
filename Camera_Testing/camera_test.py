@@ -243,12 +243,12 @@ while cap.isOpened():
         run_time_dict["Total End"].append(time.time() - st)
         previous_robot_loc_pixel = cords_2_pixel(previous_robot_loc, pixel_center, real_center_dist, cam_height, user_height, inv_camera_orientation)
         
-        cv.circle(frame, tuple(main_centroid[::-1]), 15, (0, 0, 255), -1)
-        cv.circle(frame, tuple(minor_centroid[::-1]), 5, (0, 255, 0), -1)
-        cv.circle(frame, tuple(previous_robot_loc_pixel[::-1]), 25, (255, 255, 255), -1)
+        # cv.circle(frame, tuple(main_centroid[::-1]), 15, (0, 0, 255), -1)
+        # cv.circle(frame, tuple(minor_centroid[::-1]), 5, (0, 255, 0), -1)
+        # cv.circle(frame, tuple(previous_robot_loc_pixel[::-1]), 25, (255, 255, 255), -1)
         if save == True:
             temp_pixel = cords_2_pixel(temp, pixel_center, real_center_dist, cam_height, user_height, inv_camera_orientation)
-            cv.circle(frame, tuple(temp_pixel[::-1]), 20, (0, 0, 0), -1)
+            # cv.circle(frame, tuple(temp_pixel[::-1]), 20, (0, 0, 0), -1)
             cv.imwrite(f"./saved_frames/frames/punch_frame{i}.jpg", frame)
             f = open("./saved_frames/punch_data.txt", "a")
             f.write(f"Punch Frame Case #{i}\n")
@@ -277,10 +277,10 @@ while cap.isOpened():
     # bgr_binary_frame = cv.cvtColor(binary_frame, cv.COLOR_HSV2BGR)
     i += 1
     result.write(frame)
-    cv.imshow('Original Frame', frame)
+    # cv.imshow('Original Frame', frame)
     run_time_dict["Output End"].append(time.time() - st)
                                        
-    if cv.waitKey(1) == ord('q'):
+    if cv.waitKey(1) == ord('q') or i == 5000:
         break
 
 print("fps:", i / (time.time() - st1))
