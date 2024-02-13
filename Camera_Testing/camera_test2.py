@@ -132,22 +132,23 @@ class WebcamVideoStream:
 	def punch_pixels(self):
 		frame = self.read()
 		hsv_frame = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
+        # Convert the frame to the HSV color space (better for color tracking)
 		color_mask_gloves = cv.inRange(hsv_frame, self.lower_bound_gloves, self.upper_bound_gloves)
-		return np.column_stack(np.where(color_mask_gloves > 0))
+		return np.column_stack(np.where(color_mask_gloves > 0)), frame
 	
 	def stop(self):
 		# indicate that the thread should be stopped
 		self.stopped = True
 
-st = time.time()
-cap = cv.VideoCapture(1, cv.CAP_DSHOW)
+# st = time.time()
+# cap = cv.VideoCapture(1, cv.CAP_DSHOW)
 
 # cap = cv.VideoCapture(0, cv.CAP_VFW)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
+# if not cap.isOpened():
+    # print("Cannot open camera")
+    # exit()
 
-change_res(640, 360)
+# change_res(640, 360)
 pixel_center = np.array([360 / 2, 360 / 2], dtype=int)
 real_center_dist = 1.14
 cam_height = 2.36855
@@ -184,8 +185,8 @@ st1 = time.time()
 cam = WebcamVideoStream(1)
 cam.start()
 
-while cap.isOpened():
-    frame = cam.read()
+while True:
+    # frame = cam.read()
     st = time.time()
     # frame = cv.undistort(frame, camera_matrix, distortion_coeff, None, camera_matrix)
     # frame = cv.remap(frame, mapx, mapy, cv.INTER_LINEAR)
@@ -196,27 +197,15 @@ while cap.isOpened():
     # if not ret:
         # print("Can't receive frame (stream end?). Exiting ...")
         # break
-    # Convert the frame to the HSV color space (better for color tracking)
-    # hsv_frame = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
-    
-    
-    lower_bound_bot = np.array([130, 100, 100])
-    upper_bound_bot = np.array([160, 255, 255])
-    # for yellow target
-    lower_bound_gloves = np.array([20, 100, 100])
-    upper_bound_gloves = np.array([30, 255, 255])
-    # lower_bound_bot = np.array([130, 100, 100])
-    # upper_bound_bot = np.array([160, 255,255])
+   
     # Create a binary mask for the specified color
     # color_mask_gloves = cv.inRange(hsv_frame, lower_bound_gloves, upper_bound_gloves)
     run_time_dict["Color Detection"].append(time.time() - st)
-    
-    
 
     # marked_pixel_coords = np.column_stack(np.where(color_mask_gloves > 0))
 
     run_time_dict["Marking Pixels"].append(time.time()-st)
-    marked_pixel_coords = cam.punch_pixels()
+    marked_pixel_coords, frame = cam.punch_pixels()
     marked_coords = pixel_2_cords(marked_pixel_coords, pixel_center, real_center_dist, cam_height, user_height, camera_orientation)
     run_time_dict["Converting Cords"].append(time.time()-st)
     cord_list, cord_centers = kmeans_gpu(marked_coords, 2, cord_centers)
