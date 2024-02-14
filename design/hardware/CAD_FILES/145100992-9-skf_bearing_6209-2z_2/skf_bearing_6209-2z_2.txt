@@ -1,0 +1,11 @@
+﻿"Symbol";"Value";"Unit";
+"TraceParts.PartNumber";"10-26092016-086570";"";
+"REFERENCE";"6209-2Z";"";
+"TraceParts.PartVersion";"1.2.1";"";
+"TraceParts.InstanceId";"10-26092016-086570C8P6NN1EVKO3A26KY63UW6MV2";"";
+"TraceParts.PartTitle";"Deep groove ball bearings, single row, shield on both sides";"";
+"SUPPLIER";"SKF";"";
+"DESIGN";"Single row deep groove ball bearing, shield on both sides, Bore Ø 45 mm, Outside Ø 85 mm";"";
+"TRACEPARTS";"TRACEPARTS";"";
+"TraceParts.PartLanguage";"en";"";
+"MASS";"0.433";"";
