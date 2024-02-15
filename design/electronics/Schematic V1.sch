@@ -15040,92 +15040,6 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="SparkFun-Resistors" urn="urn:adsk.eagle:library:532">
-<description>&lt;h3&gt;SparkFun Resistors&lt;/h3&gt;
-This library contains resistors. Reference designator:R. 
-&lt;br&gt;
-&lt;br&gt;
-We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
-&lt;br&gt;
-&lt;br&gt;If you enjoy using this library, please buy one of our products at &lt;a href=" www.sparkfun.com"&gt;SparkFun.com&lt;/a&gt;.
-&lt;br&gt;
-&lt;br&gt;
-&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
-&lt;br&gt;
-&lt;br&gt;
-You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
-<packages>
-<package name="0603" urn="urn:adsk.eagle:footprint:39615/1" library_version="1">
-<description>&lt;p&gt;&lt;b&gt;Generic 1608 (0603) package&lt;/b&gt;&lt;/p&gt;
-&lt;p&gt;0.2mm courtyard excess rounded to nearest 0.05mm.&lt;/p&gt;</description>
-<wire x1="-1.6" y1="0.7" x2="1.6" y2="0.7" width="0.0508" layer="39"/>
-<wire x1="1.6" y1="0.7" x2="1.6" y2="-0.7" width="0.0508" layer="39"/>
-<wire x1="1.6" y1="-0.7" x2="-1.6" y2="-0.7" width="0.0508" layer="39"/>
-<wire x1="-1.6" y1="-0.7" x2="-1.6" y2="0.7" width="0.0508" layer="39"/>
-<wire x1="-0.356" y1="0.432" x2="0.356" y2="0.432" width="0.1016" layer="51"/>
-<wire x1="-0.356" y1="-0.419" x2="0.356" y2="-0.419" width="0.1016" layer="51"/>
-<smd name="1" x="-0.85" y="0" dx="1.1" dy="1" layer="1"/>
-<smd name="2" x="0.85" y="0" dx="1.1" dy="1" layer="1"/>
-<text x="0" y="0.762" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center">&gt;NAME</text>
-<text x="0" y="-0.762" size="0.6096" layer="27" font="vector" ratio="20" align="top-center">&gt;VALUE</text>
-<rectangle x1="-0.8382" y1="-0.4699" x2="-0.3381" y2="0.4801" layer="51"/>
-<rectangle x1="0.3302" y1="-0.4699" x2="0.8303" y2="0.4801" layer="51"/>
-<rectangle x1="-0.1999" y1="-0.3" x2="0.1999" y2="0.3" layer="35"/>
-</package>
-</packages>
-<packages3d>
-<package3d name="0603" urn="urn:adsk.eagle:package:39650/1" type="box" library_version="1">
-<description>Generic 1608 (0603) package
-0.2mm courtyard excess rounded to nearest 0.05mm.</description>
-<packageinstances>
-<packageinstance name="0603"/>
-</packageinstances>
-</package3d>
-</packages3d>
-<symbols>
-<symbol name="RESISTOR" urn="urn:adsk.eagle:symbol:39614/1" library_version="1">
-<wire x1="-2.54" y1="0" x2="-2.159" y2="1.016" width="0.1524" layer="94"/>
-<wire x1="-2.159" y1="1.016" x2="-1.524" y2="-1.016" width="0.1524" layer="94"/>
-<wire x1="-1.524" y1="-1.016" x2="-0.889" y2="1.016" width="0.1524" layer="94"/>
-<wire x1="-0.889" y1="1.016" x2="-0.254" y2="-1.016" width="0.1524" layer="94"/>
-<wire x1="-0.254" y1="-1.016" x2="0.381" y2="1.016" width="0.1524" layer="94"/>
-<wire x1="0.381" y1="1.016" x2="1.016" y2="-1.016" width="0.1524" layer="94"/>
-<wire x1="1.016" y1="-1.016" x2="1.651" y2="1.016" width="0.1524" layer="94"/>
-<wire x1="1.651" y1="1.016" x2="2.286" y2="-1.016" width="0.1524" layer="94"/>
-<wire x1="2.286" y1="-1.016" x2="2.54" y2="0" width="0.1524" layer="94"/>
-<text x="0" y="1.524" size="1.778" layer="95" font="vector" align="bottom-center">&gt;NAME</text>
-<text x="0" y="-1.524" size="1.778" layer="96" font="vector" align="top-center">&gt;VALUE</text>
-<pin name="2" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
-<pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="33KOHM" urn="urn:adsk.eagle:component:39720/1" prefix="R" library_version="1">
-<description>&lt;h3&gt;33kΩ resistor&lt;/h3&gt;
-&lt;p&gt;A resistor is a passive two-terminal electrical component that implements electrical resistance as a circuit element. Resistors act to reduce current flow, and, at the same time, act to lower voltage levels within circuits. - Wikipedia&lt;/p&gt;</description>
-<gates>
-<gate name="G$1" symbol="RESISTOR" x="-17.78" y="17.78"/>
-</gates>
-<devices>
-<device name="-0603-1/10W-1%" package="0603">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:39650/1"/>
-</package3dinstances>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="RES-08416"/>
-<attribute name="VALUE" value="33k"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="SparkFun-DiscreteSemi" urn="urn:adsk.eagle:library:514">
 <description>&lt;h3&gt;SparkFun Discrete Semiconductors&lt;/h3&gt;
 This library contains diodes, optoisolators, TRIACs, MOSFETs, transistors, etc. 
@@ -18397,7 +18311,6 @@ Used as a test point connection for pogo pins or other debugging tools.
 <part name="R14" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="73k"/>
 <part name="R15" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="73k"/>
 <part name="R16" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10k"/>
-<part name="R1" library="SparkFun-Resistors" library_urn="urn:adsk.eagle:library:532" deviceset="33KOHM" device="-0603-1/10W-1%" package3d_urn="urn:adsk.eagle:package:39650/1" value="25k"/>
 <part name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="75k"/>
 <part name="C46" library="SparkFun-Capacitors" library_urn="urn:adsk.eagle:library:510" deviceset="1.0UF" device="-0805-25V-10%" package3d_urn="urn:adsk.eagle:package:37429/1" value="1.0uF"/>
 <part name="U12" library="SSW-130-01-G-S" deviceset="SN75ALS174ADWR" device="DW20-M"/>
@@ -18532,6 +18445,7 @@ Used as a test point connection for pogo pins or other debugging tools.
 <part name="R5" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="1M"/>
 <part name="C13" library="SparkFun-Capacitors" deviceset="4.7UF" device="-0805-50V-(10%)" value="120pF"/>
 <part name="C14" library="SparkFun-Capacitors" deviceset="4.7UF" device="-0805-50V-(10%)" value="10uF"/>
+<part name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="25k"/>
 </parts>
 <sheets>
 <sheet>
@@ -18657,10 +18571,6 @@ Used as a test point connection for pogo pins or other debugging tools.
 </instance>
 <instance part="J1" gate="A" x="45.72" y="231.14" smashed="yes">
 <attribute name="NAME" x="32.1056" y="236.4486" size="2.0828" layer="95" ratio="6" rot="SR0"/>
-</instance>
-<instance part="R1" gate="G$1" x="139.7" y="228.6" smashed="yes" rot="R180">
-<attribute name="NAME" x="139.7" y="227.076" size="1.778" layer="95" font="vector" rot="R180" align="bottom-center"/>
-<attribute name="VALUE" x="139.7" y="230.124" size="1.778" layer="96" font="vector" rot="R180" align="top-center"/>
 </instance>
 <instance part="R2" gate="G$1" x="124.46" y="228.6" smashed="yes" rot="R180">
 <attribute name="NAME" x="128.27" y="227.1014" size="1.778" layer="95" rot="R180"/>
@@ -18850,6 +18760,10 @@ Used as a test point connection for pogo pins or other debugging tools.
 <attribute name="NAME" x="338.836" y="195.199" size="1.778" layer="95" font="vector" rot="R180"/>
 <attribute name="VALUE" x="338.836" y="200.279" size="1.778" layer="96" font="vector" rot="R180"/>
 </instance>
+<instance part="R1" gate="G$1" x="139.7" y="228.6" smashed="yes" rot="R180">
+<attribute name="NAME" x="143.51" y="227.1014" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="143.51" y="231.902" size="1.778" layer="96" rot="R180"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -18940,9 +18854,9 @@ Used as a test point connection for pogo pins or other debugging tools.
 <label x="45.72" y="228.6" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="R1" gate="G$1" pin="1"/>
 <wire x1="144.78" y1="228.6" x2="152.4" y2="228.6" width="0.1524" layer="91"/>
 <label x="147.32" y="228.6" size="1.778" layer="95"/>
+<pinref part="R1" gate="G$1" pin="1"/>
 </segment>
 <segment>
 <pinref part="J2" gate="G$1" pin="3"/>
@@ -19208,11 +19122,11 @@ Used as a test point connection for pogo pins or other debugging tools.
 <label x="355.6" y="142.24" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="R1" gate="G$1" pin="2"/>
 <wire x1="129.54" y1="228.6" x2="134.62" y2="228.6" width="0.1524" layer="91"/>
 <label x="129.54" y="228.6" size="1.778" layer="95"/>
 <pinref part="R2" gate="G$1" pin="1"/>
 <junction x="129.54" y="228.6"/>
+<pinref part="R1" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="S_GND" class="0">
