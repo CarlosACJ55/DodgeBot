@@ -19186,12 +19186,6 @@ Used as a test point connection for pogo pins or other debugging tools.
 <pinref part="C34" gate="G$1" pin="1"/>
 <wire x1="124.46" y1="137.16" x2="116.84" y2="137.16" width="0.1524" layer="91"/>
 <label x="121.92" y="137.16" size="1.778" layer="95"/>
-<pinref part="C32" gate="G$1" pin="1"/>
-<wire x1="132.08" y1="137.16" x2="124.46" y2="137.16" width="0.1524" layer="91"/>
-<wire x1="132.08" y1="137.16" x2="137.16" y2="137.16" width="0.1524" layer="91"/>
-<pinref part="C33" gate="G$1" pin="1"/>
-<junction x="132.08" y="137.16"/>
-<junction x="124.46" y="137.16"/>
 </segment>
 <segment>
 <pinref part="C30" gate="G$1" pin="1"/>
@@ -19329,8 +19323,14 @@ Used as a test point connection for pogo pins or other debugging tools.
 <label x="58.42" y="160.02" size="1.778" layer="95"/>
 <pinref part="U1" gate="C" pin="VSSA"/>
 </segment>
+<segment>
+<pinref part="C32" gate="G$1" pin="1"/>
+<wire x1="132.08" y1="137.16" x2="137.16" y2="137.16" width="0.1524" layer="91"/>
+<pinref part="C33" gate="G$1" pin="1"/>
+<label x="137.16" y="137.16" size="1.778" layer="95"/>
+</segment>
 </net>
-<net name="N$14" class="0">
+<net name="+3.3VA" class="0">
 <segment>
 <pinref part="C32" gate="G$1" pin="2"/>
 <wire x1="137.16" y1="152.4" x2="137.16" y2="144.78" width="0.1524" layer="91"/>
@@ -19342,6 +19342,7 @@ Used as a test point connection for pogo pins or other debugging tools.
 <pinref part="L5" gate="A" pin="1"/>
 <junction x="137.16" y="152.4"/>
 <pinref part="U1" gate="C" pin="VDDA"/>
+<label x="114.3" y="152.4" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$1" class="0">
