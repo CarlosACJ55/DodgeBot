@@ -21895,71 +21895,7 @@ Receiver ICs'</text>
 <junction x="43.18" y="170.18"/>
 </segment>
 </net>
-<net name="ENC_PUL_OUT_B_GPIO_1" class="0">
-<segment>
-<wire x1="43.18" y1="208.28" x2="30.48" y2="208.28" width="0.1524" layer="91"/>
-<label x="12.7" y="208.28" size="1.778" layer="95"/>
-<pinref part="U1" gate="B" pin="PE0"/>
-<junction x="43.18" y="208.28"/>
-</segment>
-</net>
-<net name="ENC_PUL_OUT_C_GPIO_1" class="0">
-<segment>
-<wire x1="43.18" y1="205.74" x2="30.48" y2="205.74" width="0.1524" layer="91"/>
-<label x="12.7" y="205.74" size="1.778" layer="95"/>
-<pinref part="U1" gate="B" pin="PE1"/>
-<junction x="43.18" y="205.74"/>
-</segment>
-</net>
-<net name="ABS_ENC_OUT_GPIO_1" class="0">
-<segment>
-<wire x1="43.18" y1="203.2" x2="30.48" y2="203.2" width="0.1524" layer="91"/>
-<label x="15.24" y="203.2" size="1.778" layer="95"/>
-<pinref part="U1" gate="B" pin="PE2"/>
-<junction x="43.18" y="203.2"/>
-</segment>
-</net>
-<net name="ENC_PUL_OUT_A_GPIO_2" class="0">
-<segment>
-<wire x1="43.18" y1="200.66" x2="30.48" y2="200.66" width="0.1524" layer="91"/>
-<label x="12.7" y="200.66" size="1.778" layer="95"/>
-<pinref part="U1" gate="B" pin="PE3"/>
-<junction x="43.18" y="200.66"/>
-</segment>
-</net>
-<net name="ENC_PUL_OUT_B_GPIO_2" class="0">
-<segment>
-<wire x1="43.18" y1="198.12" x2="30.48" y2="198.12" width="0.1524" layer="91"/>
-<label x="12.7" y="198.12" size="1.778" layer="95"/>
-<pinref part="U1" gate="B" pin="PE4"/>
-<junction x="43.18" y="198.12"/>
-</segment>
-</net>
-<net name="ENC_PUL_OUT_C_GPIO_2" class="0">
-<segment>
-<wire x1="43.18" y1="195.58" x2="30.48" y2="195.58" width="0.1524" layer="91"/>
-<label x="12.7" y="195.58" size="1.778" layer="95"/>
-<pinref part="U1" gate="B" pin="PE5"/>
-<junction x="43.18" y="195.58"/>
-</segment>
-</net>
-<net name="ABS_ENC_OUT_GPIO_2" class="0">
-<segment>
-<wire x1="43.18" y1="193.04" x2="30.48" y2="193.04" width="0.1524" layer="91"/>
-<label x="15.24" y="193.04" size="1.778" layer="95"/>
-<pinref part="U1" gate="B" pin="PE6"/>
-<junction x="43.18" y="193.04"/>
-</segment>
-</net>
-<net name="ENC_PUL_OUT_A_GPIO_1" class="0">
-<segment>
-<wire x1="144.78" y1="165.1" x2="132.08" y2="165.1" width="0.1524" layer="91"/>
-<label x="114.3" y="165.1" size="1.778" layer="95"/>
-<pinref part="U1" gate="A" pin="PB9"/>
-<junction x="144.78" y="165.1"/>
-</segment>
-</net>
-<net name="ALO_GPIO_C_1" class="0">
+<net name="ALO_GPIO_A_1" class="0">
 <segment>
 <wire x1="144.78" y1="213.36" x2="132.08" y2="213.36" width="0.1524" layer="91"/>
 <label x="127" y="213.36" size="1.778" layer="95"/>
@@ -21967,20 +21903,12 @@ Receiver ICs'</text>
 <junction x="144.78" y="213.36"/>
 </segment>
 </net>
-<net name="ALO_GPIO_A_1" class="0">
+<net name="ALO_GPIO_B_1" class="0">
 <segment>
 <wire x1="200.66" y1="220.98" x2="213.36" y2="220.98" width="0.1524" layer="91"/>
 <label x="200.66" y="220.98" size="1.778" layer="95"/>
 <pinref part="U1" gate="A" pin="PC4"/>
 <junction x="200.66" y="220.98"/>
-</segment>
-</net>
-<net name="ALO_GPIO_B_1" class="0">
-<segment>
-<wire x1="200.66" y1="218.44" x2="213.36" y2="218.44" width="0.1524" layer="91"/>
-<label x="200.66" y="218.44" size="1.778" layer="95"/>
-<pinref part="U1" gate="A" pin="PC5"/>
-<junction x="200.66" y="218.44"/>
 </segment>
 </net>
 <net name="ALO_GPIO_A_2" class="0">
@@ -22065,58 +21993,18 @@ Receiver ICs'</text>
 </net>
 <net name="SERVO_EN_GPIO_1" class="0">
 <segment>
-<wire x1="200.66" y1="160.02" x2="213.36" y2="160.02" width="0.1524" layer="91"/>
-<label x="200.66" y="160.02" size="1.778" layer="95"/>
-<pinref part="U1" gate="A" pin="PD11"/>
-<junction x="200.66" y="160.02"/>
-</segment>
-</net>
-<net name="PROP_CONTROL_EN_GPIO_1" class="0">
-<segment>
-<wire x1="200.66" y1="157.48" x2="213.36" y2="157.48" width="0.1524" layer="91"/>
-<label x="200.66" y="157.48" size="1.778" layer="95"/>
-<pinref part="U1" gate="A" pin="PD12"/>
-<junction x="200.66" y="157.48"/>
-</segment>
-</net>
-<net name="FRWD_EX_TORQUE_LIM_EN_GPIO_1" class="0">
-<segment>
-<wire x1="200.66" y1="215.9" x2="213.36" y2="215.9" width="0.1524" layer="91"/>
-<label x="200.66" y="215.9" size="1.778" layer="95"/>
-<pinref part="U1" gate="A" pin="PC6"/>
-<junction x="200.66" y="215.9"/>
-</segment>
-</net>
-<net name="REVERSE_EX_TORQUE_LIM_EN_GPIO_1" class="0">
-<segment>
 <wire x1="200.66" y1="213.36" x2="213.36" y2="213.36" width="0.1524" layer="91"/>
 <label x="200.66" y="213.36" size="1.778" layer="95"/>
 <pinref part="U1" gate="A" pin="PC7"/>
 <junction x="200.66" y="213.36"/>
 </segment>
 </net>
-<net name="SERVO_EN_GPIO_2" class="0">
+<net name="PROP_CONTROL_EN_GPIO_1" class="0">
 <segment>
-<wire x1="200.66" y1="210.82" x2="213.36" y2="210.82" width="0.1524" layer="91"/>
-<label x="200.66" y="210.82" size="1.778" layer="95"/>
-<pinref part="U1" gate="A" pin="PC8"/>
-<junction x="200.66" y="210.82"/>
-</segment>
-</net>
-<net name="PROP_CONTROL_EN_GPIO_2" class="0">
-<segment>
-<wire x1="200.66" y1="208.28" x2="213.36" y2="208.28" width="0.1524" layer="91"/>
-<label x="200.66" y="208.28" size="1.778" layer="95"/>
-<pinref part="U1" gate="A" pin="PC9"/>
-<junction x="200.66" y="208.28"/>
-</segment>
-</net>
-<net name="FRWD_DRIVE_EN_GPIO_2" class="0">
-<segment>
-<wire x1="144.78" y1="210.82" x2="132.08" y2="210.82" width="0.1524" layer="91"/>
-<label x="114.3" y="210.82" size="1.778" layer="95"/>
-<pinref part="U1" gate="A" pin="PA8"/>
-<junction x="144.78" y="210.82"/>
+<wire x1="200.66" y1="215.9" x2="213.36" y2="215.9" width="0.1524" layer="91"/>
+<label x="200.66" y="215.9" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PC6"/>
+<junction x="200.66" y="215.9"/>
 </segment>
 </net>
 <net name="REVERSE_DRIVE_EN_GPIO_2" class="0">
@@ -22129,34 +22017,34 @@ Receiver ICs'</text>
 </net>
 <net name="ALARM_RST_GPIO_2" class="0">
 <segment>
-<wire x1="144.78" y1="205.74" x2="132.08" y2="205.74" width="0.1524" layer="91"/>
-<label x="119.38" y="205.74" size="1.778" layer="95"/>
-<pinref part="U1" gate="A" pin="PA10"/>
-<junction x="144.78" y="205.74"/>
+<wire x1="144.78" y1="210.82" x2="132.08" y2="210.82" width="0.1524" layer="91"/>
+<label x="119.38" y="210.82" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PA8"/>
+<junction x="144.78" y="210.82"/>
 </segment>
 </net>
 <net name="FRWD_EX_TORQUE_LIM_EN_GPIO_2" class="0">
 <segment>
-<wire x1="144.78" y1="203.2" x2="132.08" y2="203.2" width="0.1524" layer="91"/>
-<label x="104.14" y="203.2" size="1.778" layer="95"/>
-<pinref part="U1" gate="A" pin="PA11"/>
-<junction x="144.78" y="203.2"/>
+<wire x1="200.66" y1="208.28" x2="213.36" y2="208.28" width="0.1524" layer="91"/>
+<label x="200.66" y="208.28" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PC9"/>
+<junction x="200.66" y="208.28"/>
 </segment>
 </net>
 <net name="REVERSE_EX_TORQUE_LIM_EN_GPIO_2" class="0">
 <segment>
-<wire x1="144.78" y1="200.66" x2="132.08" y2="200.66" width="0.1524" layer="91"/>
-<label x="96.52" y="200.66" size="1.778" layer="95"/>
-<pinref part="U1" gate="A" pin="PA12"/>
-<junction x="144.78" y="200.66"/>
+<wire x1="200.66" y1="210.82" x2="213.36" y2="210.82" width="0.1524" layer="91"/>
+<label x="200.66" y="210.82" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PC8"/>
+<junction x="200.66" y="210.82"/>
 </segment>
 </net>
 <net name="FRWD_DRIVE_EN_GPIO_1" class="0">
 <segment>
-<wire x1="200.66" y1="154.94" x2="213.36" y2="154.94" width="0.1524" layer="91"/>
-<label x="200.66" y="154.94" size="1.778" layer="95"/>
-<pinref part="U1" gate="A" pin="PD13"/>
-<junction x="200.66" y="154.94"/>
+<wire x1="200.66" y1="149.86" x2="213.36" y2="149.86" width="0.1524" layer="91"/>
+<label x="200.66" y="149.86" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PD15"/>
+<junction x="200.66" y="149.86"/>
 </segment>
 </net>
 <net name="REVERSE_DRIVE_EN_GPIO_1" class="0">
@@ -22165,14 +22053,6 @@ Receiver ICs'</text>
 <label x="200.66" y="152.4" size="1.778" layer="95"/>
 <pinref part="U1" gate="A" pin="PD14"/>
 <junction x="200.66" y="152.4"/>
-</segment>
-</net>
-<net name="ALARM_RST_GPIO_1" class="0">
-<segment>
-<wire x1="200.66" y1="149.86" x2="213.36" y2="149.86" width="0.1524" layer="91"/>
-<label x="200.66" y="149.86" size="1.778" layer="95"/>
-<pinref part="U1" gate="A" pin="PD15"/>
-<junction x="200.66" y="149.86"/>
 </segment>
 </net>
 <net name="UART_RX" class="0">
@@ -22729,6 +22609,118 @@ Receiver ICs'</text>
 <wire x1="93.98" y1="208.28" x2="99.06" y2="208.28" width="0.1524" layer="91"/>
 <pinref part="U1" gate="B" pin="PH0/OSC_IN"/>
 <junction x="93.98" y="208.28"/>
+</segment>
+</net>
+<net name="ALO_GPIO_C_1" class="0">
+<segment>
+<wire x1="200.66" y1="218.44" x2="213.36" y2="218.44" width="0.1524" layer="91"/>
+<label x="200.66" y="218.44" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PC5"/>
+<junction x="200.66" y="218.44"/>
+</segment>
+</net>
+<net name="FRWD_DRIVE_EN_GPIO_2" class="0">
+<segment>
+<wire x1="144.78" y1="205.74" x2="132.08" y2="205.74" width="0.1524" layer="91"/>
+<label x="113.538" y="205.994" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PA10"/>
+<junction x="144.78" y="205.74"/>
+</segment>
+</net>
+<net name="PROP_CONTROL_EN_GPIO_2" class="0">
+<segment>
+<wire x1="144.78" y1="203.2" x2="132.08" y2="203.2" width="0.1524" layer="91"/>
+<label x="109.22" y="203.2" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PA11"/>
+<junction x="144.78" y="203.2"/>
+</segment>
+</net>
+<net name="SERVO_EN_GPIO_2" class="0">
+<segment>
+<wire x1="144.78" y1="200.66" x2="132.08" y2="200.66" width="0.1524" layer="91"/>
+<label x="119.38" y="200.66" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PA12"/>
+<junction x="144.78" y="200.66"/>
+</segment>
+</net>
+<net name="ALARM_RST_GPIO_1" class="0">
+<segment>
+<wire x1="200.66" y1="154.94" x2="213.36" y2="154.94" width="0.1524" layer="91"/>
+<label x="200.66" y="154.94" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PD13"/>
+<junction x="200.66" y="154.94"/>
+</segment>
+</net>
+<net name="FRWD_EX_TORQUE_LIM_EN_GPIO_1" class="0">
+<segment>
+<wire x1="200.66" y1="157.48" x2="213.36" y2="157.48" width="0.1524" layer="91"/>
+<label x="200.66" y="157.48" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PD12"/>
+<junction x="200.66" y="157.48"/>
+</segment>
+</net>
+<net name="REVERSE_EX_TORQUE_LIM_EN_GPIO_1" class="0">
+<segment>
+<wire x1="200.66" y1="160.02" x2="213.36" y2="160.02" width="0.1524" layer="91"/>
+<label x="200.66" y="160.02" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PD11"/>
+<junction x="200.66" y="160.02"/>
+</segment>
+</net>
+<net name="ENC_PUL_OUT_A_GPIO_1" class="0">
+<segment>
+<wire x1="200.66" y1="200.66" x2="213.36" y2="200.66" width="0.1524" layer="91"/>
+<label x="200.66" y="200.66" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PC12"/>
+</segment>
+</net>
+<net name="ABS_ENC_OUT_GPIO_1" class="0">
+<segment>
+<wire x1="200.66" y1="182.88" x2="213.36" y2="182.88" width="0.1524" layer="91"/>
+<label x="200.66" y="182.88" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PD2"/>
+</segment>
+</net>
+<net name="ENC_PUL_OUT_B_GPIO_1" class="0">
+<segment>
+<wire x1="200.66" y1="187.96" x2="213.36" y2="187.96" width="0.1524" layer="91"/>
+<label x="200.66" y="187.96" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PD0"/>
+</segment>
+</net>
+<net name="ENC_PUL_OUT_C_GPIO_1" class="0">
+<segment>
+<wire x1="200.66" y1="185.42" x2="213.36" y2="185.42" width="0.1524" layer="91"/>
+<label x="200.66" y="185.42" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PD1"/>
+</segment>
+</net>
+<net name="ENC_PUL_OUT_A_GPIO_2" class="0">
+<segment>
+<wire x1="200.66" y1="180.34" x2="213.36" y2="180.34" width="0.1524" layer="91"/>
+<label x="200.66" y="180.34" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PD3"/>
+</segment>
+</net>
+<net name="ENC_PUL_OUT_B_GPIO_2" class="0">
+<segment>
+<wire x1="200.66" y1="177.8" x2="213.36" y2="177.8" width="0.1524" layer="91"/>
+<label x="200.66" y="177.8" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PD4"/>
+</segment>
+</net>
+<net name="ABS_ENC_OUT_GPIO_2" class="0">
+<segment>
+<wire x1="200.66" y1="172.72" x2="213.36" y2="172.72" width="0.1524" layer="91"/>
+<label x="200.66" y="172.72" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PD6"/>
+</segment>
+</net>
+<net name="ENC_PUL_OUT_C_GPIO_2" class="0">
+<segment>
+<wire x1="200.66" y1="175.26" x2="213.36" y2="175.26" width="0.1524" layer="91"/>
+<label x="200.66" y="175.26" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PD5"/>
 </segment>
 </net>
 </nets>
