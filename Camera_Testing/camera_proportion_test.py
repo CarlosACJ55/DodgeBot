@@ -38,33 +38,33 @@ def cords_2_pixel(real_dist_cords, pixel_center_location, center_dist, camera_he
     pixel_location = pixel_center_location - pixel_xy
     return pixel_location.astype('uint16')
 
-def pixel_2_cords(pixel_location, pixel_center_location, center_dist, camera_height, height, orientation):
-    real_ratio = (camera_height - height) / camera_height
-    dist = real_ratio * center_dist
-    temp = pixel_location.copy()
-    pixel_loc = pixel_location.copy()
-    pixel_loc[0] = temp[1]
-    pixel_loc[1] = temp[0]
-    pixel_xy = pixel_loc - pixel_center_location
+# def pixel_2_cords(pixel_location, pixel_center_location, center_dist, camera_height, height, orientation):
+#     real_ratio = (camera_height - height) / camera_height
+#     dist = real_ratio * center_dist
+#     temp = pixel_location.copy()
+#     pixel_loc = pixel_location.copy()
+#     pixel_loc[0] = temp[1]
+#     pixel_loc[1] = temp[0]
+#     pixel_xy = pixel_loc - pixel_center_location
 
-    pixel_xy_ratio = pixel_xy / pixel_center_location
-    real_dist_cords = pixel_xy_ratio * dist
-    return real_dist_cords * orientation
+#     pixel_xy_ratio = pixel_xy / pixel_center_location
+#     real_dist_cords = pixel_xy_ratio * dist
+#     return real_dist_cords * orientation
 
 
-def cords_2_pixel(real_dist_cords, pixel_center_location, center_dist, camera_height, height, inv_camera_orientation):
-    real_ratio = (camera_height - height) / camera_height
-    dist = real_ratio * center_dist
+# def cords_2_pixel(real_dist_cords, pixel_center_location, center_dist, camera_height, height, inv_camera_orientation):
+#     real_ratio = (camera_height - height) / camera_height
+#     dist = real_ratio * center_dist
     
-    orientated_cords = real_dist_cords * inv_camera_orientation
-    pixel_xy_ratio = orientated_cords / dist
+#     orientated_cords = real_dist_cords * inv_camera_orientation
+#     pixel_xy_ratio = orientated_cords / dist
 
-    pixel_xy = pixel_xy_ratio * pixel_center_location
-    pixel_location = pixel_center_location - pixel_xy
-    temp = pixel_location.copy()
-    pixel_location[0] = temp[1]
-    pixel_location[1] = temp[0]
-    return pixel_location.astype('uint16')
+#     pixel_xy = pixel_xy_ratio * pixel_center_location
+#     pixel_location = pixel_center_location - pixel_xy
+#     temp = pixel_location.copy()
+#     pixel_location[0] = temp[1]
+#     pixel_location[1] = temp[0]
+#     return pixel_location.astype('uint16')
 
 
 # real_center_dist = 1.00
@@ -73,12 +73,14 @@ def cords_2_pixel(real_dist_cords, pixel_center_location, center_dist, camera_he
 # camera_orientation = np.array([1, -1])
 
 pixel_center = np.array([360 / 2, 360 / 2], dtype=int)
-pixel_loc = np.array([45, 315])
+
 cam_height = 2
 user_height = 1
 real_center_dist = 2
 camera_orientation = np.array([1, -1])
 inv_camera_orientation = -1 * camera_orientation
+
+pixel_loc = np.array([45, 45])
 xy = pixel_2_cords(pixel_loc.copy(), pixel_center, real_center_dist, cam_height, user_height, camera_orientation)
 print(f"pixel_loc:{pixel_loc} -> loc:{xy}")
 pixel_loc = cords_2_pixel(xy, pixel_center, real_center_dist, cam_height, user_height, -1*camera_orientation)
@@ -102,7 +104,10 @@ xy = pixel_2_cords(pixel_loc.copy(), pixel_center, real_center_dist, cam_height,
 print(f"pixel_loc:{pixel_loc} -> loc:{xy}")
 pixel_loc = cords_2_pixel(xy, pixel_center, real_center_dist, cam_height, user_height, -1*camera_orientation)
 print(f"loc:{xy} -> pixel_loc:{pixel_loc}")
-print("***************************")
+# print("***************************")
+print("\n")
+
+
 # 2.36855
 # cam_height = 2.36855
 
