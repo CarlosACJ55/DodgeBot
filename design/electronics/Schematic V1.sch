@@ -22062,10 +22062,10 @@ Receiver ICs'</text>
 <label x="88.9" y="33.02" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="200.66" y1="203.2" x2="213.36" y2="203.2" width="0.1524" layer="91"/>
-<label x="200.66" y="203.2" size="1.778" layer="95"/>
-<pinref part="U1" gate="A" pin="PC11"/>
-<junction x="200.66" y="203.2"/>
+<wire x1="132.08" y1="170.18" x2="144.78" y2="170.18" width="0.1524" layer="91"/>
+<label x="132.08" y="170.18" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PB7"/>
+<junction x="144.78" y="170.18"/>
 </segment>
 </net>
 <net name="UART_TX" class="0">
@@ -22075,10 +22075,10 @@ Receiver ICs'</text>
 <label x="88.9" y="30.48" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="200.66" y1="205.74" x2="213.36" y2="205.74" width="0.1524" layer="91"/>
-<label x="200.66" y="205.74" size="1.778" layer="95"/>
-<pinref part="U1" gate="A" pin="PC10"/>
-<junction x="200.66" y="205.74"/>
+<wire x1="132.08" y1="172.72" x2="144.78" y2="172.72" width="0.1524" layer="91"/>
+<label x="132.08" y="172.72" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="PB6"/>
+<junction x="144.78" y="172.72"/>
 </segment>
 </net>
 <net name="TORQUE-SPEED_ANALOG_1" class="0">
