@@ -18446,6 +18446,10 @@ Used as a test point connection for pogo pins or other debugging tools.
 <part name="C13" library="SparkFun-Capacitors" deviceset="4.7UF" device="-0805-50V-(10%)" value="120pF"/>
 <part name="C14" library="SparkFun-Capacitors" deviceset="4.7UF" device="-0805-50V-(10%)" value="10uF"/>
 <part name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="25k"/>
+<part name="R6" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="33k"/>
+<part name="R23" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="66k"/>
+<part name="R24" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="33k"/>
+<part name="R25" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="66k"/>
 </parts>
 <sheets>
 <sheet>
@@ -18764,6 +18768,22 @@ Used as a test point connection for pogo pins or other debugging tools.
 <attribute name="NAME" x="143.51" y="227.1014" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="143.51" y="231.902" size="1.778" layer="96" rot="R180"/>
 </instance>
+<instance part="R6" gate="G$1" x="124.46" y="220.98" smashed="yes" rot="R180">
+<attribute name="NAME" x="128.27" y="219.4814" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="128.27" y="224.282" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="R23" gate="G$1" x="139.7" y="220.98" smashed="yes" rot="R180">
+<attribute name="NAME" x="143.51" y="219.4814" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="143.51" y="224.282" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="R24" gate="G$1" x="124.46" y="213.36" smashed="yes" rot="R180">
+<attribute name="NAME" x="128.27" y="211.8614" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="128.27" y="216.662" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="R25" gate="G$1" x="139.7" y="213.36" smashed="yes" rot="R180">
+<attribute name="NAME" x="143.51" y="211.8614" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="143.51" y="216.662" size="1.778" layer="96" rot="R180"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -18978,6 +18998,18 @@ Used as a test point connection for pogo pins or other debugging tools.
 <wire x1="254" y1="144.78" x2="259.08" y2="144.78" width="0.1524" layer="91"/>
 <label x="254" y="144.78" size="1.778" layer="95"/>
 </segment>
+<segment>
+<wire x1="111.76" y1="220.98" x2="119.38" y2="220.98" width="0.1524" layer="91"/>
+<label x="111.76" y="220.98" size="1.778" layer="95"/>
+<pinref part="R6" gate="G$1" pin="2"/>
+<junction x="119.38" y="220.98"/>
+</segment>
+<segment>
+<wire x1="111.76" y1="213.36" x2="119.38" y2="213.36" width="0.1524" layer="91"/>
+<label x="111.76" y="213.36" size="1.778" layer="95"/>
+<pinref part="R24" gate="G$1" pin="2"/>
+<junction x="119.38" y="213.36"/>
+</segment>
 </net>
 <net name="N$2" class="0">
 <segment>
@@ -19115,20 +19147,6 @@ Used as a test point connection for pogo pins or other debugging tools.
 <wire x1="332.74" y1="78.74" x2="342.9" y2="78.74" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="V_ON" class="0">
-<segment>
-<pinref part="U2" gate="A" pin="ON/~OFF"/>
-<wire x1="355.6" y1="142.24" x2="360.68" y2="142.24" width="0.1524" layer="91"/>
-<label x="355.6" y="142.24" size="1.778" layer="95"/>
-</segment>
-<segment>
-<wire x1="129.54" y1="228.6" x2="134.62" y2="228.6" width="0.1524" layer="91"/>
-<label x="129.54" y="228.6" size="1.778" layer="95"/>
-<pinref part="R2" gate="G$1" pin="1"/>
-<junction x="129.54" y="228.6"/>
-<pinref part="R1" gate="G$1" pin="2"/>
-</segment>
-</net>
 <net name="S_GND" class="0">
 <segment>
 <pinref part="C15" gate="G$1" pin="1"/>
@@ -19219,6 +19237,16 @@ Used as a test point connection for pogo pins or other debugging tools.
 <pinref part="TP6" gate="G$1" pin="1"/>
 <wire x1="124.46" y1="12.7" x2="119.38" y2="12.7" width="0.1524" layer="91"/>
 <label x="116.84" y="12.7" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="144.78" y1="220.98" x2="152.4" y2="220.98" width="0.1524" layer="91"/>
+<label x="147.32" y="220.98" size="1.778" layer="95"/>
+<pinref part="R23" gate="G$1" pin="1"/>
+</segment>
+<segment>
+<wire x1="144.78" y1="213.36" x2="152.4" y2="213.36" width="0.1524" layer="91"/>
+<label x="147.32" y="213.36" size="1.778" layer="95"/>
+<pinref part="R25" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="N$4" class="0">
@@ -19394,6 +19422,38 @@ Used as a test point connection for pogo pins or other debugging tools.
 <pinref part="C13" gate="G$1" pin="1"/>
 <wire x1="322.58" y1="193.04" x2="327.66" y2="193.04" width="0.1524" layer="91"/>
 <junction x="322.58" y="193.04"/>
+</segment>
+</net>
+<net name="V_ON_14V" class="0">
+<segment>
+<wire x1="129.54" y1="228.6" x2="134.62" y2="228.6" width="0.1524" layer="91"/>
+<label x="129.54" y="228.6" size="1.778" layer="95"/>
+<pinref part="R2" gate="G$1" pin="1"/>
+<junction x="129.54" y="228.6"/>
+<pinref part="R1" gate="G$1" pin="2"/>
+</segment>
+<segment>
+<pinref part="U2" gate="A" pin="ON/~OFF"/>
+<wire x1="355.6" y1="142.24" x2="360.68" y2="142.24" width="0.1524" layer="91"/>
+<label x="355.6" y="142.24" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="V_ON_5V_1" class="0">
+<segment>
+<wire x1="129.54" y1="220.98" x2="134.62" y2="220.98" width="0.1524" layer="91"/>
+<label x="129.54" y="220.98" size="1.778" layer="95"/>
+<pinref part="R6" gate="G$1" pin="1"/>
+<junction x="129.54" y="220.98"/>
+<pinref part="R23" gate="G$1" pin="2"/>
+</segment>
+</net>
+<net name="V_ON_5V_2" class="0">
+<segment>
+<wire x1="129.54" y1="213.36" x2="134.62" y2="213.36" width="0.1524" layer="91"/>
+<label x="129.54" y="213.36" size="1.778" layer="95"/>
+<pinref part="R24" gate="G$1" pin="1"/>
+<junction x="129.54" y="213.36"/>
+<pinref part="R25" gate="G$1" pin="2"/>
 </segment>
 </net>
 </nets>
@@ -20889,60 +20949,6 @@ Receiver ICs'</text>
 <label x="515.62" y="147.32" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="V_ON" class="0">
-<segment>
-<wire x1="454.66" y1="203.2" x2="439.42" y2="203.2" width="0.1524" layer="91"/>
-<pinref part="U10" gate="A" pin="1/2EN"/>
-<label x="434.34" y="203.2" size="1.778" layer="95"/>
-</segment>
-<segment>
-<wire x1="523.24" y1="200.66" x2="515.62" y2="200.66" width="0.1524" layer="91"/>
-<pinref part="U10" gate="A" pin="3/4EN"/>
-<label x="515.62" y="200.66" size="1.778" layer="95"/>
-</segment>
-<segment>
-<wire x1="454.66" y1="160.02" x2="439.42" y2="160.02" width="0.1524" layer="91"/>
-<pinref part="U17" gate="A" pin="1/2EN"/>
-<label x="434.34" y="160.02" size="1.778" layer="95"/>
-</segment>
-<segment>
-<wire x1="523.24" y1="157.48" x2="515.62" y2="157.48" width="0.1524" layer="91"/>
-<pinref part="U17" gate="A" pin="3/4EN"/>
-<label x="515.62" y="157.48" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="U18" gate="A" pin="1/2EN"/>
-<wire x1="457.2" y1="96.52" x2="447.04" y2="96.52" width="0.1524" layer="91"/>
-<label x="447.04" y="96.52" size="1.778" layer="95"/>
-<junction x="457.2" y="96.52"/>
-</segment>
-<segment>
-<wire x1="518.16" y1="93.98" x2="525.78" y2="93.98" width="0.1524" layer="91"/>
-<label x="520.7" y="93.98" size="1.778" layer="95"/>
-<pinref part="U18" gate="A" pin="3/4EN"/>
-</segment>
-<segment>
-<pinref part="U19" gate="A" pin="1/2EN"/>
-<wire x1="457.2" y1="38.1" x2="447.04" y2="38.1" width="0.1524" layer="91"/>
-<label x="447.04" y="38.1" size="1.778" layer="95"/>
-<junction x="457.2" y="38.1"/>
-</segment>
-<segment>
-<wire x1="518.16" y1="35.56" x2="525.78" y2="35.56" width="0.1524" layer="91"/>
-<label x="520.7" y="35.56" size="1.778" layer="95"/>
-<pinref part="U19" gate="A" pin="3/4EN"/>
-</segment>
-<segment>
-<pinref part="U12" gate="A" pin="3/42N"/>
-<wire x1="101.6" y1="157.48" x2="109.22" y2="157.48" width="0.1524" layer="91"/>
-<label x="101.6" y="157.48" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="U7" gate="A" pin="3/42N"/>
-<wire x1="104.14" y1="198.12" x2="111.76" y2="198.12" width="0.1524" layer="91"/>
-<label x="104.14" y="198.12" size="1.778" layer="95"/>
-</segment>
-</net>
 <net name="GEN_PURPOSE_OUT_HI_A_1" class="0">
 <segment>
 <pinref part="R39" gate="G$1" pin="1"/>
@@ -21629,6 +21635,64 @@ Receiver ICs'</text>
 <label x="304.8" y="215.9" size="1.778" layer="95"/>
 <junction x="304.8" y="215.9"/>
 <pinref part="U13" gate="A" pin="1C"/>
+</segment>
+</net>
+<net name="V_ON_5V" class="0">
+<segment>
+<wire x1="523.24" y1="200.66" x2="515.62" y2="200.66" width="0.1524" layer="91"/>
+<pinref part="U10" gate="A" pin="3/4EN"/>
+<label x="515.62" y="200.66" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="523.24" y1="157.48" x2="515.62" y2="157.48" width="0.1524" layer="91"/>
+<pinref part="U17" gate="A" pin="3/4EN"/>
+<label x="515.62" y="157.48" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="454.66" y1="160.02" x2="439.42" y2="160.02" width="0.1524" layer="91"/>
+<pinref part="U17" gate="A" pin="1/2EN"/>
+<label x="434.34" y="160.02" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="518.16" y1="35.56" x2="525.78" y2="35.56" width="0.1524" layer="91"/>
+<label x="520.7" y="35.56" size="1.778" layer="95"/>
+<pinref part="U19" gate="A" pin="3/4EN"/>
+</segment>
+<segment>
+<pinref part="U19" gate="A" pin="1/2EN"/>
+<wire x1="457.2" y1="38.1" x2="447.04" y2="38.1" width="0.1524" layer="91"/>
+<label x="447.04" y="38.1" size="1.778" layer="95"/>
+<junction x="457.2" y="38.1"/>
+</segment>
+<segment>
+<pinref part="U12" gate="A" pin="3/42N"/>
+<wire x1="101.6" y1="157.48" x2="109.22" y2="157.48" width="0.1524" layer="91"/>
+<label x="101.6" y="157.48" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="V_ON_5V_1" class="0">
+<segment>
+<wire x1="454.66" y1="203.2" x2="439.42" y2="203.2" width="0.1524" layer="91"/>
+<pinref part="U10" gate="A" pin="1/2EN"/>
+<label x="434.34" y="203.2" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U18" gate="A" pin="1/2EN"/>
+<wire x1="457.2" y1="96.52" x2="447.04" y2="96.52" width="0.1524" layer="91"/>
+<label x="447.04" y="96.52" size="1.778" layer="95"/>
+<junction x="457.2" y="96.52"/>
+</segment>
+<segment>
+<wire x1="518.16" y1="93.98" x2="525.78" y2="93.98" width="0.1524" layer="91"/>
+<label x="520.7" y="93.98" size="1.778" layer="95"/>
+<pinref part="U18" gate="A" pin="3/4EN"/>
+</segment>
+</net>
+<net name="V_ON_5V_2" class="0">
+<segment>
+<pinref part="U7" gate="A" pin="3/42N"/>
+<wire x1="104.14" y1="198.12" x2="111.76" y2="198.12" width="0.1524" layer="91"/>
+<label x="104.14" y="198.12" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
