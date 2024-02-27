@@ -6169,10 +6169,10 @@ maxErrors = 50
 <contactref element="J4" pad="10"/>
 <contactref element="J4" pad="1"/>
 <contactref element="U2" pad="8"/>
-<polygon width="0.1524" layer="16" isolate="0.508" thermals="no" rank="2">
+<polygon width="0.1524" layer="16" isolate="0.8128" thermals="no" rank="2">
 <vertex x="0" y="131.826"/>
-<vertex x="152.1968" y="131.826"/>
-<vertex x="152.1968" y="1.016"/>
+<vertex x="54.4068" y="131.826"/>
+<vertex x="54.4068" y="1.016"/>
 <vertex x="0" y="1.016"/>
 </polygon>
 <wire x1="33.02" y1="101.9048" x2="33.02" y2="99.314" width="1.27" layer="1"/>
@@ -6552,11 +6552,11 @@ maxErrors = 50
 <contactref element="U24" pad="14"/>
 <contactref element="U11" pad="1"/>
 <contactref element="C4" pad="2"/>
-<polygon width="0.254" layer="1" isolate="0.508" thermals="no" rank="4">
+<polygon width="0.254" layer="1" isolate="0.8128" thermals="no" rank="4">
 <vertex x="40.64" y="70.866"/>
 <vertex x="40.64" y="-0.254"/>
-<vertex x="152.2476" y="-0.254"/>
-<vertex x="152.2476" y="70.866"/>
+<vertex x="51.9176" y="-0.254"/>
+<vertex x="51.9176" y="70.866"/>
 </polygon>
 <contactref element="U1" pad="6"/>
 <contactref element="U1" pad="21"/>
