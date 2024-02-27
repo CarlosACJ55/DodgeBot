@@ -5217,12 +5217,12 @@ maxErrors = 50
 <attribute name="NAME" x="149.560990625" y="64.1946" size="1.905" layer="25" rot="R90"/>
 <attribute name="VALUE" x="144.907990625" y="81.6356" size="0.635" layer="27" rot="R90" align="bottom-center"/>
 </element>
-<element name="J6" library="SSW-130-01-G-S" package="SAMTEC_SSW-106-02-TM-S-RA" value="SSW-106-02-TM-S-RA" x="129.5146" y="54.1528" smashed="yes" rot="R270">
-<attribute name="MANUFACTURER" value="Samtec" x="-132.1054" y="37.6428" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="NAME" x="140.7986" y="69.3778" size="1.27" layer="25" rot="R270"/>
-<attribute name="PARTREV" value="R" x="-132.1054" y="37.6428" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="STANDARD" value="Manufacturer Recommendations" x="-132.1054" y="37.6428" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="126.3196" y="69.3778" size="1.27" layer="27" rot="R270"/>
+<element name="J6" library="SSW-130-01-G-S" package="SAMTEC_SSW-106-02-TM-S-RA" value="SSW-106-02-TM-S-RA" x="142.2146" y="54.1528" smashed="yes" rot="R270">
+<attribute name="MANUFACTURER" value="Samtec" x="-119.4054" y="37.6428" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="NAME" x="153.4986" y="69.3778" size="1.27" layer="25" rot="R270"/>
+<attribute name="PARTREV" value="R" x="-119.4054" y="37.6428" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="STANDARD" value="Manufacturer Recommendations" x="-119.4054" y="37.6428" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="139.0196" y="69.3778" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="L4" library="SSW-130-01-G-S" package="IND_BLM21_MUR-M" value="BLM21PG600SN1DIND_BLM21_MUR-M" x="52.5526" y="62.3062" smashed="yes" rot="MR0">
 <attribute name="COPYRIGHT" value="Copyright (C) 2024 Ultra Librarian. All rights reserved." x="-61.7474" y="-206.9338" size="1.778" layer="28" rot="MR0" display="off"/>
@@ -5629,16 +5629,16 @@ maxErrors = 50
 <attribute name="COPYRIGHT" value="Copyright (C) 2024 Ultra Librarian. All rights reserved." x="260.1976" y="-101.4476" size="1.778" layer="27" display="off"/>
 <attribute name="MANUFACTURER_PART_NUMBER" value="SN65LBC175AD" x="260.1976" y="-101.4476" size="1.778" layer="27" display="off"/>
 <attribute name="MFR_NAME" value="Texas Instruments" x="260.1976" y="-101.4476" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="97.8408" y="34.4678" size="0.6096" layer="27" ratio="6" rot="SR90"/>
 <attribute name="NAME" x="94.361" y="36.3474" size="1.27" layer="27" ratio="6" rot="SR0"/>
+<attribute name="NAME" x="97.8408" y="34.4678" size="0.6096" layer="27" ratio="6" rot="SR90"/>
 <attribute name="VALUE" x="95.9104" y="36.3474" size="1.27" layer="27" ratio="6" rot="SR0"/>
 </element>
 <element name="U12" library="SSW-130-01-G-S" package="DW20-M" value="SN75ALS174ADWRDW20-M" x="126.8984" y="104.0638" smashed="yes">
 <attribute name="COPYRIGHT" value="Copyright (C) 2024 Ultra Librarian. All rights reserved." x="317.3984" y="-1.3462" size="1.778" layer="27" display="off"/>
 <attribute name="MANUFACTURER_PART_NUMBER" value="SN75ALS174ADWR" x="317.3984" y="-1.3462" size="1.778" layer="27" display="off"/>
 <attribute name="MFR_NAME" value="Texas Instruments" x="317.3984" y="-1.3462" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="123.6218" y="103.4288" size="1.27" layer="25" ratio="6" rot="SR0"/>
 <attribute name="NAME" x="123.6218" y="103.4288" size="1.27" layer="27" ratio="6" rot="SR0"/>
+<attribute name="NAME" x="123.6218" y="103.4288" size="1.27" layer="25" ratio="6" rot="SR0"/>
 <attribute name="VALUE" x="125.1712" y="103.4288" size="1.27" layer="27" ratio="6" rot="SR0"/>
 </element>
 <element name="NPN" library="SSW-130-01-G-S" package="D0016A_M" value="SN75468DRD0016A_M" x="87.249" y="45.4914" smashed="yes" rot="R270">
@@ -5707,8 +5707,8 @@ maxErrors = 50
 <attribute name="COPYRIGHT" value="Copyright (C) 2024 Ultra Librarian. All rights reserved." x="233.934" y="193.04" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MANUFACTURER_PART_NUMBER" value="SN75ALS174ADWR" x="233.934" y="193.04" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MFR_NAME" value="Texas Instruments" x="233.934" y="193.04" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="NAME" x="129.159" y="38.6334" size="1.27" layer="25" ratio="6" rot="SR90"/>
 <attribute name="NAME" x="129.159" y="38.6334" size="1.27" layer="27" ratio="6" rot="SR90"/>
+<attribute name="NAME" x="129.159" y="38.6334" size="1.27" layer="25" ratio="6" rot="SR90"/>
 <attribute name="VALUE" x="129.159" y="40.1828" size="1.27" layer="27" ratio="6" rot="SR90"/>
 </element>
 <element name="U8" library="SSW-130-01-G-S" package="TSSOP14_PW_R-PDSO-G14_TEX-M" value="OPA4205APWRTSSOP14_PW_R-PDSO-G14_TEX-M" x="31.75" y="63.5" smashed="yes">
@@ -6065,14 +6065,14 @@ maxErrors = 50
 <via x="3.81" y="119.38" extent="1-16" drill="1.27"/>
 <wire x1="120.5482" y1="137.0332" x2="20.5486" y2="137.0332" width="1.27" layer="1"/>
 <wire x1="120.5482" y1="137.0332" x2="148.717" y2="108.8644" width="1.27" layer="1"/>
-<wire x1="148.717" y1="67.5386" x2="132.842" y2="51.6636" width="1.27" layer="1"/>
-<wire x1="132.842" y1="51.6636" x2="115.1128" y2="51.6636" width="1.27" layer="1"/>
+<wire x1="148.717" y1="53.5686" x2="146.812" y2="51.6636" width="1.27" layer="1"/>
+<wire x1="146.812" y1="51.6636" x2="115.1128" y2="51.6636" width="1.27" layer="1"/>
 <wire x1="115.1128" y1="51.6636" x2="114.9858" y2="51.5366" width="1.27" layer="1"/>
 <via x="114.9858" y="51.5366" extent="1-16" drill="1.27"/>
 <wire x1="114.9858" y1="51.5366" x2="114.9858" y2="51.4858" width="1.27" layer="16"/>
 <wire x1="106.0958" y1="42.5958" x2="106.0958" y2="42.5323" width="1.27" layer="16"/>
 <via x="106.0958" y="42.5323" extent="1-16" drill="1.27"/>
-<wire x1="148.717" y1="108.8644" x2="148.717" y2="67.5386" width="1.27" layer="1"/>
+<wire x1="148.717" y1="108.8644" x2="148.717" y2="53.5686" width="1.27" layer="1"/>
 <wire x1="114.9858" y1="51.4858" x2="106.0958" y2="42.5958" width="1.27" layer="16"/>
 <via x="105.6894" y="40.1574" extent="1-16" drill="0.65"/>
 <wire x1="105.6894" y1="40.1574" x2="113.1824" y2="40.1574" width="0.635" layer="16"/>
@@ -7087,12 +7087,12 @@ maxErrors = 50
 <wire x1="119.9642" y1="96.4294" x2="119.9642" y2="98.3488" width="0.3048" layer="1"/>
 <via x="119.9642" y="98.3488" extent="1-16" drill="0.35"/>
 <wire x1="119.6594" y1="47.1424" x2="119.6594" y2="52.3494" width="0.3048" layer="16"/>
-<wire x1="121.4628" y1="54.1528" x2="129.5146" y2="54.1528" width="0.3048" layer="16"/>
+<wire x1="121.4628" y1="54.1528" x2="142.2146" y2="54.1528" width="0.3048" layer="16"/>
 <wire x1="119.6594" y1="52.3494" x2="121.4628" y2="54.1528" width="0.3048" layer="16"/>
-<wire x1="129.5146" y1="56.6928" x2="129.5146" y2="54.1528" width="0.3048" layer="16"/>
-<wire x1="129.5146" y1="56.6928" x2="147.32" y2="74.4982" width="0.3048" layer="16"/>
+<wire x1="142.2146" y1="56.6928" x2="142.2146" y2="54.1528" width="0.3048" layer="16"/>
+<wire x1="142.2146" y1="56.6928" x2="147.32" y2="61.7982" width="0.3048" layer="16"/>
 <wire x1="147.32" y1="77.253590625" x2="145.477990625" y2="79.0956" width="0.3048" layer="16"/>
-<wire x1="147.32" y1="74.4982" x2="147.32" y2="77.253590625" width="0.3048" layer="16"/>
+<wire x1="147.32" y1="61.7982" x2="147.32" y2="77.253590625" width="0.3048" layer="16"/>
 <wire x1="58.42" y1="69.85" x2="54.61" y2="69.85" width="0.508" layer="1"/>
 <contactref element="R76" pad="1"/>
 <wire x1="126.6952" y1="102.1994" x2="126.6952" y2="99.7712" width="0.3048" layer="16"/>
@@ -9067,20 +9067,20 @@ maxErrors = 50
 <signal name="UART_RX">
 <contactref element="J6" pad="04"/>
 <contactref element="U1" pad="64"/>
-<wire x1="92.713" y1="67.556" x2="125.484" y2="67.556" width="0.2286" layer="1"/>
-<wire x1="130.7592" y1="64.7954" x2="130.7592" y2="62.6364" width="0.2286" layer="1"/>
-<wire x1="130.7592" y1="62.6364" x2="129.8956" y2="61.7728" width="0.2286" layer="1"/>
-<wire x1="129.8956" y1="61.7728" x2="129.5146" y2="61.7728" width="0.2286" layer="1"/>
-<wire x1="125.484" y1="67.556" x2="127.5842" y2="65.4558" width="0.2286" layer="1"/>
-<wire x1="127.5842" y1="65.4558" x2="130.0988" y2="65.4558" width="0.2286" layer="1"/>
-<wire x1="130.0988" y1="65.4558" x2="130.7592" y2="64.7954" width="0.2286" layer="1"/>
+<wire x1="136.914" y1="67.556" x2="92.713" y2="67.556" width="0.2286" layer="1"/>
+<wire x1="143.4592" y1="64.7954" x2="143.4592" y2="62.6364" width="0.2286" layer="1"/>
+<wire x1="143.4592" y1="62.6364" x2="142.5956" y2="61.7728" width="0.2286" layer="1"/>
+<wire x1="142.5956" y1="61.7728" x2="142.2146" y2="61.7728" width="0.2286" layer="1"/>
+<wire x1="136.914" y1="67.556" x2="139.0142" y2="65.4558" width="0.2286" layer="1"/>
+<wire x1="139.0142" y1="65.4558" x2="142.7988" y2="65.4558" width="0.2286" layer="1"/>
+<wire x1="142.7988" y1="65.4558" x2="143.4592" y2="64.7954" width="0.2286" layer="1"/>
 </signal>
 <signal name="UART_TX">
 <contactref element="J6" pad="05"/>
 <contactref element="U1" pad="63"/>
-<wire x1="92.713" y1="67.056" x2="123.444" y2="67.056" width="0.2286" layer="1"/>
-<wire x1="126.1872" y1="64.3128" x2="129.5146" y2="64.3128" width="0.2286" layer="1"/>
-<wire x1="123.444" y1="67.056" x2="126.1872" y2="64.3128" width="0.2286" layer="1"/>
+<wire x1="134.874" y1="67.056" x2="92.713" y2="67.056" width="0.2286" layer="1"/>
+<wire x1="137.6172" y1="64.3128" x2="142.2146" y2="64.3128" width="0.2286" layer="1"/>
+<wire x1="134.874" y1="67.056" x2="137.6172" y2="64.3128" width="0.2286" layer="1"/>
 </signal>
 <signal name="S_GNDA">
 <contactref element="L2" pad="2"/>
