@@ -6116,7 +6116,6 @@ maxErrors = 50
 <signal name="P_GND">
 <contactref element="5V" pad="4"/>
 <contactref element="J1" pad="2"/>
-<contactref element="J1" pad="3"/>
 <contactref element="14_JACK" pad="3"/>
 <contactref element="14_JACK" pad="2"/>
 <contactref element="L4" pad="2"/>
@@ -6267,7 +6266,9 @@ maxErrors = 50
 <wire x1="93.5228" y1="96.6216" x2="90.4268" y2="93.5256" width="0.508" layer="16"/>
 <wire x1="50.8" y1="50.9524" x2="44.3738" y2="50.9524" width="0.3048" layer="16"/>
 <wire x1="44.3738" y1="50.9524" x2="43.561" y2="51.7652" width="0.3048" layer="16"/>
-<wire x1="44.324" y1="14.7584" x2="48.5902" y2="19.0246" width="0.762" layer="16"/>
+<contactref element="J1" pad="3"/>
+<wire x1="48.5902" y1="19.0246" x2="44.6278" y2="15.0622" width="0.762" layer="16"/>
+<wire x1="44.6278" y1="15.0622" x2="44.324" y2="14.7584" width="0.762" layer="16"/>
 <wire x1="44.324" y1="14.7584" x2="44.324" y2="9.7738" width="0.762" layer="16"/>
 </signal>
 <signal name="+5V">

@@ -18431,16 +18431,7 @@ Used as a test point connection for pogo pins or other debugging tools.
 <attribute name="NAME" x="320.3956" y="153.8986" size="2.0828" layer="95" ratio="6" rot="SR0"/>
 <attribute name="VALUE" x="319.7606" y="151.3586" size="2.0828" layer="96" ratio="6" rot="SR0"/>
 </instance>
-<instance part="0.01UF_C7" gate="A" x="289.56" y="139.7" smashed="yes" rot="R180">
-<attribute name="VALUE" x="294.7162" y="145.2372" size="3.4798" layer="96" ratio="10" rot="SR180"/>
-<attribute name="NAME" x="293.6494" y="137.6172" size="3.4798" layer="95" ratio="10" rot="SR180"/>
-<attribute name="VALUE" x="294.7162" y="145.2372" size="3.4798" layer="96" ratio="10" rot="SR180"/>
-<attribute name="NAME" x="293.6494" y="137.6172" size="3.4798" layer="95" ratio="10" rot="SR180"/>
-<attribute name="VALUE" x="294.7162" y="145.2372" size="3.4798" layer="96" ratio="10" rot="SR180"/>
-<attribute name="NAME" x="293.6494" y="137.6172" size="3.4798" layer="95" ratio="10" rot="SR180"/>
-<attribute name="VALUE" x="294.7162" y="145.2372" size="3.4798" layer="96" ratio="10" rot="SR180"/>
-<attribute name="NAME" x="293.6494" y="137.6172" size="3.4798" layer="95" ratio="10" rot="SR180"/>
-</instance>
+<instance part="0.01UF_C7" gate="A" x="289.56" y="139.7" smashed="yes" rot="R180"/>
 <instance part="C15" gate="G$1" x="132.08" y="116.84" smashed="yes" rot="R180">
 <attribute name="NAME" x="130.556" y="113.919" size="1.778" layer="95" font="vector" rot="R180"/>
 <attribute name="VALUE" x="130.556" y="118.999" size="1.778" layer="96" font="vector" rot="R180"/>
@@ -18638,36 +18629,17 @@ Used as a test point connection for pogo pins or other debugging tools.
 <attribute name="NAME" x="207.8228" y="164.1094" size="3.4798" layer="95" ratio="10" rot="SR270"/>
 </instance>
 <instance part="330UF_C3" gate="A" x="254" y="144.78" smashed="yes" rot="R270">
-<attribute name="VALUE" x="248.4628" y="149.9362" size="3.4798" layer="96" ratio="10" rot="SR270"/>
-<attribute name="NAME" x="256.0828" y="148.8694" size="3.4798" layer="95" ratio="10" rot="SR270"/>
-<attribute name="VALUE" x="248.4628" y="149.9362" size="3.4798" layer="96" ratio="10" rot="SR270"/>
-<attribute name="NAME" x="256.0828" y="148.8694" size="3.4798" layer="95" ratio="10" rot="SR270"/>
-<attribute name="VALUE" x="248.4628" y="149.9362" size="3.4798" layer="96" ratio="10" rot="SR270"/>
-<attribute name="NAME" x="256.0828" y="148.8694" size="3.4798" layer="95" ratio="10" rot="SR270"/>
-<attribute name="VALUE" x="248.4628" y="149.9362" size="3.4798" layer="96" ratio="10" rot="SR270"/>
-<attribute name="NAME" x="256.0828" y="148.8694" size="3.4798" layer="95" ratio="10" rot="SR270"/>
-<attribute name="VALUE" x="248.4628" y="149.9362" size="3.4798" layer="96" ratio="10" rot="SR270"/>
-<attribute name="NAME" x="256.0828" y="148.8694" size="3.4798" layer="95" ratio="10" rot="SR270"/>
-<attribute name="VALUE" x="248.4628" y="149.9362" size="3.4798" layer="96" ratio="10" rot="SR270"/>
-<attribute name="NAME" x="256.0828" y="148.8694" size="3.4798" layer="95" ratio="10" rot="SR270"/>
-<attribute name="VALUE" x="248.4628" y="149.9362" size="3.4798" layer="96" ratio="10" rot="SR270"/>
-<attribute name="NAME" x="256.0828" y="148.8694" size="3.4798" layer="95" ratio="10" rot="SR270"/>
+<attribute name="NAME" x="251.9172" y="148.8694" size="3.4798" layer="95" ratio="10" rot="SMR270"/>
 </instance>
 <instance part="10UH_L1" gate="A" x="259.08" y="144.78" smashed="yes">
-<attribute name="VALUE" x="257.0988" y="140.5128" size="3.4798" layer="96" ratio="10" rot="SR0"/>
 <attribute name="NAME" x="258.1656" y="148.1328" size="3.4798" layer="95" ratio="10" rot="SR0"/>
-<attribute name="VALUE" x="257.0988" y="140.5128" size="3.4798" layer="96" ratio="10" rot="SR0"/>
 <attribute name="NAME" x="258.1656" y="148.1328" size="3.4798" layer="95" ratio="10" rot="SR0"/>
-<attribute name="VALUE" x="257.0988" y="140.5128" size="3.4798" layer="96" ratio="10" rot="SR0"/>
 <attribute name="NAME" x="258.1656" y="148.1328" size="3.4798" layer="95" ratio="10" rot="SR0"/>
-<attribute name="VALUE" x="257.0988" y="140.5128" size="3.4798" layer="96" ratio="10" rot="SR0"/>
 <attribute name="NAME" x="258.1656" y="148.1328" size="3.4798" layer="95" ratio="10" rot="SR0"/>
-<attribute name="VALUE" x="257.0988" y="140.5128" size="3.4798" layer="96" ratio="10" rot="SR0"/>
 <attribute name="NAME" x="258.1656" y="148.1328" size="3.4798" layer="95" ratio="10" rot="SR0"/>
 </instance>
 <instance part="DIODE" gate="A" x="276.86" y="139.7" smashed="yes" rot="R270">
-<attribute name="VALUE" x="270.6624" y="143.5862" size="3.4798" layer="96" ratio="10" rot="SR270"/>
-<attribute name="NAME" x="280.2128" y="142.5194" size="3.4798" layer="95" ratio="10" rot="SR270"/>
+<attribute name="NAME" x="270.0528" y="142.5194" size="3.4798" layer="95" ratio="10" rot="SR270"/>
 </instance>
 <instance part="STM32F2" gate="C" x="63.5" y="170.18" smashed="yes">
 <attribute name="NAME" x="84.1756" y="179.2986" size="2.0828" layer="95" ratio="6" rot="SR0"/>
@@ -18855,10 +18827,11 @@ Used as a test point connection for pogo pins or other debugging tools.
 </segment>
 <segment>
 <pinref part="J1" gate="G$1" pin="2"/>
-<pinref part="J1" gate="G$1" pin="3"/>
-<wire x1="50.8" y1="228.6" x2="50.8" y2="226.06" width="0.1524" layer="91"/>
-<wire x1="50.8" y1="228.6" x2="50.8" y2="231.14" width="0.1524" layer="91"/>
+<wire x1="50.8" y1="228.6" x2="53.34" y2="228.6" width="0.1524" layer="91"/>
 <label x="45.72" y="228.6" size="1.778" layer="95"/>
+<pinref part="J1" gate="G$1" pin="3"/>
+<wire x1="50.8" y1="231.14" x2="53.34" y2="231.14" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="231.14" x2="53.34" y2="228.6" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <wire x1="144.78" y1="241.3" x2="152.4" y2="241.3" width="0.1524" layer="91"/>
@@ -19341,8 +19314,8 @@ Used as a test point connection for pogo pins or other debugging tools.
 <net name="+24V" class="0">
 <segment>
 <pinref part="J1" gate="G$1" pin="1"/>
-<wire x1="50.8" y1="233.68" x2="50.8" y2="231.14" width="0.1524" layer="91"/>
-<label x="45.72" y="231.14" size="1.778" layer="95"/>
+<wire x1="50.8" y1="233.68" x2="53.34" y2="233.68" width="0.1524" layer="91"/>
+<label x="50.8" y="233.68" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$22" class="0">
@@ -22883,71 +22856,20 @@ Receiver ICs'</text>
 </sheet>
 </sheets>
 <errors>
-<approved hash="104,2,43.18,187.96,U7,GND,S_GND,,,"/>
-<approved hash="202,2,104.14,208.28,U7,4A,,,,"/>
-<approved hash="104,2,104.14,210.82,U7,VCC,+5V,,,"/>
-<approved hash="104,2,40.64,147.32,U12,GND,S_GND,,,"/>
-<approved hash="202,2,101.6,167.64,U12,4A,,,,"/>
-<approved hash="104,2,101.6,170.18,U12,VCC,+5V,,,"/>
-<approved hash="104,2,454.66,193.04,LINE_RECEIVER,GND,S_GND,,,"/>
-<approved hash="104,2,515.62,210.82,LINE_RECEIVER,VCC,+5V,,,"/>
+<approved hash="202,2,104.14,208.28,LINE_DRIVER1,4A,,,,"/>
+<approved hash="202,2,101.6,167.64,LINE_DRIVER2,4A,,,,"/>
 <approved hash="104,2,274.32,177.8,NPN,E,P_GND,,,"/>
-<approved hash="104,2,274.32,124.46,U14,E,P_GND,,,"/>
-<approved hash="104,2,723.9,162.56,OPTOCOUPLER,VDD_2,+3.3V,,,"/>
-<approved hash="104,2,723.9,175.26,OPTOCOUPLER,VDD,+3.3V,,,"/>
-<approved hash="104,2,723.9,106.68,U16,VDD_2,+3.3V,,,"/>
-<approved hash="104,2,723.9,119.38,U16,VDD,+3.3V,,,"/>
-<approved hash="104,2,454.66,149.86,U17,GND,S_GND,,,"/>
-<approved hash="104,2,515.62,167.64,U17,VCC,+5V,,,"/>
-<approved hash="104,2,457.2,86.36,U18,GND,S_GND,,,"/>
-<approved hash="104,2,518.16,104.14,U18,VCC,+5V,,,"/>
-<approved hash="104,2,457.2,27.94,U19,GND,S_GND,,,"/>
-<approved hash="104,2,518.16,45.72,U19,VCC,+5V,,,"/>
-<approved hash="104,1,330.2,68.58,U4,GND,P_GND,,,"/>
-<approved hash="104,2,591.82,104.14,U22,VCCA,+5V,,,"/>
-<approved hash="104,2,627.38,104.14,U22,VCCB,+3.3V,,,"/>
-<approved hash="104,2,591.82,50.8,U6,VCCA,+5V,,,"/>
-<approved hash="104,2,627.38,50.8,U6,VCCB,+3.3V,,,"/>
-<approved hash="104,2,586.74,208.28,LEVEL_SHIFTER,VCCA,+5V,,,"/>
-<approved hash="104,2,622.3,208.28,LEVEL_SHIFTER,VCCB,+3.3V,,,"/>
-<approved hash="104,2,586.74,165.1,U24,VCCA,+5V,,,"/>
-<approved hash="104,2,622.3,165.1,U24,VCCB,+3.3V,,,"/>
-<approved hash="104,4,93.98,88.9,U11,V+,+3.3V,,,"/>
-<approved hash="104,4,144.78,88.9,U11,GND,S_GND,,,"/>
-<approved hash="202,4,93.98,190.5,U1B,BOOT0,,,,"/>
-<approved hash="104,1,66.04,170.18,U1C,VSS_2,S_GND,,,"/>
-<approved hash="104,1,66.04,167.64,U1C,VSS_3,S_GND,,,"/>
-<approved hash="104,1,66.04,165.1,U1C,VSS,S_GND,,,"/>
-<approved hash="104,1,66.04,160.02,U1C,VSSA,S_GNDA,,,"/>
-<approved hash="104,1,66.04,154.94,U1C,VBAT,+3.3V,,,"/>
-<approved hash="104,1,66.04,149.86,U1C,VREF+,+3.3V,,,"/>
-<approved hash="104,1,111.76,170.18,U1C,VDD_2,+3.3V,,,"/>
-<approved hash="104,1,111.76,167.64,U1C,VDD_3,+3.3V,,,"/>
-<approved hash="104,1,111.76,165.1,U1C,VDD_4,+3.3V,,,"/>
-<approved hash="104,1,111.76,162.56,U1C,VDD_5,+3.3V,,,"/>
-<approved hash="104,1,111.76,160.02,U1C,VDD_6,+3.3V,,,"/>
-<approved hash="104,1,111.76,157.48,U1C,VDD,+3.3V,,,"/>
-<approved hash="104,1,111.76,152.4,U1C,VDDA,+3.3VA,,,"/>
-<approved hash="104,1,111.76,147.32,U1C,VCAP_1,N$4,,,"/>
-<approved hash="104,1,111.76,144.78,U1C,VCAP_2,N$5,,,"/>
-<approved hash="104,1,254,205.74,U5,VCC,N$1,,,"/>
-<approved hash="202,1,254,200.66,U5,SYNC,,,,"/>
-<approved hash="104,1,294.64,195.58,U5,AGND,-15V,,,"/>
-<approved hash="104,1,294.64,208.28,U5,PGND_2,-15V,,,"/>
-<approved hash="104,1,294.64,210.82,U5,PGND,-15V,,,"/>
+<approved hash="202,4,93.98,190.5,STM32F2B,BOOT0,,,,"/>
+<approved hash="202,1,254,200.66,-15V,SYNC,,,,"/>
 <approved hash="206,1,330.2,78.74,+3.3V,,,,,"/>
 <approved hash="206,1,330.2,76.2,+3.3V,,,,,"/>
 <approved hash="206,2,129.54,76.2,1.65V_REF,,,,,"/>
 <approved hash="206,2,167.64,78.74,1.65V_REF,,,,,"/>
 <approved hash="206,1,254,210.82,SW_OUT,,,,,"/>
 <approved hash="206,1,254,213.36,SW_OUT,,,,,"/>
-<approved hash="110,2,739.14,167.64,ALO_GPIO_C_1,+3.3V,,,,"/>
-<approved hash="110,2,736.6,111.76,ALO_GPIO_C_2,+3.3V,,,,"/>
-<approved hash="111,2,736.6,111.76,ALO_GPIO_C_2,,,,,"/>
-<approved hash="111,2,739.14,167.64,ALO_GPIO_C_1,,,,,"/>
 <approved hash="113,1,193.571,130.071,FRAME1,,,,,"/>
 <approved hash="113,2,193.571,130.071,FRAME2,,,,,"/>
-<approved hash="113,2,584.731,130.071,FRAME3,,,,,"/>
+<approved hash="113,3,193.571,130.071,FRAME3,,,,,"/>
 <approved hash="113,4,193.571,130.071,FRAME4,,,,,"/>
 </errors>
 </schematic>
