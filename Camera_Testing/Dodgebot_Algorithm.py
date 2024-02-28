@@ -195,8 +195,9 @@ robot_loc = np.array([0, 0])
 robot_loc_pixel = cords_2_pixel(robot_loc, pixel_center, real_center_dist, cam_height, user_height, inv_camera_orientation)
 max_dodge_dist = .1
 avoidance_dist = .15
-edge_percentage = .5 #how far tward the edge to move away
 Radius = .5
+user_center_dist = ((cam_height - user_height) / cam_height) * real_center_dist
+edge_percentage = (.5*user_center_dist) / Radius
 real_center_dist_robot = ((cam_height - robot_height) / cam_height) * real_center_dist
 cord_centers = torch.tensor([[-.5, -.5], [.5, .5]])
 # print("**\n",edge_percentage*real_center_dist_user, "\n**")
@@ -298,6 +299,9 @@ while True:
 				run_time_dict["Engage Decision"].append(time.time() - st)
 				perpendicular_v1 = np.array([hat_vector_2frames[1], -1*hat_vector_2frames[0]])
 				perpendicular_v2 = np.array([-1*hat_vector_2frames[1], hat_vector_2frames[0]])
+				punch_body_loc = (main_punch[0] + minor_punch[0]) / 2
+				robot_2_body_v = punch_body_loc - robot_loc
+				robot_2_body_v_hat = robot_2_body_v / np.linalg.norm(robot_2_body_v)
 				run_time_dict["Perpendicular Calc"].append(time.time() - st)
 
 				#checks that the robot isnt too clost to the edge
@@ -309,23 +313,38 @@ while True:
 						vy = perpendicular_v1[1]
 					else:
 						vx = perpendicular_v2[0]
-						vy = perpendicular_v2[1]   
+						vy = perpendicular_v2[1]
+					center_vector = -1*robot_loc
+					hat_center_vector = center_vector / np.linalg.norm(center_vector)
+					hat_avoidance_vector = np.array([vx, vy])
+					#moves it twards the center more
+					hat_avoidance_vector = .5 * hat_center_vector + .5 * hat_avoidance_vector
+
+					# if np.linalg.norm(perpendicular_v1 - robot_2_body_v_hat) < np.linalg.norm(perpendicular_v2 - robot_2_body_v_hat):
+
+					avoidance_vector = np.abs(avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + (2 * avoidance_dist) * hat_avoidance_vector
+					# else:
+						# avoidance_vector = np.abs(avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + ( * avoidance_dist) * hat_avoidance_vector
+
+					
 				else:
 					#approximate body location
 					print("Center Dodge")
-					punch_body_loc = (main_punch[0] + minor_punch[0]) / 2
-					robot_2_body_v = punch_body_loc - robot_loc
-					robot_2_body_v_hat = robot_2_body_v / np.linalg.norm(robot_2_body_v)
+					# punch_body_loc = (main_punch[0] + minor_punch[0]) / 2
+					# robot_2_body_v = punch_body_loc - robot_loc
+					# robot_2_body_v_hat = robot_2_body_v / np.linalg.norm(robot_2_body_v)
 					if np.linalg.norm(perpendicular_v1 - robot_2_body_v_hat) >=  np.linalg.norm(perpendicular_v2 - robot_2_body_v_hat):
 						vx = perpendicular_v1[0]
 						vy = perpendicular_v1[1]
 					else:
 						vx = perpendicular_v2[0]
 						vy = perpendicular_v2[1]
+
 					hat_avoidance_vector = np.array([vx, vy])
+					avoidance_vector = np.abs(avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + (1.1 * avoidance_dist) * hat_avoidance_vector
                         
 				prev_robot_loc = robot_loc.copy()
-				robot_loc = robot_loc + np.abs(avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + (1.1 * avoidance_dist) * hat_avoidance_vector
+				robot_loc = robot_loc + avoidance_vector
 				run_time_dict["Avoidance"].append(time.time() - st)
 				
 		elif time.time() - dodge_time >= 1:
