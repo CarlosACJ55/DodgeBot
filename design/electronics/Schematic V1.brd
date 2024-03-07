@@ -7091,6 +7091,10 @@ maxErrors = 50
 <wire x1="66.305" y1="97.9932" x2="66.305" y2="97.1694" width="0.3048" layer="16"/>
 <wire x1="67.9196" y1="95.5548" x2="68.8848" y2="95.5548" width="0.3048" layer="16"/>
 <wire x1="66.305" y1="97.1694" x2="67.9196" y2="95.5548" width="0.3048" layer="16"/>
+<contactref element="STM32F2" pad="94"/>
+<wire x1="81.963" y1="74.806" x2="81.963" y2="74.12" width="0.2286" layer="1"/>
+<wire x1="88.519" y1="67.564" x2="88.519" y2="65.024" width="0.2286" layer="1"/>
+<wire x1="81.963" y1="74.12" x2="88.519" y2="67.564" width="0.2286" layer="1"/>
 </signal>
 <signal name="N$4">
 <contactref element="C35" pad="2"/>

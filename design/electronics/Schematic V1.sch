@@ -21916,6 +21916,11 @@ Receiver ICs'</text>
 <wire x1="83.82" y1="81.28" x2="91.44" y2="81.28" width="0.1524" layer="91"/>
 <label x="88.9" y="81.28" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="STM32F2" gate="B" pin="BOOT0"/>
+<wire x1="93.98" y1="190.5" x2="99.06" y2="190.5" width="0.1524" layer="91"/>
+<label x="96.52" y="190.5" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="SWDIO" class="0">
 <segment>
