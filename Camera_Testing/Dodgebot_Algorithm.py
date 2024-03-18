@@ -322,7 +322,7 @@ while True:
 
 					# if np.linalg.norm(perpendicular_v1 - robot_2_body_v_hat) < np.linalg.norm(perpendicular_v2 - robot_2_body_v_hat):
 
-					avoidance_vector = np.abs(avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + (2 * avoidance_dist) * hat_avoidance_vector
+					avoidance_vector = np.abs(avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + (1.5 * avoidance_dist) * hat_avoidance_vector
 					# else:
 						# avoidance_vector = np.abs(avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + ( * avoidance_dist) * hat_avoidance_vector
 
@@ -341,7 +341,7 @@ while True:
 						vy = perpendicular_v2[1]
 
 					hat_avoidance_vector = np.array([vx, vy])
-					avoidance_vector = np.abs(avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + (1.1 * avoidance_dist) * hat_avoidance_vector
+					avoidance_vector = np.abs(avoidance_dist - dist_from_punch_traj) * hat_avoidance_vector + (avoidance_dist) * hat_avoidance_vector
                         
 				prev_robot_loc = robot_loc.copy()
 				robot_loc = robot_loc + avoidance_vector
