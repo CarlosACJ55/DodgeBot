@@ -18,7 +18,7 @@ class Protocol:
 
     def __init__(self, connection):
         self.connection = connection
-        self.serial_obj = connection.serial_object
+        self.serial_obj = connection.serial_obj
 
     def get_raw_line(self):
         self.raw_msg = self.serial_obj.readline()

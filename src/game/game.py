@@ -10,8 +10,6 @@ class Game:
     def __init__(self, protocol, gui):
         self.bot = protocol
         self.ui = gui
-
-    def load(self):
         self.frame = self.ui.launch_menu(self)
 
     def setup(self):
@@ -38,6 +36,7 @@ class Game:
     def end(self):
         self.bot.reset()
         self.state = Phase.IDLE
+        self.frame = self.ui.launch_timer(self)
 
     def play(self):
         if self.bot.check_connection() and self.bot.in_sync and self.state == Phase.READY:
@@ -49,7 +48,6 @@ class Game:
             time_thread.join()
             self.stop_dodging()
             self.end()
-            self.load()
 
     def countdown(self):
         for self.state.time in reversed(range(self.state.time)):

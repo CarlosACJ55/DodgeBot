@@ -4,6 +4,7 @@ from game.game import Game
 from gui.root import Root
 
 if __name__ == "__main__":
-    stm = Protocol(Connection)
-    game = Game(stm, Root(stm))
-    game.load()
+    stm = Protocol(Connection())
+    ui = Root(stm)
+    game = Game(stm, ui)
+    ui.show()

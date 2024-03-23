@@ -4,26 +4,25 @@ from tkinter import messagebox
 
 
 class Menu:
-    def __init__(self, root_gui, game):
-        self.root = root_gui
+    def __init__(self, root, game):
         self.game = game
         # Static
-        self.frame = tk.LabelFrame(self.root.root_widget, text="Main Menu", padx=5, pady=5)
+        self.frame = tk.LabelFrame(root, text="Main Menu", padx=5, pady=5)
         self.title = tk.Label(self.frame, text="PunchBot", font=("Helvetica", 16))
         self.subtitle = tk.Label(self.frame, text="Ready for another session?", font=("Helvetica", 12))
         self.height_lbl = tk.Label(self.frame, text="Player height (cm):")
         self.duration_lbl = tk.Label(self.frame, text="Game duration (s):")
-        # Interactive
+        # Dynamic
         self.height_ent = tk.Entry(self.frame)
         self.height_ent.insert(0, str(game.state.height))
         self.height_ent.bind("<KeyRelease>", self.refresh_input)
         self.duration_ent = tk.Entry(self.frame)
         self.duration_ent.insert(0, str(game.state.time))
         self.duration_ent.bind("<KeyRelease>", self.refresh_input)
-        self.refresh_input(None)
         self.setup_btn = tk.Button(self.frame, command=self.setup, text="Setup", width=10)
         self.start_btn = tk.Button(self.frame, command=game.play, text="Start", width=20)
         self.stop_btn = tk.Button(self.frame, command=game.emergency_reset, text="EMERGENCY_RESET", width=20)
+        self.refresh_input(None)
         # Layout
         self.frame.grid(row=0, column=0, padx=10, pady=10)
         self.title.grid(row=0, column=0, columnspan=2, pady=5)

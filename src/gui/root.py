@@ -12,10 +12,11 @@ class Root:
     def __init__(self, protocol):
         self.protocol = protocol
         self.root_widget.protocol("MW_DELETE_WINDOW", self.close_window)
-        self.timer_view = Timer(self.root_widget)
 
-    def run(self):
-        self.root_widget.mainloop()
+    def close_window(self):
+        self.root_widget.destroy()
+        self.protocol.connection.disconnect()
+        self.protocol.in_sync = False
 
     def clear(self):
         for frame in self.root_widget.winfo_children():
@@ -29,7 +30,5 @@ class Root:
         self.clear()
         return Timer(self.root_widget, game_state)
 
-    def close_window(self):
-        self.root_widget.destroy()
-        self.protocol.connection.disconnect()
-        self.protocol.in_sync = False
+    def show(self):
+        self.root_widget.mainloop()

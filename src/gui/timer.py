@@ -8,19 +8,17 @@ def format_time(seconds):
 
 
 class Timer:
-    def __init__(self, root_gui, game_state):
-        self.root = root_gui.root_widget
+    def __init__(self, root, game_state):
         self.game_state = game_state
         # Static
-        self.frame = tk.LabelFrame(self.root, text="Dashboard", padx=5, pady=5, bg="white", width=60)
+        self.frame = tk.LabelFrame(root, text="Dashboard", padx=5, pady=5, bg="white", width=60)
         self.title = tk.Label(self.frame, text="Fight!", font=("Helvetica", 24), width=15)
         self.separator = ttk.Separator(self.frame, orient='vertical')
         # Dynamic
         self.time_lbl = tk.Label(self.frame, text=format_time(self.game_state.time), font=('Arial', 48))
-        # Interactive
         self.stop_btn = tk.Button(self.frame, command=self.stop, text="STOP", width=40)
         # Layout
-        self.root.geometry("800x120")
+        root.geometry("800x120")
         self.frame.grid(row=0, column=0, padx=10, pady=10, sticky=tkc.EW)
         self.title.grid(row=0, column=0, columnspan=2, pady=5)
         self.separator.grid(row=0, column=1, rowspan=1, sticky=tkc.NS, padx=20)

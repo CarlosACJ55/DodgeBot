@@ -12,6 +12,6 @@ class Phase(Enum):
 
 @dataclass
 class State:
-    phase: Phase = Phase.DISCONNECTED
-    time: int = 180
-    height: int = 180
+    phase = Phase.DISCONNECTED
+    time = 180
+    height = 180
