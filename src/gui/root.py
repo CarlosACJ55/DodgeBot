@@ -1,7 +1,7 @@
 import tkinter as tk
 
-from gui.menu import Menu
-from gui.timer import Timer
+from src.gui.menu import Menu
+from src.gui.timer import Timer
 
 
 class Root:

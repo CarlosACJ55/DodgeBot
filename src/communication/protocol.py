@@ -1,6 +1,6 @@
 import time
 
-from communication.constants import *
+from src.communication.constants import *
 
 
 def format_message(code):

@@ -1,4 +1,4 @@
-from game.state import Phase
+from src.game.state import Phase
 
 # Format
 SEPARATOR = "#"
