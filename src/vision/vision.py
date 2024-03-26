@@ -1,4 +1,5 @@
 import threading
+from os import path
 
 import cv2 as cv
 import numpy as np
@@ -12,14 +13,16 @@ def frame_resize(frame):
 
 
 class Vision:
+    calibration_dir = path.join(path.dirname(__file__), 'calibration')
+    map_x = np.load(path.join(calibration_dir, 'x.npy'))
+    map_y = np.load(path.join(calibration_dir, 'y.npy'))
+    lower_bound_gloves = np.array([20, 100, 100])
+    upper_bound_gloves = np.array([30, 255, 255])
+    continue_streaming = False
+
     def __init__(self, src=0):
         self.stream = cv.VideoCapture(src, cv.CAP_DSHOW)
         self.grabbed, self.frame = self.stream.read()
-        self.lower_bound_gloves = np.array([20, 100, 100])
-        self.upper_bound_gloves = np.array([30, 255, 255])
-        self.map_x = np.load("mapx.npy")
-        self.map_y = np.load("mapy.npy")
-        self.continue_streaming = False
 
     def start_stream(self):
         threading.Thread(target=self.stream_data, args=()).start()

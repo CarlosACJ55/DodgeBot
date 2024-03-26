@@ -2,10 +2,19 @@ import tkinter as tk
 import tkinter.constants as tkc
 from tkinter import messagebox
 
+from src.game.state import Phase
+
+MAX_T = 600
+MIN_T = 10
+MAX_H = 300
+MIN_H = 50
+
 
 class Menu:
     def __init__(self, root, game):
         self.game = game
+        self.height = game.state.height
+        self.time = game.state.time
         # Static
         self.frame = tk.LabelFrame(root, text="Main Menu", padx=5, pady=5)
         self.title = tk.Label(self.frame, text="PunchBot", font=("Helvetica", 16))
@@ -14,10 +23,10 @@ class Menu:
         self.duration_lbl = tk.Label(self.frame, text="Game duration (s):")
         # Dynamic
         self.height_ent = tk.Entry(self.frame)
-        self.height_ent.insert(0, str(game.state.height))
+        self.height_ent.insert(0, str(self.height))
         self.height_ent.bind("<KeyRelease>", self.refresh_input)
         self.duration_ent = tk.Entry(self.frame)
-        self.duration_ent.insert(0, str(game.state.time))
+        self.duration_ent.insert(0, str(self.time))
         self.duration_ent.bind("<KeyRelease>", self.refresh_input)
         self.setup_btn = tk.Button(self.frame, command=self.setup, text="Setup", width=10)
         self.start_btn = tk.Button(self.frame, command=game.play, text="Start", width=20)
@@ -38,13 +47,15 @@ class Menu:
     def refresh_input(self, _):
         self.setup_btn["state"] = self.start_btn["state"] = tkc.DISABLED
         if self.height_ent.get().isdigit() and self.duration_ent.get().isdigit():
-            self.game.state.height, self.game.state.time = int(self.height_ent.get()), int(self.duration_ent.get())
-            if 50 < self.game.state.height < 300 and 10 <= self.game.state.time <= 600:
+            self.height = int(self.height_ent.get())
+            self.time = int(self.duration_ent.get())
+            if MIN_H < self.height < MAX_H and MIN_T <= self.time <= MAX_T:
                 self.setup_btn["state"] = tkc.ACTIVE
 
     def setup(self):
         self.start_btn["state"] = tkc.DISABLED
-        if self.game.setup():
+        self.game.configure(self.height, self.time)
+        if self.game.state == Phase.READY:
             self.start_btn["state"] = tkc.ACTIVE
         else:
             tk.messagebox.showinfo("Failed to setup the microcontroller.")

@@ -6,37 +6,36 @@ from src.prediction.sentry import Sentry
 
 class Game:
     state = State()
-    frame = None
 
     def __init__(self, protocol, gui):
-        self.bot = protocol
+        self.stm = protocol
         self.ui = gui
-        self.frame = self.ui.launch_menu(self)
+        self.frame = self.ui.menu_frame(self)
 
-    def setup(self):
-        if self.bot.synchronize():
+    def configure(self, height, time):
+        if self.stm.synchronize():
             self.state.phase = Phase.IDLE
-            if self.bot.go_ready():
-                self.state.phase = Phase.READY
-                return True
-        return False
+        self.state.height = height
+        self.state.time = time
+        if self.stm.go_ready():
+            self.state.phase = Phase.READY
 
     def end(self):
-        self.bot.reset()
+        self.stm.reset()
         self.state.phase = Phase.IDLE
-        self.frame = self.ui.launch_timer(self)
+        self.frame = self.ui.menu_frame(self)
 
     def emergency_reset(self):
-        if not self.bot.check_connection():
-            self.bot.reconnect()
+        if not self.stm.check_connection():
+            self.stm.reconnect()
         self.state.phase = Phase.RESETTING
         if self.state.phase == Phase.IN_GAME:
             self.end()
-        if self.bot.reset():
+        if self.stm.reset():
             self.state.phase = Phase.IDLE
         else:
-            self.bot.power_off()
-        self.bot.disconnect()
+            self.stm.power_off()
+        self.stm.disconnect()
         self.state.phase = Phase.DISCONNECTED
 
     def countdown(self):
@@ -49,12 +48,12 @@ class Game:
         while self.state.phase == Phase.IN_GAME:
             dodge_path = computer.detect_punch()
             if dodge_path is not None:
-                self.bot.move_to(dodge_path)
-            self.bot.reset()
+                self.stm.move_to(dodge_path)
+            self.stm.reset()
 
     def play(self):
-        if self.bot.check_connection() and self.bot.in_sync and self.state.phase == Phase.READY:
-            self.frame = self.ui.launch_timer(self.state)
+        if self.stm.check_connection() and self.state.phase == Phase.READY:
+            self.frame = self.ui.timer_frame(self.state)
             time_thread = threading.Thread(target=self.countdown)
             time_thread.start()
             self.state.phase = Phase.IN_GAME

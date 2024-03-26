@@ -5,9 +5,8 @@ from enum import Enum
 class Phase(Enum):
     DISCONNECTED = "D"
     IDLE = "I"
-    READY = "R"
-    IN_GAME = "G"
-    RESETTING = "S"
+    IN_GAME = "S"
+    RESETTING = "R"
 
 
 @dataclass

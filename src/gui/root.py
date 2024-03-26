@@ -16,17 +16,17 @@ class Root:
     def close_window(self):
         self.root_widget.destroy()
         self.protocol.connection.disconnect()
-        self.protocol.in_sync = False
+        self.protocol.connected = False
 
     def clear(self):
         for frame in self.root_widget.winfo_children():
             frame.destroy()
 
-    def launch_menu(self, game):
+    def menu_frame(self, game):
         self.clear()
         return Menu(self.root_widget, game)
 
-    def launch_timer(self, game_state):
+    def timer_frame(self, game_state):
         self.clear()
         return Timer(self.root_widget, game_state)
 

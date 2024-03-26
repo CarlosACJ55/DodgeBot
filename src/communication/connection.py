@@ -6,22 +6,32 @@ class Connection:
         self.port = port
         self.baud_rate = baud_rate
         self.timeout = timeout
-        self.serial_obj = serial.Serial()
+        self.serial = serial.Serial()
 
     def is_connected(self):
-        return self.serial_obj.is_open
+        return self.serial.is_open
 
     def re_connect(self):
         if self.is_connected():
             self.disconnect()
-        self.serial_obj.baudrate = self.baud_rate
-        self.serial_obj.port = self.port
-        self.serial_obj.timeout = self.timeout
-        self.serial_obj.open()
-        if self.serial_obj.is_open:
-            print("UART on {} connected successfully.".format(self.serial_obj.port))
+        self.serial.baudrate = self.baud_rate
+        self.serial.port = self.port
+        self.serial.timeout = self.timeout
+        self.serial.open()
+        if self.serial.is_open:
+            print("UART on {} connected successfully.".format(self.serial.port))
+
+    def send(self, msg):
+        self.msg.encode()
+
+    def receive(self):
+        double = self.serial.readline().decode().split('#')
+        msg = double[0]
+        if len(double) != 2 or msg != double[1]:
+            raise ConnectionError("Received corrupt message")
+        return msg
 
     def disconnect(self):
-        self.serial_obj.close()
-        if not self.serial_obj.is_open:
-            print("UART on {} disconnected successfully.".format(self.serial_obj.port))
+        self.serial.close()
+        if not self.serial.is_open:
+            print("UART on {} disconnected successfully.".format(self.serial.port))
