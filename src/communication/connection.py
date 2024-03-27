@@ -1,5 +1,7 @@
 import serial.tools.list_ports
 
+from src.communication import codes
+
 
 class Connection:
     def __init__(self, port="COM3", baud_rate=921600, timeout=0.1):
@@ -22,14 +24,14 @@ class Connection:
             print("UART on {} connected successfully.".format(self.serial.port))
 
     def send(self, msg):
-        self.msg.encode()
+        doubled_msg = msg + codes.CHK_SEP + msg + codes.MSG_END
+        self.serial.write(doubled_msg.encode())
 
     def receive(self):
-        double = self.serial.readline().decode().split('#')
-        msg = double[0]
-        if len(double) != 2 or msg != double[1]:
+        doubled_msg = self.serial.readline().decode().split(codes.CHK_SEP)
+        if len(doubled_msg) != 2 or doubled_msg[0] != doubled_msg[1]:
             raise ConnectionError("Received corrupt message")
-        return msg
+        return doubled_msg[0]
 
     def disconnect(self):
         self.serial.close()

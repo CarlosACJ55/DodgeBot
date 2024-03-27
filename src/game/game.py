@@ -13,12 +13,10 @@ class Game:
         self.frame = self.ui.menu_frame(self)
 
     def configure(self, height, time):
-        if self.stm.synchronize():
-            self.state.phase = Phase.IDLE
         self.state.height = height
         self.state.time = time
-        if self.stm.go_ready():
-            self.state.phase = Phase.READY
+        if self.stm.synchronize():
+            self.state.phase = Phase.IDLE
 
     def end(self):
         self.stm.reset()
@@ -52,7 +50,7 @@ class Game:
             self.stm.reset()
 
     def play(self):
-        if self.stm.check_connection() and self.state.phase == Phase.READY:
+        if self.stm.check_connection() and self.state.phase == Phase.IDLE:
             self.frame = self.ui.timer_frame(self.state)
             time_thread = threading.Thread(target=self.countdown)
             time_thread.start()

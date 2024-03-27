@@ -1,21 +1,19 @@
 from src.game.state import Phase
 
 # Command Codes
-STATE_REQ = '?'
-STATE_RES = '!'
+COM = '!'
+STOP = 'E'
+SYNC = Phase.IDLE.value
 RESET = Phase.RESETTING.value
 START = Phase.IN_GAME.value
-SYNC = Phase.IDLE.value
-STOP = 'E'
 
 # Position Codes
-POS_REQ = 'M'
-POS_RES = 'N'
+POS = 'X'
 DIR_L = 'L'
 DIR_R = 'R'
 
 # Alarm Codes
-ALARM = 'A'
+ARM = 'A'
 ALO_ON = '1'
 ALO_OFF = '0'
 
@@ -24,5 +22,5 @@ MSG_SEP = ','
 CHK_SEP = '#'
 MSG_END = '\n'
 
-# Variables
+# Limits
 MAX_ATTEMPTS = 200

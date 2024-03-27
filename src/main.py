@@ -1,4 +1,3 @@
-from communication.connection import Connection
 from communication.protocol import Protocol
 from game.game import Game
 from gui.root import Root
