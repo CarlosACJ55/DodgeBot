@@ -28,7 +28,7 @@ class Connection:
         self.serial.write(doubled_msg.encode())
 
     def receive(self):
-        doubled_msg = self.serial.readline().decode().split(codes.CHK_SEP)
+        doubled_msg = self.serial.readline().decode("UTF-8").split(codes.CHK_SEP)
         if len(doubled_msg) != 2 or doubled_msg[0] != doubled_msg[1]:
             raise ConnectionError("Received corrupt message")
         return doubled_msg[0]

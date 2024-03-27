@@ -1,7 +1,7 @@
 from src.communication.connection import Connection
 from src.communication.message import *
 
-msg_constructor = {codes.COM: Command, codes.POS: Position, codes.ARM: Alarm}
+valid_message_types = {codes.COM: Command, codes.POS: Position, codes.ARM: Alarm}
 
 
 class Protocol:
@@ -17,9 +17,9 @@ class Protocol:
     def read(self):
         msg = self.connection.receive().split(',')
         code = msg.pop()
-        if code not in msg_constructor:
+        if code not in valid_message_types:
             raise Exception("Invalid command code")
-        return msg_constructor[code](msg)
+        return valid_message_types[code](msg)
 
     def synchronize(self):
         self.write(Command([codes.SYNC]))
@@ -40,9 +40,9 @@ class Protocol:
         self.write(Command([codes.RESET]))
         msg = self.connection.receive().split(',')
         code = msg.pop()
-        if code not in msg_constructor:
+        if code not in valid_message_types:
             raise Exception("Invalid command code")
-        return msg_constructor[code](msg)
+        return valid_message_types[code](msg)
 
     def freeze(self):
         self.write(Command([codes.STOP]))
