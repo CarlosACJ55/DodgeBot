@@ -234,3 +234,15 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+/src/actuation/cmake-build-debug/.cmake/api/v1/query/cache-v2
+/src/actuation/cmake-build-debug/CMakeFiles/clion-Debug-log.txt
+/src/actuation/cmake-build-debug/CMakeFiles/clion-environment.txt
+/src/actuation/cmake-build-debug/CMakeFiles/cmake.check_cache
+/src/actuation/cmake-build-debug/CMakeCache.txt
+/src/actuation/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/CMakeCCompilerId.c
+/src/actuation/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml
+/src/actuation/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/CMakeCXXCompilerId.cpp
+/src/actuation/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1
+/src/actuation/cmake-build-debug/CMakeFiles/3.26.4/CMakeSystem.cmake
+/src/actuation/cmake-build-debug/.cmake/api/v1/query/codemodel-v2
+/src/actuation/cmake-build-debug/.cmake/api/v1/query/toolchains-v1
