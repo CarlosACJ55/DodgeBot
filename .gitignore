@@ -246,3 +246,7 @@ cython_debug/
 /src/actuation/cmake-build-debug/CMakeFiles/3.26.4/CMakeSystem.cmake
 /src/actuation/cmake-build-debug/.cmake/api/v1/query/codemodel-v2
 /src/actuation/cmake-build-debug/.cmake/api/v1/query/toolchains-v1
+!/CMakeLists.txt
+/src/actuation/CMakeLists.txt
+/src/actuation/CMakeLists_template.txt
+/src/actuation/CMakeLists_template.txt
