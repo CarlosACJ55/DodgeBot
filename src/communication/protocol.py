@@ -1,5 +1,7 @@
-from src.communication.connection import Connection
-from src.communication.message import *
+
+from communication import codes
+from communication.connection import Connection
+from communication.message import *
 
 valid_message_types = {codes.COM: Command, codes.POS: Position, codes.ARM: Alarm}
 

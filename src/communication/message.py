@@ -1,6 +1,6 @@
 from abc import ABC
 
-from src.communication import codes
+from communication import codes
 
 
 class Message(ABC):
