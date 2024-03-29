@@ -61,7 +61,6 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 
 /* USER CODE BEGIN Private defines */
-static void HAL_UART_RxCpltCallback(UART_HandleTypeDef *);
 
 /* USER CODE END Private defines */
 
