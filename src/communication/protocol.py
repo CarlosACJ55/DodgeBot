@@ -17,7 +17,9 @@ class Protocol:
         self.connection.send(command)
 
     def read(self):
-        msg = self.connection.receive().split(',')
+        msg = None
+        while msg is None:
+            msg = self.connection.receive()
         code = msg.pop()
         if code not in valid_message_types:
             raise Exception("Invalid command code")

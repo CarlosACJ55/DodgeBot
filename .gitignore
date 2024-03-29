@@ -12,7 +12,6 @@
 ### C++ template
 # Prerequisites
 *.d
-
 # Compiled Object files
 *.slo
 *.lo
@@ -76,10 +75,9 @@ dkms.conf
 
 ### Python template
 # Byte-compiled / optimized / DLL files
-__pycache__/
 *.py[cod]
 *$py.class
-
+**/__pycache__/
 
 # Distribution / packaging
 .Python
@@ -248,5 +246,4 @@ cython_debug/
 /src/actuation/cmake-build-debug/.cmake/api/v1/query/toolchains-v1
 !/CMakeLists.txt
 /src/actuation/CMakeLists.txt
-/src/actuation/CMakeLists_template.txt
 /src/actuation/CMakeLists_template.txt
