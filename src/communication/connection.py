@@ -1,6 +1,6 @@
 import serial.tools.list_ports
 
-from src.communication import codes
+from communication import codes
 
 
 class Connection:

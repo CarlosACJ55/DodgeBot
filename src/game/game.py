@@ -1,7 +1,6 @@
 import threading
 
-from src.game.state import Phase, State
-from src.prediction.sentry import Sentry
+from game.state import Phase, State
 
 
 class Game:

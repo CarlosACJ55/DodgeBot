@@ -2,7 +2,8 @@ import tkinter as tk
 import tkinter.constants as tkc
 from tkinter import messagebox
 
-from src.game.state import Phase
+from game.state import Phase
+
 
 MAX_T = 600
 MIN_T = 10

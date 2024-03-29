@@ -1,4 +1,4 @@
-from src.game.state import Phase
+from game.state import Phase
 
 # Command Codes
 COM = '!'
