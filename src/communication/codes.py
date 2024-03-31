@@ -19,7 +19,6 @@ ALO_OFF = '0'
 
 # Formatting
 MSG_SEP = ','
-CHK_SEP = '#'
 MSG_END = '\n'
 
 # Limits

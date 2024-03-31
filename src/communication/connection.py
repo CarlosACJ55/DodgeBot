@@ -1,13 +1,31 @@
-import serial.tools.list_ports
+import serial
 
 from communication import codes
 
 
+def format_msg(msg):
+    return msg + msg + codes.MSG_END
+
+
+def decode_msg(msg):
+    half_len = len(msg) // 2
+    half_1 = msg[:half_len]
+    half_2 = msg[half_len:-1]
+    return half_1 if half_1 == half_2 else None
+
+
 class Connection:
-    def __init__(self, port="COM3", baud_rate=921600, timeout=0.1):
+    def __init__(self,
+                 port="COM3",
+                 baud_rate=921600,
+                 byte_size=serial.EIGHTBITS,
+                 stop_bits=serial.STOPBITS_ONE,
+                 time_out=0.1):
         self.port = port
         self.baud_rate = baud_rate
-        self.timeout = timeout
+        self.byte_size = byte_size
+        self.stop_bits = stop_bits
+        self.time_out = time_out
         self.serial = serial.Serial()
 
     def is_connected(self):
@@ -16,24 +34,18 @@ class Connection:
     def re_connect(self):
         if self.is_connected():
             self.disconnect()
-        self.serial.baudrate = self.baud_rate
         self.serial.port = self.port
-        self.serial.timeout = self.timeout
+        self.serial.baudrate = self.baud_rate
+        self.serial.byte_size = self.byte_size
+        self.serial.stopbits = self.stop_bits
+        self.serial.timeout = self.time_out
         self.serial.open()
-        if self.serial.is_open:
-            print("UART on {} connected successfully.".format(self.serial.port))
 
     def send(self, msg):
-        doubled_msg = msg + codes.CHK_SEP + msg + codes.MSG_END
-        self.serial.write(doubled_msg.encode())
+        self.serial.write(format_msg(msg))
 
     def receive(self):
-        doubled_msg = self.serial.readline().decode("UTF-8").split(codes.CHK_SEP)
-        if len(doubled_msg) != 2 or doubled_msg[0] != doubled_msg[1]:
-            raise ConnectionError("Received corrupt message")
-        return doubled_msg[0]
+        return decode_msg(self.serial.readline().decode("UTF-8"))
 
     def disconnect(self):
         self.serial.close()
-        if not self.serial.is_open:
-            print("UART on {} disconnected successfully.".format(self.serial.port))
