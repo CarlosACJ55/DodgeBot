@@ -24,6 +24,7 @@ class Connection:
         self.port = port
         self.baud_rate = baud_rate
         self.byte_size = byte_size
+        self.parity = serial.PARITY_NONE
         self.stop_bits = stop_bits
         self.time_out = time_out
         self.serial = serial.Serial()
@@ -36,7 +37,8 @@ class Connection:
             self.disconnect()
         self.serial.port = self.port
         self.serial.baudrate = self.baud_rate
-        self.serial.byte_size = self.byte_size
+        self.serial.bytesize = self.byte_size
+        self.serial.parity = self.parity
         self.serial.stopbits = self.stop_bits
         self.serial.timeout = self.time_out
         self.serial.open()
