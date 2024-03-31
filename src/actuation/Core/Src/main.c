@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "stdio.h"
 #include "string.h"
 
 /* USER CODE END Includes */
@@ -29,11 +30,7 @@
 /* USER CODE BEGIN PTD */
 #define RX_BUF_LEN 30
 #define MAX_Q_LEN 100
-
-typedef struct {
-  uint8_t data[RX_BUF_LEN];
-  uint16_t len;
-} Message;
+#define TIMEOUT 100
 
 typedef struct {
   uint8_t xDir, yDir;
@@ -46,12 +43,6 @@ typedef struct {
   uint8_t end;
   uint8_t count;
 } MoveQueue;
-
-typedef struct {
-  Message messages[MAX_Q_LEN];
-  uint8_t end;
-  uint8_t count;
-} MessageQueue;
 
 typedef enum State {
   DISCONNECTED,
@@ -78,11 +69,12 @@ RTC_HandleTypeDef hrtc;
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim12;
 
-UART_HandleTypeDef huart6;
-DMA_HandleTypeDef hdma_usart6_rx;
+UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-MessageQueue msgQ = {.end = 0, .count = 0};
+volatile unsigned char c;
+volatile char buffer[RX_BUF_LEN], msg[RX_BUF_LEN / 2];
+volatile int i = 0, msgLen = 0, msgReady = 0;
 MoveQueue movQ = {.end = 0, .count = 0};
 State gameState = DISCONNECTED;
 /* USER CODE END PV */
@@ -90,23 +82,16 @@ State gameState = DISCONNECTED;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_DMA_Init(void);
-static void MX_USART6_UART_Init(void);
 static void MX_RTC_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_TIM12_Init(void);
 static void MX_DAC_Init(void);
+static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
 static void send(const uint8_t *, const uint8_t);
-static void switchStates(uint8_t next);
 static uint8_t strToInt(uint8_t *, uint8_t *);
 static void enqueueMove(uint8_t *, uint8_t);
-static void interpret(Message *);
 static void send_pulses(TIM_HandleTypeDef *, uint8_t, uint8_t);
-static void enqueueMessage(const uint8_t *, uint8_t);
-static Message * dequeueMessage();
-static uint8_t isQueueEmpty();
-static uint8_t isQueueFull();
 static void processMessage(const uint8_t *, uint16_t);
 /* USER CODE END PFP */
 
@@ -142,16 +127,15 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
-  MX_USART6_UART_Init();
   MX_RTC_Init();
   MX_TIM1_Init();
   MX_TIM12_Init();
   MX_DAC_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+  __HAL_UART_ENABLE_IT(&huart1, UART_IT_RXNE);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
   HAL_TIM_PWM_Start(&htim12, TIM_CHANNEL_1);
-  HAL_UART_Receive_DMA(&huart6, (uint8_t *)msgQ.messages, sizeof(RX_BUF_LEN));
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -162,20 +146,23 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    switch (gameState) {
-    case IN_GAME:
-      break;
-      case IDLE:
-        send((uint8_t *)"X,1,200,0,100\n", 13);
-      break;
-    case CENTER:
-      /* code */
-      break;
-    case DISCONNECTED:
-      break;
-    default:
-      send((uint8_t *)"Unsynchronized.", 1);
+    if (msgReady) {
+      HAL_UART_Transmit(&huart1, msg, msgLen, TIMEOUT);
     }
+//    switch (gameState) {
+//    case IN_GAME:
+//      break;
+//      case IDLE:
+//        send((uint8_t *)"X,1,200,0,100\n", 13);
+//      break;
+//    case CENTER:
+//      /* code */
+//      break;
+//    case DISCONNECTED:
+//      break;
+//    default:
+//      send((uint8_t *)"Unsynchronized.", 1);
+//    }
   }
   /* USER CODE END 3 */
 }
@@ -436,51 +423,35 @@ static void MX_TIM12_Init(void)
 }
 
 /**
-  * @brief USART6 Initialization Function
+  * @brief USART1 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_USART6_UART_Init(void)
+static void MX_USART1_UART_Init(void)
 {
 
-  /* USER CODE BEGIN USART6_Init 0 */
+  /* USER CODE BEGIN USART1_Init 0 */
 
-  /* USER CODE END USART6_Init 0 */
+  /* USER CODE END USART1_Init 0 */
 
-  /* USER CODE BEGIN USART6_Init 1 */
+  /* USER CODE BEGIN USART1_Init 1 */
 
-  /* USER CODE END USART6_Init 1 */
-  huart6.Instance = USART6;
-  huart6.Init.BaudRate = 115200;
-  huart6.Init.WordLength = UART_WORDLENGTH_9B;
-  huart6.Init.StopBits = UART_STOPBITS_1;
-  huart6.Init.Parity = UART_PARITY_EVEN;
-  huart6.Init.Mode = UART_MODE_TX_RX;
-  huart6.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart6.Init.OverSampling = UART_OVERSAMPLING_16;
-  if (HAL_UART_Init(&huart6) != HAL_OK)
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 921600;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN USART6_Init 2 */
+  /* USER CODE BEGIN USART1_Init 2 */
 
-  /* USER CODE END USART6_Init 2 */
-
-}
-
-/**
-  * Enable DMA controller clock
-  */
-static void MX_DMA_Init(void)
-{
-
-  /* DMA controller clock enable */
-  __HAL_RCC_DMA2_CLK_ENABLE();
-
-  /* DMA interrupt init */
-  /* DMA2_Stream1_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
+  /* USER CODE END USART1_Init 2 */
 
 }
 
@@ -529,6 +500,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : PC6 PC7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct.Alternate = GPIO_AF8_USART6;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
   /*Configure GPIO pin : PA12 */
   GPIO_InitStruct.Pin = GPIO_PIN_12;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -548,28 +527,8 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
 void send(const uint8_t *msg, const uint8_t len) {
-  HAL_UART_Transmit(&huart6, (uint8_t *)msg, len, HAL_MAX_DELAY);
-}
-
-void switchStates(uint8_t next) {
-  switch (next) {
-  case 'I':
-    gameState = IDLE;
-    break;
-  case 'E':
-    gameState = DISCONNECTED;
-  case 'S':
-    if (gameState == IDLE) {
-      gameState = IN_GAME;
-      break;
-    }
-    send((uint8_t *)"!E", 2);
-  case 'R':
-    //reset_motors();
-	  break;
-  }
+  HAL_UART_Transmit(&huart1, (uint8_t *)msg, len, HAL_MAX_DELAY);
 }
 
 uint8_t strToInt(uint8_t *l, uint8_t *r) {
@@ -603,40 +562,6 @@ void enqueueMove(uint8_t *start, uint8_t len) {
   cur->yPul = strToInt(start + p1, start + p2);
 }
 
-void interpret(Message *msg) {
-  switch (msg->data[0]) {
-  case '!':
-    switchStates(msg->data[2]);
-    send(msg->data, msg->len);
-    break;
-  case 'X':
-    msg->data[msg->len] = '\0';
-    enqueueMove(msg->data, msg->len);
-    break;
-  default:
-    send((uint8_t *)"Invalid message code received.", 1);
-    break;
-  }
-}
-
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-  if (msgQ.count++ == MAX_Q_LEN)
-    send((uint8_t *)"Message queue overflow.", 1);
-  Message *cur = &msgQ.messages[msgQ.end++];
-  msgQ.end %= MAX_Q_LEN;
-  HAL_UART_Receive_DMA(huart, (uint8_t *)&msgQ.messages[msgQ.end], 1);
-  for (cur->len = 0; cur->data[cur->len++] != '\0';)
-    if (cur->len == RX_BUF_LEN)
-      send((uint8_t *)"Rx buffer overflow.", 1);
-  if (cur->len %= 2)
-    send((uint8_t *)"Transmission error.", 1);
-  cur->len /= 2;
-  if (strncmp((char *)cur->data, (char *)cur->data + cur->len, cur->len))
-    send((uint8_t *)"Transmission error.", 1);
-  interpret(cur);
-  msgQ.count--;
-}
-
 void send_pulses(TIM_HandleTypeDef *htim, uint8_t n, uint8_t dir) {
   uint8_t num_pulses_sent = dir;
   uint8_t i = 0;
@@ -651,17 +576,44 @@ void send_pulses(TIM_HandleTypeDef *htim, uint8_t n, uint8_t dir) {
   }
   htim->Instance->CNT = 0;
 }
-static void enqueueMessage(const uint8_t *, uint8_t){}
-static Message * dequeueMessage(){
-	return NULL;
-}
-static uint8_t isQueueEmpty(){
-	return 0;
-}
-static uint8_t isQueueFull(){
-	return 1;
-}
+
 static void processMessage(const uint8_t *, uint16_t){}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+  switch (c) {
+  case '#':
+    buffer[msgLen = i] = msg[i] = '\0';
+    strcpy((char *)msg, (char *)buffer);
+    i = 0;
+    break;
+  case ';':
+    buffer[i] = '\0';
+    if (strcmp((char *)msg, (char *)buffer) || msgReady) gameState = DISCONNECTED;
+    else msgReady = 1;
+    i = 0;
+    break;
+  default:
+    buffer[i++] = c;
+  }
+}
+
+//void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+//  if (msgQ.count++ == MAX_Q_LEN)
+//    send((uint8_t *)"Message queue overflow.", 1);
+//  Message *cur = &msgQ.messages[msgQ.end++];
+//  msgQ.end %= MAX_Q_LEN;
+//  HAL_UART_Receive_DMA(huart, (uint8_t *)&msgQ.messages[msgQ.end], 1);
+//  for (cur->len = 0; cur->data[cur->len++] != '\0';)
+//    if (cur->len == RX_BUF_LEN)
+//      send((uint8_t *)"Rx buffer overflow.", 1);
+//  if (cur->len %= 2)
+//    send((uint8_t *)"Transmission error.", 1);
+//  cur->len /= 2;
+//  if (strncmp((char *)cur->data, (char *)cur->data + cur->len, cur->len))
+//    send((uint8_t *)"Transmission error.", 1);
+//  interpret(cur);
+//  msgQ.count--;
+//}
 /* USER CODE END 4 */
 
 /**
