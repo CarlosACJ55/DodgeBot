@@ -33,18 +33,18 @@
 #define TIMEOUT 100
 
 typedef struct {
-  uint8_t xDir, yDir;
-  uint8_t xPul, yPul;
+  unsigned char xDir, yDir;
+  unsigned char xPul, yPul;
 } Move;
 
 typedef struct {
   Move moves[MAX_Q_LEN];
-  uint8_t start;
-  uint8_t end;
-  uint8_t count;
+  unsigned char start;
+  unsigned char end;
+  unsigned char count;
 } MoveQueue;
 
-typedef enum State { DISCONNECTED, IDLE, CENTER, IN_GAME } State;
+typedef enum State { DISCONNECTED, IDLE, RE_CENTER, IN_GAME } State;
 
 /* USER CODE END PTD */
 
@@ -84,10 +84,10 @@ static void MX_DAC_Init(void);
 static void MX_USART6_UART_Init(void);
 /* USER CODE BEGIN PFP */
 static void transmit(const unsigned char *);
-static uint8_t strToInt(uint8_t *, uint8_t *);
-static void enqueueMove(uint8_t *, uint8_t);
-static void send_pulses(TIM_HandleTypeDef *, uint8_t, uint8_t);
-static void processMessage(const uint8_t *, uint16_t);
+static unsigned char strToInt(unsigned char *, unsigned char *);
+static void enqueueMove(unsigned char *, unsigned char);
+static void send_pulses(unsigned char, unsigned char, unsigned char, unsigned char);
+static void handleCommand(const char);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -145,22 +145,18 @@ int main(void)
     /* USER CODE BEGIN 3 */
     if (msgReady) {
       msgReady = 0;
-      transmit(msg);
+      switch (msg[0]) {
+      case '!':
+        transmit(msg);
+        handleCommand(msg[1]);
+        break;
+      case 'X':
+        break;
+      default:
+
+        gameState = DISCONNECTED;
+      }
     }
-    //    switch (gameState) {
-    //    case IN_GAME:
-    //      break;
-    //      case IDLE:
-    //        transmit((uint8_t *)"X,1,200,0,100\n");
-    //      break;
-    //    case CENTER:
-    //      /* code */
-    //      break;
-    //    case DISCONNECTED:
-    //      break;
-    //    default:
-    //      transmit((uint8_t *)"Unsynchronized.\n");
-    //    }
   }
   /* USER CODE END 3 */
 }
@@ -520,11 +516,11 @@ static void MX_GPIO_Init(void)
 void transmit(const unsigned char *m) {
   char s[MAX_TX_LEN];
   snprintf(s, sizeof(s), "%s#%s;\n", m, m);
-  HAL_UART_Transmit(&huart6, (uint8_t *)s, strlen(s), HAL_MAX_DELAY);
+  HAL_UART_Transmit(&huart6, (unsigned char *)s, strlen(s), HAL_MAX_DELAY);
 }
 
-uint8_t strToInt(uint8_t *l, uint8_t *r) {
-  uint8_t res = 0, pow = 1;
+unsigned char strToInt(unsigned char *l, unsigned char *r) {
+  unsigned char res = 0, pow = 1;
   do {
     l--;
     res += pow * (*r - '0');
@@ -533,43 +529,91 @@ uint8_t strToInt(uint8_t *l, uint8_t *r) {
   return res;
 }
 
-void enqueueMove(uint8_t *start, uint8_t len) {
+void enqueueMove(unsigned char *start, unsigned char len) {
   Move *cur = &movQ.moves[movQ.end++];
   movQ.end %= MAX_Q_LEN;
   if (movQ.count++ == MAX_Q_LEN)
-    transmit((uint8_t *)"Move queue overflow.\n");
-  uint8_t p1 = 1, p2;
+    transmit((unsigned char *)"Move queue overflow.\n");
+  unsigned char p1 = 1, p2;
   cur->xDir = start[p1++] - '0';
   for (p2 = p1 + 1; start[p2] != ','; p2++)
     if (p2 == len)
-      transmit((uint8_t *)"Invalid move format\n");
+      transmit((unsigned char *)"Invalid move format\n");
   cur->xPul = strToInt(start + p1, start + p2);
   p1 = p2 + 1;
   cur->yDir = start[p1++] - '0';
   for (p2 = p1 + 1; start[p2] != '\0'; p2++)
     if (p2 == len)
-      transmit((uint8_t *)"Invalid move format\n");
+      transmit((unsigned char *)"Invalid move format\n");
   if (p2 != len)
-    transmit((uint8_t *)"Invalid move format\n");
+    transmit((unsigned char *)"Invalid move format\n");
   cur->yPul = strToInt(start + p1, start + p2);
 }
 
-void send_pulses(TIM_HandleTypeDef *htim, uint8_t n, uint8_t dir) {
-  uint8_t num_pulses_sent = dir;
-  uint8_t i = 0;
-  uint8_t arr_check = htim->Instance->ARR;
-  while (num_pulses_sent < n) {
-    while (i < arr_check) {
-      htim->Instance->CNT = i;
-      i++;
+static void send_pulses(unsigned char motor1_num_pulses, unsigned char motor2_num_pulses, unsigned char motor1_dir, unsigned char motor2_dir){
+  unsigned char num_pulses_sent1 = 0;
+  unsigned char num_pulses_sent2 = 0;
+  unsigned char i = 0;
+  unsigned char arr_check = htim12.Instance->ARR;
+  if(motor1_num_pulses > motor2_num_pulses){
+    for(num_pulses_sent1=0; num_pulses_sent1 < motor1_num_pulses; num_pulses_sent1++){
+      if(num_pulses_sent2 < motor2_num_pulses){
+        for(i; i < arr_check; i++){
+        htim12.Instance->CNT = i;
+        htim1.Instance->CNT = i;
+        }
+        i = 0;
+        num_pulses_sent2++;
+      }
+      else{
+        htim1.Instance->CNT = 0;
+        for(i; i < arr_check; i++){
+          htim12.Instance->CNT = i;
+        }
+        i = 0;
+      }
     }
-    num_pulses_sent++;
-    i = 0;
   }
-  htim->Instance->CNT = 0;
+  else{
+    for(num_pulses_sent2=0; num_pulses_sent2 < motor2_num_pulses; num_pulses_sent2++){
+      if(num_pulses_sent1 < motor1_num_pulses){
+        for(i; i < arr_check; i++){
+        htim12.Instance->CNT = i;
+        htim1.Instance->CNT = i;
+        }
+        i = 0;
+        num_pulses_sent1++;
+      }
+      else{
+        htim12.Instance->CNT = 0;
+        for(i; i < arr_check; i++){
+        htim1.Instance->CNT = i;
+        }
+        i = 0;
+      }
+    }
+  }
+  htim12.Instance->CNT = 0;
+  htim1.Instance->CNT = 0;
+  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0, GPIO_PIN_SET);
 }
 
-static void processMessage(const uint8_t *, uint16_t) {}
+static void handleCommand(const char cmd) {
+  switch (cmd) {
+  case IN_GAME:
+    break;
+    case IDLE:
+      transmit((unsigned char *)"X,1,200,0,100\n");
+    break;
+  case RE_CENTER:
+    /* code */
+    break;
+  case DISCONNECTED:
+    break;
+  default:
+    transmit((unsigned char *)"Unsynchronized.\n");
+  }
+}
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
   switch (c) {
@@ -591,23 +635,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
   }
 }
 
-// void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-//   if (msgQ.count++ == MAX_Q_LEN)
-//     transmit((uint8_t *)"Message queue overflow.\n");
-//   Message *cur = &msgQ.messages[msgQ.end++];
-//   msgQ.end %= MAX_Q_LEN;
-//   HAL_UART_Receive_DMA(huart, (uint8_t *)&msgQ.messages[msgQ.end], 1);
-//   for (cur->len = 0; cur->data[cur->len++] != '\0';)
-//     if (cur->len == MAX_TX_LEN)
-//       transmit((uint8_t *)"Rx buffer overflow.\n");
-//   if (cur->len %= 2)
-//     transmit((uint8_t *)"Transmission error.\n");
-//   cur->len /= 2;
-//   if (strncmp((char *)cur->data, (char *)cur->data + cur->len, cur->len))
-//     transmit((uint8_t *)"Transmission error.\n");
-//   interpret(cur);
-//   msgQ.count--;
-// }
 /* USER CODE END 4 */
 
 /**

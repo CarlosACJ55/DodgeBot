@@ -3,7 +3,7 @@ from communication import codes
 from communication.connection import Connection
 from communication.message import *
 
-valid_message_types = {codes.COM: Command, codes.POS: Position, codes.ARM: Alarm}
+valid_message_types = {codes.CMD: Command, codes.POS: Position, codes.ALO: Alarm}
 
 
 class Protocol:
@@ -14,19 +14,17 @@ class Protocol:
         self.connection.reconnect()
 
     def write(self, command):
-        self.connection.send(command)
+        self.connection.send(str(command))
 
     def read(self):
         msg = None
         while msg is None:
             msg = self.connection.receive()
-        code = msg.pop()
-        if code not in valid_message_types:
-            raise Exception("Invalid command code")
-        return valid_message_types[code](msg)
+        print("response:" + str(msg) + ".")
+        return valid_message_types.get(msg[0], None)(msg[1:])
 
     def synchronize(self):
-        self.write(Command([codes.SYNC]))
+        self.write(Command(codes.SYNC))
         return isinstance(self.read(), Command)
 
     def check_connection(self):

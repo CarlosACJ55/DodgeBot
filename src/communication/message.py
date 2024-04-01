@@ -8,41 +8,32 @@ class Message(ABC):
         self.data = data
 
     def __str__(self):
-        return codes.MSG_SEP.join(self.data)
+        return self.code + codes.DATA_SEP.join(self.data)
 
 
 class Command(Message):
-    def __init__(self, data):
-        if len(data) != 1:
+    def __init__(self, cmd):
+        if len(cmd) != 1:
             raise Exception('Invalid amount of data for a Command Message')
-        if not data[0].isdecimal():
-            raise Exception('Invalid data for a Command Message')
-        super().__init__(data)
+        super().__init__(cmd)
+        self.code = codes.CMD
 
 
 class Position(Message):
     def __init__(self, data):
-        if len(data) != 4:
-            raise Exception('Invalid amount of data for a Position Message')
-        for x in data:
-            if not x.isdigit():
-                raise Exception('Invalid data for a Position Message')
+        strings = data.split(codes.DATA_SEP)
+        if len(strings) != 4:
+            raise Exception('Invalid data for a Position Message')
         super().__init__(data)
-        self.m1_dir = data[0]
-        self.m1_pul = data[1]
-        self.m2_dir = data[2]
-        self.m2_pul = data[3]
+        self.m1_dir, self.m1_pul, self.m2_dir, self.m2_pul = [int(s) for s in strings]
+        self.code = codes.POS
 
 
 class Alarm(Message):
     def __init__(self, data):
         super().__init__(data)
-        if len(data) != 3:
+        if len(data) != 3 or not data.isdigit():
             raise Exception('Invalid amount of data for a Alarm Message')
-        for x in data:
-            if x not in {codes.ALO_ON, codes.ALO_OFF}:
-                raise Exception('Invalid codes for an Alarm Message')
         super.__init__(data)
-        self.a = data[0]
-        self.b = data[1]
-        self.c = data[2]
+        self.a, self.b, self.c = [int(c) for c in data]
+        self.code = codes.ALO

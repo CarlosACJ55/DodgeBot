@@ -1,11 +1,11 @@
 from game.state import Phase
 
 # Command Codes
-COM = '!'
-STOP = 'E'
+CMD = '!'
 SYNC = Phase.IDLE.value
 RESET = Phase.RESETTING.value
 START = Phase.IN_GAME.value
+STOP = 'E'
 
 # Position Codes
 POS = 'X'
@@ -13,11 +13,10 @@ DIR_L = 'L'
 DIR_R = 'R'
 
 # Alarm Codes
-ARM = 'A'
-ALO_ON = '1'
-ALO_OFF = '0'
+ALO = 'A'
 
 # Formatting
+DATA_SEP = ','
 MSG_SEP = '#'
 MSG_END = ';'
 
