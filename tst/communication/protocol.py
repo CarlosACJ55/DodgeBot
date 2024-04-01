@@ -1,9 +1,4 @@
-import sys
-import os
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-src_path = os.path.join(project_root, 'src')
-sys.path.insert(0, src_path)
-from communication.message import Command, Position
+from communication.message import Command
 from communication import codes
 from communication.protocol import Protocol
 
@@ -12,7 +7,7 @@ protocol = Protocol()
 
 def protocol_test():
     res = True
-    
+
     # connect:false
     if protocol.connection.is_connected():
         print("protocol_test [connect:false] failed")
@@ -24,17 +19,21 @@ def protocol_test():
         print("protocol_test [connect:true] failed")
         res = False
 
-    # write and read:commands
-    commands = [Command(codes.SYNC), Command(codes.START), Command(codes.STOP), Command(codes.RESET)]
+    # write and read
+    test_code = codes.SYNC
+    test_message = Command(test_code)
+    protocol.write(test_message)
+    response = protocol.read()
+    if not isinstance(response, Command) or response.data != test_code:
+        print("protocol_test [write and read] failed")
+        res = False
+
+    # command
+    commands = [codes.SYNC, codes.START, codes.RESET, codes.STOP]
     for command in commands:
-        print("command:" + str(command) + ".")
-        protocol.write(command)
-        response = protocol.read()
-        if type(response) != type(command) or response.data != command.data:
-            print("protocol_test [write and read:commands] failed")
+        if not protocol.command(command):
+            print("protocol_test [commands:" + str(command) + "] failed")
             res = False
-            break
-        print("yay")
 
     # # write and read:positions
     # messages = [Position(codes.SYNC), Position(codes.START), Position(codes.RESET), Position(codes.STOP)]
@@ -43,7 +42,7 @@ def protocol_test():
     #     if protocol.read()
     #     print("protocol_test [decode_msg] failed")
     #     res = False
-        
+
     # # write and read:alarms (MUST CONFIGURE STM TO ECHO MESSAGE TO RUN THIS TEST)
     # messages = [Command(codes.SYNC), Command(codes.START), Command(codes.RESET), Command(codes.STOP)]
     # for m in messages:
@@ -51,11 +50,6 @@ def protocol_test():
     #     if protocol.read()
     #     print("protocol_test [decode_msg] failed")
     #     res = False
-
-    # synchronize
-    if not protocol.synchronize():
-        print("protocol_test [synchronize] failed")
-        res = False
 
     # # check_connection
     # if not connection.is_connected():

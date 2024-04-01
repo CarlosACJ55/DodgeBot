@@ -16,12 +16,12 @@ def decode_msg(msg):
 
 class Connection:
     def __init__(self,
-                 port="COM5",
+                 port="/dev/tty.usbserial-A50285BI",
                  baud_rate=921600,
                  byte_size=serial.EIGHTBITS,
-                 parity = serial.PARITY_NONE,
+                 parity=serial.PARITY_NONE,
                  stop_bits=serial.STOPBITS_ONE,
-                 timeout=0.1):
+                 timeout=1):
         self.port = port
         self.baud_rate = baud_rate
         self.byte_size = byte_size
@@ -48,8 +48,7 @@ class Connection:
         self.serial.write(format_msg(msg).encode("utf-8"))
 
     def receive(self):
-        got =  decode_msg(self.serial.readline().decode("utf-8"))
-        print("got:", got)
+        got = decode_msg(self.serial.readline().decode())
         return got
 
     def disconnect(self):
