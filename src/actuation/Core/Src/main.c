@@ -28,13 +28,13 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-#define MAX_TX_LEN 30
+#define MAX_TX_LEN 50
 #define MAX_Q_LEN 100
-#define TIMEOUT 100
+#define TIMEOUT 1000
 
 typedef struct {
-  unsigned char xDir, yDir;
-  unsigned char xPul, yPul;
+  char xDir, yDir;
+  int xPul, yPul;
 } Move;
 
 typedef struct {
@@ -44,7 +44,7 @@ typedef struct {
   unsigned char count;
 } MoveQueue;
 
-typedef enum State { DISCONNECTED, IDLE, RE_CENTER, IN_GAME } State;
+typedef enum State {IDLE = 'I', IN_GAME = 'S', RE_CENTER = 'R', DISCONNECTED = 'D'} State;
 
 /* USER CODE END PTD */
 
@@ -67,7 +67,8 @@ TIM_HandleTypeDef htim12;
 UART_HandleTypeDef huart6;
 
 /* USER CODE BEGIN PV */
-volatile unsigned char buffer[MAX_TX_LEN], c;
+unsigned char c;
+volatile unsigned char buffer[MAX_TX_LEN];
 volatile int i = 0, msgReady = 0;
 unsigned char msg[MAX_TX_LEN / 2];
 MoveQueue movQ = {.end = 0, .count = 0};
@@ -83,11 +84,13 @@ static void MX_TIM12_Init(void);
 static void MX_DAC_Init(void);
 static void MX_USART6_UART_Init(void);
 /* USER CODE BEGIN PFP */
-static void transmit(const unsigned char *);
-static unsigned char strToInt(unsigned char *, unsigned char *);
-static void enqueueMove(unsigned char *, unsigned char);
-static void send_pulses(unsigned char, unsigned char, unsigned char, unsigned char);
+static void transmit(const char *);
+static void resetMotors();
 static void handleCommand(const char);
+static void enqueueMove(Move);
+static void handlePos(unsigned char *);
+static Move *dequeueMove();
+static void send_pulses(Move *move);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -141,22 +144,22 @@ int main(void)
   htim12.Instance->CNT = 0;
   while (1) {
     /* USER CODE END WHILE */
-
     /* USER CODE BEGIN 3 */
     if (msgReady) {
       msgReady = 0;
       switch (msg[0]) {
       case '!':
-        transmit(msg);
         handleCommand(msg[1]);
         break;
       case 'X':
+        handlePos(msg + 1);
         break;
       default:
-
+        transmit("A999\0");
         gameState = DISCONNECTED;
       }
     }
+    if (gameState == IN_GAME && movQ.count) send_pulses(dequeueMove());
   }
   /* USER CODE END 3 */
 }
@@ -513,61 +516,87 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void transmit(const unsigned char *m) {
+void transmit(const char *m) {
   char s[MAX_TX_LEN];
   snprintf(s, sizeof(s), "%s#%s;\n", m, m);
   HAL_UART_Transmit(&huart6, (unsigned char *)s, strlen(s), HAL_MAX_DELAY);
 }
 
-unsigned char strToInt(unsigned char *l, unsigned char *r) {
-  unsigned char res = 0, pow = 1;
-  do {
-    l--;
-    res += pow * (*r - '0');
-    pow *= 10;
-  } while (l != r);
-  return res;
+void resetMotors() {
+  return;
 }
 
-void enqueueMove(unsigned char *start, unsigned char len) {
-  Move *cur = &movQ.moves[movQ.end++];
+void handleCommand(const char code) {
+  switch (code) {
+  case 'R':
+    gameState = RE_CENTER;
+//    transmit("X,1,200,0,100\n"); // send cur position.
+    transmit("!R\0");
+    break;
+  case 'I':
+    if (gameState == RE_CENTER || gameState == IN_GAME) resetMotors();
+    gameState = IDLE;
+    transmit("!I\0");
+    break;
+  case 'D':
+    gameState = DISCONNECTED;
+    transmit("!D\0");
+  case 'S':
+    if (gameState != IDLE) transmit("A988\0");
+    else {
+      gameState = IN_GAME;
+      transmit("!S\0");
+    }
+    break;
+  default:
+    transmit("A989\0");
+  }
+}
+
+void enqueueMove(Move m) {
+  Move *end = &movQ.moves[movQ.end++];
   movQ.end %= MAX_Q_LEN;
   if (movQ.count++ == MAX_Q_LEN)
-    transmit((unsigned char *)"Move queue overflow.\n");
-  unsigned char p1 = 1, p2;
-  cur->xDir = start[p1++] - '0';
-  for (p2 = p1 + 1; start[p2] != ','; p2++)
-    if (p2 == len)
-      transmit((unsigned char *)"Invalid move format\n");
-  cur->xPul = strToInt(start + p1, start + p2);
-  p1 = p2 + 1;
-  cur->yDir = start[p1++] - '0';
-  for (p2 = p1 + 1; start[p2] != '\0'; p2++)
-    if (p2 == len)
-      transmit((unsigned char *)"Invalid move format\n");
-  if (p2 != len)
-    transmit((unsigned char *)"Invalid move format\n");
-  cur->yPul = strToInt(start + p1, start + p2);
+    transmit("A979\0");
+  end->xDir = m.xDir;
+  end->xPul = m.xPul;
+  end->yDir = m.yDir;
+  end->yPul = m.yPul;
 }
 
-static void send_pulses(unsigned char motor1_num_pulses, unsigned char motor2_num_pulses, unsigned char motor1_dir, unsigned char motor2_dir){
-  unsigned char num_pulses_sent1 = 0;
-  unsigned char num_pulses_sent2 = 0;
-  unsigned char i = 0;
+void handlePos(unsigned char *data) {
+  Move m;
+  sscanf((char *)data, "%c,%d,%c,%d", &m.xDir, &m.xPul, &m.yDir, &m.yPul);
+  enqueueMove(m);
+}
+
+
+Move *dequeueMove() {
+  if (!movQ.count)
+    transmit("A969\0");
+  Move *move = &movQ.moves[movQ.start++];
+  movQ.start %= MAX_Q_LEN;
+  return move;
+}
+
+void send_pulses(Move *move){
+  int sent1 = 0;
+  int sent2 = 0;
+  int i;
   unsigned char arr_check = htim12.Instance->ARR;
-  if(motor1_num_pulses > motor2_num_pulses){
-    for(num_pulses_sent1=0; num_pulses_sent1 < motor1_num_pulses; num_pulses_sent1++){
-      if(num_pulses_sent2 < motor2_num_pulses){
-        for(i; i < arr_check; i++){
+  if(move->xPul > move->yPul){
+    for(sent1 = 0; sent1 < move->xPul; sent1++){
+      if(sent2 < move->yPul){
+        for(i = 0; i < arr_check; i++){
         htim12.Instance->CNT = i;
         htim1.Instance->CNT = i;
         }
         i = 0;
-        num_pulses_sent2++;
+        sent2++;
       }
       else{
         htim1.Instance->CNT = 0;
-        for(i; i < arr_check; i++){
+        for(; i < arr_check; i++){
           htim12.Instance->CNT = i;
         }
         i = 0;
@@ -575,19 +604,19 @@ static void send_pulses(unsigned char motor1_num_pulses, unsigned char motor2_nu
     }
   }
   else{
-    for(num_pulses_sent2=0; num_pulses_sent2 < motor2_num_pulses; num_pulses_sent2++){
-      if(num_pulses_sent1 < motor1_num_pulses){
-        for(i; i < arr_check; i++){
+    for(sent2=0; sent2 < move->yPul; sent2++){
+      if(sent1 < move->xPul){
+        for(i = 0; i < arr_check; i++){
         htim12.Instance->CNT = i;
         htim1.Instance->CNT = i;
         }
         i = 0;
-        num_pulses_sent1++;
+        sent1++;
       }
       else{
         htim12.Instance->CNT = 0;
-        for(i; i < arr_check; i++){
-        htim1.Instance->CNT = i;
+        for(; i < arr_check; i++){
+          htim1.Instance->CNT = i;
         }
         i = 0;
       }
@@ -596,23 +625,6 @@ static void send_pulses(unsigned char motor1_num_pulses, unsigned char motor2_nu
   htim12.Instance->CNT = 0;
   htim1.Instance->CNT = 0;
   HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0, GPIO_PIN_SET);
-}
-
-static void handleCommand(const char cmd) {
-  switch (cmd) {
-  case IN_GAME:
-    break;
-    case IDLE:
-      transmit((unsigned char *)"X,1,200,0,100\n");
-    break;
-  case RE_CENTER:
-    /* code */
-    break;
-  case DISCONNECTED:
-    break;
-  default:
-    transmit((unsigned char *)"Unsynchronized.\n");
-  }
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
@@ -634,7 +646,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     buffer[i++] = c;
   }
 }
-
 /* USER CODE END 4 */
 
 /**
