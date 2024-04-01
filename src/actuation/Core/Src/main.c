@@ -64,11 +64,10 @@ RTC_HandleTypeDef hrtc;
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim12;
 
-UART_HandleTypeDef huart1;
+UART_HandleTypeDef huart6;
 
 /* USER CODE BEGIN PV */
-volatile unsigned char c;
-volatile unsigned char buffer[MAX_TX_LEN];
+volatile unsigned char buffer[MAX_TX_LEN], c;
 volatile int i = 0, msgReady = 0;
 unsigned char msg[MAX_TX_LEN / 2];
 MoveQueue movQ = {.end = 0, .count = 0};
@@ -82,7 +81,7 @@ static void MX_RTC_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_TIM12_Init(void);
 static void MX_DAC_Init(void);
-static void MX_USART1_UART_Init(void);
+static void MX_USART6_UART_Init(void);
 /* USER CODE BEGIN PFP */
 static void transmit(const unsigned char *);
 static uint8_t strToInt(uint8_t *, uint8_t *);
@@ -100,7 +99,8 @@ static void processMessage(const uint8_t *, uint16_t);
   * @brief  The application entry point.
   * @retval int
   */
-int main(void) {
+int main(void)
+{
   /* USER CODE BEGIN 1 */
   /* USER CODE END 1 */
 
@@ -126,10 +126,11 @@ int main(void) {
   MX_TIM1_Init();
   MX_TIM12_Init();
   MX_DAC_Init();
-  MX_USART1_UART_Init();
+  MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
-//  HAL_UART_RegisterRxEventCallback(&huart1, handleRx)
-  HAL_UART_Receive_IT(&huart1, (unsigned char *)&c, 1);
+//  HAL_UART_RegisterRxEventCallback(&huart6, handleRx)
+  __HAL_UART_ENABLE_IT(&huart6, UART_IT_RXNE);
+  HAL_UART_Receive_IT(&huart6, (unsigned char *)&c, 1);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
   HAL_TIM_PWM_Start(&htim12, TIM_CHANNEL_1);
   /* USER CODE END 2 */
@@ -142,7 +143,6 @@ int main(void) {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    HAL_UART_Transmit_IT(&huart1, "test", sizeof("test"));
     if (msgReady) {
       msgReady = 0;
       transmit(msg);
@@ -421,35 +421,35 @@ static void MX_TIM12_Init(void)
 }
 
 /**
-  * @brief USART1 Initialization Function
+  * @brief USART6 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_USART1_UART_Init(void)
+static void MX_USART6_UART_Init(void)
 {
 
-  /* USER CODE BEGIN USART1_Init 0 */
+  /* USER CODE BEGIN USART6_Init 0 */
 
-  /* USER CODE END USART1_Init 0 */
+  /* USER CODE END USART6_Init 0 */
 
-  /* USER CODE BEGIN USART1_Init 1 */
+  /* USER CODE BEGIN USART6_Init 1 */
 
-  /* USER CODE END USART1_Init 1 */
-  huart1.Instance = USART1;
-  huart1.Init.BaudRate = 921600;
-  huart1.Init.WordLength = UART_WORDLENGTH_8B;
-  huart1.Init.StopBits = UART_STOPBITS_1;
-  huart1.Init.Parity = UART_PARITY_NONE;
-  huart1.Init.Mode = UART_MODE_TX_RX;
-  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
-  if (HAL_UART_Init(&huart1) != HAL_OK)
+  /* USER CODE END USART6_Init 1 */
+  huart6.Instance = USART6;
+  huart6.Init.BaudRate = 921600;
+  huart6.Init.WordLength = UART_WORDLENGTH_8B;
+  huart6.Init.StopBits = UART_STOPBITS_1;
+  huart6.Init.Parity = UART_PARITY_NONE;
+  huart6.Init.Mode = UART_MODE_TX_RX;
+  huart6.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart6.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart6) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN USART1_Init 2 */
+  /* USER CODE BEGIN USART6_Init 2 */
 
-  /* USER CODE END USART1_Init 2 */
+  /* USER CODE END USART6_Init 2 */
 
 }
 
@@ -498,14 +498,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PC6 PC7 */
-  GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF8_USART6;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
   /*Configure GPIO pin : PA12 */
   GPIO_InitStruct.Pin = GPIO_PIN_12;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -528,7 +520,7 @@ static void MX_GPIO_Init(void)
 void transmit(const unsigned char *m) {
   char s[MAX_TX_LEN];
   snprintf(s, sizeof(s), "%s#%s;\n", m, m);
-  HAL_UART_Transmit(&huart1, (uint8_t *)s, strlen(s), HAL_MAX_DELAY);
+  HAL_UART_Transmit(&huart6, (uint8_t *)s, strlen(s), HAL_MAX_DELAY);
 }
 
 uint8_t strToInt(uint8_t *l, uint8_t *r) {

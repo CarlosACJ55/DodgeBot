@@ -1,3 +1,8 @@
+import sys
+import os
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+src_path = os.path.join(project_root, 'src')
+sys.path.insert(0, src_path)
 from communication import codes
 from communication.connection import Connection, decode_msg, format_msg
 
@@ -6,46 +11,47 @@ connection = Connection()
 
 
 def connection_test():
+    res = True
     # format_msg
     message = "ABCD"
     formatted = format_msg(message)
-    if formatted != message + message + codes.MSG_END:
+    if formatted != message + codes.MSG_SEP + message + codes.MSG_END:
         print("connection_test [format_msg] failed")
-        return False
+        res = False
 
     # decode_msg
-    if decode_msg(formatted) != message:
+    if decode_msg(formatted + '\n') != message:
         print("connection_test [decode_msg] failed")
 
-    # is_connected:true
+    # is_connected:false
     if connection.is_connected():
         print("connection_test [is_connected:false] failed")
-        return False
+        res = False
 
-    # re_connect
-    connection.re_connect()
-    if not connection.serial.is_open():
-        print("connection_test [re_connect] failed")
-        return False
+    # reconnect
+    connection.reconnect()
+    if not connection.serial.is_open:
+        print("connection_test [reconnect] failed")
+        res = False
 
-    # is_connected
+    # is_connected:true
     if not connection.is_connected():
         print("connection_test [is_connected:true] failed")
-        return False
+        res = False
 
     # send and receive (MUST CONFIGURE STM TO ECHO MESSAGE TO RUN THIS TEST)
     connection.send(message)
     if connection.receive() != message:
         print("connection_test [send and receive] failed")
-        return False
+        res = False
 
     # disconnect
     connection.disconnect()
     if connection.serial.is_open:
         print("connection_test [disconnect] failed")
-        return False
-    return True
+        res = False
+    return res
 
 
 if __name__ == '__main__':
-    print("Result of connection_test():", connection_test())
+    print("Result of connection_test:", connection_test())

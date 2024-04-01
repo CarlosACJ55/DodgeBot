@@ -11,7 +11,7 @@ class Protocol:
     streaming = False
 
     def connect(self):
-        self.connection.re_connect()
+        self.connection.reconnect()
 
     def write(self, command):
         self.connection.send(command)

@@ -18,8 +18,8 @@ ALO_ON = '1'
 ALO_OFF = '0'
 
 # Formatting
-MSG_SEP = ','
-MSG_END = '\n'
+MSG_SEP = '#'
+MSG_END = ';'
 
 # Limits
 MAX_ATTEMPTS = 200
