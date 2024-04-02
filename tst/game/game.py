@@ -1,59 +1,52 @@
-import threading
+from communication import codes
+from communication.connection import Connection, decode_msg, format_msg
 
-from game.state import Phase, State
+
+connection = Connection()
 
 
-class Game:
-    state = State()
+def connection_test():  # STM MUST BE IN ECHO MODE TO RUN THIS TEST
+    res = True
+    # format_msg
+    message = "ABCD"
+    formatted = format_msg(message)
+    if formatted != message + codes.MSG_SEP + message + codes.MSG_END:
+        print("connection_test [format_msg] failed")
+        res = False
 
-    def __init__(self, protocol, gui):
-        self.stm = protocol
-        self.ui = gui
-        self.frame = self.ui.menu_frame(self)
+    # decode_msg
+    if decode_msg(formatted + '\n') != message:
+        print("connection_test [decode_msg] failed")
 
-    def configure(self, height, time):
-        self.state.height = height
-        self.state.time = time
-        if self.stm.synchronize():
-            self.state.phase = Phase.IDLE
+    # is_connected:false
+    if connection.is_connected():
+        print("connection_test [is_connected:false] failed")
+        res = False
 
-    def end(self):
-        self.stm.reset()
-        self.state.phase = Phase.IDLE
-        self.frame = self.ui.menu_frame(self)
+    # reconnect
+    connection.reconnect()
+    if not connection.serial.is_open:
+        print("connection_test [reconnect] failed")
+        res = False
 
-    def emergency_reset(self):
-        if not self.stm.check_connection():
-            self.stm.reconnect()
-        self.state.phase = Phase.RESETTING
-        if self.state.phase == Phase.IN_GAME:
-            self.end()
-        if self.stm.reset():
-            self.state.phase = Phase.IDLE
-        else:
-            self.stm.power_off()
-        self.stm.disconnect()
-        self.state.phase = Phase.DISCONNECTED
+    # is_connected:true
+    if not connection.is_connected():
+        print("connection_test [is_connected:true] failed")
+        res = False
 
-    def countdown(self):
-        for self.state.time in reversed(range(self.state.time)):
-            self.frame.update_timer()
-        self.end()
+    # send and receive
+    connection.send(message)
+    if connection.receive() != message:
+        print("connection_test [send and receive] failed")
+        res = False
 
-    def start_dodging(self):
-        computer = Sentry(self.state.height)
-        while self.state.phase == Phase.IN_GAME:
-            dodge_path = computer.detect_punch()
-            if dodge_path is not None:
-                self.stm.move_to(dodge_path)
-            self.stm.reset()
+    # disconnect
+    connection.disconnect()
+    if connection.serial.is_open:
+        print("connection_test [disconnect] failed")
+        res = False
+    return res
 
-    def play(self):
-        if self.stm.check_connection() and self.state.phase == Phase.IDLE:
-            self.frame = self.ui.timer_frame(self.state)
-            time_thread = threading.Thread(target=self.countdown)
-            time_thread.start()
-            self.state.phase = Phase.IN_GAME
-            self.start_dodging()
-            time_thread.join()
-            self.end()
+
+if __name__ == '__main__':
+    print("Result of connection_test:", connection_test())

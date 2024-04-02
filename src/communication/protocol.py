@@ -24,14 +24,14 @@ class Protocol:
         return msg_types.get(msg[0], None)(msg[1:])
 
     def transition(self, code):
-        if code not in {codes.SYNC, codes.RESET, codes.START, codes.STOP}:
+        if code not in {codes.SYNC, codes.RESET, codes.START, codes.DISC}:
             raise ValueError("Incorrect code for a command")
         self.write(Command(code))
         res = self.read()
         return res.data == code if isinstance(res, Command) else res
 
-    def move(self, x_dir, x_pulses, y_dir, y_pulses):
-        self.write(Position(codes.DATA_SEP.join([str(x_dir), str(x_pulses), str(y_dir), str(y_pulses)])))
+    def move(self, x, y):
+        self.write(Position(str(x) + codes.DATA_SEP + str(y)))
 
     def locate(self):
         res = self.read()

@@ -5,7 +5,7 @@ from communication.protocol import Protocol
 protocol = Protocol()
 
 
-def protocol_test():
+def protocol_test():  # STM POS MUST BE SET TO 0, AND STM MUST BE IN TRACKING MODE
     res = True
 
     # check_connection:false
@@ -33,20 +33,19 @@ def protocol_test():
         res = False
 
     # transition
-    test_modes = [codes.START, codes.RESET, codes.STOP, codes.SYNC, codes.START]
+    test_modes = [codes.START, codes.RESET, codes.DISC, codes.SYNC, codes.START]
     for mode in test_modes:
         if not protocol.transition(mode):
             print("protocol_test [commands:" + str(mode) + "] failed")
             res = False
 
-    # move and locate [STM POS MUST BE SET TO 0, AND STM MUST BE IN TRACKING MODE]
-    test_moves = [(0, 10, 1, 10), (0, 40, 1, 40), (1, 10, 0, 10), (1, 40, 0, 39)]
-    test_displacements = [(0, 10, 1, 10), (0, 50, 1, 50), (0, 40, 1, 40), (1, 0, 1, 1)]
-    pos = None
+    # move and locate
+    test_moves = [(10, -10), (40, -40), (-10, 10), (-40, 39), (0, 1)]
+    test_displacements = [(10, -10), (50, -50), (40, -40), (0, -1), (0, 0)]
     for move, result in zip(test_moves, test_displacements):
         protocol.move(*move)
         pos = protocol.locate()
-        if (pos.x_dir, pos.x_pul, pos.y_dir, pos.y_pul) != result:
+        if pos.x != result[0] or pos.y != result[1]:
             print("protocol_test [move and locate] failed")
             res = False
 

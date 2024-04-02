@@ -1,8 +1,3 @@
-import sys
-import os
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-src_path = os.path.join(project_root, 'src')
-sys.path.insert(0, src_path)
 from communication import codes
 from communication.connection import Connection, decode_msg, format_msg
 
@@ -10,7 +5,7 @@ from communication.connection import Connection, decode_msg, format_msg
 connection = Connection()
 
 
-def connection_test():
+def connection_test():  # STM MUST BE IN ECHO MODE TO RUN THIS TEST
     res = True
     # format_msg
     message = "ABCD"
@@ -39,7 +34,7 @@ def connection_test():
         print("connection_test [is_connected:true] failed")
         res = False
 
-    # send and receive (STM MUST BE IN ECHO MODE TO RUN THIS TEST)
+    # send and receive
     connection.send(message)
     if connection.receive() != message:
         print("connection_test [send and receive] failed")
