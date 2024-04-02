@@ -39,20 +39,16 @@ def protocol_test():
             print("protocol_test [commands:" + str(mode) + "] failed")
             res = False
 
-    # move and locate
-    test_moves = [(0, 10, 1, 10), (0, 40, 1, 40), (0, 10, 1, 10), (0, 40, 1, 40)]
+    # move and locate [STM POS MUST BE SET TO 0, AND STM MUST BE IN TRACKING MODE]
+    test_moves = [(0, 10, 1, 10), (0, 40, 1, 40), (1, 10, 0, 10), (1, 40, 0, 39)]
+    test_displacements = [(0, 10, 1, 10), (0, 50, 1, 50), (0, 40, 1, 40), (1, 0, 1, 1)]
     pos = None
-    for move in test_moves:
+    for move, result in zip(test_moves, test_displacements):
         protocol.move(*move)
         pos = protocol.locate()
-        if (pos.x_dir, pos.x_pul, pos.y_dir, pos.y_pul) == move:
-            print("protocol_test [decode_msg] failed")
+        if (pos.x_dir, pos.x_pul, pos.y_dir, pos.y_pul) != result:
+            print("protocol_test [move and locate] failed")
             res = False
-
-    # move:tracking
-    if pos.x_pul or pos.y_pul:
-        print("protocol_test [move:tracking] failed")
-        res = False
 
     # disconnect
     protocol.disconnect()
