@@ -18,7 +18,7 @@ Https://engineering.purdue.edu/477grp5/
   - Developped with Pytest
 * Braum controlled by STM32F7 programmed in C
   - Generated drivers with STM32CubeMX
-  - Depelopped for Yaskawa [model#] motors
+  - Depelopped for Yaskawa SGM7G-30A & SGM7G-20A motors
 
 ## Authors
 
