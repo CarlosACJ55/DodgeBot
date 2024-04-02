@@ -3,14 +3,14 @@ from enum import Enum
 
 
 class Phase(Enum):
-    DISCONNECTED = "D"
+    DISCONNECT = "D"
     IDLE = "I"
     IN_GAME = "S"
-    RESETTING = "R"
+    RESET = "R"
 
 
 @dataclass
 class State:
-    phase = Phase.DISCONNECTED
+    phase = Phase.DISCONNECT
     time = 180
     height = 180

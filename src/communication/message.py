@@ -23,11 +23,11 @@ class Command(Message):
 class Position(Message):
     def __init__(self, data):
         strings = data.split(codes.DATA_SEP)
-        if len(strings) != 4:
+        if len(strings) != 2:
             raise Exception('Invalid data for a Position Message')
         super().__init__(data)
-        self.x_dir, self.x_pul, self.y_dir, self.y_pul = [int(s) for s in strings]
         self.code = codes.POS
+        self.x, self.y = int(strings[0]), int(strings[1])
 
 
 class Alarm(Message):
@@ -35,5 +35,5 @@ class Alarm(Message):
         if len(data) != 3 or not data.isdigit():
             raise Exception('Invalid amount of data for a Alarm Message')
         super().__init__(data)
-        self.a, self.b, self.c = [int(c) for c in data]
         self.code = codes.ALO
+        self.a, self.b, self.c = [int(c) for c in data]

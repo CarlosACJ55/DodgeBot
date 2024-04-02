@@ -1,6 +1,7 @@
 import threading
 
-from game.state import Phase, State
+from sentry import Sentry
+from state import Phase, State
 
 
 class Game:
@@ -25,7 +26,7 @@ class Game:
     def emergency_reset(self):
         if not self.stm.check_connection():
             self.stm.reconnect()
-        self.state.phase = Phase.RESETTING
+        self.state.phase = Phase.RESET
         if self.state.phase == Phase.IN_GAME:
             self.end()
         if self.stm.reset():
@@ -33,7 +34,7 @@ class Game:
         else:
             self.stm.power_off()
         self.stm.disconnect()
-        self.state.phase = Phase.DISCONNECTED
+        self.state.phase = Phase.DISCONNECT
 
     def countdown(self):
         for self.state.time in reversed(range(self.state.time)):
