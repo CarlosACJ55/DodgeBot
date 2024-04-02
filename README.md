@@ -14,11 +14,12 @@ Https://engineering.purdue.edu/477grp5/
 ### Dependencies
 
 * Brains coded in Python 3
-  - Packaged with Poetry
-  - Developped with Pytest
-* Braum controlled by STM32F7 programmed in C
-  - Generated drivers with STM32CubeMX
-  - Depelopped for Yaskawa SGM7G-30A & SGM7G-20A motors
+  - Packaged with **Poetry**
+  - Developped with **Pytest**
+  - Ui designed in **tkinter**
+* Braum controlled by STM32F7 programmed in **C**
+  - Generated drivers with **STM32CubeMX**
+  - Depelopped for **Yaskawa** **SGM7G-30A** & **SGM7G-20A** motors
 
 ## Authors
 
