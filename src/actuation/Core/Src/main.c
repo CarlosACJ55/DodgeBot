@@ -33,7 +33,6 @@
 #define TIMEOUT 1000
 
 typedef struct {
-  char xDir, yDir;
   int xPul, yPul;
 } Position;
 
@@ -78,7 +77,9 @@ volatile int i = 0, msgReady = 0;
 unsigned char msg[MAX_TX_LEN];
 MoveQueue movQ = {0};
 State gameState = DISCONNECTED;
+#ifdef TRACK
 Position curPos = {0};
+#endif
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -168,9 +169,10 @@ int main(void) {
       }
 #endif
       msgReady = 0;
-#ifndef
+#ifndef TRACK
       if (gameState == IN_GAME && movQ.count)
         send_pulses(dequeueMove());
+#endif
     }
   }
   /* USER CODE END 3 */
@@ -511,7 +513,6 @@ void handleCommand(const char code) {
   switch (code) {
   case 'R':
     gameState = RE_CENTER;
-    //    transmit("X,1,200,0,100\n"); // send cur position.
     transmit("!R\0");
     break;
   case 'I':
@@ -523,6 +524,7 @@ void handleCommand(const char code) {
   case 'D':
     gameState = DISCONNECTED;
     transmit("!D\0");
+    break;
   case 'S':
     if (gameState != IDLE)
       transmit("A988\0");
@@ -536,47 +538,31 @@ void handleCommand(const char code) {
   }
 }
 
-void enqueueMove(Position m) {
-  Position *end = &movQ.moves[movQ.end++];
-  movQ.end %= MAX_Q_LEN;
+void enqueueMove(Position *m) {
   if (movQ.count++ == MAX_Q_LEN)
     transmit("A979\0");
-  end->xDir = m.xDir;
-  end->xPul = m.xPul;
-  end->yDir = m.yDir;
-  end->yPul = m.yPul;
+  Position *end = &movQ.moves[movQ.end++];
+  movQ.end %= MAX_Q_LEN;
+  end->xPul = m->xPul;
+  end->yPul = m->yPul;
 }
 
 void sendPos(Position p) {
   char message[MAX_TX_LEN] = {0};
-  sprintf(message, "X%d,%d,%d,%d", p.xDir, p.xPul, p.yDir, p.yPul);
+  sprintf(message, "X%d,%d", p.xPul, p.yPul);
   transmit(message);
 }
 
 void handlePos(unsigned char *data) {
   Position m;
-  sscanf((char *)data, "%c,%d,%c,%d", &m.xDir, &m.xPul, &m.yDir, &m.yPul);
-  enqueueMove(m);
-
-  if (m.xDir) {
-    curPos.xPul += m.xPul;
-  } else {
-    curPos.xPul -= m.xPul;
-  }
-  if (curPos.xPul < 1) {
-    curPos.xDir = !curPos.xDir;
-    curPos.xPul *= -1;
-  }
-  if (m.yDir) {
-    curPos.yPul += m.yPul;
-  } else {
-    curPos.yPul -= m.yPul;
-  }
-  if (curPos.yPul < 1) {
-    curPos.yDir = !curPos.yDir;
-    curPos.yPul *= -1;
-  }
+  sscanf((char *)data, "%d,%d", &m.xPul, &m.yPul);
+#ifdef TRACK
+  curPos.xPul += m.xPul;
+  curPos.yPul += m.yPul;
   sendPos(curPos);
+#else
+  enqueueMove(&m);
+#endif
 }
 
 Position *dequeueMove() {
