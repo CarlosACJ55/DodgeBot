@@ -152,7 +152,9 @@ int main(void) {
     /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
     if (msgReady) {
-//      transmit((const char *)msg); // ECHO MODE
+#ifdef ECHO
+      transmit((const char *)msg);
+#else
       switch (msg[0]) {
       case '!':
         handleCommand(msg[1]);
@@ -164,10 +166,12 @@ int main(void) {
         transmit("A999\0");
         gameState = DISCONNECTED;
       }
+#endif
       msgReady = 0;
+#ifndef
+      if (gameState == IN_GAME && movQ.count)
+        send_pulses(dequeueMove());
     }
-    if (gameState == IN_GAME && movQ.count)
-      send_pulses(dequeueMove());
   }
   /* USER CODE END 3 */
 }
@@ -556,8 +560,7 @@ void handlePos(unsigned char *data) {
 
   if (m.xDir) {
     curPos.xPul += m.xPul;
-  }
-  else {
+  } else {
     curPos.xPul -= m.xPul;
   }
   if (curPos.xPul < 1) {
@@ -566,8 +569,7 @@ void handlePos(unsigned char *data) {
   }
   if (m.yDir) {
     curPos.yPul += m.yPul;
-  }
-  else {
+  } else {
     curPos.yPul -= m.yPul;
   }
   if (curPos.yPul < 1) {
