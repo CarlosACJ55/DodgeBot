@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "brains"
+version = "0.1.0"
+description = ""
+authors = ["CarlosACJ55 <CarlosACJ55@icloud.com>"]
+readme = "README.md"
+packages = [{include = "brains", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pyserial = "^3.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
