@@ -28,17 +28,17 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-#define MAX_TX_LEN 50
+#define MAX_TX_LEN 30
 #define MAX_Q_LEN 100
 #define TIMEOUT 1000
 
 typedef struct {
   char xDir, yDir;
   int xPul, yPul;
-} Move;
+} Position;
 
 typedef struct {
-  Move moves[MAX_Q_LEN];
+  Position moves[MAX_Q_LEN];
   unsigned char start;
   unsigned char end;
   unsigned char count;
@@ -75,9 +75,10 @@ UART_HandleTypeDef huart6;
 unsigned char c;
 volatile unsigned char buffer[MAX_TX_LEN];
 volatile int i = 0, msgReady = 0;
-unsigned char msg[MAX_TX_LEN / 2];
-MoveQueue movQ = {.end = 0, .count = 0};
+unsigned char msg[MAX_TX_LEN];
+MoveQueue movQ = {0};
 State gameState = DISCONNECTED;
+Position curPos = {0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -92,10 +93,10 @@ static void MX_USART6_UART_Init(void);
 static void transmit(const char *);
 static void resetMotors();
 static void handleCommand(const char);
-static void enqueueMove(Move);
+static void enqueueMove(Position);
 static void handlePos(unsigned char *);
-static Move *dequeueMove();
-static void send_pulses(Move *move);
+static Position *dequeueMove();
+static void send_pulses(Position *move);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -151,7 +152,7 @@ int main(void) {
     /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
     if (msgReady) {
-      msgReady = 0;
+//      transmit((const char *)msg); // ECHO MODE
       switch (msg[0]) {
       case '!':
         handleCommand(msg[1]);
@@ -163,6 +164,7 @@ int main(void) {
         transmit("A999\0");
         gameState = DISCONNECTED;
       }
+      msgReady = 0;
     }
     if (gameState == IN_GAME && movQ.count)
       send_pulses(dequeueMove());
@@ -530,8 +532,8 @@ void handleCommand(const char code) {
   }
 }
 
-void enqueueMove(Move m) {
-  Move *end = &movQ.moves[movQ.end++];
+void enqueueMove(Position m) {
+  Position *end = &movQ.moves[movQ.end++];
   movQ.end %= MAX_Q_LEN;
   if (movQ.count++ == MAX_Q_LEN)
     transmit("A979\0");
@@ -541,21 +543,49 @@ void enqueueMove(Move m) {
   end->yPul = m.yPul;
 }
 
-void handlePos(unsigned char *data) {
-  Move m;
-  sscanf((char *)data, "%c,%d,%c,%d", &m.xDir, &m.xPul, &m.yDir, &m.yPul);
-  enqueueMove(m);
+void sendPos(Position p) {
+  char message[MAX_TX_LEN] = {0};
+  sprintf(message, "X%d,%d,%d,%d", p.xDir, p.xPul, p.yDir, p.yPul);
+  transmit(message);
 }
 
-Move *dequeueMove() {
+void handlePos(unsigned char *data) {
+  Position m;
+  sscanf((char *)data, "%c,%d,%c,%d", &m.xDir, &m.xPul, &m.yDir, &m.yPul);
+  enqueueMove(m);
+
+  if (m.xDir) {
+    curPos.xPul += m.xPul;
+  }
+  else {
+    curPos.xPul -= m.xPul;
+  }
+  if (curPos.xPul < 1) {
+    curPos.xDir = !curPos.xDir;
+    curPos.xPul *= -1;
+  }
+  if (m.yDir) {
+    curPos.yPul += m.yPul;
+  }
+  else {
+    curPos.yPul -= m.yPul;
+  }
+  if (curPos.yPul < 1) {
+    curPos.yDir = !curPos.yDir;
+    curPos.yPul *= -1;
+  }
+  sendPos(curPos);
+}
+
+Position *dequeueMove() {
   if (!movQ.count)
     transmit("A969\0");
-  Move *move = &movQ.moves[movQ.start++];
+  Position *move = &movQ.moves[movQ.start++];
   movQ.start %= MAX_Q_LEN;
   return move;
 }
 
-void send_pulses(Move *move) {
+void send_pulses(Position *move) {
   int sent1 = 0;
   int sent2 = 0;
   int i;
