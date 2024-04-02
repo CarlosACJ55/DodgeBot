@@ -1,19 +1,17 @@
 from game.state import Phase
 
-# Command Codes
-CMD = '!'
+# Transition
+SHF = '!'
+# Position
+POS = 'X'
+# Alarm Codes
+ALO = 'A'
+
+# Commands
 SYNC = Phase.IDLE.value
 RESET = Phase.RESETTING.value
 START = Phase.IN_GAME.value
-STOP = 'E'
-
-# Position Codes
-POS = 'X'
-DIR_L = 'L'
-DIR_R = 'R'
-
-# Alarm Codes
-ALO = 'A'
+STOP = 'D'
 
 # Formatting
 DATA_SEP = ','

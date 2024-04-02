@@ -39,7 +39,7 @@ def connection_test():
         print("connection_test [is_connected:true] failed")
         res = False
 
-    # send and receive (MUST CONFIGURE STM TO ECHO MESSAGE TO RUN THIS TEST)
+    # send and receive (STM MUST BE IN ECHO MODE TO RUN THIS TEST)
     connection.send(message)
     if connection.receive() != message:
         print("connection_test [send and receive] failed")

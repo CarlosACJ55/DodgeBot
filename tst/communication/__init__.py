@@ -4,11 +4,9 @@ from tst.communication.protocol import protocol_test
 
 
 def runtests():
-    test_result = True
-    test_result = test_result and message_test()
+    test_result = message_test()
     test_result = test_result and connection_test()
-    test_result = test_result and protocol_test()
-    return test_result
+    return test_result and protocol_test()
 
 
 if __name__ == "__main__":
