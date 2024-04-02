@@ -9,6 +9,10 @@ packages = [{include = "brains", from = "src"}]
 [tool.poetry.dependencies]
 python = "^3.12"
 pyserial = "^3.5"
+numpy = "^1.26.4"
+torch = "^2.2.2"
+kmeans-pytorch = "^0.3"
+opencv-python = "^4.9.0.80"
 
 
 [build-system]
