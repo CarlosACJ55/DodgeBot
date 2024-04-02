@@ -94,7 +94,7 @@ static void MX_USART6_UART_Init(void);
 static void transmit(const char *);
 static void resetMotors();
 static void handleCommand(const char);
-static void enqueueMove(Position);
+static void enqueueMove(Position *);
 static void handlePos(unsigned char *);
 static Position *dequeueMove();
 static void send_pulses(Position *move);
