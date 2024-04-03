@@ -43,9 +43,9 @@ class Game:
         self.end()
 
     def start_dodging(self):
-        computer = Pathfinder(self.state.height)
+        pf = Pathfinder(self.state.height)
         while self.state.phase == Phase.IN_GAME:
-            dodge_path = computer.detect_punch()
+            dodge_path = pf.detect_punch()
             if dodge_path is not None:
                 self.stm.move_to(dodge_path)
             self.stm.reset()
