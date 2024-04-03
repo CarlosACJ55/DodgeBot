@@ -25,7 +25,7 @@ jobs:
         python-version: "3.10"
     - name: Install dependencies
       run: |
-        cd DodgeBot/brains
+        cd brains
         python -m pip install --upgrade pip
         pip install poetry
         poetry install
