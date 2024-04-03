@@ -76,7 +76,7 @@ volatile int i = 0, msgReady = 0;
 unsigned char msg[MAX_TX_LEN];
 MoveQueue movQ = {0};
 State gameState = DISCONNECTED;
-#ifdef TRACK
+#if defined(SIM) || defined(TRACK)
 Position curPos = {0};
 #endif
 /* USER CODE END PV */
@@ -91,11 +91,12 @@ static void MX_DAC_Init(void);
 static void MX_USART6_UART_Init(void);
 /* USER CODE BEGIN PFP */
 static void transmit(const char *);
-static void resetMotors();
+static void resetMotors(void);
 static void handleCommand(const char);
 static void enqueueMove(Position *);
 static void handlePos(unsigned char *);
-static Position *dequeueMove();
+static int motorsReady(void);
+static Position *dequeueMove(void);
 static void send_pulses(Position *move);
 /* USER CODE END PFP */
 
@@ -171,7 +172,7 @@ int main(void)
 #endif
       msgReady = 0;
 #ifndef TRACK
-      if (gameState == IN_GAME && movQ.count)
+      if (gameState == IN_GAME && movQ.count && motorsReady())
         send_pulses(dequeueMove());
 #endif
     }
@@ -595,6 +596,10 @@ void handlePos(unsigned char *data) {
 #endif
 }
 
+int motorsReady(void) {
+  return 1;
+}
+
 Position *dequeueMove() {
   if (!movQ.count)
     transmit("A969\0");
@@ -604,9 +609,8 @@ Position *dequeueMove() {
 }
 
 void send_pulses(Position *move) {
-  int sent1 = 0;
-  int sent2 = 0;
-  int i;
+#ifndef SIM
+  int sent1 = 0, sent2 = 0, i;
   unsigned char arr_check = htim12.Instance->ARR;
   if (move->xPul > move->yPul) {
     for (sent1 = 0; sent1 < move->xPul; sent1++) {
@@ -646,6 +650,32 @@ void send_pulses(Position *move) {
   htim12.Instance->CNT = 0;
   htim1.Instance->CNT = 0;
   HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0, GPIO_PIN_SET);
+#else
+    curPos.xPul += move->xPul;
+    curPos.yPul += move->yPul;
+//  Carlos bs, trying to compress code:
+//  TIM_HandleTypeDef *first, *second;
+//  if (move->xPul > move->yPul) {
+//    first = &htim12;
+//    second = &htim1;
+//  }
+//  for (sent1 = 0; sent1 < move->xPul; sent1++) {
+//    if (sent2 < move->yPul) {
+//      for (i = 0; i < arr_check; i++) {
+//        htim12.Instance->CNT = i;
+//        htim1.Instance->CNT = i;
+//      }
+//      i = 0;
+//      sent2++;
+//    } else {
+//      htim1.Instance->CNT = 0;
+//      for (; i < arr_check; i++) {
+//        htim12.Instance->CNT = i;
+//      }
+//      i = 0;
+//    }
+//  }
+#endif
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {

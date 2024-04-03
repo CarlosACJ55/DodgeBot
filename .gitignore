@@ -181,3 +181,10 @@ cython_debug/
 *.su
 *.mk
 /brawn/Release
+*.o
+*.cyclo
+*.map
+*.elf
+*.o
+*.d
+*.su
