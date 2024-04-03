@@ -1,4 +1,5 @@
 import serial
+import serial.serialutil as s
 
 from src.communication import codes
 
@@ -18,9 +19,9 @@ class Connection:
     def __init__(self,
                  port="/dev/tty.usbserial-A50285BI",
                  baud_rate=921600,
-                 byte_size=serial.EIGHTBITS,
-                 parity=serial.PARITY_NONE,
-                 stop_bits=serial.STOPBITS_ONE,
+                 byte_size=s.EIGHTBITS,
+                 parity=s.PARITY_NONE,
+                 stop_bits=s.STOPBITS_ONE,
                  timeout=1):
         self.port = port
         self.baud_rate = baud_rate

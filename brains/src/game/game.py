@@ -1,5 +1,6 @@
 import threading
 
+from src.communication import codes
 from src.game.state import Phase, State
 from src.pathfiner.pathfinder import Pathfinder
 
@@ -15,7 +16,7 @@ class Game:
     def configure(self, height, time):
         self.state.height = height
         self.state.time = time
-        if self.stm.synchronize():
+        if self.stm.transition(codes.SYNC):
             self.state.phase = Phase.IDLE
 
     def end(self):

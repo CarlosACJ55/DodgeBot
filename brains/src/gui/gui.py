@@ -1,5 +1,6 @@
 import tkinter as tk
 
+from src.gui.menu import Menu
 from src.gui.timer import Timer
 
 MAX_T = 600
@@ -28,7 +29,7 @@ class GUI:
 
     def menu_frame(self, game):
         self.clear()
-        return tk.Menu(self.root_widget, game)
+        return Menu(self.root_widget, game)
 
     def timer_frame(self, game_state):
         self.clear()
