@@ -1,5 +1,5 @@
 # Transition
-from game.state import Phase
+from src.game.state import Phase
 
 SHF = '!'
 # Position

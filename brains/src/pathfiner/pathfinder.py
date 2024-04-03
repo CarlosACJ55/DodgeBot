@@ -6,7 +6,7 @@ import torch
 from kmeans_pytorch import kmeans, kmeans_predict
 from numpy.linalg import norm as mag
 
-from vision.vision import Vision
+from src.vision.vision import Vision
 
 np.random.seed(42)
 X = 0

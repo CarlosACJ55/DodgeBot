@@ -1,6 +1,6 @@
-from communication import codes
-from communication.connection import Connection
-from communication.message import Alarm, Command, Position
+from src.communication import codes
+from src.communication.connection import Connection
+from src.communication.message import Alarm, Command, Position
 
 msg_types = {codes.SHF: Command, codes.POS: Position, codes.ALO: Alarm}
 

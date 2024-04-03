@@ -1,5 +1,5 @@
-from communication import codes
-from communication.connection import Connection, decode_msg, format_msg
+from src.communication import codes
+from src.communication.connection import Connection, decode_msg, format_msg
 
 connection = Connection()
 

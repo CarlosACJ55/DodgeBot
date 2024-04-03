@@ -1,7 +1,7 @@
 import threading
 
-from game.state import Phase, State
-from pathfiner.pathfinder import Pathfinder
+from src.game.state import Phase, State
+from src.pathfiner.pathfinder import Pathfinder
 
 
 class Game:

@@ -1,6 +1,6 @@
 import serial
 
-from communication import codes
+from src.communication import codes
 
 
 def format_msg(msg):

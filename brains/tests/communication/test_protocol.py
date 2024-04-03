@@ -1,6 +1,6 @@
-from communication import codes
-from communication.message import Command
-from communication.protocol import Protocol
+from src.communication import codes
+from src.communication.message import Command
+from src.communication.protocol import Protocol
 
 protocol = Protocol()
 
