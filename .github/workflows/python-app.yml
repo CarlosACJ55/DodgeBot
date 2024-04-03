@@ -27,6 +27,7 @@ jobs:
       run: |
         cd brains
         python -m pip install --upgrade pip
+        pip install pyserial
         pip install poetry
         poetry install
         pip install flake8 pytest
