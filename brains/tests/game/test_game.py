@@ -38,7 +38,7 @@ def game_test():
     if stm_position.x or stm_position.y:
         print("game_test [reset:end] failed")
         res = False
-    return re
+    return res
 
 
 if __name__ == '__main__':
