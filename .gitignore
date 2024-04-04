@@ -188,3 +188,8 @@ cython_debug/
 *.o
 *.d
 *.su
+*.cyclo
+*.d
+*.o
+*.su
+*.elf
