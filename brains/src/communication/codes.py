@@ -12,6 +12,7 @@ SYNC = Phase.IDLE.value
 RESET = Phase.RESET.value
 START = Phase.IN_GAME.value
 DISC = Phase.DISCONNECT.value
+FIND = "?"
 
 # Formatting
 DATA_SEP = ','
