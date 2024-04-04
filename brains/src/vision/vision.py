@@ -1,7 +1,7 @@
 import threading
 from os import path
 
-import cv2
+import cv2 as cv
 import numpy as np
 
 
@@ -21,7 +21,7 @@ class Vision:
     continue_streaming = False
 
     def __init__(self, src=0):
-        self.stream = cv2.VideoCapture(src, cv2.CAP_DSHOW)
+        self.stream = cv.VideoCapture(src, cv.CAP_DSHOW)
         self.grabbed, self.frame = self.stream.read()
 
     def start_stream(self):
@@ -36,9 +36,10 @@ class Vision:
         while self.continue_streaming:
             self.grabbed, self.frame = self.stream.read()
         self.stream.release()
+        cv.destroyAllWindows()
 
     def read_gloves(self):
-        frame = frame_resize(cv2.remap(self.frame, self.map_x, self.map_y, cv2.INTER_LINEAR))
-        hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        color_mask_gloves = cv2.inRange(hsv_frame, self.lower_bound_gloves, self.upper_bound_gloves)
+        frame = frame_resize(cv.remap(self.frame, self.map_x, self.map_y, cv.INTER_LINEAR))
+        hsv_frame = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
+        color_mask_gloves = cv.inRange(hsv_frame, self.lower_bound_gloves, self.upper_bound_gloves)
         return np.column_stack(np.where(color_mask_gloves > 0)), frame

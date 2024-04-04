@@ -1,8 +1,8 @@
 import threading
-
-from src.communication import codes
-from src.game.state import Phase, State
-from src.pathfiner.pathfinder import Pathfinder
+import cv2 as cv
+from communication import codes
+from game.state import Phase, State
+from pathfiner.pathfinder import Pathfinder
 
 
 class Game:
@@ -45,9 +45,14 @@ class Game:
     def start_dodging(self):
         computer = Pathfinder(self.state.height)
         while self.state.phase == Phase.IN_GAME:
-            dodge_path = computer.detect_punch()
-            if dodge_path is not None:
-                self.stm.move_to(dodge_path)
+            cv.imshow("Original Frame", computer.cam.frame)
+            dodge_path_angles = computer.detect_punch()
+            
+            if dodge_path_angles is not None:
+                # self.stm.move_to(dodge_path)
+                # computer.bot_pos = computer.bot_pos + dodge_path
+                
+                self.stm.move(dodge_path_angles)
             self.stm.reset()
 
     def play(self):
