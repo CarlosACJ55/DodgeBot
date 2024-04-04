@@ -1,8 +1,12 @@
 import threading
 import cv2 as cv
 from communication import codes
-from game.state import Phase, State
-from pathfiner.pathfinder import Pathfinder
+# from game.state import Phase, State
+# from pathfiner.pathfinder import Pathfinder
+import time
+
+from src.game.state import Phase, State
+from src.pathfiner.pathfinder import Pathfinder
 
 
 class Game:
@@ -16,12 +20,18 @@ class Game:
     def configure(self, height, time):
         self.state.height = height
         self.state.time = time
-        if self.stm.transition(codes.SYNC):
+        if self.stm.transition(Phase.IDLE):
             self.state.phase = Phase.IDLE
 
+    def reset(self):
+        pos = self.stm.find()
+        self.stm.move(-pos.x, -pos.y)
+
     def end(self):
-        self.stm.reset()
+        self.reset()
         self.state.phase = Phase.IDLE
+        if not self.stm.transition(Phase.IDLE):
+            self.emergency_reset()
         self.frame = self.ui.menu_frame(self)
 
     def emergency_reset(self):
@@ -30,37 +40,48 @@ class Game:
         self.state.phase = Phase.RESET
         if self.state.phase == Phase.IN_GAME:
             self.end()
-        if self.stm.reset():
+        self.reset()
+        pos = self.stm.find()
+        if pos.x or pos.y:
+            self.stm.power_off()
+        if self.stm.transition(Phase.IDLE):
             self.state.phase = Phase.IDLE
         else:
-            self.stm.power_off()
-        self.stm.disconnect()
+            self.stm.disconnect()
         self.state.phase = Phase.DISCONNECT
 
     def countdown(self):
         for self.state.time in reversed(range(self.state.time)):
             self.frame.update_timer()
-        self.end()
 
     def start_dodging(self):
-        computer = Pathfinder(self.state.height)
+        pf = Pathfinder(self.state.height)
+        last_punch = time.time()
         while self.state.phase == Phase.IN_GAME:
-            cv.imshow("Original Frame", computer.cam.frame)
-            dodge_path_angles = computer.detect_punch()
+            cv.imshow("Original Frame", pf.cam.frame)
+            dodge_path_angles = pf.detect_punch()
             
             if dodge_path_angles is not None:
                 # self.stm.move_to(dodge_path)
                 # computer.bot_pos = computer.bot_pos + dodge_path
                 
                 self.stm.move(dodge_path_angles)
-            self.stm.reset()
+            # self.stm.reset()
+            # dodge = pf.detect_punch()
+            # if dodge:
+            #     self.stm.move(*dodge)
+            #     last_punch = time.time()
+            # if time.time() - last_punch > 2:
+            #     self.stm.reset()
 
     def play(self):
         if self.stm.check_connection() and self.state.phase == Phase.IDLE:
-            self.frame = self.ui.timer_frame(self.state)
+            self.frame = self.ui.timer_frame(self)
+            self.state.phase = Phase.IN_GAME
             time_thread = threading.Thread(target=self.countdown)
             time_thread.start()
-            self.state.phase = Phase.IN_GAME
+            if not self.stm.transition(Phase.IN_GAME):
+                self.emergency_reset()
             self.start_dodging()
             time_thread.join()
             self.end()

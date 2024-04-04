@@ -31,6 +31,10 @@ class Protocol:
         res = self.read()
         return res.data == code if isinstance(res, Command) else res
 
+    def find(self):
+        self.write(Command(codes.FIND))
+        return self.locate()
+
     def move(self, x, y):
         self.write(Position(str(x) + codes.DATA_SEP + str(y)))
 

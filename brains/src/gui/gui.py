@@ -31,9 +31,9 @@ class GUI:
         self.clear()
         return Menu(self.root_widget, game)
 
-    def timer_frame(self, game_state):
+    def timer_frame(self, game):
         self.clear()
-        return Timer(self.root_widget, game_state)
+        return Timer(self.root_widget, game)
 
     def show(self):
         self.root_widget.mainloop()
