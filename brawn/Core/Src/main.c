@@ -65,6 +65,7 @@ DAC_HandleTypeDef hdac;
 RTC_HandleTypeDef hrtc;
 
 TIM_HandleTypeDef htim1;
+TIM_HandleTypeDef htim4;
 TIM_HandleTypeDef htim12;
 
 UART_HandleTypeDef huart6;
@@ -89,6 +90,7 @@ static void MX_TIM1_Init(void);
 static void MX_TIM12_Init(void);
 static void MX_DAC_Init(void);
 static void MX_USART6_UART_Init(void);
+static void MX_TIM4_Init(void);
 /* USER CODE BEGIN PFP */
 static void transmit(const char *);
 static void resetMotors(void);
@@ -138,6 +140,7 @@ int main(void)
   MX_TIM12_Init();
   MX_DAC_Init();
   MX_USART6_UART_Init();
+  MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
   __HAL_UART_ENABLE_IT(&huart6, UART_IT_RXNE);
   HAL_UART_Receive_IT(&huart6, (unsigned char *)&c, 1);
@@ -149,6 +152,9 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+
+
   while (1)
   {
     /* USER CODE END WHILE */
@@ -323,6 +329,7 @@ static void MX_TIM1_Init(void)
 
   /* USER CODE END TIM1_Init 0 */
 
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
   TIM_OC_InitTypeDef sConfigOC = {0};
   TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig = {0};
@@ -337,6 +344,15 @@ static void MX_TIM1_Init(void)
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim1, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
   if (HAL_TIM_PWM_Init(&htim1) != HAL_OK)
   {
     Error_Handler();
@@ -376,6 +392,51 @@ static void MX_TIM1_Init(void)
 
   /* USER CODE END TIM1_Init 2 */
   HAL_TIM_MspPostInit(&htim1);
+
+}
+
+/**
+  * @brief TIM4 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM4_Init(void)
+{
+
+  /* USER CODE BEGIN TIM4_Init 0 */
+
+  /* USER CODE END TIM4_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM4_Init 1 */
+
+  /* USER CODE END TIM4_Init 1 */
+  htim4.Instance = TIM4;
+  htim4.Init.Prescaler = 0;
+  htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim4.Init.Period = 65535;
+  htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim4, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM4_Init 2 */
+
+  /* USER CODE END TIM4_Init 2 */
 
 }
 
@@ -480,58 +541,140 @@ static void MX_GPIO_Init(void)
 /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
-  __HAL_RCC_GPIOC_CLK_ENABLE();
-  __HAL_RCC_GPIOE_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOE, ALO1_LED_C_Pin|ALO2_LED_A_Pin|ALO2_LED_B_Pin|ALO2_LED_C_Pin
+                          |ALARM_RST_GPIO_1_Pin|FRWD_EXT_TORQUE_LIM_EN_GPIO_1_Pin|REVERSE_EXT_TORQUE_LIM_EN_GPIO_1_Pin|ALO1_LED_A_Pin
+                          |ALO1_LED_B_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_9, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOC, SERVO_EN_GPIO_1_Pin|SERVO_EN_GPIO_2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, PROP_CONTROL_EN_GPIO_1_Pin|FRWD_DRIVE_EN_GPIO_1_Pin|REVERSE_DRIVE_EN_GPIO_1_Pin|DIR_GPIO_1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, CLR_GPIO_1_Pin|PROP_CONTROL_EN_GPIO_2_Pin|FRWD_DRIVE_EN_GPIO_2_Pin|REVERSE_DRIVE_EN_GPIO_2_Pin
+                          |ALARM_RST_GPIO_2_Pin|FRWD_EXT_TORQUE_LIM_EN_GPIO_2_Pin|REVERSE_EXT_TORQUE_LIM_EN_GPIO_2_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : PB15 */
-  GPIO_InitStruct.Pin = GPIO_PIN_15;
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(POS_EN_GPIO_GPIO_Port, POS_EN_GPIO_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, CLR_GPIO_2_Pin|DIR_GPIO_2_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : ALO1_LED_C_Pin ALO2_LED_A_Pin ALO2_LED_B_Pin ALO2_LED_C_Pin
+                           ALARM_RST_GPIO_1_Pin FRWD_EXT_TORQUE_LIM_EN_GPIO_1_Pin REVERSE_EXT_TORQUE_LIM_EN_GPIO_1_Pin ALO1_LED_A_Pin
+                           ALO1_LED_B_Pin */
+  GPIO_InitStruct.Pin = ALO1_LED_C_Pin|ALO2_LED_A_Pin|ALO2_LED_B_Pin|ALO2_LED_C_Pin
+                          |ALARM_RST_GPIO_1_Pin|FRWD_EXT_TORQUE_LIM_EN_GPIO_1_Pin|REVERSE_EXT_TORQUE_LIM_EN_GPIO_1_Pin|ALO1_LED_A_Pin
+                          |ALO1_LED_B_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : ALARM_NOTIF_Pin */
+  GPIO_InitStruct.Pin = ALARM_NOTIF_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(ALARM_NOTIF_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : ALO_GPIO_A_1_Pin ALO_GPIO_B_1_Pin ALO_GPIO_A_2_Pin */
+  GPIO_InitStruct.Pin = ALO_GPIO_A_1_Pin|ALO_GPIO_B_1_Pin|ALO_GPIO_A_2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : ALO_GPIO_C_1_Pin ALO_GPIO_B_2_Pin ALO_GPIO_C_2_Pin */
+  GPIO_InitStruct.Pin = ALO_GPIO_C_1_Pin|ALO_GPIO_B_2_Pin|ALO_GPIO_C_2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : SERVO_EN_GPIO_1_Pin SERVO_EN_GPIO_2_Pin */
+  GPIO_InitStruct.Pin = SERVO_EN_GPIO_1_Pin|SERVO_EN_GPIO_2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PROP_CONTROL_EN_GPIO_1_Pin FRWD_DRIVE_EN_GPIO_1_Pin REVERSE_DRIVE_EN_GPIO_1_Pin DIR_GPIO_1_Pin */
+  GPIO_InitStruct.Pin = PROP_CONTROL_EN_GPIO_1_Pin|FRWD_DRIVE_EN_GPIO_1_Pin|REVERSE_DRIVE_EN_GPIO_1_Pin|DIR_GPIO_1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PD9 */
-  GPIO_InitStruct.Pin = GPIO_PIN_9;
+  /*Configure GPIO pins : ENC_B_GPIO_1_Pin ENC_C_GPIO_1_Pin ABS_ENC_GPIO_1_Pin GEN_PURPOSE_OUT_GPIO_A_1_Pin */
+  GPIO_InitStruct.Pin = ENC_B_GPIO_1_Pin|ENC_C_GPIO_1_Pin|ABS_ENC_GPIO_1_Pin|GEN_PURPOSE_OUT_GPIO_A_1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : GEN_PURPOSE_OUT_GPIO_B_1_Pin GEN_PURPOSE_OUT_GPIO_C_1_Pin ENC_A_GPIO_2_Pin ENC_B_GPIO_2_Pin
+                           ENC_C_GPIO_2_Pin ABS_ENC_GPIO_2_Pin GEN_PURPOSE_OUT_GPIO_A_2_Pin GEN_PURPOSE_OUT_GPIO_B_2_Pin
+                           GEN_PURPOSE_OUT_GPIO_C_2_Pin */
+  GPIO_InitStruct.Pin = GEN_PURPOSE_OUT_GPIO_B_1_Pin|GEN_PURPOSE_OUT_GPIO_C_1_Pin|ENC_A_GPIO_2_Pin|ENC_B_GPIO_2_Pin
+                          |ENC_C_GPIO_2_Pin|ABS_ENC_GPIO_2_Pin|GEN_PURPOSE_OUT_GPIO_A_2_Pin|GEN_PURPOSE_OUT_GPIO_B_2_Pin
+                          |GEN_PURPOSE_OUT_GPIO_C_2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : CLR_GPIO_1_Pin POS_EN_GPIO_Pin PROP_CONTROL_EN_GPIO_2_Pin FRWD_DRIVE_EN_GPIO_2_Pin
+                           REVERSE_DRIVE_EN_GPIO_2_Pin ALARM_RST_GPIO_2_Pin FRWD_EXT_TORQUE_LIM_EN_GPIO_2_Pin REVERSE_EXT_TORQUE_LIM_EN_GPIO_2_Pin */
+  GPIO_InitStruct.Pin = CLR_GPIO_1_Pin|POS_EN_GPIO_Pin|PROP_CONTROL_EN_GPIO_2_Pin|FRWD_DRIVE_EN_GPIO_2_Pin
+                          |REVERSE_DRIVE_EN_GPIO_2_Pin|ALARM_RST_GPIO_2_Pin|FRWD_EXT_TORQUE_LIM_EN_GPIO_2_Pin|REVERSE_EXT_TORQUE_LIM_EN_GPIO_2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PA12 */
-  GPIO_InitStruct.Pin = GPIO_PIN_12;
+  /*Configure GPIO pin : ENC_A_GPIO_1_Pin */
+  GPIO_InitStruct.Pin = ENC_A_GPIO_1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(ENC_A_GPIO_1_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : CLR_GPIO_2_Pin DIR_GPIO_2_Pin */
+  GPIO_InitStruct.Pin = CLR_GPIO_2_Pin|DIR_GPIO_2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PE0 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI2_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
+
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  /* Prevent unused argument(s) compilation warning */
+  switch (GPIO_Pin) {
+  case ALARM_NOTIF_Pin: // TODO:  Finish writing all these
+    HAL_GPIO_WritePin(GPIOA, ALO1_LED_A_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOA, ALO2_LED_A_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOB, ALO1_LED_B_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOB, ALO2_LED_B_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOC, ALO1_LED_C_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOC, ALO2_LED_C_Pin, GPIO_PIN_SET);
+  }
+}
+
 void transmit(const char *m) {
   char s[MAX_TX_LEN];
   snprintf(s, sizeof(s), "%s#%s;\n", m, m);
@@ -597,12 +740,13 @@ void handlePos(unsigned char *data) {
 }
 
 int motorsReady(void) {
-  return 1;
+  return HAL_GPIO_ReadPin(GPIOB, GEN_PURPOSE_OUT_GPIO_B_1_Pin) && HAL_GPIO_ReadPin(GPIOB, GEN_PURPOSE_OUT_GPIO_B_2_Pin) &&
+      !(HAL_GPIO_ReadPin(GPIOA, GEN_PURPOSE_OUT_GPIO_A_1_Pin) || HAL_GPIO_ReadPin(GPIOA, GEN_PURPOSE_OUT_GPIO_A_2_Pin));
 }
 
 Position *dequeueMove() {
   if (!movQ.count)
-    transmit("A969\0");
+    transmit("A978\0");
   Position *move = &movQ.moves[movQ.start++];
   movQ.start %= MAX_Q_LEN;
   return move;
@@ -610,71 +754,32 @@ Position *dequeueMove() {
 
 void send_pulses(Position *move) {
 #ifndef SIM
-  int sent1 = 0, sent2 = 0, i;
-  unsigned char arr_check = htim12.Instance->ARR;
-  if (move->xPul > move->yPul) {
-    for (sent1 = 0; sent1 < move->xPul; sent1++) {
-      if (sent2 < move->yPul) {
-        for (i = 0; i < arr_check; i++) {
-          htim12.Instance->CNT = i;
-          htim1.Instance->CNT = i;
-        }
-        i = 0;
-        sent2++;
-      } else {
-        htim1.Instance->CNT = 0;
-        for (; i < arr_check; i++) {
-          htim12.Instance->CNT = i;
-        }
-        i = 0;
-      }
-    }
-  } else {
-    for (sent2 = 0; sent2 < move->yPul; sent2++) {
-      if (sent1 < move->xPul) {
-        for (i = 0; i < arr_check; i++) {
-          htim12.Instance->CNT = i;
-          htim1.Instance->CNT = i;
-        }
-        i = 0;
-        sent1++;
-      } else {
-        htim12.Instance->CNT = 0;
-        for (; i < arr_check; i++) {
-          htim1.Instance->CNT = i;
-        }
-        i = 0;
-      }
+  while (HAL_GPIO_ReadPin(GPIOC, GEN_PURPOSE_OUT_GPIO_C_1_Pin) || HAL_GPIO_ReadPin(GPIOC, GEN_PURPOSE_OUT_GPIO_C_2_Pin));
+  int higher = move->xPul, lower = move->yPul;
+  TIM_HandleTypeDef *higherTim = &htim12, *lowerTim = &htim1;
+  if (lower > higher) {
+    higher = move->yPul;
+    lower = move->xPul;
+    higherTim = &htim1;
+    lowerTim = &htim12;
+  }
+  higher -= lower;
+  while (lower--) {
+    for (int i = 0; i < htim12.Instance->ARR; i++) {
+      higherTim->Instance->CNT = i;
+      lowerTim->Instance->CNT = i;
     }
   }
-  htim12.Instance->CNT = 0;
-  htim1.Instance->CNT = 0;
-  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_0, GPIO_PIN_SET);
+  lowerTim->Instance->CNT = 0;
+  while (higher--) {
+    for (int i = 0; i < htim12.Instance->ARR; i++) {
+      higherTim->Instance->CNT = i;
+    }
+  }
+  higherTim->Instance->CNT = 0;
 #else
     curPos.xPul += move->xPul;
     curPos.yPul += move->yPul;
-//  Carlos bs, trying to compress code:
-//  TIM_HandleTypeDef *first, *second;
-//  if (move->xPul > move->yPul) {
-//    first = &htim12;
-//    second = &htim1;
-//  }
-//  for (sent1 = 0; sent1 < move->xPul; sent1++) {
-//    if (sent2 < move->yPul) {
-//      for (i = 0; i < arr_check; i++) {
-//        htim12.Instance->CNT = i;
-//        htim1.Instance->CNT = i;
-//      }
-//      i = 0;
-//      sent2++;
-//    } else {
-//      htim1.Instance->CNT = 0;
-//      for (; i < arr_check; i++) {
-//        htim12.Instance->CNT = i;
-//      }
-//      i = 0;
-//    }
-//  }
 #endif
 }
 
@@ -695,6 +800,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     break;
   default:
     buffer[i++] = c;
+    if (i == MAX_TX_LEN)
+      transmit("A969\0");
   }
 }
 /* USER CODE END 4 */
