@@ -25,7 +25,7 @@ class Pathfinder:
     px_cent = np.array([360 / 2, 360 / 2], dtype=int)
     center_dist = 1.14
     cam_h = 2.36855
-    min_clearance = .15
+    min_clearance = .2
     cord_centers = torch.tensor([[-.5, -.5], [.5, .5]])
     dodge_time = 0
     radius = .5
@@ -42,30 +42,20 @@ class Pathfinder:
         self.bot_pos = np.array([0.0001, 0.0001], dtype=np.float16)  # TODO: Change this to read the position from the camera
         self.max_edge_cords = self.angle_2_cords(np.array([45, 45], dtype=np.float16))[0:2]
         self.max_edge_length = mag(self.max_edge_cords) * self.edge_percentage
-    
-    # def bot_tracking(self):
-    #     while self.cam.continue_streaming:
-    #         bot_cam_pos = self.cam.find_bot()
-    #         if len(bot_cam_pos) > 0:
-    #             avrg_pixel = np.mean(bot_cam_pos)
                 
         
     
     def center_bot(self):
-        # print(f"Bot is being centered {-self.bot_pos}")
         if (abs(self.bot_pos[0]) <= .01 and abs(self.bot_pos[1]) <= .01):
-            # print(f"Bot is None")
             return None
         else:
-            ####################
             print(f"Bot is being centered {-self.bot_pos}")
-            print(f"{self.bot_center_pos_angle} - {self.cords_2_angle(self.bot_pos)}")
-            temp = self.bot_center_pos_angle - self.cords_2_angle(self.bot_pos)
+            # print(f"{self.bot_center_pos_angle} - {self.cords_2_angle(self.bot_pos)}")
+            # temp = self.bot_center_pos_angle - self.cords_2_angle(self.bot_pos)
+            ############################################################
             self.bot_pos[0] = 0.00001
             self.bot_pos[1] = 0.00001
-            return temp
-            ################
-            # return self.bot_center_pos_angle - self.cords_2_angle(self.bot_pos)
+            return self.bot_center_pos_angle - self.cords_2_angle(self.bot_pos)
             
     
     def angle_2_cords(self, angle_vector):
@@ -126,8 +116,9 @@ class Pathfinder:
         raw_glove_data, frame = self.cam.read_gloves()
         marked_coords = self.pixel_2_cords(raw_glove_data)
         # print(marked_coords)
-        self.run_time_dict["Kmeans"].append(time.time() - st)
+        
         cord_list, test_cord_centers = self.kmeans_gpu(marked_coords, 2)
+        self.run_time_dict["Kmeans"].append(time.time() - st)
         # print(time.time()-st)
         # print(test_cord_centers)
         if len(cord_list) < 2:
@@ -143,7 +134,8 @@ class Pathfinder:
         self.buf[0].pop()
         self.buf[1].appendleft(test_cord_centers[1].numpy())
         self.buf[1].pop()
-       
+        self.run_time_dict["Buffer"].append(time.time() - st)
+    #    Main Punch":[],"Slope"
             
         close, far = (0, 1) if mag(self.buf[0][0] - self.bot_pos) < mag(self.buf[1][0] - self.bot_pos) else (1, 0)
         # print(close, far)
@@ -156,7 +148,7 @@ class Pathfinder:
         punch_diff = punch_pos - self.buf[close][1]
         punch_mag = mag(punch_diff)
         punch_hat = punch_diff / punch_mag
-        
+        self.run_time_dict["Main Punch"].append(time.time()-st)
        
         if punch_mag < .05:
             if time.time() - self.dodge_time >= self.reset_time_sec:
@@ -181,7 +173,7 @@ class Pathfinder:
             cv.circle(frame, tuple(self.cords_2_pixel(self.bot_pos)[::-1]), 25, (0, 0, 0), -1)
             ######################
             return None
-        
+        self.run_time_dict["Slope"].append(time.time()-st)
         perp_left = np.array([punch_hat[Y], -punch_hat[X]])
         perp_right = np.array([-punch_hat[Y], punch_hat[X]])
         # print("perp left, right", perp_left, perp_right)
@@ -200,7 +192,7 @@ class Pathfinder:
             unit_dodge = .5*(-self.bot_pos / mag(self.bot_pos)) + .5*(perp)
             dodge = np.abs(self.min_clearance - clearance) * unit_dodge + 1.5 * self.min_clearance * unit_dodge
             # print("bot pos", self.bot_pos, "unit doge", unit_dodge, "perp", perp)
-        
+        self.run_time_dict["Avoidance"].append(time.time()-st)
         bot_prev_pos_angle = self.cords_2_angle(self.bot_pos)
         ##################
         cv.circle(frame, tuple(self.cords_2_pixel(self.bot_pos)[::-1]), 25, (255, 255, 0), -1)
@@ -210,13 +202,15 @@ class Pathfinder:
         ##################
         cv.circle(frame, tuple(self.cords_2_pixel(self.bot_pos)[::-1]), 25, (255, 255, 255), -1)
         ##################
-        if np.isnan(self.cords_2_angle(self.bot_pos) - bot_prev_pos_angle).any() == True:
-            print(locals())
-            print()
+        # if np.isnan(self.cords_2_angle(self.bot_pos) - bot_prev_pos_angle).any() == True:
+        #     print(locals())
+        #     print()
             # print("************NAN*************\n"*2)
             # print("botpos", self.bot_pos)
             # print("edge", self.pixel_2_cords(np.array([[0,1], [1,0]])))
             # print(f"{self.cords_2_angle(self.bot_pos)} - {bot_prev_pos_angle}")
             # print("************NAN*************\n"*2)
         self.run_time_dict["Total End"].append(time.time()-st)
+        print("Kmeans: ", self.run_time_dict["Kmeans"][-1])
+        print("Main Punch: " self.run_time_dict["Main Punch"][-1], self.run_time_dict["Slope"][-1], self.run_time_dict["Avoidance"][-1], self.run_time_dict["Total End"][-1])
         return self.cords_2_angle(self.bot_pos) - bot_prev_pos_angle
