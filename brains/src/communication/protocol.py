@@ -25,11 +25,11 @@ class Protocol:
         return msg_types.get(msg[0], None)(msg[1:])
 
     def transition(self, code):
-        if code not in {codes.SYNC, codes.RESET, codes.START, codes.DISC}:
+        if code.value not in {codes.SYNC, codes.RESET, codes.START, codes.DISC, codes.FIND}:
             raise ValueError("Incorrect code for a command")
-        self.write(Command(code))
+        self.write(Command(code.value))
         res = self.read()
-        return res.data == code if isinstance(res, Command) else res
+        return res.data == code.value if isinstance(res, Command) else res
 
     def find(self):
         self.write(Command(codes.FIND))

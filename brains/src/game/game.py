@@ -1,8 +1,5 @@
 import threading
 import cv2 as cv
-from communication import codes
-# from game.state import Phase, State
-# from pathfiner.pathfinder import Pathfinder
 import time
 
 from src.game.state import Phase, State
@@ -16,6 +13,7 @@ class Game:
         self.stm = protocol
         self.ui = gui
         self.frame = self.ui.menu_frame(self)
+        protocol.connect()
 
     def configure(self, height, time):
         self.state.height = height
@@ -64,8 +62,8 @@ class Game:
             if dodge_path_angles is not None:
                 # self.stm.move_to(dodge_path)
                 # computer.bot_pos = computer.bot_pos + dodge_path
-                
-                self.stm.move(dodge_path_angles)
+                x, y = dodge_path_angles
+                self.stm.move(int(float(x)), int(float(y)))
             # self.stm.reset()
             # dodge = pf.detect_punch()
             # if dodge:

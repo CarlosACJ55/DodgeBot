@@ -56,7 +56,7 @@ class Menu:
     def setup(self):
         self.start_btn["state"] = tkc.DISABLED
         self.game.configure(self.height, self.time)
-        if self.game.state == Phase.IDLE:
+        if self.game.state.phase == Phase.IDLE:
             self.start_btn["state"] = tkc.ACTIVE
         else:
             tk.messagebox.showinfo("Failed to setup the microcontroller.")

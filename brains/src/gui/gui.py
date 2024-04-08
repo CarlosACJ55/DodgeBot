@@ -29,11 +29,15 @@ class GUI:
 
     def menu_frame(self, game):
         self.clear()
-        return Menu(self.root_widget, game)
+        ret = Menu(self.root_widget, game)
+        self.root_widget.geometry("")
+        return ret
 
     def timer_frame(self, game):
         self.clear()
-        return Timer(self.root_widget, game)
+        ret = Timer(self.root_widget, game)
+        self.root_widget.geometry("")
+        return ret
 
     def show(self):
         self.root_widget.mainloop()

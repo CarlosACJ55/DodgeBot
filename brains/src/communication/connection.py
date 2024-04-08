@@ -16,7 +16,8 @@ def decode_msg(msg):
 
 class Connection:
     def __init__(self,
-                 port="/dev/tty.usbserial-A50285BI",
+                #  port="/dev/tty.usbserial-A50285BI",
+                 port="COM3",
                  baud_rate=921600,
                  byte_size=serial.EIGHTBITS,
                  parity=serial.PARITY_NONE,
