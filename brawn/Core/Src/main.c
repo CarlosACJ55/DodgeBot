@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
 #include "string.h"
+#include <stdlib.h>
 
 /* USER CODE END Includes */
 
@@ -99,8 +100,8 @@ static void handleCommand(const char);
 static void enqueueMove(Position *);
 static void handlePos(unsigned char *);
 static int motorsReady(void);
-static Position *dequeueMove(void);
-static void send_pulses(Position *move);
+static Position dequeueMove(void);
+static void send_pulses(Position move);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -178,11 +179,11 @@ int main(void)
       }
 #endif
       msgReady = 0;
-#ifndef TRACK
-      if (gameState == IN_GAME && movQ.count && motorsReady())
-        send_pulses(dequeueMove());
-#endif
     }
+#ifndef TRACK
+    if (gameState == IN_GAME && movQ.count && motorsReady())
+      send_pulses(dequeueMove());
+#endif
   }
   /* USER CODE END 3 */
 }
@@ -746,26 +747,36 @@ void handlePos(unsigned char *data) {
 }
 
 int motorsReady(void) {
-  return HAL_GPIO_ReadPin(GPIOB, GEN_PURPOSE_OUT_GPIO_B_1_Pin) && HAL_GPIO_ReadPin(GPIOB, GEN_PURPOSE_OUT_GPIO_B_2_Pin) &&
-      !(HAL_GPIO_ReadPin(GPIOA, GEN_PURPOSE_OUT_GPIO_A_1_Pin) || HAL_GPIO_ReadPin(GPIOA, GEN_PURPOSE_OUT_GPIO_A_2_Pin));
+#ifndef SIM
+  return 1;
+//  return HAL_GPIO_ReadPin(GPIOB, GEN_PURPOSE_OUT_GPIO_B_1_Pin) && HAL_GPIO_ReadPin(GPIOB, GEN_PURPOSE_OUT_GPIO_B_2_Pin) &&
+//      !(HAL_GPIO_ReadPin(GPIOA, GEN_PURPOSE_OUT_GPIO_A_1_Pin) || HAL_GPIO_ReadPin(GPIOA, GEN_PURPOSE_OUT_GPIO_A_2_Pin));
+#else
+  return 1;
+#endif
 }
 
-Position *dequeueMove() {
-  if (!movQ.count)
+Position dequeueMove() {
+  if (!movQ.count--)
     transmit("A978\0");
-  Position *move = &movQ.moves[movQ.start++];
+  Position move = movQ.moves[movQ.start++];
   movQ.start %= MAX_Q_LEN;
   return move;
 }
 
-void send_pulses(Position *move) {
+void send_pulses(Position move) {
 #ifndef SIM
-  while (HAL_GPIO_ReadPin(GPIOC, GEN_PURPOSE_OUT_GPIO_C_1_Pin) || HAL_GPIO_ReadPin(GPIOC, GEN_PURPOSE_OUT_GPIO_C_2_Pin));
-  int higher = move->xPul, lower = move->yPul;
+//  while (HAL_GPIO_ReadPin(GPIOC, GEN_PURPOSE_OUT_GPIO_C_1_Pin) || HAL_GPIO_ReadPin(GPIOC, GEN_PURPOSE_OUT_GPIO_C_2_Pin));
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, move.xPul < 0 ? GPIO_PIN_RESET : GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, move.yPul < 0 ? GPIO_PIN_RESET : GPIO_PIN_SET);
+  uint16_t x_val = abs(move.xPul);
+  uint16_t y_val = abs(move.yPul);
+  int higher = x_val, lower = y_val;
   TIM_HandleTypeDef *higherTim = &htim12, *lowerTim = &htim1;
+
   if (lower > higher) {
-    higher = move->yPul;
-    lower = move->xPul;
+    higher = y_val;
+    lower = x_val;
     higherTim = &htim1;
     lowerTim = &htim12;
   }
@@ -783,6 +794,7 @@ void send_pulses(Position *move) {
     }
   }
   higherTim->Instance->CNT = 0;
+  return;
 #else
     curPos.xPul += move->xPul;
     curPos.yPul += move->yPul;
@@ -798,11 +810,13 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     break;
   case ';':
     buffer[i] = '\0';
-    if (strcmp((char *)msg, (char *)buffer) || msgReady)
+    i = 0;
+    if (strcmp((char *)msg, (char *)buffer) || msgReady) {
       gameState = DISCONNECTED;
+      msgReady = 0;
+    }
     else
       msgReady = 1;
-    i = 0;
     break;
   default:
     buffer[i++] = c;
