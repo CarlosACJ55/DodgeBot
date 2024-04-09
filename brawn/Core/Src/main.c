@@ -94,6 +94,7 @@ static void MX_TIM4_Init(void);
 /* USER CODE BEGIN PFP */
 static void transmit(const char *);
 static void resetMotors(void);
+static void sendPos(void);
 static void handleCommand(const char);
 static void enqueueMove(Position *);
 static void handlePos(unsigned char *);
@@ -707,6 +708,9 @@ void handleCommand(const char code) {
       transmit("!S\0");
     }
     break;
+  case '?':
+    sendPos();
+    break;
   default:
     transmit("A989\0");
   }
@@ -721,10 +725,12 @@ void enqueueMove(Position *m) {
   end->yPul = m->yPul;
 }
 
-void sendPos(Position p) {
+void sendPos() {
+#ifdef SIM
   char message[MAX_TX_LEN] = {0};
-  sprintf(message, "X%d,%d", p.xPul, p.yPul);
+  sprintf(message, "X%d,%d", curPos.xPul, curPos.yPul);
   transmit(message);
+#endif
 }
 
 void handlePos(unsigned char *data) {
@@ -733,7 +739,7 @@ void handlePos(unsigned char *data) {
 #ifdef TRACK
   curPos.xPul += m.xPul;
   curPos.yPul += m.yPul;
-  sendPos(curPos);
+  sendPos();
 #else
   enqueueMove(&m);
 #endif
