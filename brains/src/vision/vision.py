@@ -39,11 +39,12 @@ class Vision:
             self.grabbed, temp_frame = self.stream.read()
             self.frame = frame_resize(cv.remap(temp_frame, self.map_x, self.map_y, cv.INTER_LINEAR))
         self.stream.release()
+        print("stream realase")
         # cv.destroyAllWindows()
-    # def find_bot(self):
         
     def read_gloves(self):
+        # frame = frame_resize(cv.remap(self.frame, self.map_x, self.map_y, cv.INTER_LINEAR))
         tframe = self.frame
-        hsv_frame = cv.cvtColor(tframe, cv.COLOR_BGR2HSV)
+        hsv_frame = cv.cvtColor(self.frame, cv.COLOR_BGR2HSV)
         color_mask_gloves = cv.inRange(hsv_frame, self.lower_bound_gloves, self.upper_bound_gloves)
         return np.column_stack(np.where(color_mask_gloves > 0)), tframe

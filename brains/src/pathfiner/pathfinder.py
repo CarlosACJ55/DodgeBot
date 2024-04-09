@@ -6,8 +6,7 @@ import torch
 from kmeans_pytorch import kmeans, kmeans_predict
 from numpy.linalg import norm as mag
 
-# from src.vision.vision import Vision
-from vision import Vision
+from src.pathfiner.vision import Vision
 
 np.random.seed(42)
 X = 0
@@ -33,7 +32,9 @@ class Pathfinder:
     edge_percentage = .5
     bot_center_pos_angle = np.array([90.0, 90.0], dtype=np.float16)
     run_time_dict = {"Marking Pixels":[], "Converting Cords":[],"Kmeans":[],"Buffer":[],"Main Punch":[],"Slope":[], "Punch Vector Calc":[], "Engage Decision":[],"Perpendicular Calc":[],"Avoidance":[], "Total End":[], "Output End":[]}
-
+    identified_gloves_bool = False
+    
+    
     def __init__(self, user_h):
         self.user_h = user_h
         # self.edge_percentage = (self.cam_h - user_h) * self.center_dist / (2 * self.cam_h)
@@ -98,30 +99,30 @@ class Pathfinder:
                 
                 punch1_pixel_torch = identified_punch_coords[cluster_lbl == 0]
                 punch2_pixel_torch = identified_punch_coords[cluster_lbl == 1]
-                
                 self.cord_centers = torch.stack((torch.mean(punch1_pixel_torch, 0), torch.mean(punch2_pixel_torch, 0)))
                 if self.cord_centers.isnan().any():
                     self.kmeans_gpu(coords, 2)
                     
-                return [punch1_pixel_torch, punch2_pixel_torch], self.cord_centers
+                return True, self.cord_centers
             except IndexError:
-                return [coords], self.cord_centers
+                return True, self.cord_centers
             except ValueError:
-                return [coords], self.cord_centers
+                return True, self.cord_centers
         else:
-            return [], torch.tensor([[float('nan'), -.5], [.5, .5]])
+            return False, torch.tensor([[float('nan'), -.5], [.5, .5]])
 
     def detect_punch(self):
         st = time.time()
         raw_glove_data, frame = self.cam.read_gloves()
+        # print(raw_glove_data)
         marked_coords = self.pixel_2_cords(raw_glove_data)
         # print(marked_coords)
         
-        cord_list, test_cord_centers = self.kmeans_gpu(marked_coords, 2)
+        self.identified_gloves_bool, test_cord_centers = self.kmeans_gpu(marked_coords, 2)
         self.run_time_dict["Kmeans"].append(time.time() - st)
         # print(time.time()-st)
         # print(test_cord_centers)
-        if len(cord_list) < 2:
+        if self.identified_gloves_bool == False:
             #######################
             # cv.circle(frame, tuple(self.cords_2_pixel(self.bot_pos)[::-1]), 25, (0, 0, 0), -1)
             cv.circle(frame, tuple(self.cords_2_pixel(self.bot_pos)[::-1]), 25, (150, 150, 150), -1)
@@ -149,8 +150,8 @@ class Pathfinder:
         punch_mag = mag(punch_diff)
         punch_hat = punch_diff / punch_mag
         self.run_time_dict["Main Punch"].append(time.time()-st)
-       
-        if punch_mag < .05:
+        # print(f"mag {punch_mag}")
+        if punch_mag < .04:
             if time.time() - self.dodge_time >= self.reset_time_sec:
                 #######################
                 cv.circle(frame, tuple(self.cords_2_pixel(self.bot_pos)[::-1]), 25, (0, 0, 0), -1)
@@ -211,6 +212,5 @@ class Pathfinder:
             # print(f"{self.cords_2_angle(self.bot_pos)} - {bot_prev_pos_angle}")
             # print("************NAN*************\n"*2)
         self.run_time_dict["Total End"].append(time.time()-st)
-        print("Kmeans: ", self.run_time_dict["Kmeans"][-1])
-        print("Main Punch: " self.run_time_dict["Main Punch"][-1], self.run_time_dict["Slope"][-1], self.run_time_dict["Avoidance"][-1], self.run_time_dict["Total End"][-1])
+        print("Kmeans: ", self.run_time_dict["Kmeans"][-1], self.run_time_dict["Main Punch"][-1], self.run_time_dict["Slope"][-1], self.run_time_dict["Avoidance"][-1], self.run_time_dict["Total End"][-1])
         return self.cords_2_angle(self.bot_pos) - bot_prev_pos_angle
