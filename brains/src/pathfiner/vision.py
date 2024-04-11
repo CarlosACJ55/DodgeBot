@@ -21,10 +21,13 @@ class Vision:
     lower_bound_bot = np.array([0, 150, 150])
     upper_bound_bot = np.array([10, 255, 255])
     continue_streaming = False
-
-    def __init__(self, src=0):
+    
+    def __init__(self, src=1):
         self.stream = cv.VideoCapture(src, cv.CAP_DSHOW)
+        self.frame = np.zeros([360,360,3],dtype=np.float32)
+        self.grabbed = False
         self.grabbed, self.frame = self.stream.read()
+        print("grabbed", self.grabbed)
 
     def start_stream(self):
         threading.Thread(target=self.stream_data, args=()).start()
@@ -37,9 +40,12 @@ class Vision:
         self.continue_streaming = True
         while self.continue_streaming:
             self.grabbed, temp_frame = self.stream.read()
-            self.frame = frame_resize(cv.remap(temp_frame, self.map_x, self.map_y, cv.INTER_LINEAR))
-            
+            if self.grabbed:
+                self.frame = frame_resize(cv.remap(temp_frame, self.map_x, self.map_y, cv.INTER_LINEAR))
+            # else:
+                # print("Frame Not Grabbed", self.stream.isOpened())
         self.stream.release()
+        cv.destroyAllWindows()
         print("stream realase")
         # cv.destroyAllWindows()
         # print("Windows destroyed")

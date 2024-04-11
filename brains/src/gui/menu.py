@@ -7,7 +7,7 @@ from src.game.state import Phase
 
 
 MAX_T = 600
-MIN_T = 10
+MIN_T = 3
 MAX_H = 300
 MIN_H = 50
 

@@ -7,6 +7,7 @@ from kmeans_pytorch import kmeans, kmeans_predict
 from numpy.linalg import norm as mag
 
 from src.pathfiner.vision import Vision
+# from vision import Vision
 
 np.random.seed(42)
 X = 0
@@ -19,7 +20,6 @@ def Swap(arr, start_index, last_index):
 
 
 class Pathfinder:
-    cam = Vision(1)
     buf = [deque([np.zeros(2, dtype=np.float16), np.zeros(2, dtype=np.float16)]), deque([np.zeros(2, dtype=np.float16), np.zeros(2, dtype=np.float16)])]
     px_cent = np.array([360 / 2, 360 / 2], dtype=int)
     center_dist = 1.14
@@ -39,6 +39,7 @@ class Pathfinder:
         self.user_h = user_h
         # self.edge_percentage = (self.cam_h - user_h) * self.center_dist / (2 * self.cam_h)
         self.real_ratio = (self.cam_h - self.user_h) / self.cam_h
+        self.cam = Vision(1)
         self.cam.start_stream()
         self.bot_pos = np.array([0.0001, 0.0001], dtype=np.float16)  # TODO: Change this to read the position from the camera
         self.max_edge_cords = self.angle_2_cords(np.array([45, 45], dtype=np.float16))[0:2]
