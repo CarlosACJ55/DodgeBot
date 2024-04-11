@@ -1,3 +1,4 @@
+import time
 import tkinter as tk
 import tkinter.constants as tkc
 from tkinter import ttk
@@ -26,5 +27,6 @@ class Timer:
         self.stop_btn.grid(row=2, column=0, columnspan=5, pady=10)
 
     def update_timer(self):
-        self.frame.after(1000, lambda: self.time_lbl.config(text=format_time(self.game.state.time)))
+        time.sleep(1)
         self.time_lbl.update()
+        self.time_lbl.config(text=format_time(self.game.state.time))

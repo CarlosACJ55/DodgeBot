@@ -1,3 +1,4 @@
+import threading
 import tkinter as tk
 import tkinter.constants as tkc
 from tkinter import messagebox
@@ -30,7 +31,8 @@ class Menu:
         self.duration_ent.insert(0, str(self.time))
         self.duration_ent.bind("<KeyRelease>", self.refresh_input)
         self.setup_btn = tk.Button(self.frame, command=self.setup, text="Setup", width=10)
-        self.start_btn = tk.Button(self.frame, command=game.play, text="Start", width=20)
+        self.start_btn = tk.Button(self.frame, command=lambda: threading.Thread(target=game.play).start(), text="Start",
+                                   width=20)
         self.stop_btn = tk.Button(self.frame, command=game.emergency_reset, text="EMERGENCY_RESET", width=20)
         self.refresh_input(None)
         # Layout
