@@ -29,7 +29,10 @@ class Game:
 
     def end(self):
         # self.reset()
+        
         self.state.phase = Phase.IDLE
+        # time.sleep(1)
+        
         if not self.stm.transition(Phase.IDLE):
             self.emergency_reset()
         self.frame = self.ui.menu_frame(self)
@@ -51,8 +54,9 @@ class Game:
         self.state.phase = Phase.DISCONNECT
 
     def countdown(self):
-        for self.state.time in reversed(range(self.state.time)):
+        while self.state.time and self.state.phase == Phase.IN_GAME:
             self.frame.update_timer()
+        print("called end")
         self.end()
 
     def move_thread(self, x, y):
@@ -63,6 +67,7 @@ class Game:
     def start_dodging(self):
         pf = Pathfinder(self.state.height * (10 ** -2))  # cm to meters
         initialize_time = time.time()
+        time.sleep(1)
         while self.state.phase == Phase.IN_GAME:
             dodge_path_angles = pf.detect_punch()
             if dodge_path_angles is not None:
@@ -75,18 +80,21 @@ class Game:
                     x, y = dodge_path_angles
                     #make sure to set the new angles to move 
                     if ((time.time() - initialize_time) > 2) and (abs(x) >= .5 or abs(y) >= .5):
-                        self.move_thread(x, y)  
+                        self.move_thread(x, y)
+            print("bot", pf.get_dodgebot_camera_location())  
             cv.imshow("Original Frame", pf.cam.frame)
+            
             if cv.waitKey(1) == ord('q'):
                 break
-        
         pf.cam.stop_stream()
+        
+        
+        
         
     def play(self):
         if self.stm.check_connection() and self.state.phase == Phase.IDLE:
             self.frame = self.ui.timer_frame(self)
             self.state.phase = Phase.IN_GAME
-            
             time_thread = threading.Thread(target=self.countdown)
             time_thread.start()
             if not self.stm.transition(Phase.IN_GAME):

@@ -27,7 +27,6 @@ class Vision:
         self.frame = np.zeros([360,360,3],dtype=np.float32)
         self.grabbed = False
         self.grabbed, self.frame = self.stream.read()
-        print("grabbed", self.grabbed)
 
     def start_stream(self):
         threading.Thread(target=self.stream_data, args=()).start()
@@ -35,6 +34,9 @@ class Vision:
 
     def stop_stream(self):
         self.continue_streaming = False
+        self.stream.release()
+        cv.destroyAllWindows()
+        print("Steam Realsed")
 
     def stream_data(self):
         self.continue_streaming = True
@@ -42,18 +44,15 @@ class Vision:
             self.grabbed, temp_frame = self.stream.read()
             if self.grabbed:
                 self.frame = frame_resize(cv.remap(temp_frame, self.map_x, self.map_y, cv.INTER_LINEAR))
-            # else:
-                # print("Frame Not Grabbed", self.stream.isOpened())
-        self.stream.release()
-        cv.destroyAllWindows()
-        print("stream realase")
-        # cv.destroyAllWindows()
-        # print("Windows destroyed")
-    def find_bot(self):
-        hsv_frame = cv.cvtColor(self.frame, cv.COLOR_BGR2HSV)
-        color_mask_bot = cv.inRange(hsv_frame, self.lower_bound_bot, self.upper_bound_bot)
-        return np.column_stack(np.where(color_mask_bot > 0))
+            else:
+                print("Frame Not Grabbed", self.stream.isOpened())
         
+    def find_bot(self):
+        hsv_frame2 = cv.cvtColor(self.frame, cv.COLOR_BGR2HSV)
+        color_mask_bot = cv.inRange(hsv_frame2, self.lower_bound_bot, self.upper_bound_bot)
+        #check that color mask is working
+        return np.column_stack(np.where(color_mask_bot > 0))
+    
     def read_gloves(self):
         # frame = frame_resize(cv.remap(self.frame, self.map_x, self.map_y, cv.INTER_LINEAR))
         tframe = self.frame
