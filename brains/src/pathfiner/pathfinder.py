@@ -6,8 +6,8 @@ import torch
 from kmeans_pytorch import kmeans, kmeans_predict
 from numpy.linalg import norm as mag
 
-from src.pathfiner.vision import Vision
-# from vision import Vision
+# from src.pathfiner.vision import Vision
+from vision import Vision
 ROBOT_HEIGHT = 0
 np.random.seed(42)
 X = 0
@@ -23,7 +23,7 @@ class Pathfinder:
     buf = [deque([np.zeros(2, dtype=np.float16), np.zeros(2, dtype=np.float16)]), deque([np.zeros(2, dtype=np.float16), np.zeros(2, dtype=np.float16)])]
     px_cent = np.array([360 / 2, 360 / 2], dtype=int)
     center_dist = 1.10
-    cam_h = 2.3368 - ROBOT_HEIGHT
+    cam_h = 2.7051 - ROBOT_HEIGHT
     min_clearance = .2
     cord_centers = torch.tensor([[-.5, -.5], [.5, .5]])
     dodge_time = 0
