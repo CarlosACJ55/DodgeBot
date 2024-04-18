@@ -6,8 +6,9 @@ import torch
 from kmeans_pytorch import kmeans, kmeans_predict
 from numpy.linalg import norm as mag
 
-from src.pathfiner.vision import Vision
-
+# from src.pathfiner.vision import Vision
+from vision import Vision
+ROBOT_HEIGHT = 0
 np.random.seed(42)
 X = 0
 Y = 1
@@ -19,15 +20,15 @@ def Swap(arr, start_index, last_index):
 
 
 class Pathfinder:
-    cam = Vision(1)
     buf = [deque([np.zeros(2, dtype=np.float16), np.zeros(2, dtype=np.float16)]), deque([np.zeros(2, dtype=np.float16), np.zeros(2, dtype=np.float16)])]
     px_cent = np.array([360 / 2, 360 / 2], dtype=int)
-    center_dist = 1.14
-    cam_h = 2.36855
+    center_dist = 1.10
+    cam_h = 2.7051 - ROBOT_HEIGHT
     min_clearance = .2
     cord_centers = torch.tensor([[-.5, -.5], [.5, .5]])
     dodge_time = 0
-    radius = .5
+    radius = .93
+    radius_pixel = (radius/center_dist)*px_cent[0]
     reset_time_sec = 1
     edge_percentage = .5
     bot_center_pos_angle = np.array([90.0, 90.0], dtype=np.float16)
@@ -36,14 +37,29 @@ class Pathfinder:
     
     
     def __init__(self, user_h):
-        self.user_h = user_h
+        self.user_h = user_h - ROBOT_HEIGHT
         # self.edge_percentage = (self.cam_h - user_h) * self.center_dist / (2 * self.cam_h)
         self.real_ratio = (self.cam_h - self.user_h) / self.cam_h
+        self.cam = Vision(1)
         self.cam.start_stream()
         self.bot_pos = np.array([0.0001, 0.0001], dtype=np.float16)  # TODO: Change this to read the position from the camera
         self.max_edge_cords = self.angle_2_cords(np.array([45, 45], dtype=np.float16))[0:2]
         self.max_edge_length = mag(self.max_edge_cords) * self.edge_percentage
                 
+    def get_dodgebot_camera_location(self):
+        bot_pix_loc = self.cam.find_bot()
+        # if bot_pix_loc != :
+        if bot_pix_loc.size != 0:
+            bot_pix_loc = np.mean(bot_pix_loc, axis=0)
+            bot_offset_pix = bot_pix_loc - self.px_cent
+            # Z_pix = np.sqrt(self.radius_pixel**2 - (bot_offset_pix[0]**2 + bot_offset_pix[1]**2))
+            # print("zpix ", Z_pix)
+            # Z_ratio = (Z_pix / self.radius_pixel)
+            # Z_simulated = Z_ratio * self.radius
+            z_height_simulated = ((np.sqrt(self.radius_pixel**2 - (bot_offset_pix[0]**2 + bot_offset_pix[1]**2))) / self.radius_pixel) * self.radius
+            return self.bot_pixel_2_crods(bot_pix_loc, z_height_simulated)
+        else:
+            return bot_pix_loc
         
     
     def center_bot(self):
@@ -54,10 +70,9 @@ class Pathfinder:
             # print(f"{self.bot_center_pos_angle} - {self.cords_2_angle(self.bot_pos)}")
             # temp = self.bot_center_pos_angle - self.cords_2_angle(self.bot_pos)
             ############################################################
-            self.bot_pos[0] = 0.00001
-            self.bot_pos[1] = 0.00001
+            self.bot_pos[0] = 0.0
+            self.bot_pos[1] = 0.0
             return self.bot_center_pos_angle - self.cords_2_angle(self.bot_pos)
-            
     
     def angle_2_cords(self, angle_vector):
         robot_theta = angle_vector * (np.pi / 180)
@@ -86,7 +101,13 @@ class Pathfinder:
         else:
             pixel_location = Swap(temp, 0, 1)
         return pixel_location.astype('uint16')
-
+    
+    def bot_pixel_2_crods(self, pixel, z_height):
+        pixel_loc = np.array([pixel[1], pixel[0]]) if len(pixel.shape) == 1 else Swap(pixel, 0, 1)
+        bot_real_ratio = (self.cam_h - z_height) / self.cam_h
+        real_dist_cords = bot_real_ratio * self.center_dist * (pixel_loc - self.px_cent) / self.px_cent
+        return (real_dist_cords * np.array([1, -1])).astype(np.float32)
+    
     def kmeans_gpu(self, coords, n):
         cluster_lbl = None
         if coords.size > 0:
@@ -114,14 +135,10 @@ class Pathfinder:
     def detect_punch(self):
         st = time.time()
         raw_glove_data, frame = self.cam.read_gloves()
-        # print(raw_glove_data)
         marked_coords = self.pixel_2_cords(raw_glove_data)
-        # print(marked_coords)
-        
         self.identified_gloves_bool, test_cord_centers = self.kmeans_gpu(marked_coords, 2)
         self.run_time_dict["Kmeans"].append(time.time() - st)
-        # print(time.time()-st)
-        # print(test_cord_centers)
+        
         if self.identified_gloves_bool == False:
             #######################
             # cv.circle(frame, tuple(self.cords_2_pixel(self.bot_pos)[::-1]), 25, (0, 0, 0), -1)
@@ -130,7 +147,7 @@ class Pathfinder:
             ######################
             self.cord_centers = torch.tensor([[float('nan'), -.5], [.5, .5]])
             return self.center_bot()
-        # print("buf before", self.buf)
+       
         self.buf[0].appendleft(test_cord_centers[0].numpy())
         self.buf[0].pop()
         self.buf[1].appendleft(test_cord_centers[1].numpy())
@@ -139,7 +156,7 @@ class Pathfinder:
     #    Main Punch":[],"Slope"
             
         close, far = (0, 1) if mag(self.buf[0][0] - self.bot_pos) < mag(self.buf[1][0] - self.bot_pos) else (1, 0)
-        # print(close, far)
+       
         ####################
         cv.circle(frame, tuple(self.cords_2_pixel(self.buf[close][0])[::-1]), 15, (0, 0, 255), -1)
         cv.circle(frame, tuple(self.cords_2_pixel(self.buf[far][0])[::-1]), 5, (0, 255, 0), -1)
@@ -199,9 +216,10 @@ class Pathfinder:
         cv.circle(frame, tuple(self.cords_2_pixel(self.bot_pos)[::-1]), 25, (255, 255, 0), -1)
         ##################
         # print("prev pos", self.bot_pos, "dodge", dodge)
-        self.bot_pos = self.bot_pos + dodge
+        new_bot_pos = self.bot_pos + dodge
+        # self.bot_pos = self.bot_pos + dodge
         ##################
-        cv.circle(frame, tuple(self.cords_2_pixel(self.bot_pos)[::-1]), 25, (255, 255, 255), -1)
+        cv.circle(frame, tuple(self.cords_2_pixel(new_bot_pos)[::-1]), 25, (255, 255, 255), -1)
         ##################
         # if np.isnan(self.cords_2_angle(self.bot_pos) - bot_prev_pos_angle).any() == True:
         #     print(locals())
@@ -213,4 +231,4 @@ class Pathfinder:
             # print("************NAN*************\n"*2)
         self.run_time_dict["Total End"].append(time.time()-st)
         print("Kmeans: ", self.run_time_dict["Kmeans"][-1], self.run_time_dict["Main Punch"][-1], self.run_time_dict["Slope"][-1], self.run_time_dict["Avoidance"][-1], self.run_time_dict["Total End"][-1])
-        return self.cords_2_angle(self.bot_pos) - bot_prev_pos_angle
+        return self.cords_2_angle(new_bot_pos) - bot_prev_pos_angle
