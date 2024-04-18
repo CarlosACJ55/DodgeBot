@@ -102,6 +102,7 @@ static void handlePos(unsigned char *);
 static int motorsReady(void);
 static Position dequeueMove(void);
 static void send_pulses(Position move);
+static void alarm_reset(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -150,13 +151,31 @@ int main(void)
   HAL_TIM_PWM_Start(&htim12, TIM_CHANNEL_1);
   htim1.Instance->CNT = 0;
   htim12.Instance->CNT = 0;
+
+
+  //Set the pin high to enable proportional control/action (make sure its set to zero for now)
+  HAL_GPIO_WritePin(PROP_CONTROL_EN_GPIO_1_GPIO_Port, PROP_CONTROL_EN_GPIO_1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(PROP_CONTROL_EN_GPIO_2_GPIO_Port, PROP_CONTROL_EN_GPIO_2_Pin, GPIO_PIN_RESET);
+
+  //Set the pin high to enable to enable forward direction movement
+  HAL_GPIO_WritePin(FRWD_DRIVE_EN_GPIO_1_GPIO_Port, FRWD_DRIVE_EN_GPIO_1_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(FRWD_DRIVE_EN_GPIO_2_GPIO_Port, FRWD_DRIVE_EN_GPIO_2_Pin, GPIO_PIN_SET);
+  //Set the pin high to enable to enable reverse direction movement
+  HAL_GPIO_WritePin(REVERSE_DRIVE_EN_GPIO_1_GPIO_Port, REVERSE_DRIVE_EN_GPIO_1_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(REVERSE_DRIVE_EN_GPIO_2_GPIO_Port, REVERSE_DRIVE_EN_GPIO_2_Pin, GPIO_PIN_SET);
+
+  //Enable high to limit the torque in the forward direction (set to zero for now)
+  HAL_GPIO_WritePin(FRWD_EXT_TORQUE_LIM_EN_GPIO_1_GPIO_Port, FRWD_EXT_TORQUE_LIM_EN_GPIO_1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(FRWD_EXT_TORQUE_LIM_EN_GPIO_2_GPIO_Port, FRWD_EXT_TORQUE_LIM_EN_GPIO_2_Pin, GPIO_PIN_RESET);
+  //Enable high to limit the torque in the reverse direction (set to zero for now)
+  HAL_GPIO_WritePin(REVERSE_EXT_TORQUE_LIM_EN_GPIO_1_GPIO_Port, REVERSE_EXT_TORQUE_LIM_EN_GPIO_1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(REVERSE_EXT_TORQUE_LIM_EN_GPIO_2_GPIO_Port, REVERSE_EXT_TORQUE_LIM_EN_GPIO_2_Pin, GPIO_PIN_RESET);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
-
-
+  int readyReported = 0;
   while (1)
   {
     /* USER CODE END WHILE */
@@ -181,8 +200,21 @@ int main(void)
       msgReady = 0;
     }
 #ifndef TRACK
-    if (gameState == IN_GAME && movQ.count && motorsReady())
-      send_pulses(dequeueMove());
+    if (gameState == IN_GAME) {
+      if (movQ.count) {
+        if (motorsReady()) {
+          readyReported = 0;
+          send_pulses(dequeueMove());
+        }
+      }
+      else if (readyReported == 0 && motorsReady()) {
+        transmit("A555\0");
+        readyReported = 1;
+      }
+    }
+
+
+
 #endif
   }
   /* USER CODE END 3 */
@@ -667,14 +699,16 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   /* Prevent unused argument(s) compilation warning */
   switch (GPIO_Pin) {
-  case ALARM_NOTIF_Pin: // TODO:  Finish writing all these
-    HAL_GPIO_WritePin(GPIOA, ALO1_LED_A_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(GPIOA, ALO2_LED_A_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(GPIOB, ALO1_LED_B_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(GPIOB, ALO2_LED_B_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(GPIOC, ALO1_LED_C_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(GPIOC, ALO2_LED_C_Pin, GPIO_PIN_SET);
+  case ALARM_NOTIF_Pin:
+    HAL_GPIO_WritePin(GPIOA, ALO1_LED_A_Pin, HAL_GPIO_ReadPin(ALO_GPIO_A_1_GPIO_Port, ALO_GPIO_A_1_Pin));
+    HAL_GPIO_WritePin(GPIOA, ALO2_LED_A_Pin, HAL_GPIO_ReadPin(ALO_GPIO_A_2_GPIO_Port, ALO_GPIO_A_2_Pin));
+    HAL_GPIO_WritePin(GPIOB, ALO1_LED_B_Pin, HAL_GPIO_ReadPin(ALO_GPIO_B_1_GPIO_Port, ALO_GPIO_B_1_Pin));
+    HAL_GPIO_WritePin(GPIOB, ALO2_LED_B_Pin, HAL_GPIO_ReadPin(ALO_GPIO_B_2_GPIO_Port, ALO_GPIO_B_2_Pin));
+    HAL_GPIO_WritePin(GPIOC, ALO1_LED_C_Pin, HAL_GPIO_ReadPin(ALO_GPIO_C_1_GPIO_Port, ALO_GPIO_C_1_Pin));
+    HAL_GPIO_WritePin(GPIOC, ALO2_LED_C_Pin, HAL_GPIO_ReadPin(ALO_GPIO_C_2_GPIO_Port, ALO_GPIO_C_2_Pin));
+    alarm_reset();
   }
+//  HAL_GPIO_ReadPin
 }
 
 void transmit(const char *m) {
@@ -695,18 +729,30 @@ void handleCommand(const char code) {
     if (gameState == RE_CENTER || gameState == IN_GAME)
       resetMotors();
     gameState = IDLE;
+    //turns motors off
+    HAL_GPIO_WritePin(SERVO_EN_GPIO_1_GPIO_Port, SERVO_EN_GPIO_1_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(SERVO_EN_GPIO_2_GPIO_Port, SERVO_EN_GPIO_2_Pin, GPIO_PIN_RESET);
     transmit("!I\0");
     break;
   case 'D':
     gameState = DISCONNECTED;
     transmit("!D\0");
+    HAL_GPIO_WritePin(SERVO_EN_GPIO_1_GPIO_Port, SERVO_EN_GPIO_1_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(SERVO_EN_GPIO_2_GPIO_Port, SERVO_EN_GPIO_2_Pin, GPIO_PIN_RESET);
     break;
   case 'S':
-    if (gameState != IDLE)
+    if (gameState != IDLE){
+      HAL_GPIO_WritePin(SERVO_EN_GPIO_1_GPIO_Port, SERVO_EN_GPIO_1_Pin, GPIO_PIN_RESET);
+      HAL_GPIO_WritePin(SERVO_EN_GPIO_2_GPIO_Port, SERVO_EN_GPIO_2_Pin, GPIO_PIN_RESET);
       transmit("A988\0");
+    }
     else {
       gameState = IN_GAME;
       transmit("!S\0");
+      //turn on motors
+      HAL_GPIO_WritePin(SERVO_EN_GPIO_1_GPIO_Port, SERVO_EN_GPIO_1_Pin, GPIO_PIN_SET);
+      HAL_GPIO_WritePin(SERVO_EN_GPIO_2_GPIO_Port, SERVO_EN_GPIO_2_Pin, GPIO_PIN_SET);
+
     }
     break;
   case '?':
@@ -747,12 +793,12 @@ void handlePos(unsigned char *data) {
 }
 
 int motorsReady(void) {
-#ifndef SIM
+#ifdef SIM
   return 1;
-//  return HAL_GPIO_ReadPin(GPIOB, GEN_PURPOSE_OUT_GPIO_B_1_Pin) && HAL_GPIO_ReadPin(GPIOB, GEN_PURPOSE_OUT_GPIO_B_2_Pin) &&
-//      !(HAL_GPIO_ReadPin(GPIOA, GEN_PURPOSE_OUT_GPIO_A_1_Pin) || HAL_GPIO_ReadPin(GPIOA, GEN_PURPOSE_OUT_GPIO_A_2_Pin));
 #else
-  return 1;
+//  return 1;
+    return HAL_GPIO_ReadPin(GPIOB, GEN_PURPOSE_OUT_GPIO_B_1_Pin) && HAL_GPIO_ReadPin(GPIOB, GEN_PURPOSE_OUT_GPIO_B_2_Pin) &&
+        !(HAL_GPIO_ReadPin(GPIOA, GEN_PURPOSE_OUT_GPIO_A_1_Pin) || HAL_GPIO_ReadPin(GPIOA, GEN_PURPOSE_OUT_GPIO_A_2_Pin));
 #endif
 }
 
@@ -794,10 +840,11 @@ void send_pulses(Position move) {
     }
   }
   higherTim->Instance->CNT = 0;
+  //function that waits for the motors to be ready and then sends a signbal when ready
   return;
 #else
-    curPos.xPul += move->xPul;
-    curPos.yPul += move->yPul;
+    curPos.xPul += move.xPul;
+    curPos.yPul += move.yPul;
 #endif
 }
 
@@ -823,6 +870,15 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     if (i == MAX_TX_LEN)
       transmit("A969\0");
   }
+}
+
+void alarm_reset(void){
+  //Enable high to reset the alarm codes on the motor, and then release.
+  HAL_GPIO_WritePin(ALARM_RST_GPIO_1_GPIO_Port, ALARM_RST_GPIO_1_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(ALARM_RST_GPIO_2_GPIO_Port, ALARM_RST_GPIO_2_Pin, GPIO_PIN_SET);
+  HAL_Delay(50);
+  HAL_GPIO_WritePin(ALARM_RST_GPIO_1_GPIO_Port, ALARM_RST_GPIO_1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(ALARM_RST_GPIO_2_GPIO_Port, ALARM_RST_GPIO_2_Pin, GPIO_PIN_RESET);
 }
 /* USER CODE END 4 */
 
