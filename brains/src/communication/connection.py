@@ -49,7 +49,9 @@ class Connection:
         self.serial.write(format_msg(msg).encode("utf-8"))
 
     def receive(self):
-        got = decode_msg(self.serial.readline().decode())
+        read = self.serial.readline()
+        decoded = read.decode()
+        got = decode_msg(decoded)
         return got
 
     def disconnect(self):

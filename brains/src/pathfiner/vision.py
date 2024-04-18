@@ -16,9 +16,12 @@ class Vision:
     calibration_dir = path.join(path.dirname(__file__), 'calibration')
     map_x = np.load(path.join(calibration_dir, 'x.npy'))
     map_y = np.load(path.join(calibration_dir, 'y.npy'))
-    lower_bound_gloves = np.array([20, 100, 100])
-    upper_bound_gloves = np.array([30, 255, 255])
-    lower_bound_bot = np.array([0, 150, 150])
+    # lower_bound_gloves = np.array([25, 150, 150])
+    # upper_bound_gloves = np.array([30, 255, 255])
+    ## will need to check
+    lower_bound_gloves = np.array([17, 130, 130])
+    upper_bound_gloves = np.array([25, 255, 255])
+    lower_bound_bot = np.array([0, 130, 130])
     upper_bound_bot = np.array([10, 255, 255])
     continue_streaming = False
     
@@ -26,7 +29,7 @@ class Vision:
         self.stream = cv.VideoCapture(src, cv.CAP_DSHOW)
         self.frame = np.zeros([360,360,3],dtype=np.float32)
         self.grabbed = False
-        self.grabbed, self.frame = self.stream.read()
+        # self.grabbed, self.frame = self.stream.read()
 
     def start_stream(self):
         threading.Thread(target=self.stream_data, args=()).start()

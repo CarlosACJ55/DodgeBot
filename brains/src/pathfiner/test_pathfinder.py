@@ -14,20 +14,29 @@ sys.path.append(os.path.dirname(SCRIPT_DIR))
 from pathfinder import Pathfinder
 # while True:
 # result = cv.VideoWriter('Testrun.mp4',  cv.VideoWriter_fourcc('m', 'p', '4', 'v'), 60, (360,360)) 
-pf = Pathfinder(1.38)
+# pf = Pathfinder(1.47)
+# pf = Pathfinder(1.38)
+pf = Pathfinder(1.523)
 # last_punch = time.time()
 while True:
-    dodge_path_angles = pf.detect_punch()
+    dodge_path_angles, dodge_path_cartesian = pf.detect_punch()
     # cv.imshow("Original Frame", pf.cam.frame)
-    
+    frame = pf.cam.frame
     if dodge_path_angles is not None:
         if np.isnan(dodge_path_angles).any() == True:
             print("**************NaN***************\n"*4)
             print(pf.bot_pos)
             print("**************NaN***************\n"*4)
             # print(pf.)
-        print(f" bot pos {pf.bot_pos}, dodge angle{dodge_path_angles}")
-    cv.imshow("Original Frame", pf.cam.frame)
+        # print(f" bot pos {pf.bot_pos}, dodge angle{dodge_path_angles}")
+        pf.bot_pos = pf.bot_pos + dodge_path_cartesian
+    
+    if np.all((pf.bot_pos < .001)):
+        cv.circle(frame, tuple(pf.cords_2_pixel(pf.bot_pos)[::-1]), 25, (0, 0, 0), -1)
+    else:
+        cv.circle(frame, tuple(pf.cords_2_pixel(pf.bot_pos)[::-1]), 25, (255, 255, 255), -1)
+        
+    cv.imshow("Original Frame", frame)
     # result.write(pf.cam.frame)
   
         

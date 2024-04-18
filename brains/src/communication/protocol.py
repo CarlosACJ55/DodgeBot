@@ -10,6 +10,7 @@ class Protocol:
     streaming = False
 
     def check_connection(self):
+        print("Connection Working: ", self.connection.is_connected())
         return self.connection.is_connected()
 
     def connect(self):
