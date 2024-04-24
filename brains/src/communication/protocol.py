@@ -18,18 +18,27 @@ class Protocol:
 
     def write(self, command):
         self.connection.send(str(command))
+    
+    def receive(self):
+        msg = self.connection.receive()
+        return msg_types.get(msg[0], None)(msg[1:]) if msg else None
+        
 
     def read(self):
         msg = ""
         while not msg:
             msg = self.connection.receive()
+        # print("msg", msg)
         return msg_types.get(msg[0], None)(msg[1:])
 
     def transition(self, code):
+        print("* transition")
         if code.value not in {codes.SYNC, codes.RESET, codes.START, codes.DISC, codes.FIND}:
             raise ValueError("Incorrect code for a command")
         self.write(Command(code.value))
+        # print("read start")
         res = self.read()
+        # print(res)
         return res.data == code.value if isinstance(res, Command) else res
 
     def find(self):

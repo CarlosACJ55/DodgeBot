@@ -94,7 +94,7 @@ static void MX_USART6_UART_Init(void);
 static void MX_TIM4_Init(void);
 /* USER CODE BEGIN PFP */
 static void transmit(const char *);
-static void resetMotors(void);
+//static void resetMotors(void);
 static void sendPos(void);
 static void handleCommand(const char);
 static void enqueueMove(Position *);
@@ -171,6 +171,12 @@ int main(void)
   HAL_GPIO_WritePin(REVERSE_EXT_TORQUE_LIM_EN_GPIO_1_GPIO_Port, REVERSE_EXT_TORQUE_LIM_EN_GPIO_1_Pin, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(REVERSE_EXT_TORQUE_LIM_EN_GPIO_2_GPIO_Port, REVERSE_EXT_TORQUE_LIM_EN_GPIO_2_Pin, GPIO_PIN_RESET);
 
+
+  HAL_GPIO_WritePin(SERVO_EN_GPIO_1_GPIO_Port, SERVO_EN_GPIO_1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(SERVO_EN_GPIO_2_GPIO_Port, SERVO_EN_GPIO_2_Pin, GPIO_PIN_RESET);
+//  HAL_GPIO_WritePin(SERVO_EN_GPIO_1_GPIO_Port, SERVO_EN_GPIO_1_Pin, GPIO_PIN_SET);
+//  HAL_GPIO_WritePin(SERVO_EN_GPIO_2_GPIO_Port, SERVO_EN_GPIO_2_Pin, GPIO_PIN_SET);
+//turns on motors
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -717,7 +723,7 @@ void transmit(const char *m) {
   HAL_UART_Transmit(&huart6, (unsigned char *)s, strlen(s), HAL_MAX_DELAY);
 }
 
-void resetMotors() { return; }
+//void resetMotors() { return; }
 
 void handleCommand(const char code) {
   switch (code) {
@@ -726,10 +732,10 @@ void handleCommand(const char code) {
     transmit("!R\0");
     break;
   case 'I':
-    if (gameState == RE_CENTER || gameState == IN_GAME)
-      resetMotors();
+//    if (gameState == RE_CENTER || gameState == IN_GAME)
+//      resetMotors();
     gameState = IDLE;
-    //turns motors off
+    //turns motors on
     HAL_GPIO_WritePin(SERVO_EN_GPIO_1_GPIO_Port, SERVO_EN_GPIO_1_Pin, GPIO_PIN_RESET);
     HAL_GPIO_WritePin(SERVO_EN_GPIO_2_GPIO_Port, SERVO_EN_GPIO_2_Pin, GPIO_PIN_RESET);
     transmit("!I\0");
@@ -752,7 +758,6 @@ void handleCommand(const char code) {
       //turn on motors
       HAL_GPIO_WritePin(SERVO_EN_GPIO_1_GPIO_Port, SERVO_EN_GPIO_1_Pin, GPIO_PIN_SET);
       HAL_GPIO_WritePin(SERVO_EN_GPIO_2_GPIO_Port, SERVO_EN_GPIO_2_Pin, GPIO_PIN_SET);
-
     }
     break;
   case '?':
@@ -797,8 +802,9 @@ int motorsReady(void) {
   return 1;
 #else
 //  return 1;
-    return HAL_GPIO_ReadPin(GPIOB, GEN_PURPOSE_OUT_GPIO_B_1_Pin) && HAL_GPIO_ReadPin(GPIOB, GEN_PURPOSE_OUT_GPIO_B_2_Pin) &&
-        !(HAL_GPIO_ReadPin(GPIOA, GEN_PURPOSE_OUT_GPIO_A_1_Pin) || HAL_GPIO_ReadPin(GPIOA, GEN_PURPOSE_OUT_GPIO_A_2_Pin));
+    return !HAL_GPIO_ReadPin(GPIOB, GEN_PURPOSE_OUT_GPIO_B_1_Pin) &&
+        HAL_GPIO_ReadPin(GPIOA, GEN_PURPOSE_OUT_GPIO_A_1_Pin) && HAL_GPIO_ReadPin(GPIOA, GEN_PURPOSE_OUT_GPIO_A_2_Pin);
+    // && HAL_GPIO_ReadPin(GPIOB, GEN_PURPOSE_OUT_GPIO_B_2_Pin);
 #endif
 }
 

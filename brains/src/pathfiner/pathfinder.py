@@ -8,7 +8,8 @@ from numpy.linalg import norm as mag
 
 from src.pathfiner.vision import Vision
 # from vision import Vision
-ROBOT_HEIGHT = 0
+ROBOT_HEIGHT = (.889) + (.18) # table + motor set up
+ENCODER_SCALER = 0
 np.random.seed(42)
 X = 0
 Y = 1
@@ -22,13 +23,13 @@ def Swap(arr, start_index, last_index):
 class Pathfinder:
     buf = [deque([np.array([np.nan, 0.0], dtype=np.float32), np.array([np.nan, 0.0], dtype=np.float32)]), deque([np.array([np.nan, 0.0], dtype=np.float32), np.array([np.nan, 0.0], dtype=np.float32)])]
     px_cent = np.array([360 / 2, 360 / 2], dtype=int)
-    center_dist = 1.10
-    # cam_h = 2.7051 - ROBOT_HEIGHT
-    cam_h = 2.4384 - ROBOT_HEIGHT
-    min_clearance = .15
+    center_dist = .8509 #on the the robot plnae
+    cam_h = 2.72 - ROBOT_HEIGHT
+    # cam_h = 2.4384 - ROBOT_HEIGHT
+    min_clearance = .17
     cord_centers = torch.tensor([[-.5, -.5], [.5, .5]])
     dodge_time = 0
-    radius = .93
+    radius = .5207 #20 inch
     radius_pixel = (radius/center_dist)*px_cent[0]
     reset_time_sec = 1
     edge_percentage = .25
@@ -44,7 +45,7 @@ class Pathfinder:
         self.cam = Vision(1)
         self.cam.start_stream()
         self.bot_pos = np.array([0.0, 0.0], dtype=np.float32)  # TODO: Change this to read the position from the camera
-        self.max_edge_cords = self.angle_2_cords(np.array([22.5, 22.5], dtype=np.float32))[0:2]
+        self.max_edge_cords = self.angle_2_cords(np.array([30, 30], dtype=np.float32))[0:2]
         self.max_edge_length = mag(self.max_edge_cords) * self.edge_percentage
         print(self.max_edge_length)     
            
@@ -53,20 +54,25 @@ class Pathfinder:
         # if bot_pix_loc != :
         if bot_pix_loc.size != 0:
             bot_pix_loc = np.mean(bot_pix_loc, axis=0)
+            # print("*",bot_pix_loc)
             bot_offset_pix = bot_pix_loc - self.px_cent
+            # print("**", bot_offset_pix)
+            # print("***", self.radius_pixel)
             # Z_pix = np.sqrt(self.radius_pixel**2 - (bot_offset_pix[0]**2 + bot_offset_pix[1]**2))
             # print("zpix ", Z_pix)
             # Z_ratio = (Z_pix / self.radius_pixel)
             # Z_simulated = Z_ratio * self.radius
             z_height_simulated = ((np.sqrt(self.radius_pixel**2 - (bot_offset_pix[0]**2 + bot_offset_pix[1]**2))) / self.radius_pixel) * self.radius
+            # print("****", z_height_simulated)
             return self.bot_pixel_2_crods(bot_pix_loc, z_height_simulated)
         else:
             return bot_pix_loc
         
     
     def center_bot(self):
+        # print(self.bot_pos)
         if (abs(self.bot_pos[0]) <= .01 and abs(self.bot_pos[1]) <= .01):
-            return None, None
+            return np.array([0,0], dtype=np.float32), np.array([0,0], dtype=np.float32)
         else:
             print(f"Bot is being centered {-self.bot_pos}")
             # print(f"{self.bot_center_pos_angle} - {self.cords_2_angle(self.bot_pos)}")
@@ -127,20 +133,20 @@ class Pathfinder:
                 # print(self.cord_centers)
                 self.kmeans_gpu(coords, 2)
                 
-            return True, self.cord_centers
+            return self.cord_centers
         except IndexError:
             print("Error index")
-            return True, self.cord_centers
+            return self.cord_centers
         except ValueError:
             print("Error value")
-            return True, self.cord_centers
+            return self.cord_centers
         # else:
             # return False, torch.tensor([[float('nan'), -.5], [.5, .5]])
 
     def detect_punch(self):
         st = time.time()
         raw_glove_data, frame = self.cam.read_gloves()
-        if raw_glove_data.size < 10:
+        if raw_glove_data.size < 3:
             cv.circle(frame, tuple(self.cords_2_pixel(self.bot_pos)[::-1]), 25, (150, 150, 150), -1)
             self.cord_centers = torch.tensor([[float('nan'), -.5], [.5, .5]])
             return None, None
@@ -153,20 +159,28 @@ class Pathfinder:
         ## or maybe we automatically move to a backward position, telling the user we can not track anymore!!
         ## this is a dickhead thing but might be very effiective
         if np.any((variation_marked_cords < .0008)):
-            if np.any(np.isnan(self.buf[0][0])) or np.any(np.isnan(self.buf[0][1])) or np.any(np.isnan(self.buf[1][0])) or np.any(np.isnan(self.buf[1][1])):
-                return None, None
-            #then the single punch marked cords are closes to the buf[0], not buf[1]
-            if mag(mean_marked_cords - self.buf[0][0]) < mag(mean_marked_cords - self.buf[1][0]):
-                test_cord_centers = self.cord_centers
-                test_cord_centers[0][0] = mean_marked_cords[0]
-                test_cord_centers[0][1] = mean_marked_cords[1]
-            else:
-                test_cord_centers = self.cord_centers
-                test_cord_centers[1][0] = mean_marked_cords[0]
-                test_cord_centers[1][1] = mean_marked_cords[1]
-            # return None
-        else:
-            self.identified_gloves_bool, test_cord_centers = self.kmeans_gpu(marked_coords, 2)
+            # if np.any(np.isnan(self.buf[0][0])) or np.any(np.isnan(self.buf[0][1])) or np.any(np.isnan(self.buf[1][0])) or np.any(np.isnan(self.buf[1][1])):
+            #     return None, None
+            # #then the single punch marked cords are closes to the buf[0], not buf[1]
+            # if mag(mean_marked_cords - self.buf[0][0]) < mag(mean_marked_cords - self.buf[1][0]):
+            #     self.buf[0].appendleft(mean_marked_cords)
+            #     self.buf[0].pop()
+            #     self.buf[1].appendleft(self.buf[1][0])
+            #     self.buf[1].pop()
+            # else:
+            #     self.buf[1].appendleft(mean_marked_cords)
+            #     self.buf[1].pop()
+            #     self.buf[0].appendleft(self.buf[0][0])
+            #     self.buf[0].pop()
+                
+            return None, None
+        # else:
+        test_cord_centers = self.kmeans_gpu(marked_coords, 2)
+        
+        self.buf[0].appendleft(test_cord_centers[0].numpy())
+        self.buf[0].pop()
+        self.buf[1].appendleft(test_cord_centers[1].numpy())
+        self.buf[1].pop()
         self.run_time_dict["Kmeans"].append(time.time() - st)
         
         # if self.identified_gloves_bool == False:
@@ -181,11 +195,12 @@ class Pathfinder:
         # if test_cord_centers.isnan().any():
         #     return None, None
             
-        self.buf[0].appendleft(test_cord_centers[0].numpy())
-        self.buf[0].pop()
-        self.buf[1].appendleft(test_cord_centers[1].numpy())
-        self.buf[1].pop()
-        
+        # self.buf[0].appendleft(test_cord_centers[0].numpy())
+        # self.buf[0].pop()
+        # self.buf[1].appendleft(test_cord_centers[1].numpy())
+        # self.buf[1].pop()
+        # print(self.buf)
+        # print(self.buf)
         if np.any(np.isnan(self.buf[0][0])) or np.any(np.isnan(self.buf[0][1])) or np.any(np.isnan(self.buf[1][0])) or np.any(np.isnan(self.buf[1][1])):
             return None, None
         
@@ -268,4 +283,5 @@ class Pathfinder:
         self.run_time_dict["Total End"].append(time.time()-st)
         print("Kmeans: ", self.run_time_dict["Kmeans"][-1], self.run_time_dict["Main Punch"][-1], self.run_time_dict["Slope"][-1], self.run_time_dict["Avoidance"][-1], self.run_time_dict["Total End"][-1])
         print(f"bot_pos: {self.bot_pos} ({bot_prev_pos_angle}), new_bot_pos {new_bot_pos} ({self.cords_2_angle(new_bot_pos)}), dodge {dodge}, buff {self.buf}, punch mag {punch_mag}, punch hat{punch_hat}, m {m}, cord_centers {self.cord_centers}, punch var {variation_marked_cords}")
-        return np.round(self.cords_2_angle(new_bot_pos) - bot_prev_pos_angle, 0), np.round(dodge, 5)
+        # return np.round(self.cords_2_angle(new_bot_pos) - bot_prev_pos_angle, ENCODER_SCALER/10), np.round(dodge, 5)
+        return np.round(self.cords_2_angle(new_bot_pos) - bot_prev_pos_angle), np.round(dodge, 5)

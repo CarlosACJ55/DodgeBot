@@ -19,7 +19,7 @@ class Vision:
     # lower_bound_gloves = np.array([25, 150, 150])
     # upper_bound_gloves = np.array([30, 255, 255])
     ## will need to check
-    lower_bound_gloves = np.array([17, 130, 130])
+    lower_bound_gloves = np.array([17, 110, 110])
     upper_bound_gloves = np.array([25, 255, 255])
     lower_bound_bot = np.array([0, 130, 130])
     upper_bound_bot = np.array([10, 255, 255])

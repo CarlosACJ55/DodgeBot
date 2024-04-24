@@ -8,7 +8,7 @@ from src.communication.message import Alarm
 from src.game.state import Phase, State
 from src.pathfiner.pathfinder import Pathfinder
 
-
+ENCODER_SCALER = 1
 class Game:
     state = State()
     
@@ -26,7 +26,8 @@ class Game:
 
     def end(self):
         self.state.phase = Phase.IDLE
-        time.sleep(1)
+        # self.state.still = True
+        time.sleep(.1)
         if not self.stm.transition(Phase.IDLE):
             self.emergency_reset()
         self.frame = self.ui.menu_frame(self)
@@ -56,73 +57,104 @@ class Game:
         
             
     def move(self, x, y):
+        # print("move staring!")
+        self.stm.move(int(x*ENCODER_SCALER), int(y*ENCODER_SCALER))
         print("move staring!")
-        self.stm.move(int(x), int(y))
         self.state.still = False
-        print("move ending!")
+        # print("move ending!")
 
     def start_dodging(self):
-        # pf = Pathfinder(self.state.height * (10 ** -2))  # cm to meters
-        initialize_time = time.time()
+        pf = Pathfinder(self.state.height * (10 ** -2))  # cm to meters
+        # initialize_time = time.time()
+        
         # time.sleep(1)
+        while len(pf.get_dodgebot_camera_location()) == 0:
+            pass
+        
+        pf.bot_pos = pf.get_dodgebot_camera_location()
+        dodge_angle, _ = pf.center_bot()
+        
+        while abs(dodge_angle[0]) > 1 and abs(dodge_angle[1]) > 1:
+            # while not self.state.still:
+                # pass
+            # pf.bot_pos = pf.get_dodgebot_camera_location()
+            # dodge_angle, _ = pf.center_bot()
+            time.sleep(.25)
+            pf.bot_pos = pf.get_dodgebot_camera_location()
+            dodge_angle, _ = pf.center_bot()
+            print("Dodge angle", dodge_angle)
+            self.move(dodge_angle[0], dodge_angle[1])
+            
+        pf.bot_pos[0] = 0.0
+        pf.bot_pos[1] = 0.0
+        # time.sleep(.05)
         while self.state.phase == Phase.IN_GAME:
-            user_input = input("select the amount of degrees to move: ")
-            user_input = user_input.split(",")
-            if len(user_input) != 2:
-                user_input = input("select the amount of degrees to move: ")
-            else:
-                self.move(user_input[0], user_input[1])
+            # user_input = input("select the amount of degrees to move: ")
+            # user_input = user_input.split(",")
+            # if len(user_input) != 2:
+            #     user_input = input("select the amount of degrees to move: ")
+            # else:
+            #     print(int(user_input[0]), int(user_input[1]))
+            #     self.move(user_input[0], user_input[1])
+            
+            # response = self.stm.read()
             # print("^")
-            # dodge_path_angles, dodge_path_cartesian = pf.detect_punch()
-            # frame = pf.cam.frame
-            # if dodge_path_angles is not None:
-            #     if np.isnan(dodge_path_angles).any():
-            #         print("**************NaN***************\n" * 4)
-            #         print(pf.bot_pos)
-            #         print("**************NaN***************\n" * 4)  # print(pf.)
-            #     else:
-            #         print(f" bot pos {pf.bot_pos}, dodge angle{dodge_path_angles}")
-            #         x, y = dodge_path_angles
-            #         #make sure to set the new angles to move 
-            #         # if ((time.time() - initialize_time) > 2) and (abs(x) >= .5 or abs(y) >= .5):
-            #         self.move(x, y)
-            #         pf.bot_pos = pf.bot_pos + dodge_path_cartesian
+            dodge_path_angles, dodge_path_cartesian = pf.detect_punch()
+            frame = pf.cam.frame
+            if dodge_path_angles is not None:
+                if dodge_path_angles[0] != 0.0 or dodge_path_angles[1] != 0.0:
+                    if np.isnan(dodge_path_angles).any():
+                        print("**************NaN***************\n" * 4)
+                        print(pf.bot_pos)
+                        print("**************NaN***************\n" * 4)  # print(pf.)
+                    else:
+                        print(f" bot pos {pf.bot_pos}, dodge angle{dodge_path_angles}")
+                        x, y = dodge_path_angles
+                        #make sure to set the new angles to move 
+                        # if ((time.time() - initialize_time) > 2) and (abs(x) >= .5 or abs(y) >= .5):
+                        # if self.bot_pos 
+                        new_pos = pf.bot_pos + dodge_path_cartesian
+                        if new_pos[1] < -.4:
+                            y = 0
+                        self.move(x, y)
+                        pf.bot_pos = new_pos
                     
-            # #checks for the live bot pos everytime
+            #checks for the live bot pos everytime
             # if self.state.still:
-            #     pf.bot_pos = pf.get_dodgebot_camera_location()
-            #     self.state.still = True
+                # pf.bot_pos = pf.get_dodgebot_camera_location()
+                # self.state.still = True
             # print("bot", pf.get_dodgebot_camera_location())  
             
-            # if np.all((pf.bot_pos < .001)):
-            #     cv.circle(frame, tuple(pf.cords_2_pixel(pf.bot_pos)[::-1]), 25, (0, 0, 0), -1)
-            # else:
-            #     cv.circle(frame, tuple(pf.cords_2_pixel(pf.bot_pos)[::-1]), 25, (255, 255, 255), -1)
+            if np.all((pf.bot_pos < .001)):
+                cv.circle(frame, tuple(pf.cords_2_pixel(pf.bot_pos)[::-1]), 25, (0, 0, 0), -1)
+            else:
+                cv.circle(frame, tuple(pf.cords_2_pixel(pf.bot_pos)[::-1]), 25, (255, 255, 255), -1)
                 
-            # cv.imshow("Original Frame", frame)
-            # print("*")
-            # 
-            # if cv.waitKey(1) == ord('q'):
-                # break
-        # pf.cam.stop_stream()
+            cv.imshow("Original Frame", frame)
+            
+            
+            if cv.waitKey(1) == ord('q'):
+                break
+        pf.cam.stop_stream()
         
     def listen(self):
         print("listen thread start")
         while self.state.time and self.state.phase == Phase.IN_GAME:
             #this is only a temp fix and still might not work
-            if not self.state.still:
-                response = self.stm.read()
-                if isinstance(response, Alarm):
-                    if response.a == response.b == response.c == 5:
-                        self.state.still = True
-                        print('Motor queue empty')
-                    else:
-                        self.state.phase = Phase.RESET
+            # if not self.state.still:
+            response = self.stm.receive()
+            if isinstance(response, Alarm):
+                if response.a == response.b == response.c == 5:
+                    self.state.still = True
+                    print('Motor queue empty!')
+                else:
+                    self.state.phase = Phase.RESET
         print("listen thread exit")
                 
             
         
     def play(self):
+        print("*")
         if self.stm.check_connection() and self.state.phase == Phase.IDLE:
             self.frame = self.ui.timer_frame(self)
             self.state.phase = Phase.IN_GAME

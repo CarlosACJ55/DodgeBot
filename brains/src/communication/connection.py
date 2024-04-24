@@ -36,6 +36,7 @@ class Connection:
 
     def reconnect(self):
         if self.is_connected():
+            print("*")
             self.disconnect()
         self.serial.port = self.port
         self.serial.baudrate = self.baud_rate
@@ -44,6 +45,7 @@ class Connection:
         self.serial.stopbits = self.stop_bits
         self.serial.timeout = self.timeout
         self.serial.open()
+        print("serial", self.is_connected())
 
     def send(self, msg):
         self.serial.write(format_msg(msg).encode("utf-8"))

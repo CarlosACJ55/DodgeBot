@@ -57,6 +57,7 @@ class Menu:
     def setup(self):
         self.start_btn["state"] = tkc.DISABLED
         self.game.configure(self.height, self.time)
+        
         if self.game.state.phase == Phase.IDLE:
             self.start_btn["state"] = tkc.ACTIVE
         else:
