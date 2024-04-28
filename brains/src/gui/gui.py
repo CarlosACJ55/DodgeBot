@@ -11,7 +11,7 @@ MIN_H = 50
 
 class GUI:
     root_widget = tk.Tk()
-    root_widget.title("PunchBot")
+    root_widget.title("DodgeBot")
     root_widget.geometry("485x280")
 
     def __init__(self, protocol):

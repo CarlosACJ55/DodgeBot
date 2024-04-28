@@ -13,5 +13,5 @@ class Phase(Enum):
 class State:
     still = True
     phase = Phase.DISCONNECT
-    time = 180
-    height = 152
+    time = 30
+    height = 55

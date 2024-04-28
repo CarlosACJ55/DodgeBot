@@ -64,7 +64,8 @@ class Game:
         # print("move ending!")
 
     def start_dodging(self):
-        pf = Pathfinder(self.state.height * (10 ** -2))  # cm to meters
+        print(self.state.height * 0.0254)
+        pf = Pathfinder(self.state.height * 0.0254)  # cm to meters
         # initialize_time = time.time()
         
         # time.sleep(1)
@@ -74,12 +75,13 @@ class Game:
         pf.bot_pos = pf.get_dodgebot_camera_location()
         dodge_angle, _ = pf.center_bot()
         
-        while abs(dodge_angle[0]) > 1 and abs(dodge_angle[1]) > 1:
+        # while abs(dodge_angle[0]) > 1 and abs(dodge_angle[1]) > 1:
+        for _ in range(3):
             # while not self.state.still:
                 # pass
             # pf.bot_pos = pf.get_dodgebot_camera_location()
             # dodge_angle, _ = pf.center_bot()
-            time.sleep(.25)
+            time.sleep(.5)
             pf.bot_pos = pf.get_dodgebot_camera_location()
             dodge_angle, _ = pf.center_bot()
             print("Dodge angle", dodge_angle)
@@ -114,7 +116,7 @@ class Game:
                         # if ((time.time() - initialize_time) > 2) and (abs(x) >= .5 or abs(y) >= .5):
                         # if self.bot_pos 
                         new_pos = pf.bot_pos + dodge_path_cartesian
-                        if new_pos[1] < -.4:
+                        if new_pos[1] < -.3:
                             y = 0
                         self.move(x, y)
                         pf.bot_pos = new_pos
@@ -137,19 +139,19 @@ class Game:
                 break
         pf.cam.stop_stream()
         
-    def listen(self):
-        print("listen thread start")
-        while self.state.time and self.state.phase == Phase.IN_GAME:
-            #this is only a temp fix and still might not work
-            # if not self.state.still:
-            response = self.stm.receive()
-            if isinstance(response, Alarm):
-                if response.a == response.b == response.c == 5:
-                    self.state.still = True
-                    print('Motor queue empty!')
-                else:
-                    self.state.phase = Phase.RESET
-        print("listen thread exit")
+    # def listen(self):
+    #     print("listen thread start")
+    #     while self.state.time and self.state.phase == Phase.IN_GAME:
+    #         #this is only a temp fix and still might not work
+    #         # if not self.state.still:
+    #         response = self.stm.receive()
+    #         if isinstance(response, Alarm):
+    #             if response.a == response.b == response.c == 5:
+    #                 self.state.still = True
+    #                 print('Motor queue empty!')
+    #             else:
+    #                 self.state.phase = Phase.RESET
+    #     print("listen thread exit")
                 
             
         
@@ -164,15 +166,15 @@ class Game:
                 self.emergency_reset()
             # self.start_dodging()
             # time_thread = threading.Thread(target=self.countdown)
-            listen_thread = threading.Thread(target=self.listen)
+            # listen_thread = threading.Thread(target=self.listen)
             time_thread = threading.Thread(target=self.countdown)
             time_thread.start()
-            listen_thread.start()
+            # listen_thread.start()
             
             # print("started")
             self.start_dodging()
             # print("enede")
             # self.start_dodging()
-            listen_thread.join()
+            # listen_thread.join()
             time_thread.join()
             # listen_thread.join()

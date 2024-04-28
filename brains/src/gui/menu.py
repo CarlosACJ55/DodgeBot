@@ -19,9 +19,9 @@ class Menu:
         self.time = game.state.time
         # Static
         self.frame = tk.LabelFrame(root, text="Main Menu", padx=5, pady=5)
-        self.title = tk.Label(self.frame, text="PunchBot", font=("Helvetica", 16))
+        self.title = tk.Label(self.frame, text="DodgeBot", font=("Helvetica", 16))
         self.subtitle = tk.Label(self.frame, text="Ready for another session?", font=("Helvetica", 12))
-        self.height_lbl = tk.Label(self.frame, text="Player height (cm):")
+        self.height_lbl = tk.Label(self.frame, text="Player height (inches):")
         self.duration_lbl = tk.Label(self.frame, text="Game duration (s):")
         # Dynamic
         self.height_ent = tk.Entry(self.frame)

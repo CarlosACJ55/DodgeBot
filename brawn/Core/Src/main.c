@@ -213,10 +213,10 @@ int main(void)
           send_pulses(dequeueMove());
         }
       }
-      else if (readyReported == 0 && motorsReady()) {
-        transmit("A555\0");
-        readyReported = 1;
-      }
+//      else if (readyReported == 0 && motorsReady()) {
+//        transmit("A555\0");
+//        readyReported = 1;
+//      }
     }
 
 

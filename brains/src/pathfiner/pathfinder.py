@@ -36,6 +36,8 @@ class Pathfinder:
     bot_center_pos_angle = np.array([90.0, 90.0], dtype=np.float32)
     run_time_dict = {"Marking Pixels":[], "Converting Cords":[],"Kmeans":[],"Buffer":[],"Main Punch":[],"Slope":[], "Punch Vector Calc":[], "Engage Decision":[],"Perpendicular Calc":[],"Avoidance":[], "Total End":[], "Output End":[]}
     identified_gloves_bool = False
+    x_coeff = 1
+    y_coeff = 1.01
     
     
     def __init__(self, user_h):
@@ -219,7 +221,7 @@ class Pathfinder:
         punch_hat = punch_diff / punch_mag
         self.run_time_dict["Main Punch"].append(time.time()-st)
         # print(f"mag {punch_mag}")
-        if punch_mag < .04:
+        if punch_mag < .03:
             if time.time() - self.dodge_time >= self.reset_time_sec:
                 #######################
                 # cv.circle(frame, tuple(self.cords_2_pixel(self.bot_pos)[::-1]), 25, (0, 0, 0), -1)
@@ -253,12 +255,14 @@ class Pathfinder:
             player_pos_v = ((punch_pos + self.buf[far][0]) / 2) - self.bot_pos
             player_pos_v_hat = player_pos_v / mag(player_pos_v)
             perp = perp_left if mag(perp_left - player_pos_v_hat) >= mag(perp_right - player_pos_v_hat) else perp_right
+            # perp = self.x_coeff*perp[0] + self.y_coeff*perp[1]
             dodge = np.abs(self.min_clearance - clearance) * perp + self.min_clearance * perp
             
         else:
             print("Edge Dodge")
             perp = perp_left if mag(perp_left + self.bot_pos) < mag(perp_right + self.bot_pos) else perp_right
             unit_dodge = .5*(-self.bot_pos / mag(self.bot_pos)) + .5*(perp)
+            # unit_dodge = self.x_coeff*unit_dodge[0] + self.y_coeff*unit_dodge[1]
             dodge = np.abs(self.min_clearance - clearance) * unit_dodge + 1.5 * self.min_clearance * unit_dodge
             # print("bot pos", self.bot_pos, "unit doge", unit_dodge, "perp", perp)
         self.run_time_dict["Avoidance"].append(time.time()-st)
