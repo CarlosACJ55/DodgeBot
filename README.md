@@ -1,7 +1,7 @@
 # DodgeBot
 
-[![Python application](https://github.com/CarlosACJ55/DodgeBot/actions/workflows/python-app.yml/badge.svg)](https://github.com/CarlosACJ55/DodgeBot/actions/workflows/python-app.yml)
-
+<!-- [![Python application](https://github.com/CarlosACJ55/DodgeBot/actions/workflows/python-app.yml/badge.svg)](https://github.com/CarlosACJ55/DodgeBot/actions/workflows/python-app.yml) -->
+## Youtube Demo Video Links
 [![Dodgebot Purdue Boxing Club Review](https://img.youtube.com/vi/https://www.youtube.com/watch?v=Q3NQfAVkUB4/0.jpg)](https://youtube.com/watch?v=Q3NQfAVkUB4)
 
 [![Dodgebot Demo 1](https://img.youtube.com/vi/https://www.youtube.com/watch?v=NQUYcLnN8nE/0.jpg)](https://www.youtube.com/shorts/NQUYcLnN8nE)
@@ -14,10 +14,10 @@
 
 Punch-dodging robot project started as a senior design group project for ECE 47700 group 5 at Purdue University.
 
-### Project Website
+<!-- ### Project Website
 
 Learn about PunchBot on our Project Website!
-Https://engineering.purdue.edu/477grp5/
+Https://engineering.purdue.edu/477grp5/ -->
 
 ### Dependencies
 
